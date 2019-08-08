@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: usiinfthesis-sample.aux
+The style file: abbrv.bst
+Database file #1: biblio.bib
+Warning--can't use both volume and number fields in esmaeilzadeh2011dark
+Warning--can't use both volume and number fields in JohnsonJun94
+You've used 45 entries,
+            2118 wiz_defined-function locations,
+            1312 strings with 32875 characters,
+and the built_in function-call counts, 18981 in all, are:
+= -- 1874
+> -- 931
+< -- 27
++ -- 372
+- -- 322
+* -- 1349
+:= -- 2934
+add.period$ -- 140
+call.type$ -- 45
+change.case$ -- 295
+chr.to.int$ -- 0
+cite$ -- 47
+duplicate$ -- 752
+empty$ -- 1453
+format.name$ -- 322
+if$ -- 4118
+int.to.chr$ -- 0
+int.to.str$ -- 45
+missing$ -- 39
+newline$ -- 229
+num.names$ -- 90
+pop$ -- 367
+preamble$ -- 2
+purify$ -- 250
+quote$ -- 0
+skip$ -- 593
+stack$ -- 0
+substring$ -- 1168
+swap$ -- 274
+text.length$ -- 27
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 180
+warning$ -- 2
+while$ -- 183
+width$ -- 47
+write$ -- 504
+(There were 2 warnings)

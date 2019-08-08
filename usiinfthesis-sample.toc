@@ -1,0 +1,25 @@
+\contentsline {chapter}{Contents}{xi}{section*.3}
+\contentsline {chapter}{Introduction}{1}{chapter*.5}
+\contentsline {chapter}{\numberline {1}Automatic Identification and Selection of HW Accelerators}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Related Work}{7}{section.1.2}
+\contentsline {section}{\numberline {1.3}The RegionSeeker Framework}{9}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Methodology}{9}{subsection.1.3.1}
+\contentsline {subsubsection}{Region Identification}{10}{section*.8}
+\contentsline {subsubsection}{Merit and Cost Estimation}{10}{section*.9}
+\contentsline {subsubsection}{Region Selection Algorithm}{11}{section*.10}
+\contentsline {subsection}{\numberline {1.3.2}Experimental Results}{13}{subsection.1.3.2}
+\contentsline {section}{\numberline {1.4}RegionSeeker MuLTiVersioning}{14}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Methodology}{14}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Experimental Results}{15}{subsection.1.4.2}
+\contentsline {section}{\numberline {1.5}Conclusions}{16}{section.1.5}
+\contentsline {chapter}{\numberline {2}Optimizations applied to HW Accelerators}{17}{chapter.2}
+\contentsline {section}{\numberline {2.1}Data reuse Analysis}{17}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Motivation}{17}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Related Work}{17}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Machine Learning Approach for Loop Unrolling Prediction}{18}{section.2.2}
+\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}{AccelSeeker}}{19}{section.3.1}
+\contentsline {section}{\numberline {3.2}EnergySeeker}{19}{section.3.2}
+\contentsline {chapter}{Conclusions}{21}{chapter*.14}
+\contentsline {chapter}{Bibliography}{23}{section*.16}

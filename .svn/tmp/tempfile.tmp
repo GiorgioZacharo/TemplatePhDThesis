@@ -1,0 +1,173 @@
+\documentclass[]{USIINFthesis}
+\usepackage{lipsum,amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\renewcommand{\sfdefault}{lmss}
+%\usepackage[]{avant}
+\usepackage{listings}
+\usepackage[scaled]{beramono}
+\usepackage{textcomp}
+
+\lstdefinelanguage{algebra}
+{morekeywords={import,sort,constructors,observers,transformers,axioms,if,
+else,end},
+sensitive=false,
+morecomment=[l]{//s},
+}
+
+\title{My Dissertation} %compulsory
+\subtitle{Subtitle: Reinventing the World} %optional 
+\author{John D. Author} %compulsory
+\advisor{The Students Advisor} %compulsory
+\coadvisor{Co-Advisor} %optional
+\day{Yesterday} %defaults to \today
+\month{September} %compuslory
+\year{2009} %compulsory, put only the year
+\programDirector{Fabio Crestani} %compulsory
+\unilogo{HeaderUSI.png}
+
+\committee{%
+  \committeeMember{Mehdi Jazayeri}{University of Lugano, Switzerland}
+  \committeeMember{Antonio Carzaniga}{University of Lugano, Switzerland}
+  %there can as many members as you like
+} %the committee is compulsory
+
+\dedication{To my beloved} %optional
+\openepigraph{Someone said \dots}{Someone} %optional
+
+\makeindex %optional, also comment out \theindex at the end
+
+\begin{document}
+
+\maketitle %generates the titlepage, this is FIXED
+
+\frontmatter %generates the frontmatter, this is FIXED
+
+\begin{abstract}
+This is a very abstract abstract.
+\end{abstract}
+
+\begin{acknowledgements}
+\lipsum   
+\end{acknowledgements}
+
+\tableofcontents 
+\listoffigures %optional
+\listoftables %optional
+
+%optional chapter
+
+
+
+\mainmatter
+
+\chapter{Introduction}
+
+\lipsum
+
+
+
+\chapter{A chapter}
+
+\lipsum[1-2]
+
+\section{The first section}
+\lipsum[3-4]
+
+\section{The second, math section}
+
+\textbf{Theorem 1 (Residue Theorem).}
+Let $f$ be analytic in the region $G$ except for the isolated singularities $a_1,a_2,\ldots,a_m$. If $\gamma$ is a closed rectifiable curve in $G$ which does not pass through any of the points $a_k$ and if $\gamma\approx 0$ in $G$ then
+\[
+\frac{1}{2\pi i}\int_\gamma f = \sum_{k=1}^m n(\gamma;a_k) \text{Res}(f;a_k).
+\]
+\textbf{Theorem 2 (Maximum Modulus).}
+\emph{Let $G$ be a bounded open set in $\mathbb{C}$ and suppose that $f$ is a continuous function on $G^-$ which is analytic in $G$. Then}
+\[
+\max\{|f(z)|:z\in G^-\}=\max \{|f(z)|:z\in \partial G \}.
+\]
+\vspace*{-1em}
+
+\newcommand{\abc}{abcdefghijklmnopqrstuvwxyz}
+\newcommand{\ABC}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\newcommand{\alphabeta}{\alpha\beta\gamma\delta\epsilon\varepsilon\zeta\eta\theta\vartheta\iota\kappa\varkappa\lambda\mu\nu\xi o\pi\varpi\rho\varrho\sigma\varsigma\tau\upsilon\phi\varphi\chi\psi\omega}
+\newcommand{\AlphaBeta}{\Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Upsilon\Phi\Psi\Omega}
+
+\ABC
+
+ $\ABC$
+
+\abc
+
+ $\abc$ \quad $01234567890$
+
+$\AlphaBeta$ \quad $\alphabeta$ \quad $\ell\wp\aleph\infty\propto\emptyset\nabla\partial\mho\imath\jmath\hslash\eth$
+
+$\mathrm{A} \Lambda \Delta \nabla \mathrm{B C D} \Sigma \mathrm{E F} \Gamma \mathrm{G H I J K L M N O} \Theta \Omega \mho \mathrm{P} \Phi \Pi \Xi \mathrm{Q R S T U V W X Y} \Upsilon \Psi \mathrm{Z} $  $ \quad 1234567890 $
+
+$\mathit{A \Lambda \Delta B C D E F \Gamma G H I J K L M N O \Theta \Omega P \Phi \Pi \Xi Q R S T U V W X Y \Upsilon \Psi Z }$
+
+% don't allow overfull 
+ $a\alpha b \beta c \partial d \delta e \epsilon \varepsilon f \zeta
+ \xi g \gamma h \hbar \hslash \iota i \imath j \jmath k \kappa
+ \varkappa l \ell \lambda m n \eta \theta \vartheta o \sigma \varsigma
+ \phi \varphi \wp p \rho \varrho q r s t \tau \pi u \mu \nu v \upsilon
+ w \omega \varpi x \chi y \psi z$ 
+
+ $\infty \propto \emptyset \varnothing \mathrm{d}\eth \backepsilon$
+
+$\mathcal{\ABC}$ 
+
+$\mathbb{\ABC}$
+
+\boldmath $\alpha + b = 27$
+
+\section{The third section}
+\lipsum \texttt{Some Test}
+\lstset{language=algebra,linewidth=0.95\linewidth,breaklines=true,numbers=left,
+basicstyle=\ttfamily,numberstyle=\tiny,escapeinside={//*}{\^^M},
+mathescape=true}
+\begin{lstlisting}
+import IntSpec, ItemSpec;
+
+sort cart; //*\label{sort}
+
+constructors //*\label{begin-sig}
+create() $\longrightarrow$ cart;
+insert(cart, item) $\longrightarrow$ cart;
+observers
+amount(cart) $\longrightarrow$ int;
+transformers
+delete(cart, item) $\longrightarrow$ cart; //*\label{end-sig}
+
+axioms //*\label{begin-axioms}
+forall c: cart, i, j: item 
+
+amount(create()) $=$ 0; //*\label{begin-amount}
+amount(insert(c,i)) $=$ amount(c) $+$ price(i); //*\label{end-amount}
+delete(create(),i) $=$ create(); //*\label{begin-delete}
+delete(insert(c,i),j) $=$
+if (i =$\:$= j) c
+else insert(delete(c,j),i); //*\label{end-axioms}
+end
+\end{lstlisting}
+
+\nocite{*}
+
+\appendix %optional, use only if you have an appendix
+
+\chapter{Some retarded material}
+\section{It's over\dots}
+\lipsum 
+
+\backmatter
+
+\chapter{Glossary} %optional
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+\theindex %optional, use only if you have an index, must use
+	  %\makeindex in the preamble
+
+\end{document}

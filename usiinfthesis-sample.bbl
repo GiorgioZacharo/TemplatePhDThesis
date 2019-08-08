@@ -1,0 +1,307 @@
+\def\srt#1{}
+\begin{thebibliography}{10}
+
+\bibitem{AguilarJune16}
+M.~A. Aguilar, R.~Leupers, G.~Ascheid, and L.~G. Murillo.
+\newblock Automatic parallelization and accelerator offloading for embedded
+  applications on heterogeneous mpsocs.
+\newblock In {\em Proceedings of the 53rd Design Automation Conference}, pages
+  49:1--49:6. ACM, June 2016.
+
+\bibitem{AhnJan13}
+J.~Ahn and K.~Choi.
+\newblock Isomorphism-aware identification of custom instructions with {I}/{O}
+  serialization.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 32(1):34--46, Jan. 2013.
+
+\bibitem{AlippiMar99}
+C.~Alippi, W.~Fornaciari, L.~Pozzi, and M.~Sami.
+\newblock A {DAG} based design approach for reconfigurable {VLIW} processors.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 778--79, Mar. 1999.
+
+\bibitem{ArriaNov16}
+Altera.
+\newblock Arria 10 {SoCs}: Highest system level integration {SoC} in
+  production.
+\newblock
+  \url{www.altera.com/products/soc/portfolio/arria-10-soc/overview.html}, Nov.
+  2016.
+
+\bibitem{AtasuApr07}
+K.~Atasu, R.~G. Dimond, O.~Mencer, W.~Luk, C.~C. \"Ozturan, and G.~D\"undar.
+\newblock Optimizing instruction-set extensible processors under data bandwidth
+  constraints.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 588--593, Nice, France, Feb. 2007.
+
+\bibitem{BaleaniMay02}
+M.~Baleani, F.~Gennari, Y.~Jiang, Y.~Patel, R.~K. Brayton, and
+  A.~Sangiovanni-Vincentelli.
+\newblock {HW/SW} partitioning and code generation of embedded control
+  applications on a reconfigurable architecture platform.
+\newblock In {\em Proceedings of the 10th International Workshop on
+  Hardware/Software Codesign}, pages 151--56, Estes Park, CO, May 2002.
+
+\bibitem{BinkertFeb11}
+N.~Binkert, B.~Beckmann, G.~Black, S.~K. Reinhardt, A.~Saidi, A.~Basu,
+  J.~Hestness, D.~R. Hower, T.~Krishna, S.~Sardashti, et~al.
+\newblock The gem5 simulator.
+\newblock {\em ACM SIGARCH Computer Architecture News}, 39(2):1--7, Feb. 2011.
+
+\bibitem{BiswasMar06}
+P.~Biswas, N.~Dutt, P.~Ienne, and L.~Pozzi.
+\newblock Automatic identification of application-specific functional units
+  with architecturally visible storage.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 212--217, Mar. 2006.
+
+\bibitem{StratusHLSApr16}
+Cadence.
+\newblock Stratus high-level synthesis.
+\newblock
+  \url{www.cadence.com/content/cadence-www/global/en_US/home/tools/digital-design-and-signoff/synthesis/stratus-high-level-synthesis.html},
+  Apr. 2016.
+
+\bibitem{TensilicaMar17}
+Cadence.
+\newblock Tensilica customizable processors.
+\newblock
+  \url{https://ip.cadence.com/ipportfolio/tensilica-ip/xtensa-customizable},
+  Mar. 2017.
+
+\bibitem{CanisSep13}
+A.~Canis, J.~Choi, M.~Aldham, V.~Zhang, A.~Kammoona, T.~Czajkowski, S.~D.
+  Brown, and J.~H. Anderson.
+\newblock Leg{U}p: An open-source high-level synthesis tool for {FPGA}-based
+  processor/accelerator systems.
+\newblock {\em {ACM} Transactions on Embedded Computing Systems ({TECS})},
+  13(2):1--27, Sept. 2013.
+
+\bibitem{ChenFeb07}
+X.~Chen, D.~L. Maskell, and Y.~Sun.
+\newblock Fast identification of custom instructions for extensible processors.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 26(2):359--68, Feb. 2007.
+
+\bibitem{CongFeb04}
+J.~Cong, Y.~Fan, G.~Han, and Z.~Zhang.
+\newblock Application-specific instruction generation for configurable
+  processor architectures.
+\newblock In {\em Proceedings of the 2004 {ACM}/{SIGDA} 12th International
+  Symposium on Field Programmable Gate Arrays}, pages 183--89, Monterey, CA,
+  Feb. 2004.
+
+\bibitem{CotaJun15}
+E.~G. Cota, P.~Mantovani, G.~Di~Guglielmo, and L.~P. Carloni.
+\newblock An analysis of accelerator coupling in heterogeneous architectures.
+\newblock In {\em Proceedings of the 52nd Design Automation Conference}, pages
+  1--6. ACM, June 2015.
+
+\bibitem{dennard1974design}
+R.~H. Dennard, F.~H. Gaensslen, V.~L. Rideout, E.~Bassous, and A.~R. LeBlanc.
+\newblock Design of ion-implanted mosfet's with very small physical dimensions.
+\newblock {\em IEEE Journal of Solid-State Circuits}, 9(5):256--268, 1974.
+
+\bibitem{esmaeilzadeh2011dark}
+H.~Esmaeilzadeh, E.~Blem, R.~St~Amant, K.~Sankaralingam, and D.~Burger.
+\newblock Dark silicon and the end of multicore scaling.
+\newblock In {\em ACM SIGARCH Computer Architecture News}, volume~39, pages
+  365--376, 2011.
+
+\bibitem{GaluzziOct06}
+C.~Galuzzi, E.~M. Panainte, Y.~Yankova, K.~Bertels, and S.~Vassiliadis.
+\newblock Automatic selection of application-specific instruction-set
+  extensions.
+\newblock In {\em Proceedings of the International Conference on
+  Hardware/Software Codesign and System Synthesis}, pages 160--165, Oct. 2006.
+
+\bibitem{GiaquintaMar15}
+E.~Giaquinta, A.~Mishra, and L.~Pozzi.
+\newblock Maximum convex subgraphs under {I/O} constraint for automatic
+  identification of custom instructions.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 34(3):483--494, 2015.
+
+\bibitem{GuoMar05}
+Z.~Guo, B.~Buyukkurt, W.~Najjar, and K.~Vissers.
+\newblock Optimized generation of data-path from {C} codes for {FPGAs}.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 112--117, Mar. 2005.
+
+\bibitem{GuoJun04}
+Z.~Guo, B.~Buyukkurt, and W.~A. Najjar.
+\newblock Input data reuse in compiling window operations onto reconfigurable
+  hardware.
+\newblock In {\em Proceedings of the 2004 ACM Conference on Languages,
+  Compilers, and Tools for Embedded Systems}, pages 249--256, 2004.
+
+\bibitem{GutinFeb12}
+G.~Gutin, A.~Johnstone, J.~Reddington, E.~Scott, and A.~Yeo.
+\newblock An algorithm for finding input-output constrained convex sets in an
+  acyclic digraph.
+\newblock {\em J. Discrete Algorithms}, 13:47--58, 2012.
+
+\bibitem{HaaBOct2014}
+M.~Haa\ss, L.~Bauer, and J.~Henkel.
+\newblock Automatic custom instruction identification in memory streaming
+  algorithms.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architectures, and Synthesis for Embedded Systems}, pages 1--9, Oct. 2014.
+
+\bibitem{HankSep93}
+R.~Hank, S.~Mahlke, R.~Bringmann, J.~Gyllenhall, and W.~Hwu.
+\newblock Superblock formation using static program analysis.
+\newblock In {\em MICRO 26: Proceedings of the 26th Annual International
+  Symposium on Microarchitecture}, pages 247--255, Sept. 1993.
+
+\bibitem{HaraMay08}
+Y.~Hara, H.~Tomiyama, S.~Honda, H.~Takada, and K.~Ishii.
+\newblock C{H}{S}tone: {A} {B}enchmark {P}rogram {S}uite for {P}ractical
+  {C}-{B}ased {H}igh-{L}evel {S}ynthesis.
+\newblock In {\em Proceedings of the 2008 {IEEE} International Symposium on
+  Circuits and Systems}, pages 1192--1195. IEEE, 2008.
+
+\bibitem{JohnsonJun94}
+R.~Johnson, D.~Pearson, and K.~Pingali.
+\newblock The program structure tree: Computing control regions in linear time.
+\newblock In {\em {ACM SIGPLAN} Notices}, volume~29, pages 171--185. ACM, June
+  1994.
+
+\bibitem{LattnerMar04}
+C.~Lattner and V.~Adve.
+\newblock {LLVM}: A compilation framework for lifelong program analysis \&
+  transformation.
+\newblock In {\em Proceedings of the 2nd International Symposium on Code
+  Generation and Optimization}, pages 75--88, Mar. 2004.
+
+\bibitem{MartiFeb12}
+K.~Martin, C.~Wolinski, K.~Kuchcinski, A.~Floch, and F.~Charot.
+\newblock Constraint programming approach to reconfigurable processor extension
+  generation and application compilation.
+\newblock {\em {ACM} Transactions on Reconfigurable Technology and Systems
+  ({TRETS})}, 5(2):10, 2012.
+
+\bibitem{PothineniJan07}
+N.~Pothineni, A.~Kumar, and K.~Paul.
+\newblock Application specific datapath extension with distributed {I/O}
+  functional units.
+\newblock In {\em Proceedings of the 20th International Conference on {VLSI}
+  Design}, pages 551--558, Bangalore, India, Jan. 2007.
+
+\bibitem{PozziJul06}
+L.~Pozzi, K.~Atasu, and P.~Ienne.
+\newblock Exact and approximate algorithms for the extension of embedded
+  processor instruction sets.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 25(7):1209--29, July 2006.
+
+\bibitem{PozziSep05}
+L.~Pozzi and P.~Ienne.
+\newblock Exploiting pipelining to relax register-file port constraints of
+  instruction-set extensions.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architectures, and Synthesis for Embedded Systems}, pages 2--10, San
+  Francisco, CA, Sept. 2005.
+
+\bibitem{ReddingtonAug09}
+J.~Reddington, G.~Gutin, A.~Johnstone, E.~Scott, and A.~Yeo.
+\newblock Better than optimal: Fast identification of custom instruction
+  candidates.
+\newblock In {\em Proceedings of the 12th {IEEE} International Conference on
+  Computational Science and Engineering}, pages 17--24, 2009.
+
+\bibitem{schaller1997moore}
+R.~R. Schaller.
+\newblock Moore's law: past, present and future.
+\newblock {\em IEEE spectrum}, 34(6):52--59, 1997.
+
+\bibitem{ShaoJul14}
+Y.~S. Shao, B.~Reagen, G.-Y. Wei, and D.~Brooks.
+\newblock Aladdin: A pre-{RTL}, power-performance accelerator simulator
+  enabling large design space exploration of customized architectures.
+\newblock In {\em Proceedings of the 41st Annual International Symposium on
+  Computer Architecture}, pages 97--108. IEEE, July 2014.
+
+\bibitem{simonite2016moore}
+T.~Simonite.
+\newblock Moore{'}{s} law is dead. {N}ow what?
+\newblock {\em MIT Technology Review, May}, 13:40--41, 2016.
+
+\bibitem{ArcDec16}
+Synopsys.
+\newblock {ARC} processor cores.
+\newblock
+  \url{www.synopsys.com/designware-ip/processor-solutions/arc-processors.html},
+  Dec. 2016.
+
+\bibitem{GrosserApr12}
+C.~L. Tobias~Grosser, Armin~Groesslinger.
+\newblock {Polly - Performing polyhedral optimizations on a low-level
+  intermediate representation}.
+\newblock In {\em Parallel Processing Letters}, Apr 2012.
+
+\bibitem{VermaOct07}
+A.~K. Verma, P.~Brisk, and P.~Ienne.
+\newblock Rethinking custom {ISE} identification: A new processor-agnostic
+  method.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architectures, and Synthesis for Embedded Systems}, pages 125--134, Salzburg,
+  Austria, Oct. 2007.
+
+\bibitem{VillarrealMay10}
+J.~R. Villarreal, A.~Park, W.~A. Najjar, and R.~Halstead.
+\newblock Designing modular hardware accelerators in {C} with {ROCCC} 2.0.
+\newblock In {\em Proceedings of the 18th {IEEE} Symposium on
+  Field-Programmable Custom Computing Machines}, pages 127--134, 2010.
+
+\bibitem{VivadoHLSMar17}
+Xilinx.
+\newblock Vivado high-level synthesis.
+\newblock
+  \url{www.xilinx.com/products/design-tools/vivado/integration/esl-design.html},
+  Mar. 2017.
+
+\bibitem{ZynqMar17}
+Xilinx.
+\newblock Xilinx all programmable {SoC} portfolio.
+\newblock \url{www.xilinx.com/products/silicon-devices/soc.html}, Mar. 2017.
+
+\bibitem{YuSep04}
+P.~Yu and T.~Mitra.
+\newblock Scalable custom instructions identification for instruction set
+  extensible processors.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architectures, and Synthesis for Embedded Systems}, pages 69--78, Washington,
+  DC, Sept. 2004.
+
+\bibitem{ZacharopoulosJan17}
+G.~Zacharopoulos, G.~Ansaloni, and L.~Pozzi.
+\newblock Data reuse analysis for automated synthesis of custom instructions in
+  sliding window applications.
+\newblock {\em HiPEAC IMPACT 2017 Seventh International Workshop on Polyhedral
+  Compilation Techniques}, Jan. 2017.
+
+\bibitem{ZacharopoulosJul18}
+G.~Zacharopoulos, A.~Barbon, G.~Ansaloni, and L.~Pozzi.
+\newblock Machine learning approach for loop unrolling factor prediction in
+  high level synthesis.
+\newblock {\em 2018 IEEE International Conference on High Performance Computing
+  \& Simulation (HPCS)}, pages 91--97, 2018.
+
+\bibitem{ZacharopoulosApr19}
+G.~Zacharopoulos, L.~Ferretti, E.~Giaquinta, G.~Ansaloni, and L.~Pozzi.
+\newblock {RegionSeeker}: Automatically identifying and selecting accelerators
+  from application source code.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 38(4):741--754, Apr. 2019.
+
+\bibitem{ZuluagaJul09}
+M.~Zuluaga, T.~Kluter, P.~Brisk, N.~P. Topham, and P.~Ienne.
+\newblock Introducing control-flow inclusion to support pipelining in custom
+  instruction set extensions.
+\newblock In {\em Proceedings of the 7th Symposium on Application Specific
+  Processors}, pages 114--121, 2009.
+
+\end{thebibliography}

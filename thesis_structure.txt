@@ -1,0 +1,54 @@
+					--- PhD Thesis Structure ---
+
+Title: Software Analysis for Heterogeneous Computing Architectures
+A research automation framework towards more efficient HW/SW co-design
+
+
+Abstract
+
+Chapter 0 : Introduction
+
+An introduction is presented that gives a description of the research content, research questions and 
+provides an overview of the whole document.
+
+* Deadline: 4 July
+
+
+Chapter 1 : HW Accelerators Identification - RegionSeeker and RegionSeeker Multiversioning concept
+	
+	Intro	
+	Common Related Work	
+
+	Section 1.1: RegionSeeker
+		Presentation and description in detail of the automatic identification and selection framework.
+
+	Section 1.2: RegionSeeker Multiversioning   
+		The extension of the automatic identification and selection framework.
+
+* Deadline: 28 July
+
+Chapter 2 : Optimizations applied to HW Accelerators
+
+	Section 2.1: Data Reuse Analysis
+		Related Work
+		Present and detail the methodology for detecting and exploiting data reuse in a domain of applications.
+
+	Section 2.2: Machine Learning Approach for Loop Unrolling Prediction  
+		Related Work
+		Explain thoroughly he methodology for combining LLVM analysis and ML techniques to predict cheaply LU factors
+		for loops.
+
+* Deadline: 22 August
+
+Chapter 3 : System Aware Accelerators Identification - AccelSeeker and EnergySeeker
+
+	Section 3.1: AcccelSeeker
+		Related Work
+		A detailed description of why there is a need to enhance our earlier analysis and increase
+		the granularity of the HW accelerators Identification.
+
+	Section 3.2: Machine Learning Approach for Loop Unrolling Prediction 
+		 Related Work
+		 Explain the methodology that changes the focus from latency of execution saving to energy efficiency.
+
+Conclusions
