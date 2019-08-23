@@ -20,6 +20,8 @@
 \newcommand{\SoC}{{System-on-Chip}}
 \newcommand{\htsf}{{H.264}}
 \newcommand{\SoTA}{{state-of-the-art}}
+\newcommand{\plm}{{private local memory}}
+\newcommand{\plms}{{private local memories}}
 
 \newcommand{\dataflow}{data flow}
 \newcommand{\controlflow}{control flow}
@@ -90,6 +92,7 @@ towards more efficient\\ HW/SW co-design} %optional
 \frontmatter %generates the frontmatter, this is FIXED
 
 \begin{abstract}
+\textbf{NOTE: The abstract will be written in the end of the thesis.}\\
 Performance increase, in terms of faster execution and higher energy efficiency, 
 is a never-ending research endeavor  %story 
 and does not come for free.
@@ -161,7 +164,12 @@ architects striving to achieve
 better performance in the modern computer systems.
 Heterogeneous computing is emerging as one of the solutions in order to keep the performance 
 trend rising. This is achieved by turning the focus to specialized Hardware (HW) that 
-can accelerate the execution of a Software (SW) application or a part of that application.\par
+can accelerate the execution of a Software (SW) application or a part of that application. Specialized HW accelerators are implemented in platforms where they can be either reprogrammable, 
+thus allowing for a large degree of flexibility as various implementations may take place utilizing
+the HW resources of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated Circuit (ASIC). The first type of HW implementations sacrifice part of the potential 
+performance achieved by allowing for flexible designs, as the same HW resources can be reprogrammed.
+The latter offer no flexibility but can provide better performance in comparison to FPGAs. Under 
+the scope of this research both HW implementations were considered.  \par
 %
 % This is a link
 %
@@ -193,7 +201,7 @@ knowledge of the underlying CPU micro-architecture.\par
 %
 % End of link
 %
-The goal is to design efficient HW/SW computer architectures, so that the
+The goal of the HW/SW co-design research is to design efficient heterogeneous computer architectures, so that the
 time latency and energy requirements are ever decreasing. The heterogeneous system
 that I considered during my research comprises a general purpose CPU, loosely coupled with a number of 
 specialized HW accelerators, dedicated to the acceleration of specific parts of an application.\par
@@ -214,7 +222,8 @@ potential optimizations.\par
 
 Therefore, an in-depth SW analysis can be crucial, prior to 
 designing a heterogeneous system, as it can provide valuable information and subsequently 
-highly benefit performance. The research during my PhD has revolved around various ways that SW
+highly benefit performance. Furthermore, such an analysis can be performed in short time (typically within a few seconds) and can be portable to other target applications or platforms. 
+The research during my PhD has revolved around various ways that SW
 analysis, by extending the LLVM compiler framework \cite{LattnerMar04} and, hence, its potential,
 can guide a HW engineer %synthesizing HW accelerators 
 by making informed decisions early in the development cycle.
@@ -297,7 +306,7 @@ improve both speedup of execution and energy efficiency in comparison to a gener
 purpose CPU or a set of homogeneous CPUs. Nonetheless, the identification and selection 
 of which parts of the computation are to be implemented in HW is a complex and demanding task. 
 A thorough understanding of the application to be accelerated is necessary, the HW resources
-(area) budget is often restrictive and the granularity of the candidates for acceleration 
+(area) budget is often tight and the granularity of the candidates for acceleration 
 can dramatically affect the overall execution time. Furthermore, optimizations may be applied
 to a given, identified HW accelerator and this would produce multiple versions of equivalent
 computation instances that can result in various heterogeneous architectures with different
@@ -511,9 +520,6 @@ the identification, an estimation of the performance gain, along with
 the HW resources cost, of each candidate. Subsequently given a HW resources
 constraint, a selection of the identified HW accelerators takes place that
 maximizes the cumulative performance gain.
-% , that was developed in order to 
-% automatically identify HW accelerators, is based on an 
-% extensive LLVM analysis of the SW applications to be accelerated.
 In the following subsections the methodology is presented in detail, as well as
 experimental results from the CHStone benchmark \cite{HaraMay08} suite.
 
@@ -606,22 +612,33 @@ directly within the LLVM toolchain. The evaluation relies on the LLVM intermedia
 representation and does not need any manual modification to perform function out-lining
 on the benchmark source code. 
 The estimation of merit and the cost of a region is performed as follows.\par
+
+\emph{Merit Estimation.} 
 The merit of a region is defined as the total number of cycles saved in a HW accelerator 
 implementation compared to the respective SW implementation of the same piece of runtime 
 of a given application. Therefore the merit of a HW accelerator is estimated as the 
 difference between the \HW\ and \SW\ run time, across all its invocations in an application,
 taking into account the invocation overhead of calling a HW accelerator in a specific 
-heterogeneous architecture.\par
-On the other side of the evaluation, the cost of a region 
-is estimated as the area (or HW resources) required to
-implement its DFG nodes, 
+heterogeneous architecture. The estimation of the HW run time is computed first in the 
+basic block (BB) level as the the critical path of the latency (in clock cycles) of the Data 
+Flow Graph (DFG) nodes. Runtime profiling information is used in order to determine the execution 
+frequency of each BB.
+Subsequently the delay of the entire region in HW is estimated by multiplying the critical path
+delay of each BB with the respective execution frequency and finally summing up the products, 
+according to the specific BBs that comprise the region.
+Software run-times are estimated in a similar fashion, but instead of computing critical paths at the BB level, the sum of the latency (in clock cycles) of all its constituent operations is computed, modeling that these are processed sequentially in software.\par
 
-and its merit as the cycles saved between SW
-and HW execution, where the latter is the delay of the nodes on the
-DFG critical paths. Runtime profiling information is used in both SW and
-HW latency estimations in order to determine the number of invocations for
-each candidate.\par
-
+\emph{Cost Estimation.} On the other side of the evaluation, the cost of a region 
+is estimated as the area (or HW resources) required to implement its DFG nodes. The area 
+is computed as the sum of look-up tables that is required for
+the DFG nodes of the respective HW accelerator. Each DFG node may take up a different amount
+of loop-up tables according to its complexity. The characterization for each DFG node was carried
+out with the aid of Vivado, a commercial \HLS\ tool, targeting a Virtex7 FPGA.\par
+% and its merit as the cycles saved between SW
+% and HW execution, where the latter is the delay of the nodes on the
+% DFG critical paths. Runtime profiling information is used in both SW and
+% HW latency estimations in order to determine the number of invocations for
+% each candidate.\par
 The final output of the analysis pass is a list of valid regions, 
 or else accelerator candidates, each annotated with an estimated merit and cost.
 The region list output is in turn processed by the 
@@ -657,7 +674,7 @@ accelerator area, extract as much as possible of the computation,
 under the constraint to require no more than that area, in order to
 maximize the resulting speedup.\par
 
-\begin{figure*}[h]
+\begin{figure*}[t]
 \centering
 %\includegraphics[width= \linewidth]{figs/figs_from_pptx/exact_tree.pdf}
 \includegraphics[width= .9 \linewidth]{Figs/exact_tree.pdf}
@@ -668,25 +685,28 @@ maximize the resulting speedup.\par
 
 An exponential, \exact\ branch-and-bound method
 based on a binary-tree search was derived in order to solve optimally 
-the Region Selection problem. The algorithm is implemented so that 
-it finds the independent set of regions that maximizes merit under 
+the Region Selection problem. The algorithm converges to an
+% is implemented so that it finds the 
+independent set of regions that maximizes merit under 
 a given cost.
 This process can be exemplified through
- Figure~\ref{fig:exact_tree}:
-the root of the tree represents the empty set, and set $P$ at this
-point contains all regions. An overlapping graph among regions enforces
-the restriction of not allowing the selection of regions that overlap 
-with each other, as seen as well in Figure~\ref{fig:exact_tree}.
-Then, inclusion of region A is first
-explored, and the set P is updated by removing all regions overlapping
+ Figure~\ref{fig:exact_tree}: given an initial set $P$, that includes all
+ valid regions identified, and a set $X$, that is initially an empty set and 
+is going to be the subset of $P$ that maximizes merit under a given cost.
+The root of the tree represents the empty set, and set $P$ at this
+point contains all regions. Furthermore an overlapping graph among regions 
+shows whether there is overlapping among valid regions contained in $P$, 
+such that it poses the restriction of not allowing the selection of regions 
+that overlap with each other, i.e., containing at least one BB that is common. 
+The overlapping graph is seen as well in Figure~\ref{fig:exact_tree}.
+As the algorithm starts the exploration, inclusion of region A is first
+considered, and the set P is updated by removing all regions overlapping
 with A: $P = \{E\}$. According to the merit and costs of all regions
 in this example, shown in the table within the picture, the merit (60)
 and cost (35) of the solution currently explored is also updated.\par
 
 At every point of the exploration, a new node $u$ is considered for
 addition in the current independent set.
-% as regions with adjacent vertices
-% are mutually exclusive according to the overlapping graph. 
 If there is no node $u$
 satisfying condition $2$ of the Region Selection Problem, the algorithm
 records the set $X$ and backtracks, as $X$ is maximal with respect to
@@ -695,17 +715,64 @@ Figure~\ref{fig:exact_tree}, the cost budget $C_{\max}$ is equal to
 $35$. Hence, exploration stops at $X=\{A\}$ because the cost budget
 has been reached, and backtracks. The next region chosen is $B$, sets
 $X$ and $P$ are again updated accordingly, to $X=\{B\}$ and
-$P=\{C,D,E\}$, and exploration continues.
+$P=\{C,D,E\}$, and exploration continues until the selection algorithm
+converges.\par
+
+Two optimizations are implemented in the exact selection algorithm in order 
+to avoid unnecessary exploration. Optimization 1 performs a look up in order 
+to determine whether the maximum recorded merit can be reached by the 
+regions contained in $P$ or not. If not the exploration stops and backtracks.
+Optimization 2 ranks the valid regions in terms of merit so that the first 
+region considered for inclusion in $X$ is the one with the maximum merit.
 
 
 \subsection{Experimental Results}
 \label{subsec:exp}
 
-The evaluation of the \rseeker\ framework took place by retrieving the HW execution latency, 
-as well as the HW area resources, using the Xilinx Vivado\_HLS tool-suite.
-Vivado\_HLS outputs are intended for FPGA designs. Synthesis within this
-framework provide exact latency (number of cycles)
-and area (Look Up Tables and Flip Flops) values of each accelerator.\par
+% The evaluation of the \rseeker\ framework took place by 
+% retrieving the HW execution latency, 
+% as well as the HW area resources, using the Xilinx Vivado\_HLS tool-suite.
+% Vivado\_HLS outputs are intended for FPGA designs. Synthesis within this
+% framework provide exact latency (number of cycles)
+% and area (Look Up Tables and Flip Flops) values of each accelerator.\par
+
+The evaluation of the \rseeker\ framework took place by 
+assuming a system constituting a single SW processor and multiple HW accelerators, 
+exchanging shared data with \plms.
+The processor activates the accelerators via a memory-mapped
+interface, thus requiring a transaction on the system bus. 
+When activated, accelerators read and
+write data to and from the \plms, computing their outputs, which
+can then be accessed by the processor. Accelerators are interfaced to \plms\
+with ports having a latency of one clock cycle. The
+control interface between the processor and the accelerators was modeled 
+with a
+latency of 10 clock cycles.\par
+% These parameters correspond to the ones
+% employed by the \texttt{ap\_memory} and \texttt{s\_axilite}
+% interfaces, respectively, provided by Xilinx Vivado.\par
+
+The run-times of the non-accelerated SW part of the considered
+benchmarks were measured using the Gem5
+simulator~\cite{BinkertFeb11}, modeling an ARMv8-A processor with an
+issue width of 1. The processor model is atomic, with in-order
+execution. It is interfaced with separate instruction and data
+memories with an access latency of one clock cycle.\par
+
+Hardware execution times were retrieved using two different HLS 
+frameworks: the Aladdin simulator and the Xilinx Vivado\_HLS
+commercial tool-suite.  Aladdin targets ASIC implementations.  It
+provides a fast evaluation, but does not produce a synthesizable netlist
+as output; nonetheless, the estimations offered by this tool are
+within 1\% of the ones derived from an RTL implementation
+\cite{ShaoJul14}.  Hardware instances generated with Vivado\_HLS are
+instead intended for FPGA designs. Synthesis-runs within this
+framework are more time-consuming, but provide exact area (HW resources
+in terms of Look Up Tables and Flip Flops)
+and latency (number of cycles) values of each accelerator, as well as a direct
+path to its realization.  In both cases, default implementations of
+the accelerators were considered, i.e., no optimizations were applied to the
+implemented HW accelerators.\par
 
 The benchmarks that were used during the experimental phase are embedded applications
 of varying size from the CHStone benchmark suite \cite{HaraMay08}.
@@ -717,23 +784,56 @@ floating-point multiplication and sine functions employing integer arithmetics.
 Finally, \sha\ is a secure hash encryption algorithm, used for 
 the generation of digital signatures and the exchange of cryptographic keys.\par
 
-In Figure \ref{fig:regions_all} a summary of the performed experimental 
-exploration is presented. It reports the normalized speedups
-obtained by \rseeker\ compared to basic block and function
-identification, %when the maximum considered area budget and
-when a fixed area budget is considered and
-Vivado\_HLS are employed. The mean column illustrates that,
-on average, \rseeker\ achieves approximately 30\% higher speedups
-with respect to the two baseline methods. Moreover, while in some
-cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
-for basic blocks, \dfsin\ for functions), neither of them can do that
-consistently %across different area constraints and 
-across applications, stressing the suitability of control-flow regions as
-HW accelerator candidates.
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
+\label{fig:regions_aladdin}
+\end{figure}
+
+Figure~\ref{fig:regions_aladdin} showcases the achieved
+speedup, when employing Aladdin, by the accelerators selected by
+\rseeker\ (labeled \texttt{regions} in the figure), with respect to
+the entire run-time of the applications and for different area
+constraints.  For small-to-medium size applications such as \adpcm,
+\aes, \gsm\ and \sha\ speedup gains for \rseeker\ vary from 1.6x up to
+3.2x. For smaller kernels, larger variations can be observed, as for
+\dfmul\ and \dfsin\ the speedup reaches 1.12x and 3.9x respectively.
+Finally, for larger benchmarks such as \jpeg\ and \mpeg\, speedup is
+fairly significant: 2.5x for the former and up to 4.3x for the latter
+can be reached using \rseeker.\par
+
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Vivado\_HLS and Gem5 for Speedup and Area evaluation.}
+\label{fig:regions_vivado}
+\end{figure}
+
+Similar trends are observed when Vivado\_HLS is instead used for the
+accelerator synthesis, as reported in
+Figure~\ref{fig:regions_vivado}: \rseeker\ consistently outperforms
+\SoTA\ approaches which target either single basic blocks or
+entire functions, across all benchmarks. These results 
+highlight that the achievable speedups
+are highly influenced by which segments of applications are selected
+for accelerations, and that such choice is only marginally influenced
+by the adopted merit and cost estimation tool. In fact, this was verified 
+across the two sets of experiments, as the regions chosen were
+the same in 80\% of the cases. As an example, out of 10 regions
+selected to achieve a 2.2x speedup for the \jpeg\ benchmark, 8 are the
+same when using either Aladdin or Vivado\_HLS for merit and cost
+estimation, and the ones that differ contribute to less than 14\% of
+the provided gain.\par
 
 
-
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 %\hspace*{-2cm}
 \includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
@@ -741,6 +841,47 @@ HW accelerator candidates.
 considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado\_HLS.}
 \label{fig:regions_all}
 \end{figure}
+
+Finally, in Figure \ref{fig:regions_all} a summary of the performed experimental 
+exploration is presented. It reports the normalized speedups
+obtained by \rseeker\ compared to basic block and function
+identification, when a fixed area budget is considered and
+Vivado\_HLS are employed. The mean column illustrates that,
+on average, \rseeker\ achieves approximately 30\% higher speedups
+with respect to the two baseline methods. Moreover, while in some
+cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
+for basic blocks, \dfsin\ for functions), neither of them can achieve that
+consistently across applications, stressing the suitability of control-flow regions as
+HW accelerator candidates.\par
+
+The speedup that can be obtained by accelerating basic blocks is
+hindered by their small granularity and, consequently, the high number
+of HW accelerators invocations by the SW processor, i.e., the switches 
+between software and hardware execution. Moreover, in this
+setting many optimization opportunities
+during the hardware implementation of the accelerators are missed,
+because they only arise when control flow is considered, as is instead the case
+for regions.\par
+
+On the other hand, the speedup derived by selecting whole functions
+trails the one corresponding to regions, because of two
+reasons. First, function selection is limited to the ones which do not
+present forbidden nodes, and this may rule out promising regions
+within them. Second and more importantly, it is inflexible from
+an area viewpoint, which is especially visible when few hardware
+resources are available for acceleration. In those cases, the
+selection of functions often detects only few feasible candidates,
+with a small merit (e.g. in Figure \ref{fig:regions_aladdin}: \jpeg\ and 
+\mpeg, for an area of less than 0.5 $mm^2$).\par
+
+This limitation, though, is not present in regions, as simply the part
+referring to individual hotspots inside a function can be available
+for selection. Indeed, the performance of \rseeker\ stems from the high
+flexibility of the selection approach, as it allows the consideration of
+the entire spectrum of granularity ranging from whole functions to
+single loops, ultimately enabling a better exploitation of speedup for
+a given area budget.
+
 
 \newpage
 \section{RegionSeeker MuLTiVersioning}
@@ -752,10 +893,11 @@ design in order to increase performance, i.e. obtain faster execution. These
 HLS optimizations were not taken into account by \rseeker\ framework in the
 previous section. Default, non optimized versions of HW accelerators were identified
 and selected instead. In this
-section we present an extended \rseeker\ framework, which performs the selection not 
+section an extended \rseeker\ framework is presented, which performs the selection not 
 only among possible CFG subgraphs, but also among different versions of each identified 
 subgraph, namely different versions of the regions identified. 
-We call this extension RegionSeeker: the MuLTiVersioning approach.
+This extension is referred to in the rest of the document as RegionSeeker: the 
+MuLTiVersioning approach.
 
 % The \rseeker\ framework, as detailed in the previous section, was designed in order to identify
 % the most efficient HW accelerators under a given constraint, but was targeting default HW
@@ -768,18 +910,39 @@ We call this extension RegionSeeker: the MuLTiVersioning approach.
 \subsection{Methodology}
 \label{subsec:mv_meth}
 
-The rationale, supporting the extension of RegionSeeker framework, is to achieve better
-speedup that can be provided by exploiting a more 
-varied set of HW accelerators to select from. This is being achieved by instantiating 
-different versions of each HW accelerator. The parameters that were modified in order to 
-design different HW implementations of the same accelerators are a) the Loop Unrolling 
-(LU) factor, in accelerators that contain loops, 
-b) the loop pipelining option, being either on or off, and c) the array partition factor, 
+The rationale, supporting the extension of \rseeker\ framework, is to achieve improved
+speedup that can be provided by exploiting a more varied set of HW accelerators, with different 
+optimizations implemented onto them, to select from. This is being achieved by instantiating 
+different versions of each HW accelerator with the same functionality, yet different speedup gains 
+and different area (HW resources) requirements. The set of optimizations that were considered in 
+order to design different HW implementations of the same accelerators are: 
+\begin{enumerate}
+\item The Loop Unrolling 
+(LU) factor, in accelerators that contain loops.
+\item The loop pipelining option, being either on or off.
+\item The array partition factor, 
 which is the number of input and output ports of the memory buffer (scratchpad) attached 
-to the accelerator.\par
+to the accelerator.
+\end{enumerate}\par
 
-\subsection{Experimental Results}
-\label{subsec:mv_res}
+Loop unrolling optimization is an HLS directive that, in the context of \HLS\, instantiates multiple 
+copies of the logic implementing the functionality defined in a loop body, drastically impacting the 
+performance of HW accelerators \cite{KurraApr07} \cite{KulkarniOct12}. This directive can be applied in HW
+accelerators containing loops whose trip count can be statically defined. It should nonetheless
+be applied in a careful manner, as it entails a high area cost for the duplicated logic. Furthermore,
+the resulting benefits can be hampered by loop-carried dependencies and frequent memory
+accesses.\par
+Loop pipelining is an additional HLS directive applied in loops that allows the pipelining of 
+the operations contained in a single body of a loop and across consecutive iterations. Restrictions 
+regarding loop-carried dependencies across consecutive iterations can limit the application of the loop
+pipelining optimization, as the result of the output of a loop iteration would be required in the following
+one, thus not allowing the pipelining of the loop body operations.\par
+
+Given an initial set of HW accelerators, i.e., a set of regions that is derived by the \rseeker\ framework, 
+multiple versions for each region can be generated that maintain the same functionality.
+Each version may employ one of the optimizations listed above, or a combination of them.
+\par
+
 
 All versions of the HW accelerators were evaluated by exploiting the Aladdin HW accelerator simulator.  
 Aladdin targets ASIC implementations. It
@@ -794,13 +957,26 @@ was used with two CPU settings: a) TimingCPU  (a simple and slow CPU with only t
 and b) O3CPU (a complex and fast CPU with five pipeline stages and other resources such as a 
 branch predictor, reorder buffer etc). \par
 
+
 The \exact\ selection algorithm, as detailed in Subsection \ref{subsec:meth}  was used subsequently to 
 perform the optimal subset selection, 
 given an initial set of HW accelerators along with their respective versions, as well as a specific 
 area (HW resources) budget. An important note is that no more than one version of each candidate 
-can be selected, as one realization of the respective SW execution is required.
+can be selected, as only one realization of the respective SW execution is required.
+To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
+containing the basic block indexes included in each region. As a result the set of basic block indexes for 
+multiple versions of the same region would be identical.
 Experiments were run in \jpeg\ benchmark and four different selection
-approaches are presented, compared to the MuLTiVersioning approach.\par
+approaches are presented, compared to the \multi\ approach.\par
+
+\subsection{Experimental Results}
+\label{subsec:mv_res}
+
+The experimental setup was the same as in the \rseeker\ framework, with a system comprising a single 
+SW processor and multiple loosely coupled HW accelerators, exchanging shared data with \plms.
+The processor invokes the accelerators via a memory-mapped
+interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete,
+control returns to the SW processor.\par
 
 The speedup achieved on \jpeg\ benchmark, over the respective SW 
 time of the same set of selected regions (kernels) %, and the whole application 
@@ -809,24 +985,10 @@ The four different approaches compared are:
 a) the \emph{min} where the regions with the least amount of area are included in the set
 and hence can be selected, b) the \emph{base} 
 where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
-area regions can be selected and finally d) the MuLTiVersioning approach where any possible version 
+area regions can be selected and finally d) the \multi\ approach where any possible version 
 of the regions can be selected. \par
 
-The strength of the MuLTiVersioning approach and the benefit of having 
-a variety of potential candidates to select from 
-%for any equivalent computation, throughout the \jpeg\  application 
-is demonstrated by the experimental outcome of the \jpeg\ application (kernels run-time). 
-In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
-methodology. For a medium area point ($200 * 10^3 uM^2$), the 
-speedup achieved with MuLTiVersioning is 1.7x more than the second best, \emph{base} approach. For 
-a large area constraint ($400 * 10^3 uM^2$) the MuLTiVersioning speedup is more than 2x compared to
-\emph{base} and more than 6x compared to \emph{min}.\par
-
-% In Figure \ref{fig:mlv_speed_aladdin} the same trend is depicted in the speedup of the whole application
-% for the MuLTiVersioning methodology, where it constantly outperforms every other competitive method while
-% reaching a maximum speedup of 1.8x over the entire jpeg application.\par
-
-\begin{figure*}[h]
+\begin{figure*}[h!]
 \centering
 \hspace*{-1cm}
 \includegraphics[width= 0.7 \linewidth]{figs/plot_O3CPU_SW_large}
@@ -836,11 +998,27 @@ Aladdin and gem5 for Speedup and Area evaluation.
 Four approaches are compared: The 
 min where the regions with least amount of area are selected, the base
 where the regions with median values of area are selected, the max where 
-only the maximum area regions can be selected and finally the MuLTiVersioning
+only the maximum area regions can be selected and finally the \multi\
 approach where any version of the regions can be selected.
 }
 \label{fig:mlv_aladdin}
 \end{figure*}
+
+The strength of the \multi\ approach and the benefit of having 
+a variety of potential candidates to select from 
+%for any equivalent computation, throughout the \jpeg\  application 
+is demonstrated by the experimental outcome of the \jpeg\ application (kernels run-time). 
+In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
+methodology. For a medium area point ($200 * 10^3 uM^2$), the 
+speedup achieved with \multi\ is 1.7x more than the second best, \emph{base} approach. For 
+a large area constraint ($400 * 10^3 uM^2$) the \multi\ speedup is more than 2x compared to
+\emph{base} and more than 6x compared to \emph{min}.\par
+
+% In Figure \ref{fig:mlv_speed_aladdin} the same trend is depicted in the speedup of the whole application
+% for the MuLTiVersioning methodology, where it constantly outperforms every other competitive method while
+% reaching a maximum speedup of 1.8x over the entire jpeg application.\par
+
+
 
 % \begin{figure}[h]
 % \centering
@@ -961,6 +1139,30 @@ are synthesized into HW.
 
 \chapter{Optimizations applied to HW Accelerators}
 
+Identifying good candidates for HW acceleration is the first step to realize heterogeneous
+computing system designs that offer increased performance compared to a homogeneous system restricted
+to general purpose SW CPU(s). However, a set of optimizations applied on HW accelerators can decrease 
+even more the computational times, thus leading to an improved performance compared to default
+non-optimized HW accelerator implementations. 
+Modern \HLS\ (HLS) tools can apply such optimizations to 
+HW accelerators and increase the performance of their implementations, as well as the overall performance 
+of the entire heterogeneous system.
+HLS tools such as Vivado\_HLS  \cite{VivadoHLSMar17}, however efficient, though, are far from 
+optimal since they require a lot of manual decisions from the programmer's part when it comes to the
+choice of {\em how} these accelerators can be synthesized.
+Furthermore, the resolution of which optimizations may be applied to which HW accelerators can be a 
+complex problem, as it depends heavily on each HW accelerator characteristics.\par
+
+In order to bring automation one step forward in HW/SW co-design, and under the scope of this part of my research , 
+I tackled the problem of automating the decision making process of which optimizations should be applied to 
+candidates for HW acceleration within a certain context. 
+% I tackled the problem of automating the decision of which optimizations should be applied within a certain context. 
+These optimizations include memory management of the data consumed and produced by the HW accelerators, a set of optimizations
+targeted to loops (e.g. loop pipelining, loop unrolling, loop flattening etc), pipelining consecutive pieces of computation such 
+as subsequent function calls or loop bodies of consecutive iterations and array optimizations, such as array partitioning in blocks
+of the same size. Among the various optimizations available, I have focused on two major categories: a) Data Reuse analysis and b) Loop
+Unrolling factor prediction. Both of these instances are explained in more detail in the following two sections.
+
 \section{Data reuse Analysis}
 
 
@@ -994,12 +1196,176 @@ buffers~\cite{GuoJun04} generated by the ROCCC
 compiler~\cite{VillarrealMay10} allow for automatic detection of data
 reuse opportunities, but cannot be interfaced 
 with interconnects of varying width.
+%
+The methodology
+described in \cite{MeeusMar14} employs reuse buffers spanning multiple
+frame columns, which pose a significant area
+overhead. Both \cite{GuoJun04} and \cite{MeeusMar14} are not able
+to combine Hardware unrolling and pipelining, which are instead jointly
+supported the methodology detailed in \ref{sec:dr_meth}. An alternative 
+approach, described in
+~\cite{DongMar07}, requires a great deal of \HW\ resources as well, as it 
+requires the storage of large parts of a frame being processed inside the custom
+hardware.  In~\cite{LeeserApr06}, the authors propose an analytical
+method to gather microarchitectural parameters for sliding-window
+applications on FPGAs. Their design however ultimately needs to be
+manually implemented and hence the work neglects high level synthesis
+aspects.\par
+%
 The commercial Vivado\_HLS tool requires
 extensive manual rewrite of the source code, in order to instantiate
 a reuse memory buffer. On the other hand, the approach presented 
 % in \ref{sec:2_1_meth} 
 here relies on automated code
 analysis to derive the characteristics of the target application.\par 
+
+
+
+\subsection{Methodology}
+\label{sec:dr_meth}
+
+\begin{figure}[t]
+\centering
+%\hspace*{-2cm}
+\vspace{-0.4cm}
+\includegraphics[width= .8 \linewidth]{figs/Data_Reuse}
+\vspace*{-1cm}
+\caption{Data Reuse of memory accesses (66.6\%) across consecutive iterations of a loop, in a sliding
+window application.}
+% \vspace*{-0.7cm}
+% a figure\dots
+% \caption{\textsc{Automaton} for something or other. A caption can be rather
+% long and \emph{should} then consist of complete sentences ended with a `.'}
+\label{fig:data_reuse}
+\end{figure}
+
+% \begin{algorithm}[t]
+% \caption{LLVM Analysis Pass - %SCoP Identification and 
+% Data Reuse Analysis}
+% \label{Algo}
+% \begin{algorithmic}[1]
+% \Function{$RunOnRegion()$}{}
+%   \State\Call{$getAnalysis$}{ScopInfo}
+%   \State\Call{$scop=getScop()$}{}
+%   \State\Call{$RunOnScop$}{scop}
+% \EndFunction
+% \State
+% \Function{$RunOnScop$}{scop}
+%   \State\Call{$LI=getLoopInfo()$}{}
+%   \State\Call{$SE=getSE()$}{}
+%   \If {\Call{$L==OutermostLoop$}{}}
+%     \State\Call{$getTripCountFortLoop()$}{}
+%     \State\Call{$getStrideForLoop()$}{}
+%   \ElsIf  {\Call{$L==InnerMostLoop$}{}}
+%     \State\Call{$getReadMemoryAccesses()$}{}
+%     \State\Call{$ComputeDistancesForReadAccesses()$}{}
+%     \State\Call{$ComputeWindowSize()$}{}
+%   \EndIf
+% \EndFunction
+% \end{algorithmic}
+ 
+% \end{algorithm}
+
+In order to identify the level of data reuse that takes place throughout the execution of every
+window application, there are three pieces of information that are vital: a) the size of the window, 
+b) the stride and c) the frame size.
+An example of data reuse, accounting for roughly 66\% the size of the window between consecutive 
+iterations, can be seen in Figure \ref{fig:data_reuse}.
+The window size is the access pattern
+within the innermost body of the loop. The innermost and outermost
+loop stride is the value of the induction variable increase for the innermost
+and the outermost loop respectively. Finally, the frame size is
+the iteration space within which the sliding window is moving. To extract this information 
+I have developed an analysis pass, based on the LLVM Polly framework \cite{GrosserApr12}.\par
+
+The analysis pass %, as seen in Algorithm  \ref{Algo}, 
+iterates over regions of the application 
+functions and identifies Static Control Parts (SCoPs). The SCoPs are subgraphs of the control 
+flow graph of a function 
+where the flow of control is known statically. For each SCoP, loop and scalar evolution information
+is collected from the body of the loop. Loop information supports methods that can provide the 
+loop depth, so as to identify the innermost loop. Scalar evolution information can be used to extract 
+the loop trip count, which is the iteration space of each loop, and thus compute the frame size.
+The stride value, both vertical and horizontal, is obtained by a function that was developed based
+on existing methods of the Loop analysis LLVM pass.
+%and receives as argument the Basic Block of the corresponding loop. 
+Lastly, the read memory accesses of the innermost body of
+the loop are identified by using \texttt{isl} functions, which
+compute the
+distance (or delta) of each of these read accesses with respect to the
+first one. Given the access pattern, the window size is computed as the minimum 
+enclosing rectangle. After having identified the necessary information, the implementation of a
+local buffer that fits these needs can be carried out. 
+%then we proceed to design a local buffer that fits these needs.
+\par
+
+\subsection{Experimental Results}
+\label{sec:dr_exp}
+
+The evaluation of this approach is carried out in three benchmarks of varying window sizes.
+\texttt{Sobel} is an edge detection algorithm with an access pattern of a 3x3 window. \texttt{BlockSAD} 
+is a kernel in \htsf and is used to detect the similarity among 4x4 blocks. Finally, 
+\texttt{Maximum Filter} computes the brightest pixel among neighbors in 8x8 blocks. Three different 
+configurations were considered, spanning from a singe datapath and minimum input width (Conf.1) to multiple datapaths and increased input width (Conf.2 and Conf.3) as seen in Figure \ref{fig:data_reuse}. 
+Multiple datapaths translate to 
+more parallel windows executing and, hence, increased demand in area resources.\par
+
+The comparison of our approach is carried out against two state-of-the-art HLS 
+tools: ROCCC and Vivado\_HLS. Vivado\_HLS is compared in two modes, one being the default and
+the other one after extensive manual rewrite of the source code in order to obtain increased data 
+reuse.
+
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-2cm}
+% \includegraphics[width= .7 \linewidth]{Figs/exec_time_fpga}
+% \caption{Execution time to process a 100x100 frame.}
+% \label{fig:exec_time_fpga}
+% \end{figure}
+
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-1cm}
+% \vspace{1cm}
+% \vskip -1em 
+% \includegraphics[width= 1.1 \textwidth]{Figs/area_fpga}
+% \caption{Comparison of required resources for our generated systems and for baseline 
+% approaches: LUTs (a) and Flip-Flops (b).}
+% \label{fig:area_fpga}
+% \end{figure}
+
+Execution time, as seen in Figure \ref{fig:exec_time_fpga}, is extracted from 
+a targeted Xilinx Virtex7 FPGA platform. 
+It can be observed that ROCCC systems have similar
+performance with respect to Vivado\_norew ones. Conf.1 accelerators 
+--- even though they do not require code modifications --- are as 
+efficient as Vivado\_rew ones. Conf.2 and Conf. 3 that are
+supported only by our framework, dramatically decrease
+run-times, with an order-of-magnitude speed up on average between
+Conf.1 and Conf.3. The other state of the art tools \emph{fail to 
+provide an equivalent solution with such low execution time}.
+Figure \ref{fig:area_fpga} reports the amount of area resources required by
+ROCCC, Vivado\_HLS and our own generated accelerators.
+Unsurprisingly, accelerators featuring a high number of datapaths (Conf.3) 
+require more resources than single-datapaths approaches (Conf.1, Vivado). 
+Nevertheless, the area increase in terms of Flip-Flops is comparable to 
+the other to state-of-the-art tools, as the size of the buffer only is 
+increased slightly to support a high degree of parallelism.
+On the other hand, the results highlight that complex accelerators require 
+an increased amount of combinatorial logic (LUTs), with respect to ROCCC 
+and Vivado\_HLS.
+
+\vspace{-0.3cm}
+\subsection{Conclusions}
+
+It has been demonstrated that static code analysis can be crucial, when it comes to 
+automatically optimizing the synthesis of accelerators that are dedicated to 
+sliding window applications. My SW analysis identifies data reuse, as well as data locality,
+and subsequently allows to exploit these characteristics by making use of appropriate
+memory buffers. The experimental results reveal an order-of-magnitude performance 
+improvement with respect to state-of-the-art methodologies. This work was published in 
+HiPEAC IMPACT 2017 Seventh International Workshop on Polyhedral Compilation Techniques 
+\cite{ZacharopoulosJan17}. 
 
 \section{Machine Learning Approach for Loop Unrolling Prediction}
 

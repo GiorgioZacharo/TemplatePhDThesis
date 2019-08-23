@@ -104,6 +104,13 @@ R.~H. Dennard, F.~H. Gaensslen, V.~L. Rideout, E.~Bassous, and A.~R. LeBlanc.
 \newblock Design of ion-implanted mosfet's with very small physical dimensions.
 \newblock {\em IEEE Journal of Solid-State Circuits}, 9(5):256--268, 1974.
 
+\bibitem{DongMar07}
+Y.~Dong, Y.~Dou, and J.~Zhou.
+\newblock Optimized generation of memory structure in compiling window
+  operations onto reconfigurable hardware.
+\newblock In {\em Reconfigurable Computing: Architectures, Tools and
+  Applications, {ARC}}, pages 110--121, 2007.
+
 \bibitem{esmaeilzadeh2011dark}
 H.~Esmaeilzadeh, E.~Blem, R.~St~Amant, K.~Sankaralingam, and D.~Burger.
 \newblock Dark silicon and the end of multicore scaling.
@@ -169,6 +176,19 @@ R.~Johnson, D.~Pearson, and K.~Pingali.
 \newblock In {\em {ACM SIGPLAN} Notices}, volume~29, pages 171--185. ACM, June
   1994.
 
+\bibitem{KulkarniOct12}
+S.~Kulkarni and J.~Cavazos.
+\newblock Mitigating the compiler optimization phase-ordering problem using
+  machine learning.
+\newblock {\em {ACM SIGPLAN} Notices}, 47(10):147--162, 2012.
+
+\bibitem{KurraApr07}
+S.~Kurra, N.~K. Singh, and P.~R. Panda.
+\newblock The impact of loop unrolling on controller delay in high level
+  synthesis.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 391--396. EDA Consortium, 2007.
+
 \bibitem{LattnerMar04}
 C.~Lattner and V.~Adve.
 \newblock {LLVM}: A compilation framework for lifelong program analysis \&
@@ -182,6 +202,12 @@ K.~Martin, C.~Wolinski, K.~Kuchcinski, A.~Floch, and F.~Charot.
   generation and application compilation.
 \newblock {\em {ACM} Transactions on Reconfigurable Technology and Systems
   ({TRETS})}, 5(2):10, 2012.
+
+\bibitem{MeeusMar14}
+W.~Meeus and D.~Stroobandt.
+\newblock Automating data reuse in high-level synthesis.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 1--4, Mar. 2014.
 
 \bibitem{PothineniJan07}
 N.~Pothineni, A.~Kumar, and K.~Paul.
@@ -267,6 +293,13 @@ Xilinx.
 Xilinx.
 \newblock Xilinx all programmable {SoC} portfolio.
 \newblock \url{www.xilinx.com/products/silicon-devices/soc.html}, Mar. 2017.
+
+\bibitem{LeeserApr06}
+H.~Yu and M.~Leeser.
+\newblock Automatic sliding window operation optimisation for {FPGA}-based
+  computing boards.
+\newblock In {\em Proceedings of the 14th {IEEE} Symposium on
+  Field-Programmable Custom Computing Machines}, pages 76--88, April 2006.
 
 \bibitem{YuSep04}
 P.~Yu and T.~Mitra.
