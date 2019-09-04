@@ -1,6 +1,13 @@
 \def\srt#1{}
 \begin{thebibliography}{10}
 
+\bibitem{AgakovMar06}
+F.~Agakov, E.~Bonilla, J.~Cavazos, B.~Franke, G.~Fursin, M.~F. O'Boyle,
+  J.~Thomson, M.~Toussaint, and C.~K. Williams.
+\newblock Using machine learning to focus iterative optimization.
+\newblock In {\em Proceedings of the 4th International Symposium on Code
+  Generation and Optimization}, pages 295--305. IEEE Computer Society, 2006.
+
 \bibitem{AguilarJune16}
 M.~A. Aguilar, R.~Leupers, G.~Ascheid, and L.~G. Murillo.
 \newblock Automatic parallelization and accelerator offloading for embedded
@@ -99,6 +106,13 @@ E.~G. Cota, P.~Mantovani, G.~Di~Guglielmo, and L.~P. Carloni.
 \newblock In {\em Proceedings of the 52nd Design Automation Conference}, pages
   1--6. ACM, June 2015.
 
+\bibitem{danalis2010scalable}
+A.~Danalis, G.~Marin, C.~McCurdy, J.~S. Meredith, P.~C. Roth, K.~Spafford,
+  V.~Tipparaju, and J.~S. Vetter.
+\newblock The scalable heterogeneous computing (shoc) benchmark suite.
+\newblock In {\em Proceedings of the 3rd Workshop on General-Purpose
+  Computation on Graphics Processing Units}, pages 63--74. ACM, 2010.
+
 \bibitem{dennard1974design}
 R.~H. Dennard, F.~H. Gaensslen, V.~L. Rideout, E.~Bassous, and A.~R. LeBlanc.
 \newblock Design of ion-implanted mosfet's with very small physical dimensions.
@@ -196,6 +210,20 @@ C.~Lattner and V.~Adve.
 \newblock In {\em Proceedings of the 2nd International Symposium on Code
   Generation and Optimization}, pages 75--88, Mar. 2004.
 
+\bibitem{LiuJun13}
+H.-Y. Liu and L.~P. Carloni.
+\newblock On learning-based methods for design-space exploration with
+  high-level synthesis.
+\newblock In {\em Proceedings of the 50th Design Automation Conference}, pages
+  1--6. IEEE, June 2013.
+
+\bibitem{MarianiApr12}
+G.~Mariani, G.~Palermo, V.~Zaccaria, and C.~Silvano.
+\newblock Oscar: An optimization methodology exploiting spatial correlation in
+  multicore design spaces.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 31(5):740--753, 2012.
+
 \bibitem{MartiFeb12}
 K.~Martin, C.~Wolinski, K.~Kuchcinski, A.~Floch, and F.~Charot.
 \newblock Constraint programming approach to reconfigurable processor extension
@@ -209,12 +237,44 @@ W.~Meeus and D.~Stroobandt.
 \newblock In {\em Proceedings of the Design, Automation and Test in Europe
   Conference and Exhibition}, pages 1--4, Mar. 2014.
 
+\bibitem{MonsifrotAug02}
+A.~Monsifrot, F.~Bodin, and R.~Quiniou.
+\newblock A machine learning approach to automatic production of compiler
+  heuristics.
+\newblock In {\em AIMSA}, volume~2, pages 41--50. Springer, 2002.
+
+\bibitem{OzisikyilmazJun08}
+B.~Ozisikyilmaz, G.~Memik, and A.~Choudhary.
+\newblock {E}fficient {S}ystem {D}esign {S}pace {E}xploration {U}sing {M}achine
+  {L}earning {T}echniques.
+\newblock In {\em Proceedings of the 45th Design Automation Conference}, pages
+  966--969. ACM, June 2008.
+
+\bibitem{PalermoNov09}
+G.~Palermo, C.~Silvano, and V.~Zaccaria.
+\newblock {R}e{SPIR}: a {R}esponse {S}urface-{B}ased {P}areto {I}terative
+  {R}efinement for {A}pplication-{S}pecific {D}esign {S}pace {E}xploration.
+\newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 28(12):1816--1829, Nov 2009.
+
+\bibitem{pedregosa2011scikit}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, et~al.
+\newblock Scikit-learn: Machine learning in python.
+\newblock {\em Journal of Machine Learning Research}, 12(Oct):2825--2830, 2011.
+
 \bibitem{PothineniJan07}
 N.~Pothineni, A.~Kumar, and K.~Paul.
 \newblock Application specific datapath extension with distributed {I/O}
   functional units.
 \newblock In {\em Proceedings of the 20th International Conference on {VLSI}
   Design}, pages 551--558, Bangalore, India, Jan. 2007.
+
+\bibitem{PouchetFeb13}
+L.-N. Pouchet, P.~Zhang, P.~Sadayappan, and J.~Cong.
+\newblock Polyhedral-based data reuse optimization for configurable computing.
+\newblock In {\em Proceedings of the 2013 {ACM}/{SIGDA} 21st International
+  Symposium on Field Programmable Gate Arrays}, pages 29--38, Feb. 2013.
 
 \bibitem{PozziJul06}
 L.~Pozzi, K.~Atasu, and P.~Ienne.
@@ -243,6 +303,13 @@ R.~R. Schaller.
 \newblock Moore's law: past, present and future.
 \newblock {\em IEEE spectrum}, 34(6):52--59, 1997.
 
+\bibitem{SchmidJul15}
+M.~Schmid, O.~Reiche, F.~Hannig, and J.~Teich.
+\newblock Loop coarsening in {C}-based high-level synthesis.
+\newblock In {\em Proceedings of the 26th International Conference on
+  Application-specific Systems, Architectures and Processors}, pages 166--173,
+  July 2015.
+
 \bibitem{ShaoJul14}
 Y.~S. Shao, B.~Reagen, G.-Y. Wei, and D.~Brooks.
 \newblock Aladdin: A pre-{RTL}, power-performance accelerator simulator
@@ -255,6 +322,12 @@ T.~Simonite.
 \newblock Moore{'}{s} law is dead. {N}ow what?
 \newblock {\em MIT Technology Review, May}, 13:40--41, 2016.
 
+\bibitem{StephensonApr05}
+M.~Stephenson and S.~Amarasinghe.
+\newblock Predicting unroll factors using supervised classification.
+\newblock In {\em Proceedings of the 3rd International Symposium on Code
+  Generation and Optimization}, pages 123--134. IEEE, 2005.
+
 \bibitem{ArcDec16}
 Synopsys.
 \newblock {ARC} processor cores.
@@ -262,11 +335,21 @@ Synopsys.
   \url{www.synopsys.com/designware-ip/processor-solutions/arc-processors.html},
   Dec. 2016.
 
+\bibitem{TensilicaWeb}
+Xtensa customizable processors:
+  http://ip.cadence.com/ipportfolio/tensilica-ip/xtensa-customizable.
+
 \bibitem{GrosserApr12}
 C.~L. Tobias~Grosser, Armin~Groesslinger.
 \newblock {Polly - Performing polyhedral optimizations on a low-level
   intermediate representation}.
 \newblock In {\em Parallel Processing Letters}, Apr 2012.
+
+\bibitem{Vivado12}
+F.~Valina.
+\newblock Implementing memory structures for video processing in the {V}ivado
+  {HLS} tool.
+\newblock In {\em Xilinx}, Sept. 2012.
 
 \bibitem{VermaOct07}
 A.~K. Verma, P.~Brisk, and P.~Ienne.
@@ -293,6 +376,13 @@ Xilinx.
 Xilinx.
 \newblock Xilinx all programmable {SoC} portfolio.
 \newblock \url{www.xilinx.com/products/silicon-devices/soc.html}, Mar. 2017.
+
+\bibitem{XydisMar13}
+S.~Xydis, G.~Palermo, V.~Zaccaria, and C.~Silvano.
+\newblock A meta-model assisted coprocessor synthesis framework for
+  compiler/architecture parameters customization.
+\newblock In {\em Proceedings of the Design, Automation and Test in Europe
+  Conference and Exhibition}, pages 659--664, 2013.
 
 \bibitem{LeeserApr06}
 H.~Yu and M.~Leeser.
@@ -336,5 +426,10 @@ M.~Zuluaga, T.~Kluter, P.~Brisk, N.~P. Topham, and P.~Ienne.
   instruction set extensions.
 \newblock In {\em Proceedings of the 7th Symposium on Application Specific
   Processors}, pages 114--121, 2009.
+
+\bibitem{ZuluagaJun12}
+M.~Zuluaga, A.~Krause, P.~Milder, and M.~P{\"u}schel.
+\newblock Smart design space sampling to predict {P}areto-optimal solutions.
+\newblock In {\em {ACM SIGPLAN} Notices}, volume~47, pages 119--128, 2012.
 
 \end{thebibliography}

@@ -5,7 +5,7 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usetikzlibrary{automata}
-%\usepackage{setspace}
+% \usepackage{adjustbox}
 %\setstretch{1.05}
 
 \usepackage{listings}
@@ -22,6 +22,12 @@
 \newcommand{\SoTA}{{state-of-the-art}}
 \newcommand{\plm}{{private local memory}}
 \newcommand{\plms}{{private local memories}}
+
+\newcommand{\ML}{{Machine Learning}}
+\newcommand{\RF}{{Random Forest}}
+\newcommand{\SVM}{{Support Vector Machines}}
+\newcommand{\NN}{{Near Neighbor}}
+\newcommand{\ItRef}{{Iterative Refinement}}
 
 \newcommand{\dataflow}{data flow}
 \newcommand{\controlflow}{control flow}
@@ -46,6 +52,7 @@
 \newcommand{\dfmul}{\texttt{dfmul}}
 \newcommand{\dfsin}{\texttt{dfsin}}
 \newcommand{\gsm}{\texttt{gsm}}
+\newcommand{\stencil}{\texttt{stencil}}
 
 %change 'sl' to 'bf' for bold, or 'normalfont' for no special
 %formatting
@@ -133,6 +140,14 @@ This is where I acknowledge people.
 % \listoftables %optional
 
 \mainmatter
+
+%
+%
+%  
+%     INTRO
+%
+%
+%
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
@@ -292,9 +307,18 @@ attempt to provide a step closer on attaining this goal and expanding the \SoTA,
 new paths to future work.
 
 % \lipsum[1-4]
-% \section{Let's start!}
 
-
+%
+%
+%
+%
+%  
+%     CHAPTER 1
+%
+%
+%
+%
+%
 
 % \chapter[Short title]{A chapter title which will run over two lines --- it's for
 %   testing purpose}
@@ -540,7 +564,7 @@ regions that maximize the accumulated merit under a given cost, i.e., an area co
 
 To identify regions in both an automatic and efficient way, a
  \emph{Region Identification} pass was developed under the version 3.8 
-of the \emph{LLVM Compiler and Toolchain} \cite{LattnerMar04}. 
+of the \emph{LLVM Compiler framework} \cite{LattnerMar04}. 
 The pass receives as input applications developed in C or C++ and performs 
 their analysis at the Intermediate Representation (IR) level, a type
 of code used internally by LLVM to represent source code and allow
@@ -608,7 +632,7 @@ Using this information, the basic blocks are annotated
 
 The Region Identification pass, apart from the Region Identification detailed above, 
 performs an early evaluation of the merit and cost of a region, implemented
-directly within the LLVM toolchain. The evaluation relies on the LLVM intermediate
+directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
 representation and does not need any manual modification to perform function out-lining
 on the benchmark source code. 
 The estimation of merit and the cost of a region is performed as follows.\par
@@ -1064,80 +1088,23 @@ are synthesized into HW.
 
 % Here is some text with \textsc{SmallCaps} in normal font.
 
-% \lipsum[3-4]
-
-%  \section{The second, math section}
-% \begin{center}
-%   \begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto, initial text=, >=stealth] 
-%     \node[state, initial] (q0) {$q_0$};
-%     \node[state] (q1) [right of=q0] {$q_1$};
-%     \node[state] (q2) [right of=q1] {$q_2$};
-%     \node[state, accepting] (q3) [right of=q2] {$q_3$};
-%     \path[->]
-%     (q0) 
-%     edge [loop above] node {0,1} ()
-%     edge  node {0} (q1)
-%     (q1)
-%     edge  node {1} (q2)
-%     (q2)
-%     edge node {0} (q3)
-%     (q3)
-%     edge [loop above] node {0,1} ()
-% ;
-%   \end{tikzpicture}
-% \end{center}
-
-% \textbf{Theorem 1 (Residue Theorem).}
-% Let $f$ be analytic in the region $G$ except for the isolated singularities $a_1,a_2,\ldots,a_m$. If $\gamma$ is a closed rectifiable curve in $G$ which does not pass through any of the points $a_k$ and if $\gamma\approx 0$ in $G$ then
-% \[
-% \frac{1}{2\pi i}\int_\gamma f = \sum_{k=1}^m n(\gamma;a_k) \text{Res}(f;a_k).
-% \]
-% \textbf{Theorem 2 (Maximum Modulus).}
-% \emph{Let $G$ be a bounded open set in $\mathbb{C}$ and suppose that $f$ is a continuous function on $G^-$ which is analytic in $G$. Then}
-% \[
-% \max\{|f(z)|:z\in G^-\}=\max \{|f(z)|:z\in \partial G \}.
-% \]
-
-% \section[third]{A very very long section, titled ``The third section'', with
-%   a rather  short text alternative (third)}
-% \lipsum \texttt{Some Test}
-% \lstset{language=algebra,linewidth=0.95\linewidth,breaklines=true,numbers=left,
-% basicstyle=\ttfamily,numberstyle=\tiny,escapeinside={//*}{\^^M},
-% mathescape=true}
-% \begin{lstlisting}
-% import IntSpec, ItemSpec;
-
-% sort cart; //*\label{sort}
-
-% constructors //*\label{begin-sig}
-% create() $\longrightarrow$ cart;
-% insert(cart, item) $\longrightarrow$ cart;
-% observers
-% amount(cart) $\longrightarrow$ int;
-% transformers
-% delete(cart, item) $\longrightarrow$ cart; //*\label{end-sig}
-
-% axioms //*\label{begin-axioms}
-% forall c: cart, i, j: item 
-
-% amount(create()) $=$ 0; //*\label{begin-amount}
-% amount(insert(c,i)) $=$ amount(c) $+$ price(i); //*\label{end-amount}
-% delete(create(),i) $=$ create(); //*\label{begin-delete}
-% delete(insert(c,i),j) $=$
-% if (i =$\:$= j) c
-% else insert(delete(c,j),i); //*\label{end-axioms}
-% end
-% \end{lstlisting}
-
-% As you can easily see from the above listing \citet{bbggs:iet07}
-% define something weird based on the BPEL specification
-% \citep{bpelspec}.
-% \nocite{*}
-
 % \appendix %optional, use only if you have an appendix
 % I removed mine a year ago.
 
+%
+%
+%
+%
+%  
+%     CHAPTER 2
+%
+%
+%
+%
+%
+
 \chapter{Optimizations applied to HW Accelerators}
+% \vspace{-1cm}
 
 Identifying good candidates for HW acceleration is the first step to realize heterogeneous
 computing system designs that offer increased performance compared to a homogeneous system restricted
@@ -1153,31 +1120,72 @@ choice of {\em how} these accelerators can be synthesized.
 Furthermore, the resolution of which optimizations may be applied to which HW accelerators can be a 
 complex problem, as it depends heavily on each HW accelerator characteristics.\par
 
-In order to bring automation one step forward in HW/SW co-design, and under the scope of this part of my research , 
-I tackled the problem of automating the decision making process of which optimizations should be applied to 
-candidates for HW acceleration within a certain context. 
-% I tackled the problem of automating the decision of which optimizations should be applied within a certain context. 
-These optimizations include memory management of the data consumed and produced by the HW accelerators, a set of optimizations
-targeted to loops (e.g. loop pipelining, loop unrolling, loop flattening etc), pipelining consecutive pieces of computation such 
-as subsequent function calls or loop bodies of consecutive iterations and array optimizations, such as array partitioning in blocks
-of the same size. Among the various optimizations available, I have focused on two major categories: a) Data Reuse analysis and b) Loop
-Unrolling factor prediction. Both of these instances are explained in more detail in the following two sections.
+In order to bring automation one step forward in HW/SW co-design, and under the scope of this part of my 
+research, I tackled the problem of automating the decision making process of which optimizations should be 
+applied to candidates for HW acceleration within a certain context. 
+These optimizations include memory management of the data consumed and produced by the HW accelerators, 
+a set of optimizations targeted to loops (e.g. loop pipelining, loop unrolling, loop flattening etc), 
+pipelining consecutive pieces of computation such as subsequent function calls or loop bodies of consecutive 
+iterations and array optimizations, such as array partitioning in blocks of the same size. Among the various 
+optimizations available, I have focused on two major categories: a) Data Reuse analysis and b) Loop Unrolling 
+factor prediction. Both of these instances are explained in more detail in the following two sections.
 
 \section{Data reuse Analysis}
 
 
 \subsection{Motivation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width= .6 \linewidth]{figs/intro}
+\vskip -.5em
+\caption{At each iteration, sliding window applications process a
+  subset of the input data (a).  The managed set of subsequent
+  iterations present a high degree of overlap, both in the horizontal
+  (b) and vertical (c) dimensions. The framework in \ref{sec:dr_meth} automatically
+  leverages both, maximizing data reuse (d). }
+  \vskip -1em
+\label{fig:dr_intro}
+\end{figure}
+
 Loops are ideal candidates for acceleration. In almost every application, there is a
 number of them that contain a large number of iterations and there is a sufficient 
 amount of computation taking place in their bodies. In addition to that, there are 
-nested loops which commonly show a high level of data reuse. An example of such high
+nested loops which commonly show a high level of data reuse. An effective exploitation
+of data reuse across consecutive iterations of loops can significantly lower the required
+amount of data exchange between HW accelerators and the main memory, thus reducing the 
+respective bandwidth to and from accelerators, and increasing their performance.\par
+
+An example of such high
 data reuse can be observed in sliding window applications, where there is typically
 a window of accesses scanning a wider domain, such as a two-dimensional array. 
-Given that the level and pattern of data reuse is known a priori, it would be feasible 
+Given that the level and pattern of data reuse is known a priori, it is feasible 
 to design specific memory structures, also known as memory buffers, attached to the 
 HW accelerators. These memory buffers can exploit data reuse by keeping data locally 
 and, hence, minimize the memory latency due to communication with the main memory.\par
  %while exploiting the computational potential of the accelerators.\par
+
+Data reuse exploitation in \HLS\ (HLS) is still in premature stage.
+\SoTA\ methods \cite{Vivado12} either rely on manually rewriting the source code, preceding HLS, 
+or on source-to-source translation \cite{PouchetFeb13} \cite{SchmidJul15}, and are therefore 
+poorly integrated in HLS tool-chains.\par
+    
+The methodology detailed in Subsection \ref{sec:dr_meth} attempts to bridge this gap. 
+It presents a compiler-driven framework, based on the LLVM Polly~\cite{GrosserApr12} 
+library, able to identify automatically data reuse potential in computational kernels in order
+to guide the synthesis of complex HW accelerators.
+As seen in Figure \ref{fig:dr_intro} these accelerators exploit timely unrolling and 
+pipelining, by embedding a local storage holding elements which are re-used across iterations.\par
+  
+Sliding window applications, common in the image
+processing field, are targeted for acceleration. In such domain, a transformation is 
+applied to each element of a large two-dimensional input array (a frame) according to the
+values in a smaller domain of accesses (a window). Large,
+yet constrained, input/output links are considered as the main architectural
+constraint in the design of this type of HW accelerators. Such arrangement is
+usually supported by commercial application specific platforms, such as the Tensilica
+Xtensa processor~\cite{TensilicaWeb}.
+
 \subsection{Related Work}
 
 In the domain of identifying automatically accelerators, research has 
@@ -1239,32 +1247,6 @@ window application.}
 \label{fig:data_reuse}
 \end{figure}
 
-% \begin{algorithm}[t]
-% \caption{LLVM Analysis Pass - %SCoP Identification and 
-% Data Reuse Analysis}
-% \label{Algo}
-% \begin{algorithmic}[1]
-% \Function{$RunOnRegion()$}{}
-%   \State\Call{$getAnalysis$}{ScopInfo}
-%   \State\Call{$scop=getScop()$}{}
-%   \State\Call{$RunOnScop$}{scop}
-% \EndFunction
-% \State
-% \Function{$RunOnScop$}{scop}
-%   \State\Call{$LI=getLoopInfo()$}{}
-%   \State\Call{$SE=getSE()$}{}
-%   \If {\Call{$L==OutermostLoop$}{}}
-%     \State\Call{$getTripCountFortLoop()$}{}
-%     \State\Call{$getStrideForLoop()$}{}
-%   \ElsIf  {\Call{$L==InnerMostLoop$}{}}
-%     \State\Call{$getReadMemoryAccesses()$}{}
-%     \State\Call{$ComputeDistancesForReadAccesses()$}{}
-%     \State\Call{$ComputeWindowSize()$}{}
-%   \EndIf
-% \EndFunction
-% \end{algorithmic}
- 
-% \end{algorithm}
 
 In order to identify the level of data reuse that takes place throughout the execution of every
 window application, there are three pieces of information that are vital: a) the size of the window, 
@@ -1276,14 +1258,50 @@ within the innermost body of the loop. The innermost and outermost
 loop stride is the value of the induction variable increase for the innermost
 and the outermost loop respectively. Finally, the frame size is
 the iteration space within which the sliding window is moving. To extract this information 
-I have developed an analysis pass, based on the LLVM Polly framework \cite{GrosserApr12}.\par
+I have developed an analysis pass, based on the LLVM Polly framework \cite{GrosserApr12}. 
+Application-specific parameters are then considered in conjunction with architecture constraints 
+(input/output width) to automate the synthesis of efficient HW accelerators.\par
 
-The analysis pass %, as seen in Algorithm  \ref{Algo}, 
+\begin{algorithm}[t]
+\begin{flushleft}
+\textbf{Input:}  Application written in C/C++\\
+\textbf{Output:} List of Identified SCoPs and their respective Frame, Window, Stride sizes/values.\\
+\end{flushleft}
+\begin{algorithmic}[1]
+\Function{$RunOnRegion()$}{}
+  \State\Call{$getAnalysis$}{ScopInfo}
+  \State\Call{$scop=getScop()$}{}
+  \State\Call{$RunOnScop$}{scop}
+\EndFunction
+\State
+\Function{$RunOnScop$}{scop}
+  \State\Call{$LI=getLoopInfo()$}{}
+  \State\Call{$SE=getSE()$}{}
+  \If {\Call{$L==OutermostLoop$}{}}
+    \State\Call{$getTripCountFortLoop()$}{}
+    \State\Call{$getStrideForLoop()$}{}
+  \ElsIf  {\Call{$L==InnerMostLoop$}{}}
+    \State\Call{$getReadMemoryAccesses()$}{}
+    \State\Call{$ComputeDistancesForReadAccesses()$}{}
+    \State\Call{$ComputeWindowSize()$}{}
+  \EndIf
+\EndFunction
+\end{algorithmic}
+\caption{LLVM Analysis Pass - SCoP Identification and 
+Data Reuse Analysis}
+\label{dr_Algo}
+% \vspace{-0.2cm}
+\end{algorithm}
+
+
+The analysis pass, as seen in Algorithm  \ref{dr_Algo}, 
 iterates over regions of the application 
 functions and identifies Static Control Parts (SCoPs). The SCoPs are subgraphs of the control 
 flow graph of a function 
 where the flow of control is known statically. For each SCoP, loop and scalar evolution information
-is collected from the body of the loop. Loop information supports methods that can provide the 
+is collected from the body of the loop. \par
+
+Loop information supports methods that can provide the 
 loop depth, so as to identify the innermost loop. Scalar evolution information can be used to extract 
 the loop trip count, which is the iteration space of each loop, and thus compute the frame size.
 The stride value, both vertical and horizontal, is obtained by a function that was developed based
@@ -1306,33 +1324,34 @@ The evaluation of this approach is carried out in three benchmarks of varying wi
 \texttt{Sobel} is an edge detection algorithm with an access pattern of a 3x3 window. \texttt{BlockSAD} 
 is a kernel in \htsf and is used to detect the similarity among 4x4 blocks. Finally, 
 \texttt{Maximum Filter} computes the brightest pixel among neighbors in 8x8 blocks. Three different 
-configurations were considered, spanning from a singe datapath and minimum input width (Conf.1) to multiple datapaths and increased input width (Conf.2 and Conf.3) as seen in Figure \ref{fig:data_reuse}. 
+configurations were considered, spanning from a singe datapath and minimum input width (Conf.1) 
+to multiple datapaths and increased input width (Conf.2 and Conf.3) as seen in Figure \ref{fig:data_reuse}. 
 Multiple datapaths translate to 
 more parallel windows executing and, hence, increased demand in area resources.\par
 
-The comparison of our approach is carried out against two state-of-the-art HLS 
+The comparison of the approach introduced above is carried out against two state-of-the-art HLS 
 tools: ROCCC and Vivado\_HLS. Vivado\_HLS is compared in two modes, one being the default and
 the other one after extensive manual rewrite of the source code in order to obtain increased data 
 reuse.
 
-% \begin{figure}[h!]
-% \centering
-% \hspace*{-2cm}
-% \includegraphics[width= .7 \linewidth]{Figs/exec_time_fpga}
-% \caption{Execution time to process a 100x100 frame.}
-% \label{fig:exec_time_fpga}
-% \end{figure}
+\begin{figure}[h!]
+\centering
+\hspace*{-2cm}
+\includegraphics[width= .7 \linewidth]{figs/exec_time_fpga}
+\caption{Execution time to process a 100x100 frame.}
+\label{fig:exec_time_fpga}
+\end{figure}
 
-% \begin{figure}[h!]
-% \centering
-% \hspace*{-1cm}
-% \vspace{1cm}
-% \vskip -1em 
-% \includegraphics[width= 1.1 \textwidth]{Figs/area_fpga}
-% \caption{Comparison of required resources for our generated systems and for baseline 
-% approaches: LUTs (a) and Flip-Flops (b).}
-% \label{fig:area_fpga}
-% \end{figure}
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\vspace{1cm}
+\vskip -1em 
+\includegraphics[width= 1 \textwidth]{figs/area_fpga}
+\caption{Comparison of required resources for our generated systems and for baseline 
+approaches: LUTs (a) and Flip-Flops (b).}
+\label{fig:area_fpga}
+\end{figure}
 
 Execution time, as seen in Figure \ref{fig:exec_time_fpga}, is extracted from 
 a targeted Xilinx Virtex7 FPGA platform. 
@@ -1340,7 +1359,7 @@ It can be observed that ROCCC systems have similar
 performance with respect to Vivado\_norew ones. Conf.1 accelerators 
 --- even though they do not require code modifications --- are as 
 efficient as Vivado\_rew ones. Conf.2 and Conf. 3 that are
-supported only by our framework, dramatically decrease
+supported only by the framework presented in \ref{sec:dr_meth}, dramatically decrease
 run-times, with an order-of-magnitude speed up on average between
 Conf.1 and Conf.3. The other state of the art tools \emph{fail to 
 provide an equivalent solution with such low execution time}.
@@ -1363,11 +1382,299 @@ automatically optimizing the synthesis of accelerators that are dedicated to
 sliding window applications. My SW analysis identifies data reuse, as well as data locality,
 and subsequently allows to exploit these characteristics by making use of appropriate
 memory buffers. The experimental results reveal an order-of-magnitude performance 
-improvement with respect to state-of-the-art methodologies. This work was published in 
+improvement with respect to \SoTA\ methodologies. This work was published in 
 HiPEAC IMPACT 2017 Seventh International Workshop on Polyhedral Compilation Techniques 
 \cite{ZacharopoulosJan17}. 
 
-\section{Machine Learning Approach for Loop Unrolling Prediction}
+% SECTION 2.2
+%
+
+\section[Machine Learning Approach for Loop Unrolling\\ Factor Prediction]
+{Machine Learning Approach for Loop Unrolling\\ Factor Prediction}
+
+\subsection{Motivation}
+
+\HLS\ tools, utilized to synthesize accelerators, require manual decisions to be made, so as 
+to build efficient accelerators. These decisions regard the choice of high-level optimizations 
+and transformations to be applied, therefore a good understanding of the SW parts to be 
+accelerated is essential. Optimizations applied during synthesis can highly improve the performance 
+achieved, as well as allocate less HW resources for a given computer architecture. Nonetheless, 
+the selection of optimizations is a challenging task due to two main reasons. 
+First, hardware synthesis is a time-consuming process, limiting in practice the amount of 
+possible implementations that can be evaluated. Second, the effect of assigning different values to 
+directives is difficult to foresee, due to low-level application characteristics.\par
+
+Simulation tools such as Aladdin \cite{ShaoJul14} have been developed in order to rapidly 
+estimate the performance and cost (area) of HLS-defined designs. Nonetheless, even when employing 
+estimation tools, an exhaustive evaluation of all directives settings for
+each candidate accelerator in a heterogeneous system is still unfeasible beyond simple cases. Addressing
+this challenge, a machine learning framework is proposed that
+is able to infer the proper implementation of an HLS design based on its characteristics,
+automatically derived from a source code analysis pass, based within the
+LLVM compiler framework \cite{LattnerMar04}.\par
+
+
+Within the scope of this piece of research, the focus is placed on {\em loop unrolling}, an already 
+well known optimization from the compiler domain, as well as the HW domain.
+The loop unrolling optimization replicates the body of a loop a given number of times 
+in order to expose parallelism, which especially in a HW implementation can lead to 
+substantial speedup gains \cite{KurraApr07}. 
+% On the other hand this might raise the need for more HW resources. 
+This directive should nonetheless be applied sensibly, because it entails a high area cost for the 
+duplicated logic; in addition, its ensuing benefits can be hampered by loop-carried dependencies 
+and frequent memory accesses.\par
+
+It is thus clear that there is a trade-off between execution time and the area budget that 
+a computer architect has at hand, as well as the level of complexity and more potential 
+side effects that need to be taken into consideration. Since HW realizations are targeted, 
+the goal of this work is to reach a {\em sweet spot} between performance and HW resources.\par
+
+Within the sphere of this research work, the following contributions are made.
+First, a novel {\em \ML\ }
+approach is introduced, based on Random Forest classification, 
+instead of estimation-based models, to predict 
+accurately the optimal loop unrolling factor of loops in applications to be synthesized
+in HW. The use of this methodology can provide results with better prediction score
+and in much less time, compared to the \SoTA.
+Second, the whole process is fully automated, 
+from the analysis of the input applications, using the LLVM compiler infrastructure 
+\cite{LattnerMar04}, up to the training of the Random Forest Classifier. 
+Finally, the trained \RF\ classifier can be used to generate accurate loop unrolling predictions 
+for any given application -- a piece of information that can 
+directly be used by an HLS tool such as Vivado\_HLS, in order to synthesize parts of these 
+applications to HW.
+
+\subsection{Related Work}
+
+% Research papers have attempted to look into the benefits of loop unrolling in 
+% HLS \cite{KurraApr07}, where they predict the optimal loop unrolling factors in HLS instances 
+% by carrying out a methodology based on an estimation model. 
+% On the other hand, targeting SW \cite{StephensonApr05}, 
+% the authors make use of Supervised Classification, such as near neighbor (NN) classification 
+% and Support Vector Machines (SVM) methods, to produce accurate predictions in optimal unrolling 
+% factors. However, our suggested approach is to perform accurate predictions on the optimal loop 
+% unrolling factor of loops targeted for \HLS\ by exploiting Random Forest classifiers. The 
+% experimental phase supports our claim that such an approach leads to better overall 
+% results and much faster convergence.
+% \par
+Research papers have explored the applicability of machine learning to apply
+compiler optimizations. In \SW\ compilers, it has been
+employed by Agakov et al. \cite{AgakovMar06} to speed up iterative compilation,
+by Monsifrot et al. \cite{MonsifrotAug02} to produce compiler heuristics
+and by Kulkarni et al. \cite{KulkarniOct12} to select the order in which optimization passes
+should be performed. Stephenson et al. \cite{StephensonApr05} have made use of Supervised 
+Classification, such as near neighbor (NN) classification 
+and Support Vector Machines (SVM) methods, to produce accurate predictions in optimal unrolling 
+factors.
+In all above-mentioned research works the authors targeted \SW\ 
+compilation; in Subsection \ref{sec:ml_exp}, a comparative performance evaluation of the 
+framework presented in Subsection \ref{sec:ml_meth} to the methodology proposed by 
+Stephenson et al. is carried out, showcasing the benefit of the choice of loop features and 
+classification strategy in the HLS scenario.\par
+
+Liu et al.  \cite{LiuJun13} used a \RF\
+classification model in the context of HLS, extending the \ItRef\
+framework proposed in \cite{MarianiApr12} \cite{PalermoNov09}
+\cite{XydisMar13} and \cite{ZuluagaJun12}. They address a different
+problem with respect to the one tackled in this section: that of retrieving the set of
+Pareto-optimal implementations of a given design by navigating its
+configuration space. A similar stance, addressing system-level design,
+is illustrated by Ozisikyilmaz et al. \cite{OzisikyilmazJun08}.  As
+opposed to these works, my aim is to perform a predictive assignment
+of synthesis directives, based on a training performed on an independent
+input set. This problem was also investigated by Kurra et
+al. \cite{KurraApr07}. Contrary to their methodology, my methodology does not
+depend on a detailed estimation delay model of the loop body datapath and
+control logic.
+
+\begin{figure}[h!]
+\centering
+% \hspace*{-2cm}
+\includegraphics[width= 1 \linewidth]{figs/LUP_method}
+\caption{Overview of the Loop Unrolling Prediction methodology.}
+\label{fig:exec_time_fpga}
+\end{figure}
+
+\subsection{Methodology}
+\label{sec:ml_meth}
+
+
+
+In this section, we first define the employed objective function and the performance metrics we 
+considered to evaluate our framework performance. Then we introduce the LLVM analysis pass that we 
+developed in order to automatically extract relevant loop features and the approach we followed to 
+retrieve the area and run-time performance of HLS designs. Lastly, the supervised learning classifier 
+method is detailed, which, during the training phase, gathers the data from the previous steps to 
+produce a loop unrolling predictor, and, during the test phases, assigns loop unrolling factors based on loop features.
+
+
+% A large set of optimizations or features exist and can be applied while synthesizing an
+% accelerator using a commercial tool, such as Vivado HLS. The issues though, as mentioned
+% earlier,
+% The challenges that  are that:  a) they cannot be applied in an automatic fashion for each application
+% and b) it requires a deep understanding of each part of an application that is going
+% to be accelerated.
+
+\par
+
+The {\em optimal loop unrolling factor} is defined as follows.
+Given a defined set of unrolling factors <1, 2, 4, 8, 16, 32, 64>, there is one for every
+loop that maximizes the \textbf {Impact (I)}, given by the following formula:
+
+$$I= \alpha  \cdot \dfrac{ (L_0 - L)} {L_0} + \beta \cdot \dfrac{ (A_0 - A)} {A_0},\ \alpha + \beta = 1$$
+
+where $L_0$ is the latency of the loop for Loop Unrolling Factor (LUF) that is equal to one, 
+meaning a rolled loop and $L$ the latency for any possible LUF from the defined set.
+Respectively, $A_0$ is the area resources needs of the loop with LUF equal to one and 
+$A$ the area for any possible LUF from the defined set.\par
+
+Three different strategies were considered: a) Optimize for both latency and area ($\alpha = 
+\beta = 0.5$). In this configuration a balance is maintained between decreasing the number of 
+execution cycles and keeping low the usage of HW area resources in a given implementation.
+b) Optimize for latency ($\alpha = 0.7, \beta = 0.3$). Minimizing latency is favored by this
+approach, thus focusing on increasing the speedup of an application, and finally c) Optimize
+for area ($\alpha = 0.3, \beta = 0.7$). This approach aims at decreasing the area budget of 
+the implementation, therefore achieving an average speedup, but maintain low usage of HW 
+area resources. All three configurations fulfill different architectural needs and explore 
+realistic alternative scenarios.\par
+
+
+% Table 1 and 2
+%
+%
+\begin{table}[h]
+  \centering
+  \label{tab:X}
+  \small\addtolength{\tabcolsep}{-3pt}
+  \vspace{1em}
+  \begin{tabular}{| l |} 
+ \hline    
+ \textbf{Features - X Vector}  \\ \hline
+    \emph{Critical Path}      \\ \hline
+   \emph{ Loop\ Trip\ Count} \\ \hline
+   \emph{ Has\ Loop\ Carried\ Dependencies}     \\ \hline
+   \emph{ \#\ Load\ Instructions}     \\ \hline
+   \emph{ \#\ Store\ Instructions}      \\ \hline
+  \end{tabular} 
+    \caption{Features extracted by LLVM LU Analysis Pass.}
+  
+  
+     \vspace{2em}
+  
+  \label{tab:St_X1_X2}
+  \begin{tabular}{| l | l |} 
+ \hline    
+ \textbf{Features - X Vector 1} & \textbf{Features - X Vector 2}  \\ \hline
+  \emph{\#\ Operands}        &\emph{\#\ Floating\ Point\ Operations}        \\ \hline
+  \emph{Range\ Size}     &\emph{Loop\ Nest\ Level}   \\ \hline
+    \emph{Critical\ Path}   &\emph{\#\ Operands}  \\ \hline
+  \emph{\#\ Operations}      &\emph{\#\ Branches}   \\ \hline
+  \emph{Loop\ Trip\ Count}&\emph{\#\ Memory\ Operations}   \\ \hline
+  \end{tabular}
+    \caption{Feature vectors selected by Stephenson et al. \cite{StephensonApr05}.}
+\end{table}
+
+% one
+% favoring speedup, one favoring area usage and finally one that maintains a balance between 
+% these two, so as to fulfill different architectural needs and explore more realistic 
+% alternative scenarios.
+% One approach is to target the decrease of the number of execution cycles, thus focusing on 
+% increasing the speedup of an application, and a different approach would be a scenario where 
+% we would like to achieve an average speedup, but maintain low the usage of HW area resources 
+% in an implementation.
+
+% Knowing the optimal loop unrolling factor for each loop of a function, besides it being a 
+% non-trivial task, it is also depending on the outcome we wish to achieve. 
+% One approach is to target the decrease of the number of execution cycles, thus focusing on 
+% increasing the speedup of an application, and a different approach would be a scenario where 
+% we would like to achieve an average speedup, but maintain low the usage of HW area resources 
+% in an implementation.
+% We decided to follow three different strategies, one 
+% favoring speedup, one favoring area usage and finally one that maintains a balance between 
+% these two, so as to fulfill different architectural needs and explore more realistic 
+% alternative scenarios.\par
+
+%After defining the optimal loop unrolling factor, 
+Latency and area information are extracted
+for a subset of the total number of loops of an application, for all possible unrolling factors 
+in the LUF set defined above,
+by using Aladdin, an estimation model 
+which targets ASIC implementations. Aladdin, as mentioned in Chapter 1, allows fast, as well as 
+accurate, evaluation, since 
+the estimations offered are within 1\% of the ones derived from a Register-transfer level (RTL) 
+implementation \cite{ShaoJul14}. By exploiting the LLVM compiler infrastructure 
+\cite{LattnerMar04}, an analysis pass was developed that extracts relevant information for 
+these loops, such as the loop trip count, the estimated critical path, the number of loop carried
+dependencies and the number of Load and Store instructions. 
+This information is used as input to a
+%a Multilayer Neural Network (MNN), Support Vector Machine (SVM) and 
+Random Forest (RF) classifier.
+Supervised learning is performed by detecting the correlation between 
+the input, the compiler extracted information, used as the X feature vector, and the output, which is the optimal 
+loop unrolling factor for each loop.\par 
+%following the formula defined above.\par
+After having trained the machine learning algorithm with the training set described above, I 
+proceed by performing out of sample
+predictions, meaning predictions on loops of the same application that were not used in the training 
+phase or on loops of different applications. The outcome of this methodology are
+% predictions are generated on loops 
+close-to-optimal loop unrolling factor solutions compared to the respective optimal ones derived by 
+the Impact formula.
+Simultaneously, the time needed to perform the training and predictions is minimized, as
+further exhaustive exploration using Vivado\_HLS or any other estimation tool, such as Aladdin, is avoided.\par
+
+\subsection{Experimental Results}
+\label{sec:ml_exp}
+
+The benchmarks used during the experimental phase are broadly used embedded applications from 
+the CHStone suite \cite{HaraMay08} and SHOC suite \cite{danalis2010scalable}.
+ \adpcm, \jpeg, \mpeg, \sha\ and \stencil.\par
+
+During the experimental phase, state-of-the-art machine learning algorithms were used from the 
+Scikit-learn framework \cite{pedregosa2011scikit}.
+%  A Random Forest (RF) Classifier model is employed
+% to perform the classification. Results showcased a 60\% prediction absolute accuracy, meaning that the
+% predictions performed on the unknown subset of loops were correct 60\% of the time.
+As seen in Figure \ref{fig:mod_score} Random Forest (RF) is compared to Near Neighbor(NN) and
+Support Vector Machine (SVM) classifiers, and across different feature vectors. X as described
+above and X1,X2 by \cite{StephensonApr05}. The X1 and X2 features differ from the ones of X (e.g. X2: \# 
+Floating Point operations, loop nest level etc) as they target 
+SW execution. The suggested RF classifier and X feature vector 
+showcased a 60\% prediction absolute accuracy, meaning that the predictions performed on the unknown 
+subset of loops were correct 60\% of the time, outperforming every other state-of-the-art approach.
+
+
+
+\begin{figure*}
+
+\centering
+%\hspace*{-2cm}
+%\vspace{-0.4cm}
+  % \hspace*{-4cm}
+\includegraphics[width= .6 \linewidth]{figs/models_score}
+\includegraphics[width= .6 \linewidth]{figs/models_error}
+% \vspace*{-0.2cm}
+% \hspace*{0.5cm}
+\vspace*{-0.2cm}
+\caption{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models 
+and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite{StephensonApr05}.
+Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.}
+\label{fig:mod_score}
+% \vspace*{-0.7cm}
+\end{figure*}
+
+
+%
+%
+%
+%
+%  
+%     CHAPTER 3
+%
+%
+%
+%
+%
 
 
 \chapter[System Aware Accelerators Identification]
