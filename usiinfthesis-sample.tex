@@ -1484,15 +1484,15 @@ opposed to these works, my aim is to perform a predictive assignment
 of synthesis directives, based on a training performed on an independent
 input set. This problem was also investigated by Kurra et
 al. \cite{KurraApr07}. Contrary to their methodology, my methodology does not
-depend on a detailed estimation delay model of the loop body datapath and
-control logic.
+depend on a detailed estimation delay model of the loop body so as to
+predict loop unrolling factors in HLS instances.
 
 \begin{figure}[h!]
 \centering
 % \hspace*{-2cm}
 \includegraphics[width= 1 \linewidth]{figs/LUP_method}
 \caption{Overview of the Loop Unrolling Prediction methodology.}
-\label{fig:exec_time_fpga}
+\label{fig:lup_method}
 \end{figure}
 
 \subsection{Methodology}
@@ -1500,35 +1500,37 @@ control logic.
 
 
 
-In this section, we first define the employed objective function and the performance metrics we 
-considered to evaluate our framework performance. Then we introduce the LLVM analysis pass that we 
-developed in order to automatically extract relevant loop features and the approach we followed to 
-retrieve the area and run-time performance of HLS designs. Lastly, the supervised learning classifier 
-method is detailed, which, during the training phase, gathers the data from the previous steps to 
-produce a loop unrolling predictor, and, during the test phases, assigns loop unrolling factors based on loop features.
+In this section, first the employed objective function that determines the optimal loop 
+unrolling factor is presented, as well as the performance metrics considered to evaluate 
+the framework performance. The LLVM analysis pass that was developed in order to 
+automatically extract relevant loop features and the approach followed to retrieve the 
+area and run-time performance of HLS designs is presented. Lastly, the supervised learning 
+classifier method is detailed, which, during the training phase, gathers the data from the 
+previous steps to produce a loop unrolling predictor, and, during the test phases, assigns 
+loop unrolling factors based on loop features.\par
 
-
-% A large set of optimizations or features exist and can be applied while synthesizing an
-% accelerator using a commercial tool, such as Vivado HLS. The issues though, as mentioned
-% earlier,
-% The challenges that  are that:  a) they cannot be applied in an automatic fashion for each application
-% and b) it requires a deep understanding of each part of an application that is going
-% to be accelerated.
-
-\par
+\subsubsection{Optimal Loop Unrolling Factor -- Objective Function}
 
 The {\em optimal loop unrolling factor} is defined as follows.
-Given a defined set of unrolling factors <1, 2, 4, 8, 16, 32, 64>, there is one for every
+Given a defined set of unrolling factors S: <1, 2, 4, 8, 16, 32, 64>, there is one for every
 loop that maximizes the \textbf {Impact (I)}, given by the following formula:
 
-$$I= \alpha  \cdot \dfrac{ (L_0 - L)} {L_0} + \beta \cdot \dfrac{ (A_0 - A)} {A_0},\ \alpha + \beta = 1$$
+$$I(L,A)= \alpha  \cdot \dfrac{ (L_1 - L)} {L_1} + \beta \cdot \dfrac{ (A_1 - A)} {A_1},\ \alpha + \beta = 1$$
 
-where $L_0$ is the latency of the loop for Loop Unrolling Factor (LUF) that is equal to one, 
-meaning a rolled loop and $L$ the latency for any possible LUF from the defined set.
-Respectively, $A_0$ is the area resources needs of the loop with LUF equal to one and 
+Where $L_1$ is the latency of the of the function containing a loop and being synthesized as HW 
+accelerator, for Loop Unrolling Factor (LUF) that is equal to one, i.e., a fully rolled loop. $L$ 
+is the latency of the HW accelerator for any possible LUF from the defined set.
+Respectively, $A_1$ is the area resources requirements of the HW accelerator with LUF equal to one and 
 $A$ the area for any possible LUF from the defined set.\par
 
-Three different strategies were considered: a) Optimize for both latency and area ($\alpha = 
+Subsequently, the optimal LUF is defined as the one that maximizes the Impact function above. Note that, 
+when $LUF = 1$, then $I(L,A)=0$ which corresponds to a baseline implementation. $I(L,A)$ may also 
+be negative for suboptimal LUF choices (where unrolling might increase area without decreasing 
+latency), but will always be $\ge 0$ for optimal unrolling factors.\par
+
+
+For the evaluation presented in Subsection \ref{sec:ml_exp}
+three different strategies were considered: a) Optimize for both latency and area ($\alpha = 
 \beta = 0.5$). In this configuration a balance is maintained between decreasing the number of 
 execution cycles and keeping low the usage of HW area resources in a given implementation.
 b) Optimize for latency ($\alpha = 0.7, \beta = 0.3$). Minimizing latency is favored by this
@@ -1538,13 +1540,22 @@ the implementation, therefore achieving an average speedup, but maintain low usa
 area resources. All three configurations fulfill different architectural needs and explore 
 realistic alternative scenarios.\par
 
+To evaluate the classification performance of a trained classifier, two different metrics were
+adopted. The \emph{Prediction Score} states the
+percentage of optimal (according to $I(L,A)$ ) LUFs that were correctly
+identified on the out-of-sample test set. The \emph{Average Error}
+instead measures the average distance between the indexes in $S$ of the
+correct and the predicted LUF.
+
+
+\subsubsection{LLVM Analysis Pass -- Loop Features Extraction}
 
 % Table 1 and 2
 %
 %
 \begin{table}[h]
   \centering
-  \label{tab:X}
+
   \small\addtolength{\tabcolsep}{-3pt}
   \vspace{1em}
   \begin{tabular}{| l |} 
@@ -1557,11 +1568,12 @@ realistic alternative scenarios.\par
    \emph{ \#\ Store\ Instructions}      \\ \hline
   \end{tabular} 
     \caption{Features extracted by LLVM LU Analysis Pass.}
+      \label{tab:X}
   
   
      \vspace{2em}
   
-  \label{tab:St_X1_X2}
+
   \begin{tabular}{| l | l |} 
  \hline    
  \textbf{Features - X Vector 1} & \textbf{Features - X Vector 2}  \\ \hline
@@ -1572,40 +1584,97 @@ realistic alternative scenarios.\par
   \emph{Loop\ Trip\ Count}&\emph{\#\ Memory\ Operations}   \\ \hline
   \end{tabular}
     \caption{Feature vectors selected by Stephenson et al. \cite{StephensonApr05}.}
+      \label{tab:St_X1_X2}
 \end{table}
 
-% one
-% favoring speedup, one favoring area usage and finally one that maintains a balance between 
-% these two, so as to fulfill different architectural needs and explore more realistic 
-% alternative scenarios.
-% One approach is to target the decrease of the number of execution cycles, thus focusing on 
-% increasing the speedup of an application, and a different approach would be a scenario where 
-% we would like to achieve an average speedup, but maintain low the usage of HW area resources 
-% in an implementation.
+Loop features are automatically identified by an analysis pass (depicted as 
+point 1 in Figure~\ref{fig:lup_method}) that was developed within the LLVM 
+compiler infrastructure \cite{LattnerMar04}. Features are retrieved starting from
+applications written in C or C++, operating on their Intermediate
+Representation, provided by the LLVM front-end passes.\par  
+% The -Oz
+% compilation flag was used during compilation from the source code to
+% the Intermediate Representation level, in order to avoid vectorization
+% of the loops, which hinders a correct inspection of the loop
+% features.\par
+My \textit{LLVM Loop Unrolling Prediction Analysis Pass} iterates over functions
+of the applications and identifies loops. On each of them, it performs
+loop, scalar evolution and dependence analysis to extract their
+features, summarized in Table \ref{tab:X}: the critical path, the trip
+count, the presence of loop carried dependencies and the required
+memory accesses (load and stores).\par
 
-% Knowing the optimal loop unrolling factor for each loop of a function, besides it being a 
-% non-trivial task, it is also depending on the outcome we wish to achieve. 
-% One approach is to target the decrease of the number of execution cycles, thus focusing on 
-% increasing the speedup of an application, and a different approach would be a scenario where 
-% we would like to achieve an average speedup, but maintain low the usage of HW area resources 
-% in an implementation.
-% We decided to follow three different strategies, one 
-% favoring speedup, one favoring area usage and finally one that maintains a balance between 
-% these two, so as to fulfill different architectural needs and explore more realistic 
-% alternative scenarios.\par
+The choice of features is based on the factors that influence the cost
+and the achievable speedup of \HW\ unrolled loops: a loop with a
+long critical path may be expensive to duplicate, while loop carried
+dependencies and memory accesses may force a serialization of
+execution irrespectively of the degree of unrolling. These
+considerations lead us to consider a markedly different feature list
+with respect to works focusing on software targets, such as the one of
+Stephenson et al. (Table \ref{tab:St_X1_X2}).\par
 
-%After defining the optimal loop unrolling factor, 
-Latency and area information are extracted
-for a subset of the total number of loops of an application, for all possible unrolling factors 
-in the LUF set defined above,
-by using Aladdin, an estimation model 
-which targets ASIC implementations. Aladdin, as mentioned in Chapter 1, allows fast, as well as 
-accurate, evaluation, since 
-the estimations offered are within 1\% of the ones derived from a Register-transfer level (RTL) 
-implementation \cite{ShaoJul14}. By exploiting the LLVM compiler infrastructure 
-\cite{LattnerMar04}, an analysis pass was developed that extracts relevant information for 
-these loops, such as the loop trip count, the estimated critical path, the number of loop carried
-dependencies and the number of Load and Store instructions. 
+\begin{algorithm}[t]
+\begin{flushleft}
+\textbf{Input:}  Application written in C, C++\\
+\textbf{Output:} X (Feature Vector)\\
+\end{flushleft}
+\begin{algorithmic}[1]
+\Function{\emph{RunOnFunction}} { }
+  \For {\emph{BB\ in\ Function} }
+    \If {{\emph{L=getLoopForBB}() } } {}
+      \State{\emph{LoopUnrollingPredictionAnalysis}}{(BB,L)}
+    \EndIf
+  \EndFor
+\EndFunction
+\State
+\Function{\emph{LoopUnrollingPredictionAnalysis}}{Basic Block BB, Loop L}
+  \State{\emph{ LI=getLoopInfoAnalysis}()}
+  \State{\emph{SE=getScalarEvolutionAnalysis()} } {}
+  \State{\emph{DA=getDependenceAnalysis()}} {}
+  \State{\emph{/*\ Gather\ Features\ for\ X\ Vector */} }
+  \State{\emph{x1=getCriticalPath}}{(BB)}
+  \State{\emph{x2=getTripCountForLoop}}{(L)}
+  \State{\emph{x3=getLoopCarriedDependencies}}{(BB)}
+  \State{\emph{x4=getNumberOfLoadInstructions}}{(BB)}
+  \State{\emph{x5=getNumberOfStoreInstructions}}{(BB)}
+\EndFunction
+\end{algorithmic}
+\caption{LLVM Analysis Pass - Loop Unrolling Prediction Analysis} 
+\label{Algo_LLVM}
+
+\end{algorithm}
+
+\subsubsection{Latency and Area Estimation}
+
+To establish a link between LUFs and performance/cost of
+implementations, latency and area values must be extracted both for
+the loops in the training set (in order to optimize the classifier)
+and the ones in the test set (to measure its accuracy).%\par
+Aladdin \cite{ShaoJul14} (point 3 in
+Figure~\ref{fig:lup_method}), a pre-RTL power-performance simulator
+for \HW\ accelerators was utilized in order to retrieve latency and area 
+information. All functions in the considered benchmarks were
+simulated by employing each feasible unrolling factor in the $S$ set 
+defined above on every loop contained.  
+Latency is reported by Aladdin in clock cycles,
+while area is expressed in $\mu m^2$ in a $45nm$ technology. The
+result is shown as point 4 in Figure~\ref{fig:lup_method}.
+\par
+
+The Impact ($I$) was computed afterwards for the different $\alpha$
+and $\beta$ values, to retrieve the optimal loop unrolling factor for every loop
+of a function, which is the index of the LUF that maximizes $I$. The
+result is three vectors $\{Y1,Y2,Y3\}$ (point 5 in
+Figure~\ref{fig:lup_method}) that contain the target values for the
+classification algorithm. The $Y1$ vector includes the optimal loop
+unrolling factor that balances the \HW\ implementation of the
+accelerators in terms of low latency and low area. Values in the $Y2$
+vector favors low-latency implementations, applying more aggressive
+loop unrolling, whereas $Y3$ favors low-area ones.
+
+
+\subsubsection{Random Forest Classification}
+
 This information is used as input to a
 %a Multilayer Neural Network (MNN), Support Vector Machine (SVM) and 
 Random Forest (RF) classifier.
