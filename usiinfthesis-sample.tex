@@ -42,7 +42,6 @@
 \newcommand{\greedy}{\textsf{greedy}}
 \newcommand{\exactC}{\textsf{exact-on-cropped}}
 
-%our benchmarks
 % \newcommand{\htsf}{\texttt{h264}}
 \newcommand{\adpcm}{\texttt{adpcm}}
 \newcommand{\sha}{\texttt{sha}}
@@ -88,7 +87,9 @@ towards more efficient\\ HW/SW co-design} %optional
 \dedication{To my parents Areti and Dimitris.\\For always being there for me.} %optional
 \openepigraph{Legacy. What is a legacy?\\ Planting seeds in a garden you never get to see.}{Alexander Hamilton}
 \openepigraph
-{Men give me credit for some genius. All the genius I have lies in this; when I have a subject in hand, I study it profoundly. Day and night it is before me. My mind becomes pervaded with it. Then the effort that I have made is what people are pleased to call the fruit of genius. It is the fruit of labor and thought.} {Alexander Hamilton} %optional
+{Men give me credit for some genius. All the genius I have lies in this; when I have a subject in hand, I study 
+it profoundly. Day and night it is before me. My mind becomes pervaded with it. Then the effort that I have made 
+is what people are pleased to call the fruit of genius. It is the fruit of labor and thought.} {Alexander Hamilton} %optional
 
 \makeindex %optional, also comment out \theindex at the end
 
@@ -122,7 +123,7 @@ type of information and move one step closer towards optimizing and automating t
 \end{abstract}
 
 % \begin{abstract}[Zusammenfassung]
-% optional, use only if your external advisor requires it in his/er
+% optional, use only if  external advisor requires it in his/er
 % language 
 % \\
 
@@ -179,10 +180,12 @@ architects striving to achieve
 better performance in the modern computer systems.
 Heterogeneous computing is emerging as one of the solutions in order to keep the performance 
 trend rising. This is achieved by turning the focus to specialized Hardware (HW) that 
-can accelerate the execution of a Software (SW) application or a part of that application. Specialized HW accelerators are implemented in platforms where they can be either reprogrammable, 
+can accelerate the execution of a Software (SW) application or a part of that application. Specialized HW 
+accelerators are implemented in platforms where they can be either reprogrammable, 
 thus allowing for a large degree of flexibility as various implementations may take place utilizing
-the HW resources of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated Circuit (ASIC). The first type of HW implementations sacrifice part of the potential 
-performance achieved by allowing for flexible designs, as the same HW resources can be reprogrammed.
+the HW reces of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated 
+Circuit (ASIC). The first type of HW implementations sacrifice part of the potential 
+performance achieved by allowing for flexible designs, as the same HW reces can be reprogrammed.
 The latter offer no flexibility but can provide better performance in comparison to FPGAs. Under 
 the scope of this research both HW implementations were considered.  \par
 %
@@ -200,7 +203,7 @@ most demanding parts of an application in terms of computation. Consequently, th
 a powerful single CPU is no more that critical, as the execution can be offloaded to other
 parts of HW as well. %The gain is twofold, as 
 As a result, we both achieve a more balanced execution with 
-the use of different HW resources, and we offload the execution of specific, more demanding 
+the use of different HW reces, and we offload the execution of specific, more demanding 
 parts of the computation to specialized HW accelerators.\par
 One example of a widely spread 
 heterogeneous architecture is the addition of a GPU to a CPU on the same chip, in order 
@@ -237,7 +240,8 @@ potential optimizations.\par
 
 Therefore, an in-depth SW analysis can be crucial, prior to 
 designing a heterogeneous system, as it can provide valuable information and subsequently 
-highly benefit performance. Furthermore, such an analysis can be performed in short time (typically within a few seconds) and can be portable to other target applications or platforms. 
+highly benefit performance. Furthermore, such an analysis can be performed in short time (typically within a 
+few seconds) and can be portable to other target applications or platforms. 
 The research during my PhD has revolved around various ways that SW
 analysis, by extending the LLVM compiler framework \cite{LattnerMar04} and, hence, its potential,
 can guide a HW engineer %synthesizing HW accelerators 
@@ -258,11 +262,11 @@ This can be viewed as a map of this PhD thesis in order to navigate throughout m
 research time-line and present a high level view of how each piece is connected to each other.\par
 
 Chapter 1 answers the question of {\em what} should be accelerated, namely which parts of 
-computation, given a constraint on HW area resources. 
+computation, given a constraint on HW area reces. 
 Under the scope of this chapter the \rseeker\ tool-chain is presented \cite{ZacharopoulosApr19}. 
 \rseeker\ is an LLVM based framework 
 that, given a SW application provided as input, identifies and selects, in a fully automatic fashion, HW 
-accelerators under the constraint of an area (HW resources) budget. The granularity of the candidates for 
+accelerators under the constraint of an area (HW reces) budget. The granularity of the candidates for 
 acceleration considered is that of a subgraph of the control flow graph of a function, with a single control 
 input and a single control output. These candidates are called regions. After identification takes place, a selection algorithm solves the problem optimally of 
 finding the subset of the initial regions list that, under a given area constraint, maximizes the collective 
@@ -281,7 +285,7 @@ Furthermore, for HW accelerators that contain loops, an optimal
 Loop Unrolling factor can be predicted for each of the included loops \cite{ZacharopoulosJul18}. 
 The most suitable Loop Unrolling factor
 for each loop is defined according to the target of optimization, which can be either less use of HW
- resources or better speedup. With the aid of a prior LLVM based analysis 
+ reces or better speedup. With the aid of a prior LLVM based analysis 
  of the loops and Machine Learning classification, predictions can be performed on a set of loops and the respective 
 Loop Unrolling factors may be subsequently applied during the synthesis phase of the accelerators. \par
 
@@ -329,16 +333,16 @@ Moving towards a heterogeneous era, HW accelerators, dedicated to a specific tas
 improve both speedup of execution and energy efficiency in comparison to a general 
 purpose CPU or a set of homogeneous CPUs. Nonetheless, the identification and selection 
 of which parts of the computation are to be implemented in HW is a complex and demanding task. 
-A thorough understanding of the application to be accelerated is necessary, the HW resources
+A thorough understanding of the application to be accelerated is necessary, the HW reces
 (area) budget is often tight and the granularity of the candidates for acceleration 
 can dramatically affect the overall execution time. Furthermore, optimizations may be applied
 to a given, identified HW accelerator and this would produce multiple versions of equivalent
 computation instances that can result in various heterogeneous architectures with different
 characteristics and, as a result, different performance gains.
 In order to address all these issues I present an automated methodology
-that receives as input the source code of a given application and outputs a number of 
+that receives as input the ce code of a given application and outputs a number of 
 HW accelerators to be considered for acceleration. Among these candidates a selection takes 
-place that maximizes collective speedup, given a HW resources (area) constraint. Finally, 
+place that maximizes collective speedup, given a HW reces (area) constraint. Finally, 
 multiple versions of the same candidate can be considered during the selection phase as well.
 
 \section{Motivation}
@@ -349,7 +353,7 @@ multiple versions of the same candidate can be considered during the selection p
 \centering
 %\hspace*{-2cm}
 \includegraphics[width= .7 \linewidth]{Figs/cfg_example}
-\caption{a) Example \CFG\ of a function, colour-coded with frequency
+\caption{a) Example \CFG\ of a function, co-coded with frequency
   of execution (the darker the basic block, the more frequent). b) B
   and C are Valid Subgraphs; A and D are not Valid Subgraphs because
   they contain a forbidden node. B is also a CFG region, because it has a
@@ -392,7 +396,7 @@ novel way and to a different scenario and aim: that of automatically
 selecting HW accelerators.\par
 
 A motivational example is provided in Figure~\ref{fig:cfg-example}a,
-which depicts the CFG of an example function, colour-coded with
+which depicts the CFG of an example function, co-coded with
 frequency of execution (the darker the basic block, the more
 frequent). A possible choice, when \emph{manually} identifying
 accelerators, is to work at the granularity of functions: implement,
@@ -537,11 +541,11 @@ partitioning a SW application on the application developer.\par
 \label{sec:rs}
 
 The RegionSeeker framework is an automated methodology that 
-identifies candidates for HW acceleration from application source 
+identifies candidates for HW acceleration from application ce 
 code. An extensive SW analysis, based on the LLVM compiler infrastructure,
 performs, apart from
 the identification, an estimation of the performance gain, along with
-the HW resources cost, of each candidate. Subsequently given a HW resources
+the HW reces cost, of each candidate. Subsequently given a HW reces
 constraint, a selection of the identified HW accelerators takes place that
 maximizes the cumulative performance gain.
 In the following subsections the methodology is presented in detail, as well as
@@ -554,7 +558,7 @@ There are three parts comprising the methodology, detailed as follows.
 The first step is to automatically identify valid regions that are suitable candidates
 for HW acceleration. Secondly, an estimation of their potential merit, in terms of cycles saved
 (the difference between SW and HW execution cycles),
-is computed along with the respective cost, which is the HW resources (area) required
+is computed along with the respective cost, which is the HW reces (area) required
 for each region. Finally, a selection algorithm is utilized in order to optimally solve the 
 problem of selecting a subset of these
 regions that maximize the accumulated merit under a given cost, i.e., an area constraint.
@@ -567,7 +571,7 @@ To identify regions in both an automatic and efficient way, a
 of the \emph{LLVM Compiler framework} \cite{LattnerMar04}. 
 The pass receives as input applications developed in C or C++ and performs 
 their analysis at the Intermediate Representation (IR) level, a type
-of code used internally by LLVM to represent source code and allow
+of code used internally by LLVM to represent ce code and allow
 data flow analysis and optimizations.\par
 
 The pass iterates over every function of an
@@ -634,7 +638,7 @@ The Region Identification pass, apart from the Region Identification detailed ab
 performs an early evaluation of the merit and cost of a region, implemented
 directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
 representation and does not need any manual modification to perform function out-lining
-on the benchmark source code. 
+on the benchmark ce code. 
 The estimation of merit and the cost of a region is performed as follows.\par
 
 \emph{Merit Estimation.} 
@@ -650,7 +654,9 @@ frequency of each BB.
 Subsequently the delay of the entire region in HW is estimated by multiplying the critical path
 delay of each BB with the respective execution frequency and finally summing up the products, 
 according to the specific BBs that comprise the region.
-Software run-times are estimated in a similar fashion, but instead of computing critical paths at the BB level, the sum of the latency (in clock cycles) of all its constituent operations is computed, modeling that these are processed sequentially in software.\par
+Software run-times are estimated in a similar fashion, but instead of computing critical paths 
+at the BB level, the sum of the latency (in clock cycles) of all its constituent operations is 
+computed, modeling that these are processed sequentially in software.\par
 
 \emph{Cost Estimation.} On the other side of the evaluation, the cost of a region 
 is estimated as the area (or HW resources) required to implement its DFG nodes. The area 
@@ -1406,12 +1412,11 @@ directives is difficult to foresee, due to low-level application characteristics
 
 Simulation tools such as Aladdin \cite{ShaoJul14} have been developed in order to rapidly 
 estimate the performance and cost (area) of HLS-defined designs. Nonetheless, even when employing 
-estimation tools, an exhaustive evaluation of all directives settings for
-each candidate accelerator in a heterogeneous system is still unfeasible beyond simple cases. Addressing
-this challenge, a machine learning framework is proposed that
-is able to infer the proper implementation of an HLS design based on its characteristics,
-automatically derived from a source code analysis pass, based within the
-LLVM compiler framework \cite{LattnerMar04}.\par
+estimation tools, an exhaustive evaluation of all directives settings for each candidate accelerator 
+in a heterogeneous system is still unfeasible beyond simple cases. Addressing
+this challenge, a machine learning framework is proposed that is able to infer the proper 
+implementation of an HLS design based on its characteristics, automatically derived from a source code 
+analysis pass, based within the LLVM compiler framework \cite{LattnerMar04}.\par
 
 
 Within the scope of this piece of research, the focus is placed on {\em loop unrolling}, an already 
@@ -1436,27 +1441,15 @@ instead of estimation-based models, to predict
 accurately the optimal loop unrolling factor of loops in applications to be synthesized
 in HW. The use of this methodology can provide results with better prediction score
 and in much less time, compared to the \SoTA.
-Second, the whole process is fully automated, 
-from the analysis of the input applications, using the LLVM compiler infrastructure 
-\cite{LattnerMar04}, up to the training of the Random Forest Classifier. 
-Finally, the trained \RF\ classifier can be used to generate accurate loop unrolling predictions 
-for any given application -- a piece of information that can 
+Second, the whole process is fully automated, from the analysis of the input applications, 
+using the LLVM compiler infrastructure \cite{LattnerMar04}, up to the training of the Random 
+Forest Classifier. Finally, the trained \RF\ classifier can be used to generate accurate loop 
+unrolling predictions for any given application -- a piece of information that can 
 directly be used by an HLS tool such as Vivado\_HLS, in order to synthesize parts of these 
 applications to HW.
 
 \subsection{Related Work}
 
-% Research papers have attempted to look into the benefits of loop unrolling in 
-% HLS \cite{KurraApr07}, where they predict the optimal loop unrolling factors in HLS instances 
-% by carrying out a methodology based on an estimation model. 
-% On the other hand, targeting SW \cite{StephensonApr05}, 
-% the authors make use of Supervised Classification, such as near neighbor (NN) classification 
-% and Support Vector Machines (SVM) methods, to produce accurate predictions in optimal unrolling 
-% factors. However, our suggested approach is to perform accurate predictions on the optimal loop 
-% unrolling factor of loops targeted for \HLS\ by exploiting Random Forest classifiers. The 
-% experimental phase supports our claim that such an approach leads to better overall 
-% results and much faster convergence.
-% \par
 Research papers have explored the applicability of machine learning to apply
 compiler optimizations. In \SW\ compilers, it has been
 employed by Agakov et al. \cite{AgakovMar06} to speed up iterative compilation,
@@ -1498,14 +1491,14 @@ predict loop unrolling factors in HLS instances.
 \subsection{Methodology}
 \label{sec:ml_meth}
 
-
-
 In this section, first the employed objective function that determines the optimal loop 
-unrolling factor is presented, as well as the performance metrics considered to evaluate 
-the framework performance. The LLVM analysis pass that was developed in order to 
+unrolling factor is presented.
+% , as well as the performance metrics considered to evaluate 
+% the framework performance. 
+Then, the LLVM analysis pass that was developed in order to 
 automatically extract relevant loop features and the approach followed to retrieve the 
-area and run-time performance of HLS designs is presented. Lastly, the supervised learning 
-classifier method is detailed, which, during the training phase, gathers the data from the 
+area and run-time performance of HLS designs is detailed. Lastly, the supervised learning 
+classifier method is demonstrated, which, during the training phase, gathers the data from the 
 previous steps to produce a loop unrolling predictor, and, during the test phases, assigns 
 loop unrolling factors based on loop features.\par
 
@@ -1540,15 +1533,28 @@ the implementation, therefore achieving an average speedup, but maintain low usa
 area resources. All three configurations fulfill different architectural needs and explore 
 realistic alternative scenarios.\par
 
-To evaluate the classification performance of a trained classifier, two different metrics were
-adopted. The \emph{Prediction Score} states the
-percentage of optimal (according to $I(L,A)$ ) LUFs that were correctly
-identified on the out-of-sample test set. The \emph{Average Error}
-instead measures the average distance between the indexes in $S$ of the
-correct and the predicted LUF.
+% To evaluate the classification performance of a trained classifier, two different metrics were
+% adopted. The \emph{Prediction Score} states the
+% percentage of optimal (according to $I(L,A)$ ) LUFs that were correctly
+% identified on the out-of-sample test set. The \emph{Average Error}
+% instead measures the average distance between the indexes in $S$ of the
+% correct and the predicted LUF.
 
 
 \subsubsection{LLVM Analysis Pass -- Loop Features Extraction}
+
+Loop features are automatically identified by an analysis pass (depicted as 
+point 1 in Figure~\ref{fig:lup_method}) that was developed within the LLVM 
+compiler infrastructure \cite{LattnerMar04}. Features are retrieved starting from
+applications written in C or C++, operating on their Intermediate
+Representation, provided by the LLVM front-end passes.\par  
+
+My \textit{LLVM Loop Unrolling Prediction Analysis Pass} iterates over functions
+of the applications and identifies loops. On each of them, it performs
+loop, scalar evolution and dependence analysis to extract their
+features, summarized in Table \ref{tab:X}: the critical path, the trip
+count, the presence of loop carried dependencies and the required
+memory accesses (load and stores).\par
 
 % Table 1 and 2
 %
@@ -1586,23 +1592,6 @@ correct and the predicted LUF.
     \caption{Feature vectors selected by Stephenson et al. \cite{StephensonApr05}.}
       \label{tab:St_X1_X2}
 \end{table}
-
-Loop features are automatically identified by an analysis pass (depicted as 
-point 1 in Figure~\ref{fig:lup_method}) that was developed within the LLVM 
-compiler infrastructure \cite{LattnerMar04}. Features are retrieved starting from
-applications written in C or C++, operating on their Intermediate
-Representation, provided by the LLVM front-end passes.\par  
-% The -Oz
-% compilation flag was used during compilation from the source code to
-% the Intermediate Representation level, in order to avoid vectorization
-% of the loops, which hinders a correct inspection of the loop
-% features.\par
-My \textit{LLVM Loop Unrolling Prediction Analysis Pass} iterates over functions
-of the applications and identifies loops. On each of them, it performs
-loop, scalar evolution and dependence analysis to extract their
-features, summarized in Table \ref{tab:X}: the critical path, the trip
-count, the presence of loop carried dependencies and the required
-memory accesses (load and stores).\par
 
 The choice of features is based on the factors that influence the cost
 and the achievable speedup of \HW\ unrolled loops: a loop with a
@@ -1645,6 +1634,7 @@ Stephenson et al. (Table \ref{tab:St_X1_X2}).\par
 \end{algorithm}
 
 \subsubsection{Latency and Area Estimation}
+\label{sec:ml_la}
 
 To establish a link between LUFs and performance/cost of
 implementations, latency and area values must be extracted both for
@@ -1675,42 +1665,128 @@ loop unrolling, whereas $Y3$ favors low-area ones.
 
 \subsubsection{Random Forest Classification}
 
-This information is used as input to a
-%a Multilayer Neural Network (MNN), Support Vector Machine (SVM) and 
-Random Forest (RF) classifier.
+
+This information (X and Y vectors) extracted as described above are used 
+as input to a Random Forest (RF) classifier (point 6 in
+Figure~\ref{fig:lup_method}).
 Supervised learning is performed by detecting the correlation between 
-the input, the compiler extracted information, used as the X feature vector, and the output, which is the optimal 
-loop unrolling factor for each loop.\par 
-%following the formula defined above.\par
-After having trained the machine learning algorithm with the training set described above, I 
-proceed by performing out of sample
-predictions, meaning predictions on loops of the same application that were not used in the training 
-phase or on loops of different applications. The outcome of this methodology are
-% predictions are generated on loops 
-close-to-optimal loop unrolling factor solutions compared to the respective optimal ones derived by 
-the Impact formula.
-Simultaneously, the time needed to perform the training and predictions is minimized, as
-further exhaustive exploration using Vivado\_HLS or any other estimation tool, such as Aladdin, is avoided.\par
+the input, the compiler extracted information, used as the X feature vector, 
+and the output, which is the optimal loop unrolling factor for each loop.\par
+
+\RF\ was used as the supervised learning model, which has been shown by Liu et al.
+\cite{LiuJun13} to outperform alternatives such as Multilayer Neural Networks and \SVM\  
+classification in the context of HLS design space exploration. \RF\ algorithms follow
+a decision tree methodology, combining many weak classifiers to derive a strong one, allowing
+the generation of low-complexity and robust classifiers.\par
+
+\begin{algorithm}[t]
+\begin{flushleft}
+\textbf{Input:}  X and Y Vectors\\
+\textbf{Output:} Trained Random Forest Classifier\\
+\end{flushleft}
+\begin{algorithmic}[1]
+%\State{$NumberOfTrainingSessions=1000$}
+\For {\emph{ i\ in\ NumberOfTrainingSessions} }
+  \State{\emph{ X\_train, X\_test, Y\_train, Y\_test=train\_test\_split(X,Y)} }
+  \State{\emph{ /*\ Training\ Phase\ */} }
+  \State{\emph{ M=RandomForestLearningModel} }
+  \State{\emph{ M.train(X\_train, Y\_train)} }
+  \State{\emph{ /*\ Evaluation\ Phase\ */} }
+  \State{\emph{ Pred=M.predict(X\_test)} }
+  \State{\emph{ Error=abs(Pred-Y\_test)} }
+  \State{\emph{ Score=M.score(X\_test-Y\_test)} }
+\EndFor
+\end{algorithmic}
+\caption{Random Forest Classification -
+ Training and Test} 
+ \label{algo:RF}
+\end{algorithm}
+
+The algorithm employed, as presented in Algorithm \ref{algo:RF},
+follows an approach similar to a \textit{k-fold cross validation}
+strategy.  The whole data set ($X$ and $Y$ vectors, see points 2 and 5 
+in Figure \ref{fig:lup_method}) is divided randomly
+between a training set and a test set, where the training set is equal
+to 80\% of the whole data set and the remaining 20\% is the test set.
+Then, the \RF\ model is used for the training process on the training
+set and out-of-sample predictions are carried out for each element of
+the test set. After all predictions on the test set have been
+computed, the prediction score and the average error (as defined in
+Subsection \ref{sec:ml_exp}) are computed for the current training
+session.\par
 
 \subsection{Experimental Results}
 \label{sec:ml_exp}
 
-The benchmarks used during the experimental phase are broadly used embedded applications from 
-the CHStone suite \cite{HaraMay08} and SHOC suite \cite{danalis2010scalable}.
- \adpcm, \jpeg, \mpeg, \sha\ and \stencil.\par
+To evaluate the classification performance of a trained classifier, two different metrics were
+adopted. The \emph{Prediction Score} states the
+percentage of optimal (according to $I(L,A)$ ) LUFs that were correctly
+identified on the out-of-sample test set. The \emph{Average Error}
+instead measures the average distance between the indexes in $S$ of the
+correct and the predicted LUF.\par
 
-During the experimental phase, state-of-the-art machine learning algorithms were used from the 
-Scikit-learn framework \cite{pedregosa2011scikit}.
-%  A Random Forest (RF) Classifier model is employed
-% to perform the classification. Results showcased a 60\% prediction absolute accuracy, meaning that the
-% predictions performed on the unknown subset of loops were correct 60\% of the time.
-As seen in Figure \ref{fig:mod_score} Random Forest (RF) is compared to Near Neighbor(NN) and
-Support Vector Machine (SVM) classifiers, and across different feature vectors. X as described
-above and X1,X2 by \cite{StephensonApr05}. The X1 and X2 features differ from the ones of X (e.g. X2: \# 
-Floating Point operations, loop nest level etc) as they target 
-SW execution. The suggested RF classifier and X feature vector 
-showcased a 60\% prediction absolute accuracy, meaning that the predictions performed on the unknown 
-subset of loops were correct 60\% of the time, outperforming every other state-of-the-art approach.
+In order to comparatively evaluate the proposed methodology, combining \RF\ classification and
+LLVM-based loop features extraction, benchmarks of different complexity were considered. Small 
+and medium-sized ones are \adpcm, an audio encoding kernel, \stencil, an 
+implementation of an iterative algorithm that updates array elements according to a given pattern, 
+and \sha, a secure hash encryption method
+used in the information security domain. \jpeg\ and \mpeg\ are instead larger benchmarks, which 
+perform image and video compression, respectively.
+Applications were drawn from the CHStone  \cite{HaraMay08} and the Scalable Heterogeneous 
+Computing (SHOC) benchmark suites \cite{DanalisMar10}. In total, they comprise 87 different loops.\par
+
+% The benchmarks used during the experimental phase are broadly used embedded applications from 
+% the CHStone suite \cite{HaraMay08} and SHOC suite \cite{danalis2010scalable}.
+%  \adpcm, \jpeg, \mpeg, \sha\ and \stencil.\par
+
+Random Forest classification was implemented using the Scikit-learn suite \cite{PedregosaOct11}, 
+that includes \SoTA\ implementations of \ML\ models in python. Scikit-learn was also employed to 
+re-implement the two methods proposed by Stephenson et al. \cite{StephensonApr05}, that are consider 
+as baselines.\par
+
+Giving an initial proof of concept for the strategy proposed, Figure \ref{fig:dist} reports the 
+difference between the indexes of the predicted optimal (according to impact value) loop unrolling 
+factors and the ones retrieved with an exhaustive exploration, considering 18.000 out-of-sample 
+predictions on all the benchmark loops. Results are highly concentrated on zero, 
+indicating a high rate of correct predictions.\par
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=.5\linewidth]{figs/prediction_errors}
+\vspace{-1em}
+\caption{Distribution of Loop Unrolling Factor Prediction Errors over 18.000 
+out-of-sample predictions.}
+\label{fig:dist}
+
+\end{figure}
+
+% During the experimental phase, state-of-the-art machine learning algorithms were used from the 
+% Scikit-learn framework \cite{pedregosa2011scikit}.
+% %  A Random Forest (RF) Classifier model is employed
+% % to perform the classification. Results showcased a 60\% prediction absolute accuracy, meaning that the
+% % predictions performed on the unknown subset of loops were correct 60\% of the time.
+% As seen in Figure \ref{fig:mod_score} Random Forest (RF) is compared to Near Neighbor(NN) and
+% Support Vector Machine (SVM) classifiers, and across different feature vectors. X as described
+% above and X1,X2 by \cite{StephensonApr05}. The X1 and X2 features differ from the ones of X (e.g. X2: \# 
+% Floating Point operations, loop nest level etc) as they target 
+% SW execution. The suggested RF classifier and X feature vector 
+% showcased a 60\% prediction absolute accuracy, meaning that the predictions performed on the unknown 
+% subset of loops were correct 60\% of the time, outperforming every other state-of-the-art approach.
+
+\subsubsection{Classification Models and Features}
+\label{subsec:mode_feature}
+
+The evaluation of the choice of features ($X$ vector in Table \ref{tab:X}) and training model \RF\ 
+(RF), takes place against two \SoTA\ methodologies proposed by Stephenson et al. 
+\cite{StephensonApr05}. The latter present different classification strategies: 
+\SVM\ (SVM) and \NN\ (NN) and a different choice of investigated loop features, reported in 
+Table \ref{tab:St_X1_X2}. Figure \ref{fig:mod_score} shows, for a choice of $\alpha = 0.5$, the 
+prediction score and the average error of the nine strategies resulting from different feature 
+vectors and classification strategies. Experimental results highlight that the presented framework 
+($X$ feature vector and RF classification)
+outperform other choices, reaching a prediction score above  60\% and an average error of
+less than 1.4. Similar results were obtained for impact functions favoring area or latency
+($Y2$ and $Y3$ vectors).
 
 
 
@@ -1719,11 +1795,11 @@ subset of loops were correct 60\% of the time, outperforming every other state-o
 \centering
 %\hspace*{-2cm}
 %\vspace{-0.4cm}
-  % \hspace*{-4cm}
-\includegraphics[width= .6 \linewidth]{figs/models_score}
-\includegraphics[width= .6 \linewidth]{figs/models_error}
+  \hspace*{-2cm}
+\includegraphics[width= .5 \linewidth]{figs/models_score}
+\includegraphics[width= .5 \linewidth]{figs/models_error}
 % \vspace*{-0.2cm}
-% \hspace*{0.5cm}
+\hspace*{-2cm}
 \vspace*{-0.2cm}
 \caption{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models 
 and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite{StephensonApr05}.
@@ -1732,6 +1808,56 @@ Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.}
 % \vspace*{-0.7cm}
 \end{figure*}
 
+
+
+
+\subsubsection{Iterative Refinement}
+
+In the second round of experiments, the comparison of the proposed method was carried out against an 
+\ItRef\ approach, used in \cite{MarianiApr12} \cite{PalermoNov09} \cite{XydisMar13} \cite{ZuluagaJun12}. 
+\ItRef\ uses part of the training data set
+to obtain a first version of the classifier, whose performance is then improved by using a second,
+disjoint set of input and outputs.\par
+
+For this evaluation, three different settings of Y target vectors $\{Y1,Y2,Y3\}$ were considered, as 
+described in Subsection \ref{sec:ml_la}. The employed data,
+the features ($X$ vector) and the training model (\RF) were the same both for Algorithm \ref{algo:RF} 
+and the one using \ItRef. For \ItRef, 75\% of the training set is allocated for the 
+initial training phase, and the remaining 25\% for the refinement phase.
+
+\begin{figure*}
+\centering
+%\hspace*{-2cm}
+%\vspace{-0.4cm}
+  \hspace*{-2cm}
+\includegraphics[width= .5 \linewidth]{figs/iter_ref_score}
+\includegraphics[width= .5 \linewidth]{figs/iter_ref_error}
+% \vspace*{-0.2cm}
+\hspace*{-2cm}
+\vspace*{-0.2cm}
+\caption{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models 
+and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite{StephensonApr05}.
+Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.}
+\label{fig:iter_ref_score}
+% \vspace*{-0.7cm}
+\end{figure*}
+
+The prediction score, as seen in Figure \ref{fig:iter_ref_score}, ranges from 53\% to 63\% across the three 
+$Y$ vectors. Nevertheless, our methodology consistently outperforms the \ItRef\ approach, while achieving 
+the highest prediction score (63\%) for the setting that favors low area resources ($Y3$). A similar
+observation can be made for the average error values, where the suggested approach keeps a lower 
+average error for all predictions, across all vectors, with the one related to the $Y3$ vector 
+being the lowest (1.32).\par
+
+\subsection{Conclusions}
+
+A novel methodology based on LLVM analysis and Random Forest classification that performs loop unrolling 
+factor prediction for HLS designs was performed. This approach achieves better prediction score 
+in comparison to state-of-the-art Machine Learning methods. Experimental evidence showcases that, 
+by carrying out accurate predictions of loop unrolling factors, high performance accelerator 
+implementations can be realized, while avoiding time-consuming exhaustive explorations. This work was 
+published in the 2018 International Conference on High Performance Computing \& Simulation (HPCS) 
+\cite{ZacharopoulosJul18}.
 
 %
 %

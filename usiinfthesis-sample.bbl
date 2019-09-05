@@ -106,10 +106,10 @@ E.~G. Cota, P.~Mantovani, G.~Di~Guglielmo, and L.~P. Carloni.
 \newblock In {\em Proceedings of the 52nd Design Automation Conference}, pages
   1--6. ACM, June 2015.
 
-\bibitem{danalis2010scalable}
+\bibitem{DanalisMar10}
 A.~Danalis, G.~Marin, C.~McCurdy, J.~S. Meredith, P.~C. Roth, K.~Spafford,
   V.~Tipparaju, and J.~S. Vetter.
-\newblock The scalable heterogeneous computing (shoc) benchmark suite.
+\newblock The scalable heterogeneous computing ({SHOC}) benchmark suite.
 \newblock In {\em Proceedings of the 3rd Workshop on General-Purpose
   Computation on Graphics Processing Units}, pages 63--74. ACM, 2010.
 
@@ -257,11 +257,11 @@ G.~Palermo, C.~Silvano, and V.~Zaccaria.
 \newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 28(12):1816--1829, Nov 2009.
 
-\bibitem{pedregosa2011scikit}
+\bibitem{PedregosaOct11}
 F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
   M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, et~al.
 \newblock Scikit-learn: Machine learning in python.
-\newblock {\em Journal of Machine Learning Research}, 12(Oct):2825--2830, 2011.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
 
 \bibitem{PothineniJan07}
 N.~Pothineni, A.~Kumar, and K.~Paul.

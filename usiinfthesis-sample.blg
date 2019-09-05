@@ -8,14 +8,14 @@ Warning--can't use both volume and number fields in JohnsonJun94
 Warning--can't use both volume and number fields in ZuluagaJun12
 You've used 65 entries,
             2118 wiz_defined-function locations,
-            1420 strings with 36616 characters,
-and the built_in function-call counts, 28025 in all, are:
+            1421 strings with 36629 characters,
+and the built_in function-call counts, 28020 in all, are:
 = -- 2776
 > -- 1358
 < -- 43
 + -- 544
 - -- 470
-* -- 1981
+* -- 1978
 := -- 4285
 add.period$ -- 205
 call.type$ -- 65
@@ -23,9 +23,9 @@ change.case$ -- 429
 chr.to.int$ -- 0
 cite$ -- 68
 duplicate$ -- 1123
-empty$ -- 2166
+empty$ -- 2165
 format.name$ -- 470
-if$ -- 6115
+if$ -- 6114
 int.to.chr$ -- 0
 int.to.str$ -- 65
 missing$ -- 58
