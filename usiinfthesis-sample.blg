@@ -4,47 +4,48 @@ The top-level auxiliary file: usiinfthesis-sample.aux
 The style file: abbrv.bst
 Database file #1: biblio.bib
 Warning--can't use both volume and number fields in esmaeilzadeh2011dark
+Warning--there's a number but no volume in FerrettiJan18
 Warning--can't use both volume and number fields in JohnsonJun94
 Warning--can't use both volume and number fields in ZuluagaJun12
-You've used 65 entries,
+You've used 78 entries,
             2118 wiz_defined-function locations,
-            1421 strings with 36629 characters,
-and the built_in function-call counts, 28020 in all, are:
-= -- 2776
-> -- 1358
-< -- 43
-+ -- 544
-- -- 470
-* -- 1978
-:= -- 4285
-add.period$ -- 205
-call.type$ -- 65
-change.case$ -- 429
+            1487 strings with 38977 characters,
+and the built_in function-call counts, 33579 in all, are:
+= -- 3304
+> -- 1665
+< -- 51
++ -- 666
+- -- 578
+* -- 2392
+:= -- 5145
+add.period$ -- 245
+call.type$ -- 78
+change.case$ -- 522
 chr.to.int$ -- 0
-cite$ -- 68
-duplicate$ -- 1123
-empty$ -- 2165
-format.name$ -- 470
-if$ -- 6114
+cite$ -- 82
+duplicate$ -- 1336
+empty$ -- 2586
+format.name$ -- 578
+if$ -- 7321
 int.to.chr$ -- 0
-int.to.str$ -- 65
-missing$ -- 58
-newline$ -- 327
-num.names$ -- 128
-pop$ -- 538
+int.to.str$ -- 78
+missing$ -- 69
+newline$ -- 389
+num.names$ -- 152
+pop$ -- 660
 preamble$ -- 2
-purify$ -- 364
+purify$ -- 444
 quote$ -- 0
-skip$ -- 890
+skip$ -- 1054
 stack$ -- 0
-substring$ -- 1764
-swap$ -- 422
-text.length$ -- 43
+substring$ -- 2055
+swap$ -- 497
+text.length$ -- 51
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 260
-warning$ -- 3
-while$ -- 270
-width$ -- 67
-write$ -- 726
-(There were 3 warnings)
+type$ -- 312
+warning$ -- 4
+while$ -- 318
+width$ -- 80
+write$ -- 865
+(There were 4 warnings)

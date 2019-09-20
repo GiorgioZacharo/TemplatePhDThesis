@@ -64,6 +64,13 @@ P.~Biswas, N.~Dutt, P.~Ienne, and L.~Pozzi.
 \newblock In {\em Proceedings of the Design, Automation and Test in Europe
   Conference and Exhibition}, pages 212--217, Mar. 2006.
 
+\bibitem{CacciottiSep18}
+M.~Cacciotti, V.~Camus, J.~Schlachter, A.~Pezzotta, and C.~Enz.
+\newblock Hardware acceleration of {HDR}-image tone mapping on an {FPGA-CPU}
+  platform through high-level synthesis.
+\newblock In {\em International System-on-Chip Conference}, pages 158--162.
+  IEEE, Sept. 2018.
+
 \bibitem{StratusHLSApr16}
 Cadence.
 \newblock Stratus high-level synthesis.
@@ -85,6 +92,14 @@ A.~Canis, J.~Choi, M.~Aldham, V.~Zhang, A.~Kammoona, T.~Czajkowski, S.~D.
   processor/accelerator systems.
 \newblock {\em {ACM} Transactions on Embedded Computing Systems ({TECS})},
   13(2):1--27, Sept. 2013.
+
+\bibitem{CanisSep13b}
+A.~Canis, J.~Choi, B.~Fort, R.~Lian, Q.~Huang, N.~Calagar, M.~Gort, J.~J. Qin,
+  M.~Aldham, T.~Czajkowski, et~al.
+\newblock From software to accelerators with {LegUp} high-level synthesis.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architectures, and Synthesis for Embedded Systems}, page~18. IEEE, Sept.
+  2013.
 
 \bibitem{ChenFeb07}
 X.~Chen, D.~L. Maskell, and Y.~Sun.
@@ -130,6 +145,13 @@ H.~Esmaeilzadeh, E.~Blem, R.~St~Amant, K.~Sankaralingam, and D.~Burger.
 \newblock Dark silicon and the end of multicore scaling.
 \newblock In {\em ACM SIGARCH Computer Architecture News}, volume~39, pages
   365--376, 2011.
+
+\bibitem{FerrettiJan18}
+L.~Ferretti, G.~Ansaloni, and L.~Pozzi.
+\newblock Cluster-based heuristic for high level synthesis design space
+  exploration.
+\newblock {\em IEEE Transactions on Emerging Topics in Computing}, (99):1--9,
+  Jan 2018.
 
 \bibitem{GaluzziOct06}
 C.~Galuzzi, E.~M. Panainte, Y.~Yankova, K.~Bertels, and S.~Vassiliadis.
@@ -190,6 +212,13 @@ R.~Johnson, D.~Pearson, and K.~Pingali.
 \newblock In {\em {ACM SIGPLAN} Notices}, volume~29, pages 171--185. ACM, June
   1994.
 
+\bibitem{KathailFeb16}
+V.~Kathail, J.~Hwang, W.~Sun, Y.~Chobe, T.~Shui, and J.~Carrillo.
+\newblock {SDSoC}: A higher-level programming environment for {Z}ynq {SoC} and
+  {U}ltrascale+ {MPSoC}.
+\newblock In {\em Proceedings of the 2016 {ACM}/{SIGDA} 24th International
+  Symposium on Field Programmable Gate Arrays}, pages 4--4, Feb. 2016.
+
 \bibitem{KulkarniOct12}
 S.~Kulkarni and J.~Cavazos.
 \newblock Mitigating the compiler optimization phase-ordering problem using
@@ -217,6 +246,13 @@ H.-Y. Liu and L.~P. Carloni.
 \newblock In {\em Proceedings of the 50th Design Automation Conference}, pages
   1--6. IEEE, June 2013.
 
+\bibitem{LiuFeb16}
+X.~Liu, Y.~Chen, T.~Nguyen, S.~Gurumani, K.~Rupnow, and D.~Chen.
+\newblock High level synthesis of complex applications: An h. 264 video
+  decoder.
+\newblock In {\em Proceedings of the 2016 {ACM}/{SIGDA} 24th International
+  Symposium on Field Programmable Gate Arrays}, pages 224--233, Feb. 2016.
+
 \bibitem{MarianiApr12}
 G.~Mariani, G.~Palermo, V.~Zaccaria, and C.~Silvano.
 \newblock Oscar: An optimization methodology exploiting spatial correlation in
@@ -237,11 +273,30 @@ W.~Meeus and D.~Stroobandt.
 \newblock In {\em Proceedings of the Design, Automation and Test in Europe
   Conference and Exhibition}, pages 1--4, Mar. 2014.
 
+\bibitem{MeeusSep12}
+W.~Meeus, K.~Van~Beeck, T.~Goedem{\'e}, J.~Meel, and D.~Stroobandt.
+\newblock An overview of today's high-level synthesis tools.
+\newblock {\em Design Automation for Embedded Systems}, 16(3):31--51, Sept.
+  2012.
+
 \bibitem{MonsifrotAug02}
 A.~Monsifrot, F.~Bodin, and R.~Quiniou.
 \newblock A machine learning approach to automatic production of compiler
   heuristics.
 \newblock In {\em AIMSA}, volume~2, pages 41--50. Springer, 2002.
+
+\bibitem{NouriJun17}
+S.~Nouri, J.~Rettkowski, D.~G{\"o}hringer, and J.~Nurmi.
+\newblock {HW/SW} co-design of an {IEEE} 802.11 a/g receiver on {Xilinx Zynq
+  SoC} using high-level synthesis.
+\newblock In {\em International Symposium on Highly-Efficient Accelerators and
+  Reconfigurable Technologies}, pages 1--6. ACM, June 2017.
+
+\bibitem{OppermannJul16}
+J.~Oppermann and A.~Koch.
+\newblock Detecting kernels suitable for {C}-based high-level hardware
+  synthesis.
+\newblock In {\em Smart World Congress}, pages 1157--1164. IEEE, July 2016.
 
 \bibitem{OzisikyilmazJun08}
 B.~Ozisikyilmaz, G.~Memik, and A.~Choudhary.
@@ -262,6 +317,11 @@ F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
   M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, et~al.
 \newblock Scikit-learn: Machine learning in python.
 \newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
+\bibitem{PilatoMar12}
+C.~Pilato and F.~Ferrandi.
+\newblock Bambu: A free framework for the high level synthesis of complex
+  applications, Mar. 2012.
 
 \bibitem{PothineniJan07}
 N.~Pothineni, A.~Kumar, and K.~Paul.
@@ -298,6 +358,12 @@ J.~Reddington, G.~Gutin, A.~Johnstone, E.~Scott, and A.~Yeo.
 \newblock In {\em Proceedings of the 12th {IEEE} International Conference on
   Computational Science and Engineering}, pages 17--24, 2009.
 
+\bibitem{SchaferJun12}
+B.~C. Schafer and K.~Wakabayashi.
+\newblock Divide and conquer high-level synthesis design space exploration.
+\newblock {\em {ACM} Transactions on Design Automation of Electronic Systems
+  ({TODAES})}, 17(3):29:1--29:19, June 2012.
+
 \bibitem{schaller1997moore}
 R.~R. Schaller.
 \newblock Moore's law: past, present and future.
@@ -317,6 +383,12 @@ Y.~S. Shao, B.~Reagen, G.-Y. Wei, and D.~Brooks.
 \newblock In {\em Proceedings of the 41st Annual International Symposium on
   Computer Architecture}, pages 97--108. IEEE, July 2014.
 
+\bibitem{ShaoOct16}
+Y.~S. Shao, S.~L. Xi, V.~Srinivasan, G.-Y. Wei, and D.~Brooks.
+\newblock Co-designing accelerators and {SoC} interfaces using gem5-aladdin.
+\newblock In {\em MICRO 49: Proceedings of the 46st Annual International
+  Symposium on Microarchitecture}, pages 1--12, Oct. 2016.
+
 \bibitem{simonite2016moore}
 T.~Simonite.
 \newblock Moore{'}{s} law is dead. {N}ow what?
@@ -334,6 +406,13 @@ Synopsys.
 \newblock
   \url{www.synopsys.com/designware-ip/processor-solutions/arc-processors.html},
   Dec. 2016.
+
+\bibitem{SyrowikJun18}
+B.~A. Syrowik, B.~Fort, and S.~D. Brown.
+\newblock Use of {CPU} performance counters for accelerator selection in
+  {HLS}-generated {CPU}-accelerator systems.
+\newblock In {\em International Symposium on Highly-Efficient Accelerators and
+  Reconfigurable Technologies}, pages 1--6, June 2018.
 
 \bibitem{TensilicaWeb}
 Xtensa customizable processors:
@@ -376,6 +455,9 @@ Xilinx.
 Xilinx.
 \newblock Xilinx all programmable {SoC} portfolio.
 \newblock \url{www.xilinx.com/products/silicon-devices/soc.html}, Mar. 2017.
+
+\bibitem{XilinxESTRef18}
+Xilinx embedded system tools reference manual, 2018.
 
 \bibitem{XydisMar13}
 S.~Xydis, G.~Palermo, V.~Zaccaria, and C.~Silvano.

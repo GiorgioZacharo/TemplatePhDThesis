@@ -183,9 +183,9 @@ trend rising. This is achieved by turning the focus to specialized Hardware (HW)
 can accelerate the execution of a Software (SW) application or a part of that application. Specialized HW 
 accelerators are implemented in platforms where they can be either reprogrammable, 
 thus allowing for a large degree of flexibility as various implementations may take place utilizing
-the HW reces of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated 
+the HW resources of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated 
 Circuit (ASIC). The first type of HW implementations sacrifice part of the potential 
-performance achieved by allowing for flexible designs, as the same HW reces can be reprogrammed.
+performance achieved by allowing for flexible designs, as the same HW resources can be reprogrammed.
 The latter offer no flexibility but can provide better performance in comparison to FPGAs. Under 
 the scope of this research both HW implementations were considered.  \par
 %
@@ -203,7 +203,7 @@ most demanding parts of an application in terms of computation. Consequently, th
 a powerful single CPU is no more that critical, as the execution can be offloaded to other
 parts of HW as well. %The gain is twofold, as 
 As a result, we both achieve a more balanced execution with 
-the use of different HW reces, and we offload the execution of specific, more demanding 
+the use of different HW resources, and we offload the execution of specific, more demanding 
 parts of the computation to specialized HW accelerators.\par
 One example of a widely spread 
 heterogeneous architecture is the addition of a GPU to a CPU on the same chip, in order 
@@ -262,11 +262,11 @@ This can be viewed as a map of this PhD thesis in order to navigate throughout m
 research time-line and present a high level view of how each piece is connected to each other.\par
 
 Chapter 1 answers the question of {\em what} should be accelerated, namely which parts of 
-computation, given a constraint on HW area reces. 
+computation, given a constraint on HW area resources. 
 Under the scope of this chapter the \rseeker\ tool-chain is presented \cite{ZacharopoulosApr19}. 
 \rseeker\ is an LLVM based framework 
 that, given a SW application provided as input, identifies and selects, in a fully automatic fashion, HW 
-accelerators under the constraint of an area (HW reces) budget. The granularity of the candidates for 
+accelerators under the constraint of an area (HW resources) budget. The granularity of the candidates for 
 acceleration considered is that of a subgraph of the control flow graph of a function, with a single control 
 input and a single control output. These candidates are called regions. After identification takes place, a selection algorithm solves the problem optimally of 
 finding the subset of the initial regions list that, under a given area constraint, maximizes the collective 
@@ -285,7 +285,7 @@ Furthermore, for HW accelerators that contain loops, an optimal
 Loop Unrolling factor can be predicted for each of the included loops \cite{ZacharopoulosJul18}. 
 The most suitable Loop Unrolling factor
 for each loop is defined according to the target of optimization, which can be either less use of HW
- reces or better speedup. With the aid of a prior LLVM based analysis 
+ resources or better speedup. With the aid of a prior LLVM based analysis 
  of the loops and Machine Learning classification, predictions can be performed on a set of loops and the respective 
 Loop Unrolling factors may be subsequently applied during the synthesis phase of the accelerators. \par
 
@@ -306,7 +306,7 @@ of \aseeker\ took place on Zynq UltraScale platform by Xilinx, considering a dem
 application such as \htsf. With respect to methodologies based on profiling information \aseeker\ 
 attained an improved performance with an up to 2x speedup.\\
 Automating a complex process, such as the design and implementation of heterogeneous systems, while
-improving the performance trend is the broad goal of this PhD thesis. All chapters of this document 
+improving performance in these systems is the broad goal of this PhD thesis. All chapters of this document 
 attempt to provide a step closer on attaining this goal and expanding the \SoTA, as well as opening 
 new paths to future work.
 
@@ -327,22 +327,22 @@ new paths to future work.
 % \chapter[Short title]{A chapter title which will run over two lines --- it's for
 %   testing purpose}
 \chapter%[Automatic Identification and Selection of HW Accelerators]
-{Automatic Identification and Selection of HW Accelerators}
+{Automatic Identification and Selection of Accelerators}
 
 Moving towards a heterogeneous era, HW accelerators, dedicated to a specific task, can
 improve both speedup of execution and energy efficiency in comparison to a general 
 purpose CPU or a set of homogeneous CPUs. Nonetheless, the identification and selection 
 of which parts of the computation are to be implemented in HW is a complex and demanding task. 
-A thorough understanding of the application to be accelerated is necessary, the HW reces
+A thorough understanding of the application to be accelerated is necessary, the HW resources
 (area) budget is often tight and the granularity of the candidates for acceleration 
 can dramatically affect the overall execution time. Furthermore, optimizations may be applied
 to a given, identified HW accelerator and this would produce multiple versions of equivalent
 computation instances that can result in various heterogeneous architectures with different
 characteristics and, as a result, different performance gains.
 In order to address all these issues I present an automated methodology
-that receives as input the ce code of a given application and outputs a number of 
+that receives as input the source code of a given application and outputs a number of 
 HW accelerators to be considered for acceleration. Among these candidates a selection takes 
-place that maximizes collective speedup, given a HW reces (area) constraint. Finally, 
+place that maximizes collective speedup, given a HW resources (area) constraint. Finally, 
 multiple versions of the same candidate can be considered during the selection phase as well.
 
 \section{Motivation}
@@ -353,7 +353,7 @@ multiple versions of the same candidate can be considered during the selection p
 \centering
 %\hspace*{-2cm}
 \includegraphics[width= .7 \linewidth]{Figs/cfg_example}
-\caption{a) Example \CFG\ of a function, co-coded with frequency
+\caption{a) Example \CFG\ of a function, color-coded with frequency
   of execution (the darker the basic block, the more frequent). b) B
   and C are Valid Subgraphs; A and D are not Valid Subgraphs because
   they contain a forbidden node. B is also a CFG region, because it has a
@@ -396,7 +396,7 @@ novel way and to a different scenario and aim: that of automatically
 selecting HW accelerators.\par
 
 A motivational example is provided in Figure~\ref{fig:cfg-example}a,
-which depicts the CFG of an example function, co-coded with
+which depicts the CFG of an example function, color-coded with
 frequency of execution (the darker the basic block, the more
 frequent). A possible choice, when \emph{manually} identifying
 accelerators, is to work at the granularity of functions: implement,
@@ -482,7 +482,7 @@ network compiled from an Extended Finite State Machine (EFSM)
 model. While it targets \controlflow\ to a certain extent, their
 methodology is limited to applications that can be modeled using
 EFSMs, therefore considering a much more limited scope than that of
-generic Control Data Flow Graphs compiled from C code, as the methodology
+generic Control Data Flow Graphs compiled from source code, as the methodology
 proposed in Section \ref{sec:rs}.
 
 Finally, the authors of a recent work \cite{AguilarJune16} consider
@@ -541,11 +541,11 @@ partitioning a SW application on the application developer.\par
 \label{sec:rs}
 
 The RegionSeeker framework is an automated methodology that 
-identifies candidates for HW acceleration from application ce 
+identifies candidates for HW acceleration from application C 
 code. An extensive SW analysis, based on the LLVM compiler infrastructure,
 performs, apart from
 the identification, an estimation of the performance gain, along with
-the HW reces cost, of each candidate. Subsequently given a HW reces
+the HW resources cost, of each candidate. Subsequently given a HW resources
 constraint, a selection of the identified HW accelerators takes place that
 maximizes the cumulative performance gain.
 In the following subsections the methodology is presented in detail, as well as
@@ -558,7 +558,7 @@ There are three parts comprising the methodology, detailed as follows.
 The first step is to automatically identify valid regions that are suitable candidates
 for HW acceleration. Secondly, an estimation of their potential merit, in terms of cycles saved
 (the difference between SW and HW execution cycles),
-is computed along with the respective cost, which is the HW reces (area) required
+is computed along with the respective cost, which is the HW resources (area) required
 for each region. Finally, a selection algorithm is utilized in order to optimally solve the 
 problem of selecting a subset of these
 regions that maximize the accumulated merit under a given cost, i.e., an area constraint.
@@ -571,7 +571,7 @@ To identify regions in both an automatic and efficient way, a
 of the \emph{LLVM Compiler framework} \cite{LattnerMar04}. 
 The pass receives as input applications developed in C or C++ and performs 
 their analysis at the Intermediate Representation (IR) level, a type
-of code used internally by LLVM to represent ce code and allow
+of code used internally by LLVM to represent source code and allow
 data flow analysis and optimizations.\par
 
 The pass iterates over every function of an
@@ -638,7 +638,7 @@ The Region Identification pass, apart from the Region Identification detailed ab
 performs an early evaluation of the merit and cost of a region, implemented
 directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
 representation and does not need any manual modification to perform function out-lining
-on the benchmark ce code. 
+on the benchmark source code. 
 The estimation of merit and the cost of a region is performed as follows.\par
 
 \emph{Merit Estimation.} 
@@ -1109,7 +1109,7 @@ are synthesized into HW.
 %
 %
 
-\chapter{Optimizations applied to HW Accelerators}
+\chapter{Automatic Optimizations for Accelerators}
 % \vspace{-1cm}
 
 Identifying good candidates for HW acceleration is the first step to realize heterogeneous
@@ -1241,7 +1241,7 @@ analysis to derive the characteristics of the target application.\par
 In order to generate the custom-storage HW accelerators, a two-steps methodology is 
 carried out. First the data reuse analysis of the application takes place and 
 then the synthesis of the part of computation to be implemented in HW.
-The first is performed with the utilization of compiler static code analysis while
+The first is performed with the utilization of compiler statisource code analysis while
 in the latter details regarding the \HW\ implementations are provided.
 The phases of analysis and synthesis lead to the design and implementation of 
 custom-storage accelerators that manage to minimize the latency due to data 
@@ -1431,7 +1431,7 @@ and Vivado\_HLS.
 \vspace{-0.3cm}
 \subsection{Conclusions}
 
-It has been demonstrated that static code analysis can be crucial, when it comes to 
+It has been demonstrated that statisource code analysis can be crucial, when it comes to 
 automatically optimizing the synthesis of accelerators that are dedicated to 
 sliding window applications. My SW analysis identifies data reuse, as well as data locality,
 and subsequently allows to exploit these characteristics by making use of appropriate
@@ -1907,6 +1907,7 @@ implementations can be realized, while avoiding time-consuming exhaustive explor
 published in the 2018 International Conference on High Performance Computing \& Simulation (HPCS) 
 \cite{ZacharopoulosJul18}.
 
+
 %
 %
 %
@@ -1921,12 +1922,177 @@ published in the 2018 International Conference on High Performance Computing \& 
 
 
 \chapter[System Aware Accelerators Identification]
-{System Aware Accelerators Identification --- Speedup gain and Energy Saving}
-%--- \\AccelSeeker and EnergySeeker}
+{System Aware Accelerators Identification}
+% {System Aware Accelerators Identification --- Speedup and Energy Efficiency}
 
-\section{\aseeker}
+In the final Chapter of the dissertation the notion of automatic selection of HW accelerators is extended
+by taking into account the underlying system where the specialized accelerators are hosted. The knowledge
+of the characteristics of the system that is targeted can be critical for the choice of the HW accelerators
+to be implemented. The memory system of a platform for instance can vastly affect the latency due to data
+exchange between the main memory of the system and the HW accelerators. 
+\aseeker, an LLVM-based tool-chain, is presented as a framework that performs automatic identification 
+and selection of HW accelerators targeted to a specific \SoC\ (SoC).
+\aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
+computational latency of candidates for acceleration. The granularity of the candidates for acceleration 
+is expanded to that of a subgraph of the entire call graph of an application. 
 
-\section{EnergySeeker}
+
+\section{\aseeker: Accelerators for Speedup}
+
+\subsection{Motivation}
+
+System-level design, and heterogeneous computing as a whole, is witnessing a breakthrough. 
+Emerging best practices based on High Level Synthesis (HLS) allow unprecedented productivity levels. 
+HLS dramatically shortens development cycles by employing C/C++ descriptions as entry points 
+for the development of both \SW\ (SW) and \HW\ (HW) greatly facilitating the task of migrating 
+functionalities between the two.\par
+
+However, the design of heterogeneous systems comprising SW
+processors and HW accelerators is still a demanding endeavor,
+during which key decisions are left solely to manual effort and
+designer expertise \cite{CacciottiSep18}
+\cite{NouriJun17}. Furthermore, the long time required for HW
+synthesis, coupled with the huge space of alternative implementations
+exposed by real-world applications, limits in practice the number of
+accelerator choices that can be considered manually by a designer
+before HW/SW partitioning is settled.\par
+
+In order to limit the entailed design effort, it is therefore crucial to
+identify the set of viable acceleration options quickly, and also
+early in the design process, before performing later and more
+detailed estimations. This key step is currently poorly supported by
+design automation tools. Indeed, \SoTA\ early partitioning
+strategies are solely based on profiling information
+\cite{XilinxESTRef18} \cite{LattnerMar04} which, as was also shown by
+the authors of \cite{SyrowikJun18}, may often be misleading.
+
+Against this backdrop, herein we present \aseeker, a methodology to
+identify and select the suitable acceleration candidates in an
+application, from its software source code. \aseeker, which is
+implemented within the LLVM \cite{LattnerMar04} compiler
+infrastructure, first provides a measure of the cost (required
+resources) and merit (potential speedup) of all candidate accelerators
+in a single, quick pass, and then selects the set that maximises the
+estimated speedup, while not exceeding a resource target. The use of
+\aseeker\ can therefore guide IC architects in the early design
+phases, highlighting which segments of a computing flow should be
+targeted with high level synthesis, and which parts, instead, are not
+likely to yield tangible benefits if realised in hardware --- either
+because they present a low computational footprint, or because their
+characteristics hamper their potential for hardware acceleration,
+e.g. they require an excessive amount of data transfers while
+performing limited computations.
+% e.g. they have a high communication-to-computation ratio.
+
+The approach of \aseeker\ is markedly different from that of
+performance estimators, as we aim at pinpointing the most promising
+candidates in a single, high-level exploration, reducing the scope of
+further, and more detailed, estimations. On the other hand, it is also
+distant from approaches based solely on profiling information, because
+profilers do not offer a measure of costs and run-times of hardware
+implementations. They also do not account for invocation overheads --
+potentially leading to the selection of frequently called, but small,
+candidates -- and for data transfers -- hence potentially suggesting
+candidates requiring an excessive amount of communication.
+% with high communication-to-computation ratio.
+In both cases, poor choices may even result in slower systems with respect
+to a software-only alternative.
+
+
+Our contribution is two-fold:
+\begin{itemize}
+\item{} we introduce \aseeker, a compiler-based framework able
+  to assist system designers in hardware/software
+  partitioning choices.
+\item{} we explore \aseeker\ effectiveness on a complex application
+  (H.264 decoding \cite{LiuFeb16}), showcasing that its selection of
+  acceleration candidates 
+  %is close to the solution obtained through
+  %detailed (but lengthy and labour-intensive) system-level
+  %explorations, and that it 
+  performs partitioning choices of higher quality compared
+  to those solely based on profiling.
+\end{itemize}
+
+\subsection{Related Work}
+
+High Level Synthesis tools have considerably matured in recent years \cite{MeeusSep12}. Nowadays, available 
+commercial tools (e.g.: Xilinx Vivado HLS \cite{VivadoHLSMar17}, Cadence Stratus HLS \cite{StratusHLSApr16}), 
+as well as academic alternatives (e.g.: Legup \cite{CanisSep13}, Bambu \cite{PilatoMar12}) support the design 
+of very large accelerators from C/C++ code. They reach performance levels comparable to hand-crafted 
+implementations specified in low-level Hardware Description Languages (HDL) such as VHDL or Verilog 
+\cite{LiuFeb16}.\par
+
+\begin{figure}[!t]
+  
+  \centering
+  \includegraphics[width= .8 \linewidth]{figs/soa_evolution.pdf}
+    \vskip -.5em
+  \caption{Evolution of the SoA in automatic selection of custom
+          instructions/accelerators: (a) from data-flow level
+          \cite{PozziJul06} \cite{GiaquintaMar15}, (b) to control-flow
+          level \cite{ZacharopoulosApr19} \cite{OppermannJul16}, (c)
+          to function-call graph level (this work).}
+  \label{fig:soa-evolution}
+  \vskip -1em
+\end{figure}
+
+Nonetheless, the automated selection of the application parts most
+amenable to hardware acceleration is still an open research topic.
+Selection approaches based on synthesis results \cite{CanisSep13b}
+scale poorly to complex applications, as these are only available late
+in the design process.  Estimation frameworks offer a detailed
+analysis on the performance and resource requirements of a
+hardware-accelerated system while avoiding full synthesis runs, either
+by interfacing software and hardware simulators (e.g., gem5
+\cite{BinkertFeb11} and Aladdin \cite{ShaoJul14} in \cite{ShaoOct16}),
+or by adopting a hybrid stance, in which hardware execution times are
+estimated, while software ones are measured on a target platform (as
+in Xilinx SdSoC \cite{KathailFeb16}). However, in both cases,
+estimations are performed \emph{after} the partitioning of hardware
+and software, which is left to a trial-and-error basis.  A methodical
+solution for partitioning is instead proposed here.\par
+
+The downside of poor partitioning choices, and consequently the
+importance of automated tools such \aseeker\ that guide the selection
+of high-quality accelerator sets, is even more prominent when
+considering the high effort required to optimise the implementation of
+HLS-defined accelerators. Design optimisation entails the
+specification of multiple directives to steer designs towards the
+desired area-performance trade-off. The link between directives and
+the performance of implementations is not straightforward, hence
+requiring the evaluation of multiple alternatives to reach the
+intended results, as exemplified in \cite{SchaferJun12}
+\cite{ZuluagaJun12} \cite{FerrettiJan18} \cite{LiuJun13}. It is
+therefore key to focus up-front this optimisation effort only on those
+candidate accelerators which can lead, from an application
+perspective, to tangible speedups.\par
+
+To this end, our approach is inspired by previous works on automatic
+identification of instruction set extensions. Most techniques in this
+field target customizable processors augmented with
+application-specific functional units, within the processor pipelines.
+Hence, these techniques usually constrain their search to the scope of
+single basic blocks \cite{PozziJul06} \cite{GiaquintaMar15}, as
+depicted in Figure~\ref{fig:soa-evolution}a.  Recently, the authors of
+\cite{ZacharopoulosApr19} and \cite{OppermannJul16} have instead
+targeted the identification of larger code segments, including
+control-flow structures belonging to single functions (depicted in
+Figure~\ref{fig:soa-evolution}b).  However, such scope still falls
+short of the one employed in HLS tools, which are devoted to the
+implementation of dedicated accelerators interfaced on a system bus
+\cite{CotaJun15}. In this setting, the cost of data movement becomes
+so prominent that even control-flow structures inside functions fail
+to deliver performance. Suitable accelerator candidates must then
+encompass entire functions, including in turn all functions called
+within their call tree. \aseeker\ considers this same granularity
+(Figure~\ref{fig:soa-evolution}c), advancing the state of the art in
+automatic accelerators identification.
+
+\subsection{Methodology}
+
+\section{EnergySeeker: Accelerators for Energy Efficiency}
+
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}

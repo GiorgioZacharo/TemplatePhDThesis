@@ -33,7 +33,7 @@
 \newlabel{fig:overview}{{1}{3}{Overview of the research that has been conducted during my PhD and the respective chapters of the PhD thesis.\relax }{figure.caption.6}{}}
 \citation{ZacharopoulosJan17}
 \citation{ZacharopoulosJul18}
-\@writefile{toc}{\contentsline {chapter}{\numberline {1}Automatic Identification and Selection of HW Accelerators}{7}{chapter.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Automatic Identification and Selection of Accelerators}{7}{chapter.1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Motivation}{7}{section.1.1}}
@@ -41,8 +41,8 @@
 \citation{AguilarJune16}
 \citation{JohnsonJun94}
 \citation{LattnerMar04}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces a) Example Control Flow Graph\ of a function, co-coded with frequency of execution (the darker the basic block, the more frequent). b) B and C are Valid Subgraphs; A and D are not Valid Subgraphs because they contain a forbidden node. B is also a CFG region, because it has a single control flow\ input and output.\relax }}{8}{figure.caption.7}}
-\newlabel{fig:cfg-example}{{1.1}{8}{a) Example \CFG \ of a function, co-coded with frequency of execution (the darker the basic block, the more frequent). b) B and C are Valid Subgraphs; A and D are not Valid Subgraphs because they contain a forbidden node. B is also a CFG region, because it has a single \controlflow \ input and output.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces a) Example Control Flow Graph\ of a function, color-coded with frequency of execution (the darker the basic block, the more frequent). b) B and C are Valid Subgraphs; A and D are not Valid Subgraphs because they contain a forbidden node. B is also a CFG region, because it has a single control flow\ input and output.\relax }}{8}{figure.caption.7}}
+\newlabel{fig:cfg-example}{{1.1}{8}{a) Example \CFG \ of a function, color-coded with frequency of execution (the darker the basic block, the more frequent). b) B and C are Valid Subgraphs; A and D are not Valid Subgraphs because they contain a forbidden node. B is also a CFG region, because it has a single \controlflow \ input and output.\relax }{figure.caption.7}{}}
 \citation{YuSep04}
 \citation{PozziJul06}
 \citation{ChenFeb07}
@@ -116,7 +116,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the MuLTiVersioning\ approach where any version of the regions can be selected. \relax }}{23}{figure.caption.15}}
 \newlabel{fig:mlv_aladdin}{{1.6}{23}{Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the \multi \^^Mapproach where any version of the regions can be selected. \relax }{figure.caption.15}{}}
 \citation{VivadoHLSMar17}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Optimizations applied to HW Accelerators}{25}{chapter.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Automatic Optimizations for Accelerators}{25}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Data reuse Analysis}{26}{section.2.1}}
@@ -223,12 +223,52 @@
 \newlabel{fig:iter_ref_score}{{2.8}{41}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.32}{}}
 \citation{ZacharopoulosJul18}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Conclusions}{42}{subsection.2.2.5}}
+\citation{CacciottiSep18}
+\citation{NouriJun17}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{43}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}{AccelSeeker}}{43}{section.3.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker}{43}{section.3.2}}
-\@writefile{toc}{\contentsline {chapter}{Conclusions}{45}{chapter*.33}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{43}{section.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Motivation}{43}{subsection.3.1.1}}
+\citation{XilinxESTRef18}
+\citation{LattnerMar04}
+\citation{SyrowikJun18}
+\citation{LattnerMar04}
+\citation{LiuFeb16}
+\citation{MeeusSep12}
+\citation{VivadoHLSMar17}
+\citation{StratusHLSApr16}
+\citation{CanisSep13}
+\citation{PilatoMar12}
+\citation{LiuFeb16}
+\citation{PozziJul06}
+\citation{GiaquintaMar15}
+\citation{ZacharopoulosApr19}
+\citation{OppermannJul16}
+\citation{PozziJul06}
+\citation{GiaquintaMar15}
+\citation{ZacharopoulosApr19}
+\citation{OppermannJul16}
+\citation{CanisSep13b}
+\citation{BinkertFeb11}
+\citation{ShaoJul14}
+\citation{ShaoOct16}
+\citation{KathailFeb16}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite  {PozziJul06} \cite  {GiaquintaMar15}, (b) to control-flow level \cite  {ZacharopoulosApr19} \cite  {OppermannJul16}, (c) to function-call graph level (this work).\relax }}{45}{figure.caption.33}}
+\newlabel{fig:soa-evolution}{{3.1}{45}{Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite {PozziJul06} \cite {GiaquintaMar15}, (b) to control-flow level \cite {ZacharopoulosApr19} \cite {OppermannJul16}, (c) to function-call graph level (this work).\relax }{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Related Work}{45}{subsection.3.1.2}}
+\citation{SchaferJun12}
+\citation{ZuluagaJun12}
+\citation{FerrettiJan18}
+\citation{LiuJun13}
+\citation{PozziJul06}
+\citation{GiaquintaMar15}
+\citation{ZacharopoulosApr19}
+\citation{OppermannJul16}
+\citation{CotaJun15}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Methodology}{46}{subsection.3.1.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{46}{section.3.2}}
+\@writefile{toc}{\contentsline {chapter}{Conclusions}{47}{chapter*.34}}
 \bibstyle{abbrv}
 \bibdata{biblio}
 \bibcite{AgakovMar06}{{1}{}{{}}{{}}}
@@ -238,63 +278,76 @@
 \bibcite{ArriaNov16}{{5}{}{{}}{{}}}
 \bibcite{AtasuApr07}{{6}{}{{}}{{}}}
 \bibcite{BaleaniMay02}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{47}{section*.35}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{49}{section*.36}}
 \bibcite{BinkertFeb11}{{8}{}{{}}{{}}}
 \bibcite{BiswasMar06}{{9}{}{{}}{{}}}
-\bibcite{StratusHLSApr16}{{10}{}{{}}{{}}}
-\bibcite{TensilicaMar17}{{11}{}{{}}{{}}}
-\bibcite{CanisSep13}{{12}{}{{}}{{}}}
-\bibcite{ChenFeb07}{{13}{}{{}}{{}}}
-\bibcite{CongFeb04}{{14}{}{{}}{{}}}
-\bibcite{CotaJun15}{{15}{}{{}}{{}}}
-\bibcite{DanalisMar10}{{16}{}{{}}{{}}}
-\bibcite{dennard1974design}{{17}{}{{}}{{}}}
-\bibcite{DongMar07}{{18}{}{{}}{{}}}
-\bibcite{esmaeilzadeh2011dark}{{19}{}{{}}{{}}}
-\bibcite{GaluzziOct06}{{20}{}{{}}{{}}}
-\bibcite{GiaquintaMar15}{{21}{}{{}}{{}}}
-\bibcite{GuoMar05}{{22}{}{{}}{{}}}
-\bibcite{GuoJun04}{{23}{}{{}}{{}}}
-\bibcite{GutinFeb12}{{24}{}{{}}{{}}}
-\bibcite{HaaBOct2014}{{25}{}{{}}{{}}}
-\bibcite{HankSep93}{{26}{}{{}}{{}}}
-\bibcite{HaraMay08}{{27}{}{{}}{{}}}
-\bibcite{JohnsonJun94}{{28}{}{{}}{{}}}
-\bibcite{KulkarniOct12}{{29}{}{{}}{{}}}
-\bibcite{KurraApr07}{{30}{}{{}}{{}}}
-\bibcite{LattnerMar04}{{31}{}{{}}{{}}}
-\bibcite{LiuJun13}{{32}{}{{}}{{}}}
-\bibcite{MarianiApr12}{{33}{}{{}}{{}}}
-\bibcite{MartiFeb12}{{34}{}{{}}{{}}}
-\bibcite{MeeusMar14}{{35}{}{{}}{{}}}
-\bibcite{MonsifrotAug02}{{36}{}{{}}{{}}}
-\bibcite{OzisikyilmazJun08}{{37}{}{{}}{{}}}
-\bibcite{PalermoNov09}{{38}{}{{}}{{}}}
-\bibcite{PedregosaOct11}{{39}{}{{}}{{}}}
-\bibcite{PothineniJan07}{{40}{}{{}}{{}}}
-\bibcite{PouchetFeb13}{{41}{}{{}}{{}}}
-\bibcite{PozziJul06}{{42}{}{{}}{{}}}
-\bibcite{PozziSep05}{{43}{}{{}}{{}}}
-\bibcite{ReddingtonAug09}{{44}{}{{}}{{}}}
-\bibcite{schaller1997moore}{{45}{}{{}}{{}}}
-\bibcite{SchmidJul15}{{46}{}{{}}{{}}}
-\bibcite{ShaoJul14}{{47}{}{{}}{{}}}
-\bibcite{simonite2016moore}{{48}{}{{}}{{}}}
-\bibcite{StephensonApr05}{{49}{}{{}}{{}}}
-\bibcite{ArcDec16}{{50}{}{{}}{{}}}
-\bibcite{TensilicaWeb}{{51}{}{{}}{{}}}
-\bibcite{GrosserApr12}{{52}{}{{}}{{}}}
-\bibcite{Vivado12}{{53}{}{{}}{{}}}
-\bibcite{VermaOct07}{{54}{}{{}}{{}}}
-\bibcite{VillarrealMay10}{{55}{}{{}}{{}}}
-\bibcite{VivadoHLSMar17}{{56}{}{{}}{{}}}
-\bibcite{ZynqMar17}{{57}{}{{}}{{}}}
-\bibcite{XydisMar13}{{58}{}{{}}{{}}}
-\bibcite{LeeserApr06}{{59}{}{{}}{{}}}
-\bibcite{YuSep04}{{60}{}{{}}{{}}}
-\bibcite{ZacharopoulosJan17}{{61}{}{{}}{{}}}
-\bibcite{ZacharopoulosJul18}{{62}{}{{}}{{}}}
-\bibcite{ZacharopoulosApr19}{{63}{}{{}}{{}}}
-\bibcite{ZuluagaJul09}{{64}{}{{}}{{}}}
-\bibcite{ZuluagaJun12}{{65}{}{{}}{{}}}
+\bibcite{CacciottiSep18}{{10}{}{{}}{{}}}
+\bibcite{StratusHLSApr16}{{11}{}{{}}{{}}}
+\bibcite{TensilicaMar17}{{12}{}{{}}{{}}}
+\bibcite{CanisSep13}{{13}{}{{}}{{}}}
+\bibcite{CanisSep13b}{{14}{}{{}}{{}}}
+\bibcite{ChenFeb07}{{15}{}{{}}{{}}}
+\bibcite{CongFeb04}{{16}{}{{}}{{}}}
+\bibcite{CotaJun15}{{17}{}{{}}{{}}}
+\bibcite{DanalisMar10}{{18}{}{{}}{{}}}
+\bibcite{dennard1974design}{{19}{}{{}}{{}}}
+\bibcite{DongMar07}{{20}{}{{}}{{}}}
+\bibcite{esmaeilzadeh2011dark}{{21}{}{{}}{{}}}
+\bibcite{FerrettiJan18}{{22}{}{{}}{{}}}
+\bibcite{GaluzziOct06}{{23}{}{{}}{{}}}
+\bibcite{GiaquintaMar15}{{24}{}{{}}{{}}}
+\bibcite{GuoMar05}{{25}{}{{}}{{}}}
+\bibcite{GuoJun04}{{26}{}{{}}{{}}}
+\bibcite{GutinFeb12}{{27}{}{{}}{{}}}
+\bibcite{HaaBOct2014}{{28}{}{{}}{{}}}
+\bibcite{HankSep93}{{29}{}{{}}{{}}}
+\bibcite{HaraMay08}{{30}{}{{}}{{}}}
+\bibcite{JohnsonJun94}{{31}{}{{}}{{}}}
+\bibcite{KathailFeb16}{{32}{}{{}}{{}}}
+\bibcite{KulkarniOct12}{{33}{}{{}}{{}}}
+\bibcite{KurraApr07}{{34}{}{{}}{{}}}
+\bibcite{LattnerMar04}{{35}{}{{}}{{}}}
+\bibcite{LiuJun13}{{36}{}{{}}{{}}}
+\bibcite{LiuFeb16}{{37}{}{{}}{{}}}
+\bibcite{MarianiApr12}{{38}{}{{}}{{}}}
+\bibcite{MartiFeb12}{{39}{}{{}}{{}}}
+\bibcite{MeeusMar14}{{40}{}{{}}{{}}}
+\bibcite{MeeusSep12}{{41}{}{{}}{{}}}
+\bibcite{MonsifrotAug02}{{42}{}{{}}{{}}}
+\bibcite{NouriJun17}{{43}{}{{}}{{}}}
+\bibcite{OppermannJul16}{{44}{}{{}}{{}}}
+\bibcite{OzisikyilmazJun08}{{45}{}{{}}{{}}}
+\bibcite{PalermoNov09}{{46}{}{{}}{{}}}
+\bibcite{PedregosaOct11}{{47}{}{{}}{{}}}
+\bibcite{PilatoMar12}{{48}{}{{}}{{}}}
+\bibcite{PothineniJan07}{{49}{}{{}}{{}}}
+\bibcite{PouchetFeb13}{{50}{}{{}}{{}}}
+\bibcite{PozziJul06}{{51}{}{{}}{{}}}
+\bibcite{PozziSep05}{{52}{}{{}}{{}}}
+\bibcite{ReddingtonAug09}{{53}{}{{}}{{}}}
+\bibcite{SchaferJun12}{{54}{}{{}}{{}}}
+\bibcite{schaller1997moore}{{55}{}{{}}{{}}}
+\bibcite{SchmidJul15}{{56}{}{{}}{{}}}
+\bibcite{ShaoJul14}{{57}{}{{}}{{}}}
+\bibcite{ShaoOct16}{{58}{}{{}}{{}}}
+\bibcite{simonite2016moore}{{59}{}{{}}{{}}}
+\bibcite{StephensonApr05}{{60}{}{{}}{{}}}
+\bibcite{ArcDec16}{{61}{}{{}}{{}}}
+\bibcite{SyrowikJun18}{{62}{}{{}}{{}}}
+\bibcite{TensilicaWeb}{{63}{}{{}}{{}}}
+\bibcite{GrosserApr12}{{64}{}{{}}{{}}}
+\bibcite{Vivado12}{{65}{}{{}}{{}}}
+\bibcite{VermaOct07}{{66}{}{{}}{{}}}
+\bibcite{VillarrealMay10}{{67}{}{{}}{{}}}
+\bibcite{VivadoHLSMar17}{{68}{}{{}}{{}}}
+\bibcite{ZynqMar17}{{69}{}{{}}{{}}}
+\bibcite{XilinxESTRef18}{{70}{}{{}}{{}}}
+\bibcite{XydisMar13}{{71}{}{{}}{{}}}
+\bibcite{LeeserApr06}{{72}{}{{}}{{}}}
+\bibcite{YuSep04}{{73}{}{{}}{{}}}
+\bibcite{ZacharopoulosJan17}{{74}{}{{}}{{}}}
+\bibcite{ZacharopoulosJul18}{{75}{}{{}}{{}}}
+\bibcite{ZacharopoulosApr19}{{76}{}{{}}{{}}}
+\bibcite{ZuluagaJul09}{{77}{}{{}}{{}}}
+\bibcite{ZuluagaJun12}{{78}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
