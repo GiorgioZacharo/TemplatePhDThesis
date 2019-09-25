@@ -1241,7 +1241,7 @@ analysis to derive the characteristics of the target application.\par
 In order to generate the custom-storage HW accelerators, a two-steps methodology is 
 carried out. First the data reuse analysis of the application takes place and 
 then the synthesis of the part of computation to be implemented in HW.
-The first is performed with the utilization of compiler statisource code analysis while
+The first is performed with the utilization of compiler static source code analysis while
 in the latter details regarding the \HW\ implementations are provided.
 The phases of analysis and synthesis lead to the design and implementation of 
 custom-storage accelerators that manage to minimize the latency due to data 
@@ -1431,7 +1431,7 @@ and Vivado\_HLS.
 \vspace{-0.3cm}
 \subsection{Conclusions}
 
-It has been demonstrated that statisource code analysis can be crucial, when it comes to 
+It has been demonstrated that static source code analysis can be crucial, when it comes to 
 automatically optimizing the synthesis of accelerators that are dedicated to 
 sliding window applications. My SW analysis identifies data reuse, as well as data locality,
 and subsequently allows to exploit these characteristics by making use of appropriate
@@ -1934,8 +1934,9 @@ exchange between the main memory of the system and the HW accelerators.
 and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
 computational latency of candidates for acceleration. The granularity of the candidates for acceleration 
-is expanded to that of a subgraph of the entire call graph of an application. 
-
+is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
+communication overhead between main memory and the HW accelerators. 
+\textbf{NOTE:} Write for EnergySeeker.
 
 \section{\aseeker: Accelerators for Speedup}
 
@@ -1947,72 +1948,42 @@ HLS dramatically shortens development cycles by employing C/C++ descriptions as 
 for the development of both \SW\ (SW) and \HW\ (HW) greatly facilitating the task of migrating 
 functionalities between the two.\par
 
-However, the design of heterogeneous systems comprising SW
-processors and HW accelerators is still a demanding endeavor,
-during which key decisions are left solely to manual effort and
-designer expertise \cite{CacciottiSep18}
-\cite{NouriJun17}. Furthermore, the long time required for HW
-synthesis, coupled with the huge space of alternative implementations
-exposed by real-world applications, limits in practice the number of
-accelerator choices that can be considered manually by a designer
-before HW/SW partitioning is settled.\par
+However, the design of heterogeneous systems comprising SW processors and HW accelerators is still a 
+demanding endeavor, during which key decisions are left solely to manual effort and designer expertise 
+\cite{CacciottiSep18} \cite{NouriJun17}. Furthermore, the long time required for HW synthesis, coupled 
+with the huge space of alternative implementations exposed by real-world applications, limits in practice 
+the number of accelerator choices that can be considered manually by a designer before HW/SW partitioning 
+is settled.\par
 
-In order to limit the entailed design effort, it is therefore crucial to
-identify the set of viable acceleration options quickly, and also
-early in the design process, before performing later and more
-detailed estimations. This key step is currently poorly supported by
-design automation tools. Indeed, \SoTA\ early partitioning
-strategies are solely based on profiling information
-\cite{XilinxESTRef18} \cite{LattnerMar04} which, as was also shown by
-the authors of \cite{SyrowikJun18}, may often be misleading.
+In order to limit the entailed design effort, it is therefore crucial to identify the set of viable 
+acceleration options quickly, and also early in the design process, before performing later and more 
+detailed estimations. This key step is currently poorly supported by design automation tools. Indeed, 
+\SoTA\ early partitioning strategies are solely based on profiling information \cite{XilinxESTRef18} 
+\cite{LattnerMar04} which, as was also shown by the authors of \cite{SyrowikJun18}, may often be 
+misleading.\par
 
-Against this backdrop, herein we present \aseeker, a methodology to
-identify and select the suitable acceleration candidates in an
-application, from its software source code. \aseeker, which is
-implemented within the LLVM \cite{LattnerMar04} compiler
-infrastructure, first provides a measure of the cost (required
-resources) and merit (potential speedup) of all candidate accelerators
-in a single, quick pass, and then selects the set that maximises the
-estimated speedup, while not exceeding a resource target. The use of
-\aseeker\ can therefore guide IC architects in the early design
-phases, highlighting which segments of a computing flow should be
-targeted with high level synthesis, and which parts, instead, are not
-likely to yield tangible benefits if realised in hardware --- either
-because they present a low computational footprint, or because their
-characteristics hamper their potential for hardware acceleration,
-e.g. they require an excessive amount of data transfers while
-performing limited computations.
-% e.g. they have a high communication-to-computation ratio.
+To fill this gap and offer an efficient solution to the problem stated above, \aseeker is presented. 
+\aseeker\ offers a methodology to identify and select the suitable acceleration candidates in an
+application, from its software source code. Being implemented within the LLVM \cite{LattnerMar04} compiler 
+infrastructure, first models an estimation of the cost (required resources) and merit (potential speedup) 
+of all candidate accelerators in a single, quick pass, and then selects the set that maximizes the estimated 
+speedup, while not exceeding a resource target. The use of \aseeker\ can therefore guide Integrated Circuit 
+architects in the early design phases, highlighting which segments of a computing flow should be
+targeted with HLS, and hence where to focus the process of applying optimizations to.\par
 
-The approach of \aseeker\ is markedly different from that of
-performance estimators, as we aim at pinpointing the most promising
-candidates in a single, high-level exploration, reducing the scope of
-further, and more detailed, estimations. On the other hand, it is also
-distant from approaches based solely on profiling information, because
-profilers do not offer a measure of costs and run-times of hardware
-implementations. They also do not account for invocation overheads --
-potentially leading to the selection of frequently called, but small,
-candidates -- and for data transfers -- hence potentially suggesting
-candidates requiring an excessive amount of communication.
-% with high communication-to-computation ratio.
-In both cases, poor choices may even result in slower systems with respect
-to a software-only alternative.
+On the other hand, it indicates which parts are not likely to yield tangible benefits if realized in HW --- either 
+because they present a low computational footprint, or because their characteristics hamper their potential for HW 
+acceleration, e.g. they require an excessive amount of data transfers while performing limited computations.\par
 
-
-Our contribution is two-fold:
-\begin{itemize}
-\item{} we introduce \aseeker, a compiler-based framework able
-  to assist system designers in hardware/software
-  partitioning choices.
-\item{} we explore \aseeker\ effectiveness on a complex application
-  (H.264 decoding \cite{LiuFeb16}), showcasing that its selection of
-  acceleration candidates 
-  %is close to the solution obtained through
-  %detailed (but lengthy and labour-intensive) system-level
-  %explorations, and that it 
-  performs partitioning choices of higher quality compared
-  to those solely based on profiling.
-\end{itemize}
+The approach of \aseeker\ is markedly different from that of performance estimators, as the most promising candidates 
+are identified in a single, high-level exploration, reducing the scope of further, and more detailed, estimations. It 
+also differs from approaches based solely on profiling information, as profilers do not offer a measure of costs and 
+run-times of HW implementations. Furthermore, they do not account for invocation overheads -- potentially leading to the 
+selection of frequently called, but small, candidates. Finally, data transfers is an important factor that \SoTA\ profilers
+do not take into account -- hence potentially suggesting candidates requiring an excessive amount of communication, that in 
+turn can significantly weaken any potential performance gained. \aseeker, instead, takes into account both the communication 
+overhead and all the characteristics of the platform that are required in order to generate an estimation model which leads
+to high-performance HW accelerators choices.
 
 \subsection{Related Work}
 
@@ -2038,18 +2009,18 @@ implementations specified in low-level Hardware Description Languages (HDL) such
 \end{figure}
 
 Nonetheless, the automated selection of the application parts most
-amenable to hardware acceleration is still an open research topic.
+amenable to HW acceleration is still an open research topic.
 Selection approaches based on synthesis results \cite{CanisSep13b}
 scale poorly to complex applications, as these are only available late
 in the design process.  Estimation frameworks offer a detailed
 analysis on the performance and resource requirements of a
-hardware-accelerated system while avoiding full synthesis runs, either
-by interfacing software and hardware simulators (e.g., gem5
+HW-accelerated system while avoiding full synthesis runs, either
+by interfacing software and HW simulators (e.g., gem5
 \cite{BinkertFeb11} and Aladdin \cite{ShaoJul14} in \cite{ShaoOct16}),
-or by adopting a hybrid stance, in which hardware execution times are
+or by adopting a hybrid stance, in which HW execution times are
 estimated, while software ones are measured on a target platform (as
 in Xilinx SdSoC \cite{KathailFeb16}). However, in both cases,
-estimations are performed \emph{after} the partitioning of hardware
+estimations are performed \emph{after} the partitioning of HW
 and software, which is left to a trial-and-error basis.  A methodical
 solution for partitioning is instead proposed here.\par
 
@@ -2090,6 +2061,8 @@ within their call tree. \aseeker\ considers this same granularity
 automatic accelerators identification.
 
 \subsection{Methodology}
+
+\subsection{Experimental Results}
 
 \section{EnergySeeker: Accelerators for Energy Efficiency}
 
