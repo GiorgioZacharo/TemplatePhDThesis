@@ -42,6 +42,9 @@
 \newcommand{\greedy}{\textsf{greedy}}
 \newcommand{\exactC}{\textsf{exact-on-cropped}}
 
+\newcommand{\candidate}{{AccelCand}} 
+\newcommand{\candidates}{{AccelCand}s} 
+
 % \newcommand{\htsf}{\texttt{h264}}
 \newcommand{\adpcm}{\texttt{adpcm}}
 \newcommand{\sha}{\texttt{sha}}
@@ -2021,25 +2024,27 @@ or by adopting a hybrid stance, in which HW execution times are
 estimated, while software ones are measured on a target platform (as
 in Xilinx SdSoC \cite{KathailFeb16}). However, in both cases,
 estimations are performed \emph{after} the partitioning of HW
-and software, which is left to a trial-and-error basis.  A methodical
-solution for partitioning is instead proposed here.\par
+and software, which is left to a trial-and-error basis.
+A methodical solution for partitioning is instead proposed in this
+chapter.\par
 
 The downside of poor partitioning choices, and consequently the
 importance of automated tools such \aseeker\ that guide the selection
 of high-quality accelerator sets, is even more prominent when
-considering the high effort required to optimise the implementation of
-HLS-defined accelerators. Design optimisation entails the
+considering the high effort required to optimize the implementation of
+HLS-defined accelerators. Design optimization entails the
 specification of multiple directives to steer designs towards the
 desired area-performance trade-off. The link between directives and
 the performance of implementations is not straightforward, hence
 requiring the evaluation of multiple alternatives to reach the
 intended results, as exemplified in \cite{SchaferJun12}
 \cite{ZuluagaJun12} \cite{FerrettiJan18} \cite{LiuJun13}. It is
-therefore key to focus up-front this optimisation effort only on those
+therefore key to focus up-front this optimization effort only on those
 candidate accelerators which can lead, from an application
 perspective, to tangible speedups.\par
 
-To this end, our approach is inspired by previous works on automatic
+To this end, the approach introduced here is inspired by previous works 
+on automatic
 identification of instruction set extensions. Most techniques in this
 field target customizable processors augmented with
 application-specific functional units, within the processor pipelines.
@@ -2061,6 +2066,92 @@ within their call tree. \aseeker\ considers this same granularity
 automatic accelerators identification.
 
 \subsection{Methodology}
+
+The methodology embedded in \aseeker, whose high-level scheme is depicted in Figure 
+\ref{fig:flow}, is detailed.  
+First, the definition of a candidate for acceleration is provided, and then how the 
+selection of a subset of potential candidates to be implemented in hardware is being performed
+(A and C in the figure). Subsequently, the approach employed to estimate the candidates 
+performance and resource requirements (B in the figure) is presented.
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width= 0.7\linewidth]{figs/flow.pdf}
+      % \vskip -0.5em
+  \caption{The phases of the \aseeker\ approach. A) Candidates
+          for acceleration are identified, from source code
+          analysis. B) Given an estimation of merit and cost for each
+          candidate, and C) given a maximum available cost, \aseeker\
+          performs selection of a subset of such candidates.}
+  \label{fig:flow}
+      % \vskip -0.5em
+\end{figure}
+
+\subsubsection{Candidate Identification}
+
+In order to discover which parts of an application can be most
+profitably accelerated in hardware, the investigation of its function-call
+graph takes place, i.e., a Directed Acyclic Graph $G(N,E)$, where every node $n
+\in N$ corresponds to a function and every edge $e=(u,v) \in E$
+corresponds to a call from function $u$ to function $v$. A \emph{root}
+is a node that reaches all other nodes of the graph, i.e., for every
+other node $n \in N$, there exists a path from the root to it. The
+function-call graph $G$ has a root, which represents the top-level
+function of the application. Figure~\ref{fig:subgraph-examples}a shows
+an example of a call graph (note that edge directions are not shown
+here, for picture clarity; they are, however, intended from
+top to bottom).
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figs/subgraph_examples.pdf}
+      % \vskip -1em
+  \caption{a) An example call graph. Black nodes are the
+          functions present in a SW application, and edges represent
+          function calls. Subgraph A is an \candidate. b) Subgraphs B
+          and C are not \candidates\ (B has outgoing edges, C has no
+          root). c) Call graph resulting from selection of A as
+          accelerator.}
+  \label{fig:subgraph-examples}
+      \vskip -1em
+\end{figure}
+
+A candidate accelerator is defined, and called \textbf{\candidate},
+as a subgraph $S(N_s,E_s)$ of graph $G$, exhibiting the following two
+characteristics: the subgraph has a root; the subgraph has zero
+outgoing edges. The former means that the subgraph has a node that
+reaches all other nodes in the subgraph; the latter means that, for
+every node $n_s \in N_s$, no edge $(n_s,m_s)$ exists in $G$ such that
+$m_s \notin N_s$.\par
+
+Figure~\ref{fig:subgraph-examples}a and \ref{fig:subgraph-examples}b
+show three example subgraphs, labeled A, B, C. While subgraph A is an
+\candidate, subgraph B is not, because it does not have zero outgoing
+edges, and subgraph C also is not an \candidate, because it does not
+have a root. The call graph resulting from selection of \candidate\ A
+as accelerator is shown in Figure~\ref{fig:subgraph-examples}c: the
+whole subgraph is subsumed to a single (accelerator) call.\par
+
+The methodology is limited to considering call graphs that are
+acyclic, and hence constructs such as recursion cannot be dealt with. This 
+is in line with the limitations of HLS tools.
+
+\subsubsection{Cost and Merit Estimation}
+
+Herein, we detail how the abstract cost and merit are automatically computed from source code
+(Figure~\ref{fig:flow}, B). As the goal of the presented framework is to
+select the most performing candidates \emph{in advance of their
+optimization}, \aseeker\ considers their default implementations,
+e.g., ones where no function is inlined and no loop is unrolled.
+High-performance implementations will likely have greater resource
+requirements, in turn potentially requiring to discard some of the
+selected \candidates. Nonetheless, these additional design decisions will
+be performed within the limited scope of the candidate set retrieved
+by our tool (as opposed to the whole design) thereby easing the
+ensuing effort.
+
+\subsubsection{Selection Algorithm}
 
 \subsection{Experimental Results}
 
