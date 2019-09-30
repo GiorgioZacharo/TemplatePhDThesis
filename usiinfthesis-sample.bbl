@@ -115,6 +115,12 @@ J.~Cong, Y.~Fan, G.~Han, and Z.~Zhang.
   Symposium on Field Programmable Gate Arrays}, pages 183--89, Monterey, CA,
   Feb. 2004.
 
+\bibitem{ContiSep16}
+F.~Conti, D.~Rossi, A.~Pullini, I.~Loi, and L.~Benini.
+\newblock Pulp: A ultra-low power parallel accelerator for energy-efficient and
+  flexible embedded vision.
+\newblock {\em Journal of Signal Processing Systems}, 84(3):339--354, 2016.
+
 \bibitem{CotaJun15}
 E.~G. Cota, P.~Mantovani, G.~Di~Guglielmo, and L.~P. Carloni.
 \newblock An analysis of accelerator coupling in heterogeneous architectures.
@@ -166,6 +172,13 @@ E.~Giaquinta, A.~Mishra, and L.~Pozzi.
   identification of custom instructions.
 \newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 34(3):483--494, 2015.
+
+\bibitem{GruttnerNov13}
+K.~Gr{\"u}ttner, P.~A. Hartmann, K.~Hylla, S.~Rosinger, W.~Nebel, F.~Herrera,
+  E.~Villar, C.~Brandolese, W.~Fornaciari, G.~Palermo, et~al.
+\newblock The complex reference framework for {HW}/{SW} co-design and power
+  management supporting platform-based design-space exploration.
+\newblock {\em Microprocessors and Microsystems}, 37(8):966--980, 2013.
 
 \bibitem{GuoMar05}
 Z.~Guo, B.~Buyukkurt, W.~Najjar, and K.~Vissers.
@@ -239,6 +252,12 @@ C.~Lattner and V.~Adve.
 \newblock In {\em Proceedings of the 2nd International Symposium on Code
   Generation and Optimization}, pages 75--88, Mar. 2004.
 
+\bibitem{LeeApr13}
+K.~H. Lee and N.~Verma.
+\newblock A low-power processor with configurable embedded machine-learning
+  accelerators for high-order and adaptive analysis of medical-sensor signals.
+\newblock {\em IEEE Journal of Solid-State Circuits}, 48(7):1625--1637, 2013.
+
 \bibitem{LiuJun13}
 H.-Y. Liu and L.~P. Carloni.
 \newblock On learning-based methods for design-space exploration with
@@ -278,6 +297,14 @@ W.~Meeus, K.~Van~Beeck, T.~Goedem{\'e}, J.~Meel, and D.~Stroobandt.
 \newblock An overview of today's high-level synthesis tools.
 \newblock {\em Design Automation for Embedded Systems}, 16(3):31--51, Sept.
   2012.
+
+\bibitem{MelpignanoJune12}
+D.~Melpignano, L.~Benini, E.~Flamand, B.~Jego, T.~Lepley, G.~Haugou,
+  F.~Clermidy, and D.~Dutoit.
+\newblock Platform 2012, a many-core computing accelerator for embedded
+  {S}o{C}s: performance evaluation of visual analytics applications.
+\newblock In {\em Proceedings of the 49th Design Automation Conference}, pages
+  1137--1142. ACM, 2012.
 
 \bibitem{MonsifrotAug02}
 A.~Monsifrot, F.~Bodin, and R.~Quiniou.
@@ -351,6 +378,26 @@ L.~Pozzi and P.~Ienne.
   Architectures, and Synthesis for Embedded Systems}, pages 2--10, San
   Francisco, CA, Sept. 2005.
 
+\bibitem{OpensslDec98}
+T.~O. Project.
+\newblock Open{SSL} library.
+\newblock \url{www.openssl.org}, Dec. 1998.
+
+\bibitem{PulliniJan17}
+A.~Pullini, F.~Conti, D.~Rossi, I.~Loi, M.~Gautschi, and L.~Benini.
+\newblock A heterogeneous multicore system on chip for energy efficient brain
+  inspired computing.
+\newblock {\em IEEE Transactions on Circuits and Systems II: Express Briefs},
+  65(8):1094--1098, 2017.
+
+\bibitem{ReagenJun16}
+B.~Reagen, P.~Whatmough, R.~Adolf, S.~Rama, H.~Lee, S.~K. Lee, J.~M.
+  Hern{\'a}ndez-Lobato, G.-Y. Wei, and D.~Brooks.
+\newblock Minerva: Enabling low-power, highly-accurate deep neural network
+  accelerators.
+\newblock In {\em Proceedings of the 43rd Annual International Symposium on
+  Computer Architecture}, pages 267--278. IEEE, 2016.
+
 \bibitem{ReddingtonAug09}
 J.~Reddington, G.~Gutin, A.~Johnstone, E.~Scott, and A.~Yeo.
 \newblock Better than optimal: Fast identification of custom instruction
@@ -368,6 +415,14 @@ B.~C. Schafer and K.~Wakabayashi.
 R.~R. Schaller.
 \newblock Moore's law: past, present and future.
 \newblock {\em IEEE spectrum}, 34(6):52--59, 1997.
+
+\bibitem{SchiavoneSep17}
+P.~D. Schiavone, F.~Conti, D.~Rossi, M.~Gautschi, A.~Pullini, E.~Flamand, and
+  L.~Benini.
+\newblock Slow and steady wins the race? a comparison of ultra-low-power risc-v
+  cores for internet-of-things applications.
+\newblock In {\em 27th International Symposium on Power and Timing Modeling,
+  Optimization and Simulation ({PATMOS})}, pages 1--8. IEEE, 2017.
 
 \bibitem{SchmidJul15}
 M.~Schmid, O.~Reiche, F.~Hannig, and J.~Teich.
@@ -443,6 +498,13 @@ J.~R. Villarreal, A.~Park, W.~A. Najjar, and R.~Halstead.
 \newblock Designing modular hardware accelerators in {C} with {ROCCC} 2.0.
 \newblock In {\em Proceedings of the 18th {IEEE} Symposium on
   Field-Programmable Custom Computing Machines}, pages 127--134, 2010.
+
+\bibitem{XiaoMay18}
+C.~Xiao, Y.~Xie, and L.~Zhang.
+\newblock Aeas-towards high energy-efficiency design for openssl encryption
+  acceleration through {HW}/{SW} co-design.
+\newblock In {\em Proceedings of the 2018 on Great Lakes Symposium on VLSI},
+  pages 171--176. ACM, 2018.
 
 \bibitem{VivadoHLSMar17}
 Xilinx.

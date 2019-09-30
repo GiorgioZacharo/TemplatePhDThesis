@@ -122,7 +122,8 @@ are going to be accelerated. Therefore, an in-depth SW analysis can be crucial, 
 designing a heterogeneous system, as it can provide valuable information and subsequently 
 highly benefit performance. My initial research is revolving around various ways that SW
 analysis, by extending the compiler frameworks and, hence, their potential, can offer this 
-type of information and move one step closer towards optimizing and automating the design of hybrid HW/SW systems.
+type of information and move one step closer towards optimizing and automating the design of 
+hybrid HW/SW systems.
 \end{abstract}
 
 % \begin{abstract}[Zusammenfassung]
@@ -1941,6 +1942,13 @@ is expanded to that of a subgraph of the entire call graph of an application to 
 communication overhead between main memory and the HW accelerators. 
 \textbf{NOTE:} Write for EnergySeeker.
 
+% AccelSSeeker 3.1
+% 
+%
+%
+%
+%
+
 \section{\aseeker: Accelerators for Speedup}
 
 \subsection{Motivation}
@@ -1951,12 +1959,12 @@ HLS dramatically shortens development cycles by employing C/C++ descriptions as 
 for the development of both \SW\ (SW) and \HW\ (HW) greatly facilitating the task of migrating 
 functionalities between the two.\par
 
-However, the design of heterogeneous systems comprising SW processors and HW accelerators is still a 
-demanding endeavor, during which key decisions are left solely to manual effort and designer expertise 
-\cite{CacciottiSep18} \cite{NouriJun17}. Furthermore, the long time required for HW synthesis, coupled 
-with the huge space of alternative implementations exposed by real-world applications, limits in practice 
-the number of accelerator choices that can be considered manually by a designer before HW/SW partitioning 
-is settled.\par
+However, the design of heterogeneous systems comprising SW processors and HW accelerators is 
+still a demanding endeavor, during which key decisions are left solely to manual effort and 
+designer expertise \cite{CacciottiSep18} \cite{NouriJun17}. Furthermore, the long time required 
+for HW synthesis, coupled with the huge space of alternative implementations exposed by real-world 
+applications, limits in practice the number of accelerator choices that can be considered manually 
+by a designer before HW/SW partitioning is settled.\par
 
 In order to limit the entailed design effort, it is therefore crucial to identify the set of viable 
 acceleration options quickly, and also early in the design process, before performing later and more 
@@ -1978,14 +1986,15 @@ On the other hand, it indicates which parts are not likely to yield tangible ben
 because they present a low computational footprint, or because their characteristics hamper their potential for HW 
 acceleration, e.g. they require an excessive amount of data transfers while performing limited computations.\par
 
-The approach of \aseeker\ is markedly different from that of performance estimators, as the most promising candidates 
-are identified in a single, high-level exploration, reducing the scope of further, and more detailed, estimations. It 
-also differs from approaches based solely on profiling information, as profilers do not offer a measure of costs and 
-run-times of HW implementations. Furthermore, they do not account for invocation overheads -- potentially leading to the 
-selection of frequently called, but small, candidates. Finally, data transfers is an important factor that \SoTA\ profilers
-do not take into account -- hence potentially suggesting candidates requiring an excessive amount of communication, that in 
-turn can significantly weaken any potential performance gained. \aseeker, instead, takes into account both the communication 
-overhead and all the characteristics of the platform that are required in order to generate an estimation model which leads
+The approach of \aseeker\ is markedly different from that of performance estimators, as the most promising 
+candidates are identified in a single, high-level exploration, reducing the scope of further, and more detailed, 
+estimations. It also differs from approaches based solely on profiling information, as profilers do not offer a 
+measure of costs and run-times of HW implementations. Furthermore, they do not account for invocation overheads -- 
+potentially leading to the selection of frequently called, but small, candidates. Finally, data transfers is an 
+important factor that \SoTA\ profilersdo not take into account -- hence potentially suggesting candidates 
+requiring an excessive amount of communication, that in turn can significantly weaken any potential performance 
+gained. \aseeker, instead, takes into account both the communication overhead and all the characteristics of the 
+platform that are required in order to generate an estimation model which leads
 to high-performance HW accelerators choices.
 
 \subsection{Related Work}
@@ -2139,24 +2148,157 @@ is in line with the limitations of HLS tools.
 
 \subsubsection{Cost and Merit Estimation}
 
-Herein, we detail how the abstract cost and merit are automatically computed from source code
-(Figure~\ref{fig:flow}, B). As the goal of the presented framework is to
-select the most performing candidates \emph{in advance of their
-optimization}, \aseeker\ considers their default implementations,
+Herein, the abstract cost and merit, which are automatically computed from 
+source code, are detailed (Figure~\ref{fig:flow}, B). As the goal of the 
+presented framework is to select the most performing candidates \emph{in 
+advance of their optimization}, \aseeker\ considers their default implementations,
 e.g., ones where no function is inlined and no loop is unrolled.
 High-performance implementations will likely have greater resource
 requirements, in turn potentially requiring to discard some of the
 selected \candidates. Nonetheless, these additional design decisions will
 be performed within the limited scope of the candidate set retrieved
-by our tool (as opposed to the whole design) thereby easing the
-ensuing effort.
+by \aseeker\ (as opposed to the whole design) thereby easing the
+ensuing effort.\par
+
+\emph{Architectural characterization.}
+\aseeker\ bases its estimations on few parameters characterizing the
+target platform.  Being them only related to the modeled architecture, but 
+independent from the application, the characterization represents a one-time 
+effort for a given hardware target.
+For the experiments in Section \ref{sec:results_as}, this task was
+performed by employing a series of micro-benchmarks, synthesized on a
+Zynq Programmable System-on-Chip (PSoC). 
+The methodology, however, is not limited to this target. On the contrary, it can 
+be adapted to different computing architectures (e.g.: ASIC implementations) by 
+measuring 1) the area and critical path of single operators (adders, multipliers, 
+etc.), 2) the overhead entailed by initiating an acceleration invocation, 3) the 
+time required to transfer inputs and outputs and 4) the resources employed to realize 
+accelerator-memory links (realized by default as \texttt{master axi} ports in Zynq 
+systems).\par
+
+  \begin{figure}[!t]
+  \centering
+  
+  \includegraphics[width=.9\linewidth]{figs/figs_from_pptx/merit_estimation.pdf}
+        \vskip -1em
+  \caption{Estimation of hardware computation times at the basic block (a), function (b) and \candidate\ (c) levels.}
+  \label{fig:hw-comp}
+      \vskip -1.5em
+\end{figure}
+
+\emph{Cost Estimation.}
+The cost $C()$ of an \candidate\ is computed as the sum of its estimated logic and memory 
+real estates. Regarding logic, the sum of the required resources (independently for look-up 
+tables and DSP blocks) is performed of the arithmetic operations present in its top function.
+If function calls are present, then recursively the area of the called functions is taken into
+account as well. Furthermore, mimicking the default implementation of Xilinx PSoC accelerators, 
+the addition of the cost of the logic required by a \texttt{master  axi} port for each array 
+present in the \candidate\ parameters list.
+Then, the memory area is derived from the size of the arrays storing
+the input/output and intermediate values required by the
+accelerator. The I/O size is determined by analyzing the elements in
+the parameters list of the candidate top function, while the memory
+required for intermediate values is derived from the variable
+declarations in each candidate, ultimately determining the number of
+required BRAM blocks.
+In line with the limitation of HLS tools, we do not  support dynamic memory
+allocations.
+\par
+
+
+\emph{Merit Estimation.}
+
+The merit $M()$ of an \candidate\ is expressed in terms of the number
+of clock cycles that are saved by implementing it as a hardware
+accelerator instead of executing it in software.  In turn, the
+estimation of hardware run times must account both for computation
+bounds and host-accelerator communication overheads.  The latter are
+retrieved by considering the number of required memory accesses,
+scaled by an architecture-specific factor, as discussed in the
+previous section.\par
+
+To assess the computation time of candidates in hardware, we instead
+proceed in a bottom-up fashion, as also exemplified in Figure
+\ref{fig:hw-comp}. First, we compute the maximum propagation delay of
+each of the Basic Blocks (BBs) present in an \candidate\ (both in the
+top function and in its callees) by traversing their DFGs and
+accounting for the operations delays, thus retrieving the longest
+input-to-output paths (Figure \ref{fig:hw-comp}a).  Critical paths of
+BBs are then expressed in clock cycles, dividing the propagation
+delays with the period of the system clock. By multiplying the
+critical paths with the number of executions of each BB, we calculate
+the associated workload. Finally, an estimate of the computation time
+of an \candidate\ is the sum of the workloads of its constituent BBs
+(Figure \ref{fig:hw-comp}b-c).
+
+\subsubsection{Compiler Analysis}
 
 \subsubsection{Selection Algorithm}
 
+
+
+
 \subsection{Experimental Results}
+\label{sec:results_as}
+
+
+
+% EnergySeeker 3.2
+% 
+%
+%
+%
+%
 
 \section{EnergySeeker: Accelerators for Energy Efficiency}
 
+\subsection{Motivation}
+
+\subsection{Related Work}
+
+A large body of research work has been dedicated to energy efficiency in heterogeneous computing
+systems. In \cite{MelpignanoJune12} \cite{ContiSep16} the authors present a clustered many core 
+computing system with tightly coupled OpenRISC 32-bit processing elements. Energy efficiency is 
+achieved through parallelism, yet it is stated that more attention to the memory hierarchy and 
+more specialization in HW realizations would improve both performance and energy efficiency in 
+their proposed system. Applied on small kernels, ultra-low-power RISC-V cores result in a slowdown 
+but offer improvements in energy savings, when long idle periods are present in Internet of 
+Things (IoT) applications \cite{SchiavoneSep17}. Convolutional Neural Networks (CNNs) are 
+present in IoT devices as well. In \cite{PulliniJan17} a dedicated \HW\ realization is 
+suggested to carry out the execution of CNNs on a 65-nm SoC, and thus achieve reduced energy
+consumption. In none of these instances, though, identification, estimation or selection of
+the parts of execution to be synthesized in \HW\ are challenged.\par
+
+In \cite{ReagenJun16} an automated methodology that performs estimation of performance and 
+applies optimizations on \HW\ accelerators for low-power Deep Neural Networks (DNNs) is presented. 
+Aladdin simulator \cite{ShaoJul14} is used to perform the power requirements estimation and the 
+final implementation is validated on a 40-nm CMOS technology. Furthermore, Machine Learning 
+accelerators: a Support Vector Machine accelerator and an Active Learning Data Selection 
+accelerator, have been coupled with a low-power processor \cite{LeeApr13} to run medical
+applications and minimize the power requirements.\par
+
+HW/SW partitioning has been investigated \cite{XiaoMay18} in order to achieve better 
+energy efficiency in the Advanced Encryption Standard (AES) algorithm by using the OpenSSL 
+\cite{OpensslDec98} library. According to the data blocks size of the encryption an automated 
+method partitions incoming encryption tasks to \HW\ implementations or extended Instruction Set 
+implementations of the existing \SW\ processor. These methodologies focus on implementing 
+energy efficient HW realizations on a) specific applications while b) automating some of the 
+processes of identification, estimation and selection of the parts of the execution to be 
+materialized in \HW. Our methodology instead is general enough to accept any application as 
+input written in C or C++ while fully automating all three processes required to identify and 
+select the most suitable \HW\ accelerators that would lead to enhanced energy efficiency.\par
+
+Finally in \cite{GruttnerNov13} an automated methodology that performs estimation on performance 
+and power for SW/HW partitioning is suggested. Given a functional C/C++ description and user 
+defined HW/SW mapping, an estimation is provided and subsequently a design space exploration 
+and optimization phase in order to improve a given configuration. Contrary to our methodology, 
+the selection process of the \HW\ candidates is not automated and an area resources budget is 
+not being taken into account. 
+
+\subsection{Experimental Results}
+\label{sec:results_es}
+
+\section{Conclusions}
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}
