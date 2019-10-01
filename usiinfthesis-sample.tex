@@ -38,9 +38,9 @@
 \newcommand{\iobound}{\texttt{I/O bound}} 
 
 %algorithms
-\newcommand{\exact}{\textsf{exact}}
-\newcommand{\greedy}{\textsf{greedy}}
-\newcommand{\exactC}{\textsf{exact-on-cropped}}
+\newcommand{\exact}{\texttt{exact}}
+\newcommand{\greedy}{\texttt{greedy}}
+\newcommand{\exactC}{\texttt{exact-on-cropped}}
 
 \newcommand{\candidate}{{AccelCand}} 
 \newcommand{\candidates}{{AccelCand}s} 
@@ -164,7 +164,7 @@ performance by modern computing systems rises even more.
 Technological giants, such as Google and Facebook, gather and compute a lot of data, for instance 
 during Machine Learning related applications and lengthy simulations. This large amount of data
 processing requires a lot of computational power and ends up in lengthier and lengthier execution
-latency time.\par
+ time.\par
 
 Moore's law \cite{schaller1997moore}, an observation made by the co-founder of Intel Gordon Moore, 
 predicts that the number of transistors that can be used in the same area of an integrated 
@@ -486,8 +486,8 @@ network compiled from an Extended Finite State Machine (EFSM)
 model. While it targets \controlflow\ to a certain extent, their
 methodology is limited to applications that can be modeled using
 EFSMs, therefore considering a much more limited scope than that of
-generic Control Data Flow Graphs compiled from source code, as the methodology
-proposed in Section \ref{sec:rs}.
+generic Control Data Flow Graphs compiled from source code, as does 
+the methodology proposed in Section \ref{sec:rs}.
 
 Finally, the authors of a recent work \cite{AguilarJune16} consider
 Single Entry Single Exit regions but their target is to identify
@@ -525,8 +525,8 @@ accelerators and complex instructions. The CPUs can be configured
 during the design process to maximize performance and efficiency,
 without enduring the overhead of reconfiguration. An alternative, not 
 as performing yet more flexible, is offered by FPGA-based
-Systems-on-Chip (SoC) examples, such as Altera (the Arria10 family \cite{ArriaNov16}) and
-Xilinx (the Zynq SoCs \cite{ZynqMar17}).\par
+Systems-on-Chips (SoCs), such as the Arria10 family \cite{ArriaNov16} by Altera 
+and the Zynq SoCs \cite{ZynqMar17} by Xilinx.\par
 
 The instances mentioned above support the generation of HW
 circuits, but do not provide implementation paths for differentiating the
@@ -535,7 +535,7 @@ Synthesis (HLS) tools allow designers to move parts of applications,
 written in C or C++, between processors and
 accelerators. Research endeavors in this domain include LegUp
 \cite{CanisSep13} and ROCCC \cite{GuoMar05}, while commercial
-applications comprise the Vivado\_HLS \cite{VivadoHLSMar17} suite
+applications comprise the Vivado HLS \cite{VivadoHLSMar17} suite
 from Xilinx (for FPGAs) and StratusHLS \cite{StratusHLSApr16} from
 Cadence (for ASIC development).
 However, these HLS frameworks place the responsibility of
@@ -545,7 +545,7 @@ partitioning a SW application on the application developer.\par
 \label{sec:rs}
 
 The RegionSeeker framework is an automated methodology that 
-identifies candidates for HW acceleration from application C 
+identifies candidates for HW acceleration from application source 
 code. An extensive SW analysis, based on the LLVM compiler infrastructure,
 performs, apart from
 the identification, an estimation of the performance gain, along with
@@ -638,7 +638,7 @@ Using this information, the basic blocks are annotated
 \subsubsection{Merit and Cost Estimation}
 \label{subsec:mer_cost}
 
-The Region Identification pass, apart from the Region Identification detailed above, 
+The Region Identification pass, apart from the identification of regions detailed above, 
 performs an early evaluation of the merit and cost of a region, implemented
 directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
 representation and does not need any manual modification to perform function out-lining
@@ -759,32 +759,26 @@ regions contained in $P$ or not. If not the exploration stops and backtracks.
 Optimization 2 ranks the valid regions in terms of merit so that the first 
 region considered for inclusion in $X$ is the one with the maximum merit.
 
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
+\label{fig:regions_aladdin}
+\end{figure}
 
 \subsection{Experimental Results}
 \label{subsec:exp}
 
-% The evaluation of the \rseeker\ framework took place by 
-% retrieving the HW execution latency, 
-% as well as the HW area resources, using the Xilinx Vivado\_HLS tool-suite.
-% Vivado\_HLS outputs are intended for FPGA designs. Synthesis within this
-% framework provide exact latency (number of cycles)
-% and area (Look Up Tables and Flip Flops) values of each accelerator.\par
-
-The evaluation of the \rseeker\ framework took place by 
-assuming a system constituting a single SW processor and multiple HW accelerators, 
-exchanging shared data with \plms.
-The processor activates the accelerators via a memory-mapped
-interface, thus requiring a transaction on the system bus. 
-When activated, accelerators read and
-write data to and from the \plms, computing their outputs, which
-can then be accessed by the processor. Accelerators are interfaced to \plms\
-with ports having a latency of one clock cycle. The
-control interface between the processor and the accelerators was modeled 
-with a
-latency of 10 clock cycles.\par
-% These parameters correspond to the ones
-% employed by the \texttt{ap\_memory} and \texttt{s\_axilite}
-% interfaces, respectively, provided by Xilinx Vivado.\par
+The evaluation of the \rseeker\ framework took place by assuming a system constituting a single 
+SW processor and multiple HW accelerators, exchanging shared data with \plms. The processor 
+activates the accelerators via a memory-mapped interface, thus requiring a transaction on the 
+system bus. When activated, accelerators read and write data to and from the \plms, computing 
+their outputs, which can then be accessed by the processor. Accelerators are interfaced to \plms\ 
+with ports having a latency of one clock cycle. The control interface between the processor and 
+the accelerators was modeled with a latency of 10 clock cycles.\par
 
 The run-times of the non-accelerated SW part of the considered
 benchmarks were measured using the Gem5
@@ -794,12 +788,12 @@ execution. It is interfaced with separate instruction and data
 memories with an access latency of one clock cycle.\par
 
 Hardware execution times were retrieved using two different HLS 
-frameworks: the Aladdin simulator and the Xilinx Vivado\_HLS
+frameworks: the Aladdin simulator and the Xilinx Vivado HLS
 commercial tool-suite.  Aladdin targets ASIC implementations.  It
 provides a fast evaluation, but does not produce a synthesizable netlist
 as output; nonetheless, the estimations offered by this tool are
 within 1\% of the ones derived from an RTL implementation
-\cite{ShaoJul14}.  Hardware instances generated with Vivado\_HLS are
+\cite{ShaoJul14}.  Hardware instances generated with Vivado HLS are
 instead intended for FPGA designs. Synthesis-runs within this
 framework are more time-consuming, but provide exact area (HW resources
 in terms of Look Up Tables and Flip Flops)
@@ -818,15 +812,15 @@ floating-point multiplication and sine functions employing integer arithmetics.
 Finally, \sha\ is a secure hash encryption algorithm, used for 
 the generation of digital signatures and the exchange of cryptographic keys.\par
 
-\begin{figure}[h!]
-\centering
-\hspace*{-1cm}
-\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
-\caption{Comparison of speedups obtained on eight CHStone benchmarks
-  by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
-\label{fig:regions_aladdin}
-\end{figure}
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
+% \caption{Comparison of speedups obtained on eight CHStone benchmarks
+%   by selecting regions, only basic blocks and only functions, varying
+%   the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
+% \label{fig:regions_aladdin}
+% \end{figure}
 
 Figure~\ref{fig:regions_aladdin} showcases the achieved
 speedup, when employing Aladdin, by the accelerators selected by
@@ -846,11 +840,11 @@ can be reached using \rseeker.\par
 \includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
 \caption{Comparison of speedups obtained on eight CHStone benchmarks
   by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Vivado\_HLS and Gem5 for Speedup and Area evaluation.}
+  the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
 \label{fig:regions_vivado}
 \end{figure}
 
-Similar trends are observed when Vivado\_HLS is instead used for the
+Similar trends are observed when Vivado HLS is instead used for the
 accelerator synthesis, as reported in
 Figure~\ref{fig:regions_vivado}: \rseeker\ consistently outperforms
 \SoTA\ approaches which target either single basic blocks or
@@ -862,7 +856,7 @@ by the adopted merit and cost estimation tool. In fact, this was verified
 across the two sets of experiments, as the regions chosen were
 the same in 80\% of the cases. As an example, out of 10 regions
 selected to achieve a 2.2x speedup for the \jpeg\ benchmark, 8 are the
-same when using either Aladdin or Vivado\_HLS for merit and cost
+same when using either Aladdin or Vivado HLS for merit and cost
 estimation, and the ones that differ contribute to less than 14\% of
 the provided gain.\par
 
@@ -872,7 +866,7 @@ the provided gain.\par
 %\hspace*{-2cm}
 \includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
 \caption{Normalized Speedup of RegionSeeker with respect to function and basic block selection, 
-considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado\_HLS.}
+considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.}
 \label{fig:regions_all}
 \end{figure}
 
@@ -880,7 +874,7 @@ Finally, in Figure \ref{fig:regions_all} a summary of the performed experimental
 exploration is presented. It reports the normalized speedups
 obtained by \rseeker\ compared to basic block and function
 identification, when a fixed area budget is considered and
-Vivado\_HLS are employed. The mean column illustrates that,
+Vivado HLS are employed. The mean column illustrates that,
 on average, \rseeker\ achieves approximately 30\% higher speedups
 with respect to the two baseline methods. Moreover, while in some
 cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
@@ -920,7 +914,7 @@ a given area budget.
 \newpage
 \section{RegionSeeker MuLTiVersioning}
 
-\HLS\ (HLS) tools, such as Vivado\_HLS by Xilinx, may employ %additional 
+\HLS\ (HLS) tools, such as Vivado HLS by Xilinx, may employ %additional 
 optimizations to HW accelerators
 design in order to increase performance, i.e. obtain faster execution. These 
 %pragma-directed 
@@ -945,8 +939,8 @@ MuLTiVersioning approach.
 \label{subsec:mv_meth}
 
 The rationale, supporting the extension of \rseeker\ framework, is to achieve improved
-speedup that can be provided by exploiting a more varied set of HW accelerators, with different 
-optimizations implemented onto them, to select from. This is being achieved by instantiating 
+speedup that can be provided by exploiting a more varied set of HW accelerators to select from, 
+with different optimizations implemented onto them. This is being achieved by instantiating 
 different versions of each HW accelerator with the same functionality, yet different speedup gains 
 and different area (HW resources) requirements. The set of optimizations that were considered in 
 order to design different HW implementations of the same accelerators are: 
@@ -981,7 +975,7 @@ Each version may employ one of the optimizations listed above, or a combination 
 All versions of the HW accelerators were evaluated by exploiting the Aladdin HW accelerator simulator.  
 Aladdin targets ASIC implementations. It
 provides a fast evaluation, but does not generate a synthesizable netlist,
-as opposed to Vivado\_HLS. Nonetheless, the estimations provided are
+as opposed to Vivado HLS. Nonetheless, the estimations provided are
 within 1\% of the ones derived from a Register-transfer level (RTL) implementation, according to 
 the developers of Aladdin \cite{ShaoJul14}.
 For all simulated versions of the selected regions (or HW accelerators), the number of Cycles and number 
@@ -1001,7 +995,7 @@ To ensure that, the selection took place utilizing the overlapping graph present
 containing the basic block indexes included in each region. As a result the set of basic block indexes for 
 multiple versions of the same region would be identical.
 Experiments were run in \jpeg\ benchmark and four different selection
-approaches are presented, compared to the \multi\ approach.\par
+approaches are presented, comparing three of them to the \multi\ approach.\par
 
 \subsection{Experimental Results}
 \label{subsec:mv_res}
@@ -1073,8 +1067,8 @@ a large area constraint ($400 * 10^3 uM^2$) the \multi\ speedup is more than 2x 
 \section{Conclusions}
 \label{sec:rs_conclusions}
 
-The \rseeker\ framework, along with the \rseeker\ \multi\ extension of the former, are
-methodologies that extend the \SoTA\ in the HW/SW co-design domain. They provide
+The \rseeker\ framework, along with its %the \rseeker\ 
+\multi\ extension, are methodologies that extend the \SoTA\ in the HW/SW co-design domain. They provide
 efficient solutions to the problem of automatically deciding which parts of an application should
 be synthesized to HW, under a given area budget. The accelerators identified by \rseeker\ 
 consistently outperform the ones derived by data flow level algorithms and strictly function 
@@ -1119,12 +1113,12 @@ are synthesized into HW.
 Identifying good candidates for HW acceleration is the first step to realize heterogeneous
 computing system designs that offer increased performance compared to a homogeneous system restricted
 to general purpose SW CPU(s). However, a set of optimizations applied on HW accelerators can decrease 
-even more the computational times, thus leading to an improved performance compared to default
+even more the computation times, thus leading to an improved performance compared to default
 non-optimized HW accelerator implementations. 
 Modern \HLS\ (HLS) tools can apply such optimizations to 
 HW accelerators and increase the performance of their implementations, as well as the overall performance 
 of the entire heterogeneous system.
-HLS tools such as Vivado\_HLS  \cite{VivadoHLSMar17}, however efficient, though, are far from 
+HLS tools such as Vivado HLS  \cite{VivadoHLSMar17}, however efficient, though, are far from 
 optimal since they require a lot of manual decisions from the programmer's part when it comes to the
 choice of {\em how} these accelerators can be synthesized.
 Furthermore, the resolution of which optimizations may be applied to which HW accelerators can be a 
@@ -1176,7 +1170,7 @@ and, hence, minimize the memory latency due to communication with the main memor
  %while exploiting the computational potential of the accelerators.\par
 
 Data reuse exploitation in \HLS\ (HLS) is still in premature stage.
-\SoTA\ methods \cite{Vivado12} either rely on manually rewriting the source code, preceding HLS, 
+State-of-the-art methods \cite{Vivado12} either rely on manually rewriting the source code, preceding HLS, 
 or on source-to-source translation \cite{PouchetFeb13} \cite{SchmidJul15}, and are therefore 
 poorly integrated in HLS tool-chains.\par
     
@@ -1230,7 +1224,7 @@ applications on FPGAs. Their design however ultimately needs to be
 manually implemented and hence the work neglects high level synthesis
 aspects.\par
 %
-The commercial Vivado\_HLS tool requires
+The commercial Vivado HLS tool requires
 extensive manual rewrite of the source code, in order to instantiate
 a reuse memory buffer. On the other hand, the approach presented 
 % in \ref{sec:2_1_meth} 
@@ -1388,9 +1382,9 @@ Multiple datapaths translate to
 more parallel windows executing and, hence, increased demand in area resources.\par
 
 The comparison of the approach introduced above is carried out against two state-of-the-art HLS 
-tools: ROCCC and Vivado\_HLS. Vivado\_HLS is compared in two modes, one being the default and
-the other one after extensive manual rewrite of the source code in order to obtain increased data 
-reuse.
+tools: ROCCC and Vivado HLS. Vivado HLS is compared in two modes, one being the default (Vivado\_norew) 
+and the other one after extensive manual rewrite of the source code (Vivado\_rew) in order to obtain 
+increased data reuse.
 
 \begin{figure}[h!]
 \centering
@@ -1422,7 +1416,7 @@ run-times, with an order-of-magnitude speed up on average between
 Conf.1 and Conf.3. The other state of the art tools \emph{fail to 
 provide an equivalent solution with such low execution time}.
 Figure \ref{fig:area_fpga} reports the amount of area resources required by
-ROCCC, Vivado\_HLS and our own generated accelerators.
+ROCCC, Vivado HLS and our own generated accelerators.
 Unsurprisingly, accelerators featuring a high number of datapaths (Conf.3) 
 require more resources than single-datapaths approaches (Conf.1, Vivado). 
 Nevertheless, the area increase in terms of Flip-Flops is comparable to 
@@ -1430,7 +1424,7 @@ the other to state-of-the-art tools, as the size of the buffer only is
 increased slightly to support a high degree of parallelism.
 On the other hand, the results highlight that complex accelerators require 
 an increased amount of combinatorial logic (LUTs), with respect to ROCCC 
-and Vivado\_HLS.
+and Vivado HLS.
 
 \vspace{-0.3cm}
 \subsection{Conclusions}
@@ -1444,7 +1438,11 @@ improvement with respect to \SoTA\ methodologies. This work was published in
 HiPEAC IMPACT 2017 Seventh International Workshop on Polyhedral Compilation Techniques 
 \cite{ZacharopoulosJan17}. 
 
+
+
 % SECTION 2.2
+%
+%
 %
 
 \section[Machine Learning Approach for Loop Unrolling\\ Factor Prediction]
@@ -1497,7 +1495,7 @@ Second, the whole process is fully automated, from the analysis of the input app
 using the LLVM compiler infrastructure \cite{LattnerMar04}, up to the training of the Random 
 Forest Classifier. Finally, the trained \RF\ classifier can be used to generate accurate loop 
 unrolling predictions for any given application -- a piece of information that can 
-directly be used by an HLS tool such as Vivado\_HLS, in order to synthesize parts of these 
+directly be used by an HLS tool such as Vivado HLS, in order to synthesize parts of these 
 applications to HW.
 
 \subsection{Related Work}
@@ -1557,7 +1555,7 @@ loop unrolling factors based on loop features.\par
 \subsubsection{Optimal Loop Unrolling Factor -- Objective Function}
 
 The {\em optimal loop unrolling factor} is defined as follows.
-Given a defined set of unrolling factors S: <1, 2, 4, 8, 16, 32, 64>, there is one for every
+Given a defined set S of unrolling factors, e.g. S: <1, 2, 4, 8, 16, 32, 64>, there is one for every
 loop that maximizes the \textbf {Impact (I)}, given by the following formula:
 
 $$I(L,A)= \alpha  \cdot \dfrac{ (L_1 - L)} {L_1} + \beta \cdot \dfrac{ (A_1 - A)} {A_1},\ \alpha + \beta = 1$$
@@ -2179,11 +2177,11 @@ systems).\par
   \begin{figure}[!t]
   \centering
   
-  \includegraphics[width=.9\linewidth]{figs/figs_from_pptx/merit_estimation.pdf}
-        \vskip -1em
+  \includegraphics[width=.8\linewidth]{figs/merit_estimation.pdf}
+        % \vskip -1em
   \caption{Estimation of hardware computation times at the basic block (a), function (b) and \candidate\ (c) levels.}
   \label{fig:hw-comp}
-      \vskip -1.5em
+      % \vskip -1.5em
 \end{figure}
 
 \emph{Cost Estimation.}
@@ -2202,12 +2200,10 @@ required for intermediate values is derived from the variable
 declarations in each candidate, ultimately determining the number of
 required BRAM blocks.
 In line with the limitation of HLS tools, we do not  support dynamic memory
-allocations.
-\par
+allocations.\par
 
 
 \emph{Merit Estimation.}
-
 The merit $M()$ of an \candidate\ is expressed in terms of the number
 of clock cycles that are saved by implementing it as a hardware
 accelerator instead of executing it in software.  In turn, the

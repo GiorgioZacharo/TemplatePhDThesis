@@ -86,7 +86,7 @@
 \newlabel{subsec:mer_cost}{{1.3.1}{12}{Merit and Cost Estimation}{section*.9}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces LLVM Analysis Pass - Region Identification\relax }}{13}{algorithm.1}}
 \newlabel{algo:reg}{{1}{13}{LLVM Analysis Pass - Region Identification\relax }{algorithm.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Tree exploration performed by \textsf  {exact}, for the running example of Figure\nobreakspace  {}\ref  {fig:cfg-example}, and for a cost budget of 35.\relax }}{14}{figure.caption.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Tree exploration performed by \texttt  {exact}, for the running example of Figure\nobreakspace  {}\ref  {fig:cfg-example}, and for a cost budget of 35.\relax }}{14}{figure.caption.11}}
 \newlabel{fig:exact_tree}{{1.2}{14}{Tree exploration performed by \exact , for the running example of Figure~\ref {fig:cfg-example}, and for a cost budget of 35.\relax }{figure.caption.11}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Region Selection Algorithm}{14}{section*.10}}
 \newlabel{subsec:sel_algo}{{1.3.1}{14}{Region Selection Algorithm}{section*.10}{}}
@@ -109,10 +109,10 @@
 \newlabel{sec:rs_conclusions}{{1.5}{20}{Conclusions}{section.1.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.\relax }}{21}{figure.caption.12}}
 \newlabel{fig:regions_aladdin}{{1.3}{21}{Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.\relax }{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Vivado\_HLS and Gem5 for Speedup and Area evaluation.\relax }}{22}{figure.caption.13}}
-\newlabel{fig:regions_vivado}{{1.4}{22}{Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Vivado\_HLS and Gem5 for Speedup and Area evaluation.\relax }{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Normalized Speedup of RegionSeeker with respect to function and basic block selection, considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado\_HLS.\relax }}{23}{figure.caption.14}}
-\newlabel{fig:regions_all}{{1.5}{23}{Normalized Speedup of RegionSeeker with respect to function and basic block selection, considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado\_HLS.\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.\relax }}{22}{figure.caption.13}}
+\newlabel{fig:regions_vivado}{{1.4}{22}{Comparison of speedups obtained on eight CHStone benchmarks by selecting regions, only basic blocks and only functions, varying the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Normalized Speedup of RegionSeeker with respect to function and basic block selection, considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.\relax }}{23}{figure.caption.14}}
+\newlabel{fig:regions_all}{{1.5}{23}{Normalized Speedup of RegionSeeker with respect to function and basic block selection, considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.\relax }{figure.caption.14}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the MuLTiVersioning\ approach where any version of the regions can be selected. \relax }}{23}{figure.caption.15}}
 \newlabel{fig:mlv_aladdin}{{1.6}{23}{Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the \multi \^^Mapproach where any version of the regions can be selected. \relax }{figure.caption.15}{}}
 \citation{VivadoHLSMar17}
@@ -272,6 +272,8 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{47}{figure.caption.36}}
 \newlabel{fig:subgraph-examples}{{3.3}{47}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.36}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Cost and Merit Estimation}{48}{section*.37}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{49}{figure.caption.38}}
+\newlabel{fig:hw-comp}{{3.4}{49}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.38}{}}
 \citation{MelpignanoJune12}
 \citation{ContiSep16}
 \citation{SchiavoneSep17}
@@ -279,20 +281,20 @@
 \citation{ReagenJun16}
 \citation{ShaoJul14}
 \citation{LeeApr13}
-\citation{XiaoMay18}
-\citation{OpensslDec98}
-\@writefile{toc}{\contentsline {subsubsection}{Compiler Analysis}{50}{section*.38}}
-\@writefile{toc}{\contentsline {subsubsection}{Selection Algorithm}{50}{section*.39}}
+\@writefile{toc}{\contentsline {subsubsection}{Compiler Analysis}{50}{section*.39}}
+\@writefile{toc}{\contentsline {subsubsection}{Selection Algorithm}{50}{section*.40}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{50}{subsection.3.1.4}}
 \newlabel{sec:results_as}{{3.1.4}{50}{Experimental Results}{subsection.3.1.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{50}{section.3.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{50}{subsection.3.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{50}{subsection.3.2.2}}
+\citation{XiaoMay18}
+\citation{OpensslDec98}
 \citation{GruttnerNov13}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{51}{subsection.3.2.3}}
 \newlabel{sec:results_es}{{3.2.3}{51}{Experimental Results}{subsection.3.2.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{51}{section.3.3}}
-\@writefile{toc}{\contentsline {chapter}{Conclusions}{53}{chapter*.40}}
+\@writefile{toc}{\contentsline {chapter}{Conclusions}{53}{chapter*.41}}
 \bibstyle{abbrv}
 \bibdata{biblio}
 \bibcite{AgakovMar06}{{1}{}{{}}{{}}}
@@ -302,7 +304,7 @@
 \bibcite{ArriaNov16}{{5}{}{{}}{{}}}
 \bibcite{AtasuApr07}{{6}{}{{}}{{}}}
 \bibcite{BaleaniMay02}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{55}{section*.42}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{55}{section*.43}}
 \bibcite{BinkertFeb11}{{8}{}{{}}{{}}}
 \bibcite{BiswasMar06}{{9}{}{{}}{{}}}
 \bibcite{CacciottiSep18}{{10}{}{{}}{{}}}
