@@ -269,11 +269,23 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The phases of the {AccelSeeker}\ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, {AccelSeeker}\ performs selection of a subset of such candidates.\relax }}{47}{figure.caption.34}}
 \newlabel{fig:flow}{{3.2}{47}{The phases of the \aseeker \ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, \aseeker \^^Mperforms selection of a subset of such candidates.\relax }{figure.caption.34}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Candidate Identification}{47}{section*.35}}
+\newlabel{subsec:identification}{{3.1.3}{47}{Candidate Identification}{section*.35}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{47}{figure.caption.36}}
 \newlabel{fig:subgraph-examples}{{3.3}{47}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.36}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Cost and Merit Estimation}{48}{section*.37}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{49}{figure.caption.38}}
 \newlabel{fig:hw-comp}{{3.4}{49}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.38}{}}
+\citation{LattnerMar04}
+\newlabel{eq:inference}{{3.1.3}{50}{Cost and Merit Estimation}{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Compiler Analysis}{50}{section*.39}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces LLVM Analysis Pass - Cost and Merit Estimation\relax }}{51}{algorithm.5}}
+\newlabel{Algo_LLVM}{{5}{51}{LLVM Analysis Pass - Cost and Merit Estimation\relax }{algorithm.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Selection Algorithm}{51}{section*.40}}
+\citation{BronKerbosch73}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{52}{subsection.3.1.4}}
+\newlabel{sec:results_as}{{3.1.4}{52}{Experimental Results}{subsection.3.1.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Conclusions}{52}{subsection.3.1.5}}
+\newlabel{sec:conclusions_as}{{3.1.5}{52}{Conclusions}{subsection.3.1.5}{}}
 \citation{MelpignanoJune12}
 \citation{ContiSep16}
 \citation{SchiavoneSep17}
@@ -281,20 +293,16 @@
 \citation{ReagenJun16}
 \citation{ShaoJul14}
 \citation{LeeApr13}
-\@writefile{toc}{\contentsline {subsubsection}{Compiler Analysis}{50}{section*.39}}
-\@writefile{toc}{\contentsline {subsubsection}{Selection Algorithm}{50}{section*.40}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{50}{subsection.3.1.4}}
-\newlabel{sec:results_as}{{3.1.4}{50}{Experimental Results}{subsection.3.1.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{50}{section.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{50}{subsection.3.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{50}{subsection.3.2.2}}
 \citation{XiaoMay18}
 \citation{OpensslDec98}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{53}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{53}{subsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{53}{subsection.3.2.2}}
 \citation{GruttnerNov13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{51}{subsection.3.2.3}}
-\newlabel{sec:results_es}{{3.2.3}{51}{Experimental Results}{subsection.3.2.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{51}{section.3.3}}
-\@writefile{toc}{\contentsline {chapter}{Conclusions}{53}{chapter*.41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{54}{subsection.3.2.3}}
+\newlabel{sec:results_es}{{3.2.3}{54}{Experimental Results}{subsection.3.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{54}{section.3.3}}
+\@writefile{toc}{\contentsline {chapter}{Conclusions}{55}{chapter*.41}}
 \bibstyle{abbrv}
 \bibdata{biblio}
 \bibcite{AgakovMar06}{{1}{}{{}}{{}}}
@@ -304,7 +312,7 @@
 \bibcite{ArriaNov16}{{5}{}{{}}{{}}}
 \bibcite{AtasuApr07}{{6}{}{{}}{{}}}
 \bibcite{BaleaniMay02}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{55}{section*.43}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{57}{section*.43}}
 \bibcite{BinkertFeb11}{{8}{}{{}}{{}}}
 \bibcite{BiswasMar06}{{9}{}{{}}{{}}}
 \bibcite{CacciottiSep18}{{10}{}{{}}{{}}}

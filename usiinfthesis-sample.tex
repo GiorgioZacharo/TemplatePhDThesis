@@ -56,6 +56,9 @@
 \newcommand{\gsm}{\texttt{gsm}}
 \newcommand{\stencil}{\texttt{stencil}}
 
+\newcommand{\probname}{\emph{Accel Selection}} 
+\newcommand{\numberOfcandidates}{{63}} 
+
 %change 'sl' to 'bf' for bold, or 'normalfont' for no special
 %formatting
 \captionsetup{labelfont={sl,sf}}
@@ -2095,6 +2098,7 @@ performance and resource requirements (B in the figure) is presented.
 \end{figure}
 
 \subsubsection{Candidate Identification}
+\label{subsec:identification}
 
 In order to discover which parts of an application can be most
 profitably accelerated in hardware, the investigation of its function-call
@@ -2174,12 +2178,12 @@ time required to transfer inputs and outputs and 4) the resources employed to re
 accelerator-memory links (realized by default as \texttt{master axi} ports in Zynq 
 systems).\par
 
-  \begin{figure}[!t]
+\begin{figure}[!t]
   \centering
-  
   \includegraphics[width=.8\linewidth]{figs/merit_estimation.pdf}
         % \vskip -1em
-  \caption{Estimation of hardware computation times at the basic block (a), function (b) and \candidate\ (c) levels.}
+  \caption{Estimation of hardware computation times at the basic block (a), function (b) and 
+  \candidate\ (c) levels.}
   \label{fig:hw-comp}
       % \vskip -1.5em
 \end{figure}
@@ -2190,53 +2194,191 @@ real estates. Regarding logic, the sum of the required resources (independently 
 tables and DSP blocks) is performed of the arithmetic operations present in its top function.
 If function calls are present, then recursively the area of the called functions is taken into
 account as well. Furthermore, mimicking the default implementation of Xilinx PSoC accelerators, 
-the addition of the cost of the logic required by a \texttt{master  axi} port for each array 
+the addition of the cost of the logic required by a \texttt{master axi} port for each array 
 present in the \candidate\ parameters list.
-Then, the memory area is derived from the size of the arrays storing
-the input/output and intermediate values required by the
-accelerator. The I/O size is determined by analyzing the elements in
-the parameters list of the candidate top function, while the memory
-required for intermediate values is derived from the variable
-declarations in each candidate, ultimately determining the number of
-required BRAM blocks.
-In line with the limitation of HLS tools, we do not  support dynamic memory
-allocations.\par
-
+Then, the memory area is derived from the size of the arrays storing the input/output and intermediate 
+values required by the accelerator. The I/O size is determined by analyzing the elements in the 
+parameters list of the candidate top function, while the memory required for intermediate values is 
+derived from the variable declarations in each candidate, ultimately determining the number of required 
+BRAM blocks. In line with the limitation of HLS tools, dynamic memory allocations are not supported.\par
 
 \emph{Merit Estimation.}
-The merit $M()$ of an \candidate\ is expressed in terms of the number
-of clock cycles that are saved by implementing it as a hardware
-accelerator instead of executing it in software.  In turn, the
-estimation of hardware run times must account both for computation
-bounds and host-accelerator communication overheads.  The latter are
-retrieved by considering the number of required memory accesses,
-scaled by an architecture-specific factor, as discussed in the
-previous section.\par
+The merit $M()$ of an \candidate\ is expressed in terms of the number of clock cycles that are saved by 
+implementing it as a hardware accelerator instead of executing it in software. In turn, the estimation 
+of hardware run times must account both for computation bounds and host-accelerator communication overheads.  
+The latter are retrieved by considering the number of required memory accesses, scaled by an 
+architecture-specific factor.\par
 
-To assess the computation time of candidates in hardware, we instead
-proceed in a bottom-up fashion, as also exemplified in Figure
-\ref{fig:hw-comp}. First, we compute the maximum propagation delay of
-each of the Basic Blocks (BBs) present in an \candidate\ (both in the
-top function and in its callees) by traversing their DFGs and
-accounting for the operations delays, thus retrieving the longest
-input-to-output paths (Figure \ref{fig:hw-comp}a).  Critical paths of
-BBs are then expressed in clock cycles, dividing the propagation
-delays with the period of the system clock. By multiplying the
-critical paths with the number of executions of each BB, we calculate
-the associated workload. Finally, an estimate of the computation time
-of an \candidate\ is the sum of the workloads of its constituent BBs
-(Figure \ref{fig:hw-comp}b-c).
+To assess the computation time of candidates in hardware, a bottom-up approach was carried out, as also 
+exemplified in Figure \ref{fig:hw-comp}. First, the maximum propagation delay of each of the Basic Blocks 
+(BBs) present in an \candidate\ (both in the top function and in its callees) is computed.  This is 
+achieved by traversing their DFGs and accounting for the operations delays, thus retrieving the longest 
+input-to-output paths (Figure \ref{fig:hw-comp}a).  Critical paths ofBBs are then expressed in clock cycles, 
+dividing the propagation delays with the period of the system clock. By multiplying the critical paths with 
+the number of executions of each BB, the associated workload is computed. Finally, an estimate of the computation time of an \candidate\ is the sum of the workloads of its constituent BBs 
+(Figure \ref{fig:hw-comp}b-c).\par
+
+Software run-times are estimated in a similar fashion, but instead of computing critical paths at the BB 
+level, the sum of the latency (in clock cycles) of all its constituent operations is computed, thus modeling 
+that these are processed sequentially in software.\par
+
+From the gathered data, the merit of an \candidate\ $i$ is computed as
+follows:
+\begin{equation*}
+M(i) = [ T_{Sw}(i) - (T_{oh}+max(T_{Hw}^{comp}(i),T_{Hw}^{comm}(i))) ] \times n_{exec}
+\label{eq:inference}
+\end{equation*}
+%\vskip -.5em
+
+where $T_{Sw}(i)$ is the \candidate\ run-time in software, $T_{oh}$ is
+the fixed overhead required to configure and start the hardware
+acceleration, $T_{Hw}^{comp}(i)$ and $T_{Hw}^{comm}(i)$ are the
+run-times when $i$ is hardware-accelerated, assuming its performance
+is either computation or communication bound.  Finally, $n_{exec}$ is
+the number of times the \candidate\ is executed in the application.
 
 \subsubsection{Compiler Analysis}
 
+AccelSeeker is implemented as a compiler pass within the LLVM
+3.8~\cite{LattnerMar04} infrastructure. The resulting implementation
+comprises methods for the identification and analysis of the
+\candidates\ (Figure~\ref{fig:flow}, box A), for the estimation of
+their merit and cost (Figure~\ref{fig:flow}, box B), and for their
+selection (Figure~\ref{fig:flow}, box C). Further details are provided 
+on how the data needed in these phases is retrieved using LLVM IR-level 
+analysis.\par
+
+\begin{algorithm}[t]
+\begin{flushleft}
+\textbf{Input:}  Application written in C, C++\\
+\textbf{Output:} Candidate List with Estimated Merit and Cost\\
+\end{flushleft}
+\begin{algorithmic}[1]
+\Function{\emph{RunOnModule}} {M}
+ \State{\emph{RunOnFunction}}{(F)}
+\EndFunction
+\State
+\Function{\emph{RunOnFunction}} {F}
+  \State{\emph{/*\ Merit\ Estimation\ */} }
+ \State{\emph{$T_{SW}$=getSWLatencyEstimation}}{(F)}
+ \State{\emph{$T_{Hw}^{comp}$=getHWLatencyEstimation}}{(F)}
+ \State{\emph{$n_{exec}$=getNumberOfInvocations}}{(F)}
+ \State{\emph{$T_{Hw}^{comm}$=getIORequirements}}{(F)}
+ \State
+ \State{\emph{/*\ Cost\ Estimation\ */} }
+ \State{\emph{$A_{HW}$=getHWAreaEstimation}}{(F)}
+ \State{\emph{$A_{MAXI}$=getMAXIAreaEstimation}}{(F)}
+\EndFunction
+\end{algorithmic}
+\caption{LLVM Analysis Pass - Cost and Merit Estimation} 
+\label{Algo_LLVM}
+\end{algorithm}
+
+\emph{AccelCands identification and analysis.} For the generation of
+the call graph, every function is annotated with caller/callee relationships; 
+the call graph is subsequently traversed to identify all valid \candidates\ as 
+defined in section~\ref{subsec:identification}. At this level information is 
+detected regarding the overlapping of such \candidates, needed for the creation 
+of the conflict graph, and for subsequent selection. The control flow graph of each candidate, and
+the data flow graph of each basic block are extracted so that they can be
+used as input for the cost and merit calculation, according to the method
+already detailed in Section~\ref{sec:cost} and~\ref{sec:merit}\\
+\emph{Execution Frequency}.  The number of invocations of each
+candidate as well as the execution frequency of each basic block in
+each candidate is retrieved via LLVM and Clang, using a
+profiling-via-instrumentation routine, which requires the generation
+of an instrumented version of the code, and then enables the obtained
+frequencies to be annotated back to the IR level.\par
+
+\emph{HW Latency Communication Estimation}.  In order to take into
+account the memory latency overhead due to data exchange between the
+implemented HW accelerators and main memory (term $T_{Hw}^{comm}(i)$
+in Section~\ref{sec:merit}), I/O requirements for each \candidate\ are
+estimated within the LLVM framework by retrieving the parameter list
+of each candidate and obtaining the data requirements of
+each candidate type (e.g. size of array of integers, size of a struct etc).\par
+
+\emph{Area of Master AXI ports Estimation}.  To account for the HW
+resources required for a Master AXI port, the parameter list of each
+candidate is analysed. Every array identified accounts for extra
+logical units (LUTs), contributing to the total area.
+
+% \emph{Selection}. The selection algorithm described in
+% Section~\ref{sec:algo} is implemented as a C++ program
+% which receives, from the LLVM passes, the list of identified
+% \candidates, their associated cost and merit, the conflict graph, and
+% the value of the maximum available resources $C_{max}$. In output, it
+% returns the maximum independent set that solves the \probname\
+% Problem, i.e., the set of \candidates\ to be implemented in HW.
+
 \subsubsection{Selection Algorithm}
 
+Solving the \probname\ problem on the function-call graph of the
+application corresponds to solving the \emph{independent set
+  problem} on the resulting conflict graph. The conflict graph, in
+fact, expresses which pairs of \candidates\ are in conflict; thus, an
+\emph{independent set} of the conflict graph satisfies condition $3$ of the
+\probname\ Problem.
+
+We therefore implement an algorithm that recursively explores the
+independent sets of the conflict graph, similarly to the Bron-Kerbosch
+algorithm~\cite{BronKerbosch73}, and that returns the set $S$ with the
+highest merit $M(S)$ (hence satisfying condition $1$ of the problem
+formulation) and whose cost $C(S)$ does not exceed a user-given
+maximum cost $C_{max}$ (hence satisfying condition $2$ of the
+problem formulation).  
+This returned set represents the optimal
+solution to the \probname\ Problem.
+
+An algorithm solving an independent set problem is of course one of
+non-polynomial complexity. Our exact implementation is still able to
+find the optimal solution for the experiments in this paper in a
+matter of milliseconds, even for the considerable dimension of the
+function-call graph of the application considered (a function-call
+graph of \numberOfcandidates\ nodes, as detailed in the experiments section). 
+%Non-exact
+%versions of the algorithm should of course be devised and considered,
+%if larger function-call graphs required it.
+
+An example of selection can be seen in
+Figure~\ref{fig:max-set-examples}. First the example call graph is
+depicted, which has 8 nodes and hence 8 \candidates, each
+\emph{rooted} in one of the 8 nodes. The eight corresponding
+\candidates\ are not depicted in this figure, but some of them can be
+seen in Figure~\ref{fig:overlap-examples}a: for example, the
+\candidate\ rooted in node 2 is depicted there and labelled A, the
+\candidate\ rooted in node 3 is also depicted in the same Figure and
+labelled B, etc.  Figure~\ref{fig:max-set-examples}b depicts the
+complete conflict graph corresponding to this example. As can be seen,
+candidate 1 (corresponding to the whole graph) is in conflict with all
+other candidates, candidates 2 and 3 are not in conflict (they only
+overlap in function 7) etc. Now, given example values of cost and
+merit for each candidate (in Figure~\ref{fig:overlap-examples}c), the
+maximum independent set is found in the conflict graph, which
+maximises the sum of merits of the candidates selected, does not
+overcome a maximum sum of cost, and does not include conflicts. Two
+examples (for $C_{max} = 25$ and for $C_{max} = 40$) are shown in
+Figure~\ref{fig:overlap-examples}d.
 
 
 
 \subsection{Experimental Results}
 \label{sec:results_as}
 
+\subsection{Conclusions}
+\label{sec:conclusions_as}
+
+\aseeker\ was presented, a framework for assisting system architects during the early design phase of 
+hardware-accelerated systems. By automatically assessing the potential speedup of different hardware 
+acceleration choices, in their default implementation, as well as the hardware resources they demand, 
+\aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more 
+detailed analysis and optimization.
+\aseeker\ performs the identification of candidate accelerators, as well as their area and speedup 
+estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring 
+lengthy and detailed evaluations of each acceleration candidate individually. It then automatically 
+selects the set of candidates that maximize estimated speedup under a given resource constraint. 
+Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly
+outperforms choices that are solely based on profiling information.
 
 
 % EnergySeeker 3.2
