@@ -2240,11 +2240,12 @@ the number of times the \candidate\ is executed in the application.
 \subsubsection{Compiler Analysis}
 
 AccelSeeker is implemented as a compiler pass within the LLVM
-3.8~\cite{LattnerMar04} infrastructure. The resulting implementation
+3.8~\cite{LattnerMar04} infrastructure as seen in Algorithm \ref{Algo_LLVM}. 
+The resulting implementation
 comprises methods for the identification and analysis of the
-\candidates\ (Figure~\ref{fig:flow}, box A), for the estimation of
-their merit and cost (Figure~\ref{fig:flow}, box B), and for their
-selection (Figure~\ref{fig:flow}, box C). Further details are provided 
+\candidates\ (Figure~\ref{fig:flow}, A), for the estimation of
+their merit and cost (Figure~\ref{fig:flow}, B), and for their
+selection (Figure~\ref{fig:flow}, C). Further details are provided 
 on how the data needed in these phases is retrieved using LLVM IR-level 
 analysis.\par
 
@@ -2279,37 +2280,57 @@ the call graph, every function is annotated with caller/callee relationships;
 the call graph is subsequently traversed to identify all valid \candidates\ as 
 defined in section~\ref{subsec:identification}. At this level information is 
 detected regarding the overlapping of such \candidates, needed for the creation 
-of the conflict graph, and for subsequent selection. The control flow graph of each candidate, and
-the data flow graph of each basic block are extracted so that they can be
-used as input for the cost and merit calculation, according to the method
-already detailed in Section~\ref{sec:cost} and~\ref{sec:merit}\\
+of the conflict graph, and for subsequent selection. The control flow graph of 
+each candidate, and the data flow graph of each basic block are extracted so 
+that they can be used as input for the cost and merit calculation, according to 
+the method already detailed above.\par
+
 \emph{Execution Frequency}.  The number of invocations of each
 candidate as well as the execution frequency of each basic block in
-each candidate is retrieved via LLVM and Clang, using a
-profiling-via-instrumentation routine, which requires the generation
+each candidate is retrieved via LLVM with dynamic profiling. A
+profiling-via-instrumentation routine is used, which requires the generation
 of an instrumented version of the code, and then enables the obtained
 frequencies to be annotated back to the IR level.\par
 
-\emph{HW Latency Communication Estimation}.  In order to take into
+\emph{SW Latency Estimation}. The SW latency estimation is being
+computed by an implemented function within the LLVM analysis pass
+according to the number of instructions included in a given candidate,
+as well as the number of instructions included in function calls, if
+any. The frequency of execution of each Basic Block that the
+instructions reside is taken into account as well, for a single
+invocation of the candidate.\par
+
+\emph{HW Latency Computation Estimation}. Conversely, the HW latency
+estimation takes place by estimating the latency of the string of
+instructions that have been characterized for the HW implementation
+that is being targeted. The implemented function estimates the HW
+latency of each Basic Block as the critical path of the Basic Block
+multiplied by its respective execution frequency. The total HW latency
+of a candidate is estimated as the
+sum of all estimated HW latencies of all Basic Blocks included in the candidate. 
+Both the SW and the HW estimation take place in a bottom-up fashion,
+by first performing the estimations of the leave candidates and moving
+onwards to the ones containing calls to others.\par
+
+\emph{HW Latency Communication Estimation}. In order to take into
 account the memory latency overhead due to data exchange between the
-implemented HW accelerators and main memory (term $T_{Hw}^{comm}(i)$
-in Section~\ref{sec:merit}), I/O requirements for each \candidate\ are
+implemented HW accelerators and main memory ($T_{Hw}^{comm}(i)$), 
+I/O requirements for each \candidate\ are
 estimated within the LLVM framework by retrieving the parameter list
 of each candidate and obtaining the data requirements of
 each candidate type (e.g. size of array of integers, size of a struct etc).\par
 
-\emph{Area of Master AXI ports Estimation}.  To account for the HW
-resources required for a Master AXI port, the parameter list of each
-candidate is analysed. Every array identified accounts for extra
-logical units (LUTs), contributing to the total area.
+\emph{Area of HW Logic Estimation}. The cost of the candidate is
+estimated as the total area resources required. The area estimation
+of logical units is carried out by accounting for the Look Up Tables
+(LUTs) and the DSPs of characterized operations within a single Basic
+Block, and subsequently summing up all the resources of all Basic
+locks included in a candidate.\par
 
-% \emph{Selection}. The selection algorithm described in
-% Section~\ref{sec:algo} is implemented as a C++ program
-% which receives, from the LLVM passes, the list of identified
-% \candidates, their associated cost and merit, the conflict graph, and
-% the value of the maximum available resources $C_{max}$. In output, it
-% returns the maximum independent set that solves the \probname\
-% Problem, i.e., the set of \candidates\ to be implemented in HW.
+\emph{Area of Master AXI ports Estimation}. To account for the HW
+resources required for a Master AXI port, the parameter list of each
+candidate is analyzed. Every array identified accounts for extra
+logical units (LUTs), contributing to the total area.
 
 \subsubsection{Selection Algorithm}
 

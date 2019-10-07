@@ -64,6 +64,11 @@ P.~Biswas, N.~Dutt, P.~Ienne, and L.~Pozzi.
 \newblock In {\em Proceedings of the Design, Automation and Test in Europe
   Conference and Exhibition}, pages 212--217, Mar. 2006.
 
+\bibitem{BronKerbosch73}
+C.~Bron and J.~Kerbosch.
+\newblock Algorithm 457: finding all cliques of an undirected graph.
+\newblock In {\em Communications ACM}, volume~9, pages 575--577, 1973.
+
 \bibitem{CacciottiSep18}
 M.~Cacciotti, V.~Camus, J.~Schlachter, A.~Pezzotta, and C.~Enz.
 \newblock Hardware acceleration of {HDR}-image tone mapping on an {FPGA-CPU}

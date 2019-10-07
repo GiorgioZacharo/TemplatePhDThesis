@@ -42,13 +42,13 @@
 \contentsline {subsubsection}{Candidate Identification}{47}{section*.35}
 \contentsline {subsubsection}{Cost and Merit Estimation}{48}{section*.37}
 \contentsline {subsubsection}{Compiler Analysis}{50}{section*.39}
-\contentsline {subsubsection}{Selection Algorithm}{51}{section*.40}
-\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{52}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Conclusions}{52}{subsection.3.1.5}
+\contentsline {subsubsection}{Selection Algorithm}{52}{section*.40}
+\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{53}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Conclusions}{53}{subsection.3.1.5}
 \contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{53}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Motivation}{53}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Related Work}{53}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{54}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Conclusions}{54}{section.3.3}
-\contentsline {chapter}{Conclusions}{55}{chapter*.41}
-\contentsline {chapter}{Bibliography}{57}{section*.43}
+\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{55}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Conclusions}{55}{section.3.3}
+\contentsline {chapter}{Conclusions}{57}{chapter*.41}
+\contentsline {chapter}{Bibliography}{59}{section*.43}
