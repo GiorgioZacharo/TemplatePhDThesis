@@ -164,9 +164,9 @@ Performance increase, in terms of faster execution and higher energy efficiency,
 is a never-ending research domain and does not come for free.
 Living in an era where there is an immense amount of data, the demand for %the execution
 performance by modern computing systems rises even more.
-Technological giants, such as Google and Facebook, gather and compute a lot of data, for instance 
+Technological giants, such as Google and Facebook, gather and compute loads of data, for instance 
 during Machine Learning related applications and lengthy simulations. This large amount of data
-processing requires a lot of computational power and ends up in lengthier and lengthier execution
+processing requires immense computational power and ends up in lengthier and lengthier execution
  time.\par
 
 Moore's law \cite{schaller1997moore}, an observation made by the co-founder of Intel Gordon Moore, 
@@ -191,7 +191,7 @@ can accelerate the execution of a Software (SW) application or a part of that ap
 accelerators are implemented in platforms where they can be either reprogrammable, 
 thus allowing for a large degree of flexibility as various implementations may take place utilizing
 the HW resources of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated 
-Circuit (ASIC). The first type of HW implementations sacrifice part of the potential 
+Circuit (ASIC). The first type of HW implementation sacrifices part of the potential 
 performance achieved by allowing for flexible designs, as the same HW resources can be reprogrammed.
 The latter offer no flexibility but can provide better performance in comparison to FPGAs. Under 
 the scope of this research both HW implementations were considered.  \par
@@ -209,24 +209,23 @@ of HW, namely accelerators, can be used alongside with a general purpose CPU and
 most demanding parts of an application in terms of computation. Consequently, the need for 
 a powerful single CPU is no more that critical, as the execution can be offloaded to other
 parts of HW as well. %The gain is twofold, as 
-As a result, we both achieve a more balanced execution with 
+As a result, we achieve both a more balanced execution with 
 the use of different HW resources, and we offload the execution of specific, more demanding 
 parts of the computation to specialized HW accelerators.\par
-One example of a widely spread 
-heterogeneous architecture is the addition of a GPU to a CPU on the same chip, in order 
-to exploit the
-parallelism and computing power that a GPU has to offer, when it comes to image processing 
-and 3D graphics rendering. Other examples are general purpose CPUs coupled with dedicated HW
-that execute specific kernels or even full applications. The latter architecture could come 
-in a number of variations, with one or more HW accelerators, and different types of coupling, 
-tightly or loosely \cite{CotaJun15}. The design of the first option, tightly or co-processor model, 
-is done by using the accelerator as an Instruction Set Extension in the default pipeline of the CPU. 
-The latter implements the connection between CPU and accelerator loosely, without any 
-knowledge of the underlying CPU micro-architecture.\par
+
+One example of a widely spread heterogeneous architecture is the addition of a GPU to a CPU on the 
+same chip, in order to exploit the parallelism and computing power that a GPU has to offer, when 
+it comes to image processing and 3D graphics rendering. Other examples are general purpose CPUs 
+coupled with dedicated HW that execute specific kernels or even full applications. The latter 
+architecture could come in a number of variations, with one or more HW accelerators, and different 
+types of coupling, tightly or loosely \cite{CotaJun15}. The design of the first option, tightly or 
+co-processor model, is done by using the accelerator as an Instruction Set Extension in the default 
+pipeline of the CPU. The latter implements the connection between CPU and accelerator loosely, without 
+any knowledge of the underlying CPU micro-architecture.\par
 %
 % End of link
 %
-The goal of the HW/SW co-design research is to design efficient heterogeneous computer architectures, so that the
+The goal of HW/SW co-design research is to design efficient heterogeneous computer architectures, so that the
 time latency and energy requirements are ever decreasing. The heterogeneous system
 that I considered during my research comprises a general purpose CPU, loosely coupled with a number of 
 specialized HW accelerators, dedicated to the acceleration of specific parts of an application.\par
@@ -236,9 +235,9 @@ of accelerators to be used, while taking into account the underlying memory syst
 non-trivial research questions and depend heavily on the SW applications characteristics that
 are going to be accelerated. In addition to the accelerator selection problem, 
 every HW accelerator can be synthesized with a number of optimizations embedded onto it, according to 
-the execution task characteristics that is targeted for acceleration. For instance, in the case that 
+the characteristics of the task that is targeted for acceleration. For instance, in case 
 a loop is included in the execution, there could be a loop unrolling factor taken into account during 
-the synthesis of the accelerator that may dramatically affect the execution time. Another example 
+the synthesis of the accelerator that may dramatically affect execution time. Another example 
 would be the addition of a memory buffer, e.g. a scratchpad memory, to reduce the memory latency
 of the execution. Furthermore, the underlying memory system, as in every computer architecture, can
 significantly affect the overall performance, due to communication latency, and should be taken into 
@@ -275,7 +274,8 @@ Under the scope of this chapter the \rseeker\ tool-chain is presented \cite{Zach
 that, given a SW application provided as input, identifies and selects, in a fully automatic fashion, HW 
 accelerators under the constraint of an area (HW resources) budget. The granularity of the candidates for 
 acceleration considered is that of a subgraph of the control flow graph of a function, with a single control 
-input and a single control output. These candidates are called regions. After identification takes place, a selection algorithm solves the problem optimally of 
+input and a single control output. These candidates are called regions. After identification takes place, a 
+selection algorithm solves the problem of 
 finding the subset of the initial regions list that, under a given area constraint, maximizes the collective 
 speedup obtained. The evaluation of \rseeker\ took place by using both an industrial tool, such as Xilinx
 Vivado HLS \cite{VivadoHLSMar17}, and a research HW accelerator simulator, such as Aladdin \cite{ShaoJul14}. 
@@ -288,6 +288,10 @@ analysis that is presented attempts to answer the research question of {\em how}
 selected HW accelerators should be implemented in order to achieve improved performance. 
 Under that scope, Data Reuse analysis, during the execution of a specific domain of applications, 
 reveals the effectiveness of private local memory structures \cite{ZacharopoulosJan17}. 
+This is achieved with the aid of compiler polyhedral analysis that detects the amount of data 
+reuse on a specific domain of applications. The analysis provides automatically the appropriate dimensions 
+of a memory buffer attached to the HW accelerator that would carry out the execution of the applications
+and minimize the communication between the accelerator and the main memory.
 Furthermore, for HW accelerators that contain loops, an optimal
 Loop Unrolling factor can be predicted for each of the included loops \cite{ZacharopoulosJul18}. 
 The most suitable Loop Unrolling factor
@@ -307,13 +311,13 @@ and estimates memory latency along with computational latency of candidates for 
 granularity of the candidates for acceleration is that of a subgraph of the entire call graph of 
 the application. 
 %with a root function (node) and zero outgoing edges of the identified subgraph. 
-HW accelerators are selected by an algorithm so that speedup, or energy efficiency, is maximized, 
+HW accelerators are selected by an algorithm that maximizes speedup, or energy efficiency 
 under a given area budget. The evaluation 
 of \aseeker\ took place on Zynq UltraScale platform by Xilinx, considering a demanding and complex 
-application such as \htsf. With respect to methodologies based on profiling information \aseeker\ 
-attained an improved performance with an up to 2x speedup.\\
-Automating a complex process, such as the design and implementation of heterogeneous systems, while
-improving performance in these systems is the broad goal of this PhD thesis. All chapters of this document 
+application such as \htsf. With respect to methodologies based solely on profiling information \aseeker\ 
+attained an improved performance with an up to 2x speedup over a general purpose SW processor.\\
+Automating the design and implementation of heterogeneous systems, while
+improving their performance is the broad goal of this PhD thesis. All chapters of this document 
 attempt to provide a step closer on attaining this goal and expanding the \SoTA, as well as opening 
 new paths to future work.
 
