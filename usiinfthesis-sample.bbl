@@ -460,6 +460,11 @@ M.~Stephenson and S.~Amarasinghe.
 \newblock In {\em Proceedings of the 3rd International Symposium on Code
   Generation and Optimization}, pages 123--134. IEEE, 2005.
 
+\bibitem{H264May15}
+K.~Suehring and al.
+\newblock H.264/{AVC} reference software.
+\newblock \url{http://iphome.hhi.de/suehring/tml/}, May 2015.
+
 \bibitem{ArcDec16}
 Synopsys.
 \newblock {ARC} processor cores.
@@ -568,6 +573,12 @@ G.~Zacharopoulos, L.~Ferretti, E.~Giaquinta, G.~Ansaloni, and L.~Pozzi.
   from application source code.
 \newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 38(4):741--754, Apr. 2019.
+
+\bibitem{ZacharopoulosMar17}
+G.~Zacharopoulos and L.~Pozzi.
+\newblock Clr{F}req{C}{F}{G}{P}rinter: A tool for frequency annotated control
+  flow graph generation.
+\newblock Technical report, European LLVM Developers Meeting, Mar. 2017.
 
 \bibitem{ZuluagaJul09}
 M.~Zuluaga, T.~Kluter, P.~Brisk, N.~P. Topham, and P.~Ienne.

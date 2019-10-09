@@ -8,9 +8,12 @@
 % \usepackage{adjustbox}
 %\setstretch{1.05}
 
+\usepackage{graphicx}
+\usepackage{subfigure}
 \usepackage{listings}
 
 \newcommand{\aseeker}{{AccelSeeker}} 
+\newcommand{\eseeker}{{EnergySeeker}} 
 \newcommand{\rseeker}{{RegionSeeker}} 
 \newcommand{\multi}{MuLTiVersioning}
 \newcommand{\simulator}{\texttt{gem5-aladdin}} 
@@ -56,7 +59,11 @@
 \newcommand{\gsm}{\texttt{gsm}}
 \newcommand{\stencil}{\texttt{stencil}}
 
-\newcommand{\probname}{\emph{Accel Selection}} 
+\newcommand{\rsprobname}{\emph{Region Selection}} 
+\newcommand{\asprobname}{\emph{Accel Selection}} 
+
+\newcommand{\numofhtsfregs}{1745} % number of regions for h264
+\newcommand{\numofjpegregs}{168} %number of regions for jpeg
 \newcommand{\numberOfcandidates}{{63}} 
 
 %change 'sl' to 'bf' for bold, or 'normalfont' for no special
@@ -347,13 +354,13 @@ of which parts of the computation are to be implemented in HW is a complex and d
 A thorough understanding of the application to be accelerated is necessary, the HW resources
 (area) budget is often tight and the granularity of the candidates for acceleration 
 can dramatically affect the overall execution time. Furthermore, optimizations may be applied
-to a given, identified HW accelerator and this would produce multiple versions of equivalent
-computation instances that can result in various heterogeneous architectures with different
-characteristics and, as a result, different performance gains.
-In order to address all these issues I present an automated methodology
+to a given, identified HW accelerator and this can produce multiple versions of equivalent
+computation instances, that in turn can result in various heterogeneous architectures with different
+characteristics and different performance gains.
+In order to address these issues I present an automated methodology
 that receives as input the source code of a given application and outputs a number of 
 HW accelerators to be considered for acceleration. Among these candidates a selection takes 
-place that maximizes collective speedup, given a HW resources (area) constraint. Finally, 
+place that maximizes collective speedup, given an area constraint. Finally, 
 multiple versions of the same candidate can be considered during the selection phase as well.
 
 \section{Motivation}
@@ -432,6 +439,1064 @@ single loop to an entire function, and anything in between.
 The main body of my research for this work is the consideration 
 of CFG regions as candidates and a method to 
 automatically identify and select these regions.
+
+%
+%
+% 1.2  Problem Formulation
+%
+%
+%
+%
+%
+
+\section{Problem Formulation}
+\label{sec:prob}
+
+The suggested methodology identifies and investigates the performance of regions
+by analyzing, at the Intermediate Representation (IR) level, the
+\CFGs\ of the functions comprising a target application. A CFG
+represents the flow of control through a program.\par
+
+Definition: \textbf{CFG}. A CFG is a Directed Cyclic Graph $G$, where
+$V(G)$ is the set of nodes and $E(G)$ is the set of edges. Each node
+in a CFG corresponds to a basic block in a function, and each edge to
+the \controlflow\ within that function.\par
+
+A source node is added, connected only to the entry basic block of
+the function, and a sink node, connected only to the exit of the
+function. Figure \ref{fig:cfg-example}b shows an example of CFG. A
+node in the CFG is marked as forbidden if it corresponds to a basic
+block containing instructions that cannot be synthesized in HW --- for
+example operating system calls.\par
+
+Definition: \textbf{Valid Subgraph.}  A Valid Subgraph is any subgraph
+of the CFG that does not contain a forbidden node. In
+Figure~\ref{fig:cfg-example}b: B, and C are Valid Subgraphs; A and D
+are not Valid Subgraphs because they contain a forbidden node.\par
+
+Definition: \textbf{Region.} A region $R$ of a CFG $G$ is a Valid
+Subgraph such that there exists a \emph{single} edge going from a node
+in $V(G)\setminus V(R)$ to a node in $V(R)$ and a \emph{single} edge
+going from a node in $V(R)$ to a node in $V(G)\setminus V(R)$. In
+Figure~\ref{fig:cfg-example}b: B is a region, while C is not.\par
+
+Under the scope of this chapter, all and only regions are considered as
+candidates for identification of accelerators.
+Given a merit $M()$ and cost $C()$ function for each region 
+we can formulate the problem of selecting accelerators as follows:
+
+\textbf{Problem: Region Selection}
+
+Let $\mathcal{R} = \{ R_1, R_2, \ldots, R_n \}$ be a set of regions,
+with associated cost and merit functions $C$ and $M$.
+For any subset $X\subseteq \{1,2,\ldots,n\}$ of regions,
+we denote by $M(X) = \sum_{i\in X} M(R_i)$ the sum of the merits of
+its regions, and we denote by $C(X) = \sum_{i\in X} C(R_i)$ the sum of
+the costs of its regions.
+
+We want to select a subset $X$ of regions such that
+\begin{enumerate}
+\item No two regions belonging to the same CFG overlap, i.e.,
+  $V(R_i)\cap V(R_j) = \emptyset$, for all $1\le i,j\le n$
+\item The cost $C(X)$ is within a user-given cost budget $C_{\max}$
+\item The merit $M(X)$ is maximized
+\end{enumerate}
+
+This problem definition maps to what we have identified in the previous 
+section as the designer aim: given an available
+accelerator area, extract as much as possible of the computation,
+under the constraint to require no more than that area, in order to
+maximize the resulting speedup.
+
+%
+%
+% 1.3  Selection Algos
+%
+%
+%
+%
+%
+
+\section{Region Selection Algorithms}
+\label{sec:rs_algos}
+
+
+The \rsprobname\ Problem requires a previously identified set of regions
+as input. To identify regions, and hence gather such set, an existing LLVM 
+pass is reused, which in turn is based on an algorithm of linear
+time complexity published in~\cite{JohnsonJun94}. Then, given the
+available set of regions, the more computationally expensive
+\rsprobname\ Problem must be tackled, and algorithms to solve it are
+explained in the following.\par
+
+\begin{figure}
+\centering
+\includegraphics[width= .7 \linewidth]{figs/exact_example.pdf}
+\caption{a) Running example, used to explain the selection algorithms:
+  the CFGs of two functions are depicted, with five regions identified
+  in them --- labelled from A to E. b) The overlap graph for the five
+  regions.}
+\label{fig:exact_example}
+\end{figure}
+
+Firstly an exponential, \exact\ branch-and-bound method
+based on a binary-tree search is provided; secondly, a fast (polynomial)
+non-exact, \greedy\ method; thirdly, a meet-in-the-middle approach,
+still exponential but scaling faster than \exact, that we call
+\exactC.\par
+
+Before delving into the algorithm explanation, a running example
+is provided in Figure~\ref{fig:exact_example}. The
+Figure depicts the CFGs of two functions, and highlights five regions
+identified within them (labeled A,B,C,D,E in the picture).\par
+In the following, we denote by $O$ the set of region overlaps, i.e.,
+the set
+$$
+\{ (i, j)\ |\ V(R_i)\cap V(R_j) \neq \emptyset \}\,.
+$$
+The edges of the graph represented in Figure ~\ref{fig:exact_example}b
+correspond to the set $O$ of region overlaps, for the running example.
+
+
+\subsection{Exact Method}
+\label{sec:algo-exact}
+
+In the \exact\ method the Problem \rsprobname\ is reduced to the
+\emph{independent set problem}. In particular, we construct an
+undirected graph $G$ where $V(G) = \{ 1, 2, \ldots, n \}$, i.e., there
+is one node for each region, and $E(G) = O$, i.e., two nodes are
+connected if the corresponding regions overlap. It is easy to see that
+a set $\{ i_1, i_2, \ldots, i_r \}$ satisfies condition $1$ of the
+\rsprobname\ Problem if it is an independent set of $G$.
+Figure~\ref{fig:exact_example}b shows the overlap graph $G$
+corresponding to the running example: region A overlaps with all
+regions but E, hence edges are added linking A with B, C and D, and so
+on. Examples of independent sets in this graph are $\{A\}$, $\{B,D\}$,
+$\{B,C,E\}$.\par
+
+The algorithm recursively explores the independent sets of $G$,
+similarly to the Bron-Kerbosch algorithm~\cite{BronKerbosch73}, and
+its steps will be followed with the aid of the running example, and
+with its corresponding tree exploration, shown in
+Figure~\ref{fig:exact_tree}. The algorithm maintains a set $X$, which
+is the active independent set (initialized to $\emptyset$) and a set
+$P$ of available nodes (initialized to $V(G)$). At each iteration, the
+algorithm chooses a node $u$ in $P$ such that $C(X\cup \{u\})\le
+C_{\max}$, i.e., it satisfies condition $2$ of the \rsprobname\ Problem,
+and recursively explores the configurations
+\begin{enumerate}
+\item $X' = X\cup \{u\}$, $P' = P\setminus (\{u\}\cup N(u))$
+\item $X' = X$, $P' = P\setminus \{u\}$
+\end{enumerate}
+
+where $N(u) = \{ v\ |\ (u,v)\in E(G) \}$ is the set of neighbours of
+$u$ in the overlap graph.
+Configuration 1 traverses all the independent sets that contain $X$
+and $u$. The choice of $P'$ maintains this invariant, as all the
+neighbours of $u$ are removed from $P$. Instead, configuration 2
+traverses all the independent sets that contain $X$ but not $u$. Note
+that any independent set is visited \emph{once only}.
+
+This process can be exemplified through Figure~\ref{fig:exact_tree}:
+the root of the tree represents the empty set, and set $P$ at this
+point contains all regions. Then, inclusion of region A is first
+explored, and the set P is updated by removing all regions overlapping
+with A: $P = \{E\}$. According to the merit and costs of all regions
+in this example, shown in the table within the picture, the merit (60)
+and cost (35) of the solution currently explored is also updated.
+
+At every point of the exploration, a new node $u$ is considered for
+addition in the current independent set. If there is no node $u$
+satisfying condition $2$ of the \rsprobname\ Problem, the algorithm
+records the set $X$ and backtracks, as $X$ is maximal with respect to
+condition $2$.  For the running example in
+Figure~\ref{fig:exact_tree}, the cost budget $C_{\max}$ is equal to
+$35$. Hence, exploration stops at $X=\{A\}$ because the cost budget
+has been reached, and backtracks. The next region chosen is $B$, sets
+$X$ and $P$ are again updated accordingly, to $X=\{B\}$ and
+$P=\{C,D,E\}$, and exploration continues.
+
+\emph{Optimization 1:} To speed up the search, the algorithm maintains
+the maximum merit $M_{\max}$ of the independent sets explored so
+far. In this way, if $M(X\cup P) < M_{\max}$ the algorithm can
+backtrack, as no superset of $X$ has a merit larger than the maximum
+one found so far. This optimization can be seen at work, among others,
+in the tree-node where $X=\{B\}$ and $P=\{D,E\}$. In fact, $M_{\max}$
+is $75$ at that point in the exploration (it was reached by set
+$X=\{B,C,E\}$), while the current merit $M(\{B\})$ is $30$, and the
+remaining potential gain of $P=\{D,E\}$ is $40$. $M_{\max}$ cannot be
+reached, and the algorithm can backtrack.
+
+\emph{Optimization 2:} To make the above exact pruning strategy
+effective, the algorithm adopts the strategy of choosing the node $u$
+with maximum merit among the ones which satisfy condition $2$ of the
+\rsprobname\ Problem. In practice, this means that candidate regions are
+considered in order of decreasing merit. In Subsection
+\ref{subsec:algo-perf}, it is shown that these two optimizations greatly
+increase the scalability of the exact method.
+
+At the end of the exploration, the algorithm reports the set(s)
+recorded with merit equal to $M_{\max}$, i.e., satisfying condition
+$3$ of the \rsprobname\ Problem. In the running example, this
+corresponds to set $X=\{B,C,E\}$.
+
+\begin{figure*}[t]
+\centering
+%\includegraphics[width= \linewidth]{figs/figs_from_pptx/exact_tree.pdf}
+\includegraphics[width= .9 \linewidth]{Figs/exact_tree.pdf}
+\caption{Tree exploration performed by \exact, for the running example
+  of Figure~\ref{fig:exact_example}, and for a cost budget of 35.}
+\label{fig:exact_tree}
+\end{figure*}
+
+
+\subsection{Greedy Method}
+
+The algorithm implementing a greedy selection maintains a set $X$
+(initialized to $\emptyset$), which is the current partial solution,
+and a set $P$ of available regions (initialized to $\{ 1, 2, \ldots, n
+\}$). At each iteration, the algorithm selects the region $u$ in $P$
+with largest merit such that $C(X\cup \{u\})\le C_{\max}$, and
+continues to the next iteration with $X' = X\cup \{u\}$ and $P' =
+P\setminus (\{u\}\cup\{ v\ |\ (u,v)\in O \})$. The choice of $P'$
+guarantees that the set $X$ satisfies condition $1$ in each
+iteration. If there is no region $u$ satisfying condition $2$ the
+algorithm terminates and reports $X$.  In the running example of
+Figure~\ref{fig:exact_tree}, this corresponds to simply stopping
+exploration at set $X=\{A\}$.
+
+Since the greedy method never backtracks, it is often trapped in local
+minima, and therefore cannot guarantee optimality. On the other hand,
+it converges to a solution very fast, and is used as a naive solution
+for generating comparative results (Subsection \ref{subsec:algo-perf}).
+
+\subsection{Exact-on-cropped Method}
+
+The previous two algorithms represent two ends of the spectrum: exact
+and exponential on one side; non-exact, fast and naive on the other.
+A third solution, which strikes a balance between them, comes from the
+observation that while the list of regions identified in an
+application is long --- potentially too long to be processed exactly
+--- the list of \emph{meaningful} regions is short, where by
+meaningful is mean contributing tangibly to the overall speedup. In
+other words, the distribution of regions with respect to speedup
+provided is very skewed.
+
+The third algorithm alternative is therefore to apply the \emph{exact}
+algorithm (Section~\ref{sec:algo-exact}), but only to a \emph{cropped}
+list of regions in input. This in practice corresponds to ignoring a
+number of low-speedup regions in the selection problem. In
+Subsection~\ref{subsec:algo-perf} it is showed that such approach, while of
+course still of exponential complexity, can greatly improve the
+scalability of the \exact\ algorithm, still retrieving high-quality
+solutions.
+
+\section{The RegionSeeker Framework}
+\label{sec:rs}
+
+The RegionSeeker framework is an automated methodology that 
+identifies candidates for HW acceleration from application source 
+code. An extensive SW analysis, based on the LLVM compiler infrastructure,
+performs, apart from
+the identification, an estimation of the performance gain (merit), along with
+the HW resources (cost), of each candidate. Subsequently given a HW resources
+constraint, a selection of the identified HW accelerators takes place that
+maximizes the cumulative performance gain, as detailed in Section~\ref{sec:rs_algos}.
+First the LLVM toolchain built for this purpose is analyzed, then the employed 
+platform model and the benchmarks used for a comparative evaluation are detailed.
+
+\subsection{LLVM Toolchain}
+
+% LLVM RegionSeeker Analysis Pass.
+% %
+\begin{algorithm}[t]
+\begin{flushleft}
+\textbf{Input:}  Application written in C/C++\\
+\textbf{Output:} List of Identified and Profiled Regions\\
+\end{flushleft}
+\begin{algorithmic}[1]
+\Function{$RunOnFunction()$}{}
+\State\Call{$Region\_List=NULL$}{}
+\State\Call{$RI=getRegionInfoAnalysis()$}{}
+  \For {$Region\ in\ Function$}
+    \If {\Call{$RegionIsValid()$}{}}
+      \State\Call{$EvaluateRegion$}{Region}
+      \State{$Region\_List.Add(Region)$}     
+    \EndIf
+  \EndFor
+  \State{$return\ Region\_List$}  
+
+\EndFunction
+\State
+\State{$/* Estimate\ Merit\ for\ Region*/$}
+\Function{$EvaluateRegion$}{Region}
+  \For {$Basic\ Block\ in\ Region$}
+    \State\Call{$getProfilingInfo$}{Basic\ Block}
+  \EndFor
+\EndFunction
+\end{algorithmic}
+\caption{LLVM Analysis Pass - Region Identification} 
+\label{algo:reg}
+\end{algorithm}
+
+The analysis passes of \rseeker\ were built within the latest version (3.8) of the \emph{LLVM
+  Compiler and Toolchain} \cite{LattnerMar04}. The LLVM infrastructure
+provided the compiler ground in order to develop my own analysis
+passes, as well as the tools used for profiling. 
+\emph{Region Identification} pass, as depicted in Algorithm \ref{algo:reg}, 
+was developed to identify and provide an initial estimated evaluation to 
+the identified regions. The pass receives as input applications developed
+in C or C++ and performs the analysis in the Intermediate Representation
+(IR) level. \par
+
+\emph{Region Identification} pass iterates over every function of the provided 
+input applications and, using the existing \emph{RegionInfo} LLVM pass 
+\cite{GrosserApr12}, identifies regions within every function. Subsequently, 
+forbidden nodes within regions are identified and labeled, such as system
+calls or calls to functions that are not inlined. The regions containing
+these nodes are marked as invalid. Conversely, the valid regions are 
+evaluated by a profiling via instrumentation routine.
+Profiling via
+instrumentation requires generating an instrumented version of the
+code, which gives more detailed results than a sampling
+profiler. Using this information, the basic blocks are annotated
+ in each function with their respective execution frequency, along
+ with the aid of \emph{ClrFreqCFGPrinter} LLVM pass \cite{ZacharopoulosMar17}.\par
+ 
+
+By exploiting the execution frequency of every basic block, the respective evaluation 
+for every region is computed, which is being associated to the region as estimated merit, 
+and the region is being added to the list of identified regions.
+The final output of our analysis pass is a list of valid regions, 
+or else accelerator candidates, with an estimated merit attached to them.\par
+
+The region list output is saved in a file, which is in turn processed by the 
+selection algorithms \exact, \greedy\ and \exactC, which are 
+implemented as standalone programs in C++.
+
+\begin{figure}
+\centering
+\includegraphics[width= .6 \linewidth]{figs/platform.pdf}
+\caption{Target ASIP model, featuring a host processor interfacing
+  special-function accelerators through control interfaces and shared
+  data memories.}
+\label{fig:platform}
+\end{figure}
+
+\subsection{Platform Model and Performance Metrics}
+\label{subsec:platform}
+
+The performance benefit achievable by application-specific
+acceleration is dependent on multiple target-specific parameters,
+including the adopted memory hierarchy, the employed bus protocol, the
+interconnect strategy and the number of considered processors,
+accelerators and memories.\par
+
+In order to assess the performance of \rseeker, a system comprising
+a single processor and multiple accelerators was assumed, exchanging shared data 
+with scratchpad memories (Figure \ref{fig:platform}). 
+The processor activates the accelerators via a memory-mapped
+interface, thus requiring a transaction on the system bus. 
+When activated, accelerators read and
+write data to and from the scratchpads, computing their outputs, which
+can then be accessed by the processor. In
+this way, no data movement surrounding the execution of accelerations
+is required. Accelerators are interfaced to scratchpad memories
+with ports having a latency of one clock cycle. The
+control interface between the processor and the accelerators has a
+latency of 10 clock cycles.  These parameters correspond to the ones
+employed by the \texttt{ap\_memory} and \texttt{s\_axilite}
+interfaces, respectively, provided by Xilinx Vivado.\par
+
+The run-times of the non-accelerated part of the considered
+benchmarks are measured using the Gem5
+simulator~\cite{BinkertFeb11}, modeling an ARMv8-A processor with an
+issue width of 1. The processor model is atomic, with in-order
+execution. It is interfaced with separate instruction and data
+memories with an access latency of one clock cycle.\par
+
+Hardware execution times are retrieved using \emph{two different HLS
+  frameworks}: the Aladdin simulator and the Xilinx Vivado HLS
+commercial tool-suite. Aladdin targets ASIC implementations. It
+allows a fast evaluation, but does not produce a synthesizable netlist
+as output; nonetheless, the estimations offered by this tool are
+within 1\% of the ones derived from an RTL implementation
+\cite{ShaoJul14}. Hardware instances generated with Vivado HLS are
+instead intended for FPGA designs. Synthesis-runs within this
+framework are more time-consuming, but provide exact cost (HW resources)
+and merit (speedup) figures of each accelerator, as well as a direct
+path to its realization.\par
+
+The cost $C()$ of regions (and, for comparison, basic
+blocks and functions) was computed as the amount of required resources. We
+expressed them in terms of IC area in the case of Aladdin ($mM^2$), and the
+maximum between their required flip-flops and look-up tables,
+on a Virtex7 FPGA, in the case of Vivado. The merit $M()$ of a
+region was set as the difference between its hardware and software run
+time, across all its invocations in an application.
+
+\subsection{Benchmarks}
+\label{subsec:benchmarks}
+\vspace{.3cm}
+
+
+Real-world applications of varying size from the CHStone
+embedded applications benchmark suite \cite{HaraMay08} were considered. 
+\adpcm\ performs an encoding routine, whereas \sha\ is a secure hash
+encryption algorithm, widely used for generating digital signatures
+and the exchange of cryptographic keys. \aes\ is a symmetric-key
+encryption algorithm. \gsm\ performs a linear predictive coding
+analysis, used for mobile communication.  \dfmul\ and \dfsin\ are
+smaller kernels that perform double-precision floating-point
+multiplication and sine functions employing integer arithmetics.
+\jpeg\ and \mpeg\ are larger applications, implementing JPEG and
+MPEG-2 compression, respectively.  
+% \subsection{Methodology}
+% \label{subsec:meth}
+
+% There are three parts comprising the methodology, detailed as follows.
+% The first step is to automatically identify valid regions that are suitable candidates
+% for HW acceleration. Secondly, an estimation of their potential merit, in terms of cycles saved
+% (the difference between SW and HW execution cycles),
+% is computed along with the respective cost, which is the HW resources (area) required
+% for each region. Finally, a selection algorithm is utilized in order to optimally solve the 
+% problem of selecting a subset of these
+% regions that maximize the accumulated merit under a given cost, i.e., an area constraint.
+
+% \subsubsection{Region Identification}
+% \label{subsec:reg_id}
+
+% To identify regions in both an automatic and efficient way, a
+%  \emph{Region Identification} pass was developed under the version 3.8 
+% of the \emph{LLVM Compiler framework} \cite{LattnerMar04}. 
+% The pass receives as input applications developed in C or C++ and performs 
+% their analysis at the Intermediate Representation (IR) level, a type
+% of code used internally by LLVM to represent source code and allow
+% data flow analysis and optimizations.\par
+
+% The pass iterates over every function of an
+%  application and, using the existing \emph{RegionInfo} LLVM pass 
+% \cite{GrosserApr12}, identifies regions within every function.
+% %, as seen in Figure \ref{fig:region}. 
+% Subsequently, nodes that cannot be synthesized, such as system
+% calls or calls to functions that are not inlined, are identified 
+% and labeled as forbidden.
+% %forbidden nodes inside regions are identified and labeled, such as system
+% %calls or calls to functions that are not inlined. 
+% The regions containing
+% these nodes are marked as invalid. Conversely, the valid regions are 
+% evaluated by a profiling-via-instrumentation routine.
+% Profiling via
+% instrumentation requires generating an instrumented version of the
+% code, which gives more detailed results than a sampling
+% profiler. 
+% The output of the profiling is a file that contains information regarding 
+% the execution frequency of each basic block and the total number of calls to each 
+% function, i.e., the execution frequency of each function.
+% Using this information, the basic blocks are annotated
+%  in each function with their respective execution frequency. 
+% % with the aid of \emph{ClrFreqCFGPrinter} LLVM pass \cite{ZacharopoulosMar17},
+%  %that I have developed.
+
+
+% % LLVM RegionSeeker Analysis Pass.
+% % %
+% \begin{algorithm}[t]
+% \begin{flushleft}
+% \textbf{Input:}  Application written in C/C++\\
+% \textbf{Output:} List of Identified and Profiled Regions\\
+% \end{flushleft}
+% \begin{algorithmic}[1]
+% \Function{$RunOnFunction()$}{}
+% \State\Call{$Region\_List=NULL$}{}
+% \State\Call{$RI=getRegionInfoAnalysis()$}{}
+%   \For {$Region\ in\ Function$}
+%     \If {\Call{$RegionIsValid()$}{}}
+%       \State\Call{$EvaluateRegion$}{Region}
+%       \State{$Region\_List.Add(Region)$}     
+%     \EndIf
+%   \EndFor
+%   \State{$return\ Region\_List$}  
+% \EndFunction
+
+% \State
+% \State{$/* Estimate\ Merit\ for\ Region*/$}
+% \Function{$EvaluateRegion$}{Region}
+%   \For {$Basic\ Block\ in\ Region$}
+%     \State\Call{$getProfilingInfo$}{Basic\ Block}
+%   \EndFor
+% \EndFunction
+% \end{algorithmic}
+% \caption{LLVM Analysis Pass - Region Identification} 
+% \label{algo:reg}
+% \end{algorithm}
+
+% \subsubsection{Merit and Cost Estimation}
+% \label{subsec:mer_cost}
+
+% The Region Identification pass, apart from the identification of regions detailed above, 
+% performs an early evaluation of the merit and cost of a region, implemented
+% directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
+% representation and does not need any manual modification to perform function out-lining
+% on the benchmark source code. 
+% The estimation of merit and the cost of a region is performed as follows.\par
+
+% \emph{Merit Estimation.} 
+% The merit of a region is defined as the total number of cycles saved in a HW accelerator 
+% implementation compared to the respective SW implementation of the same piece of runtime 
+% of a given application. Therefore the merit of a HW accelerator is estimated as the 
+% difference between the \HW\ and \SW\ run time, across all its invocations in an application,
+% taking into account the invocation overhead of calling a HW accelerator in a specific 
+% heterogeneous architecture. The estimation of the HW run time is computed first in the 
+% basic block (BB) level as the the critical path of the latency (in clock cycles) of the Data 
+% Flow Graph (DFG) nodes. Runtime profiling information is used in order to determine the execution 
+% frequency of each BB.
+% Subsequently the delay of the entire region in HW is estimated by multiplying the critical path
+% delay of each BB with the respective execution frequency and finally summing up the products, 
+% according to the specific BBs that comprise the region.
+% Software run-times are estimated in a similar fashion, but instead of computing critical paths 
+% at the BB level, the sum of the latency (in clock cycles) of all its constituent operations is 
+% computed, modeling that these are processed sequentially in software.\par
+
+% \emph{Cost Estimation.} On the other side of the evaluation, the cost of a region 
+% is estimated as the area (or HW resources) required to implement its DFG nodes. The area 
+% is computed as the sum of look-up tables that is required for
+% the DFG nodes of the respective HW accelerator. Each DFG node may take up a different amount
+% of loop-up tables according to its complexity. The characterization for each DFG node was carried
+% out with the aid of Vivado, a commercial \HLS\ tool, targeting a Virtex7 FPGA.\par
+% % and its merit as the cycles saved between SW
+% % and HW execution, where the latter is the delay of the nodes on the
+% % DFG critical paths. Runtime profiling information is used in both SW and
+% % HW latency estimations in order to determine the number of invocations for
+% % each candidate.\par
+% The final output of the analysis pass is a list of valid regions, 
+% or else accelerator candidates, each annotated with an estimated merit and cost.
+% The region list output is in turn processed by the 
+% \exact\ selection algorithm implemented as standalone program in C++.
+% % selection algorithms exact and greedy implemented as standalone programs in C++.
+
+
+% \subsubsection{Region Selection Algorithm}
+% \label{subsec:sel_algo}
+
+% Given a merit $M()$ and cost $C()$ function for each region 
+% we can formulate the problem of selecting accelerators as follows:\\
+% \textbf{Problem: Region Selection}
+% Let $\mathcal{R} = \{ R_1, R_2, \ldots, R_n \}$ be a set of regions,
+% with associated cost and merit functions $C$ and $M$.
+% For any subset $X\subseteq \{1,2,\ldots,n\}$ of regions,
+% we denote by $M(X) = \sum_{i\in X} M(R_i)$ the sum of the merits of
+% its regions, and we denote by $C(X) = \sum_{i\in X} C(R_i)$ the sum of
+% the costs of its regions.
+
+% We want to select a subset $X$ of regions such that
+% \begin{enumerate}
+% \item No two regions belonging to the same CFG overlap, i.e.,
+%   $V(R_i)\cap V(R_j) = \emptyset$, for all $1\le i,j\le n$
+% \item The cost $C(X)$ is within a user-given cost budget $C_{\max}$
+% \item The merit $M(X)$ is maximized
+% \end{enumerate}
+
+
+% This problem definition maps to what we have identified in
+% Section~\ref{sec:mot} as the designer aim: given an available
+% accelerator area, extract as much as possible of the computation,
+% under the constraint to require no more than that area, in order to
+% maximize the resulting speedup.\par
+
+
+
+% An exponential, \exact\ branch-and-bound method
+% based on a binary-tree search was derived in order to solve optimally 
+% the Region Selection problem. The algorithm converges to an
+% % is implemented so that it finds the 
+% independent set of regions that maximizes merit under 
+% a given cost.
+% This process can be exemplified through
+%  Figure~\ref{fig:exact_tree}: given an initial set $P$, that includes all
+%  valid regions identified, and a set $X$, that is initially an empty set and 
+% is going to be the subset of $P$ that maximizes merit under a given cost.
+% The root of the tree represents the empty set, and set $P$ at this
+% point contains all regions. Furthermore an overlapping graph among regions 
+% shows whether there is overlapping among valid regions contained in $P$, 
+% such that it poses the restriction of not allowing the selection of regions 
+% that overlap with each other, i.e., containing at least one BB that is common. 
+% The overlapping graph is seen as well in Figure~\ref{fig:exact_tree}.
+% As the algorithm starts the exploration, inclusion of region A is first
+% considered, and the set P is updated by removing all regions overlapping
+% with A: $P = \{E\}$. According to the merit and costs of all regions
+% in this example, shown in the table within the picture, the merit (60)
+% and cost (35) of the solution currently explored is also updated.\par
+
+% At every point of the exploration, a new node $u$ is considered for
+% addition in the current independent set.
+% If there is no node $u$
+% satisfying condition $2$ of the Region Selection Problem, the algorithm
+% records the set $X$ and backtracks, as $X$ is maximal with respect to
+% condition $2$.  For the running example in
+% Figure~\ref{fig:exact_tree}, the cost budget $C_{\max}$ is equal to
+% $35$. Hence, exploration stops at $X=\{A\}$ because the cost budget
+% has been reached, and backtracks. The next region chosen is $B$, sets
+% $X$ and $P$ are again updated accordingly, to $X=\{B\}$ and
+% $P=\{C,D,E\}$, and exploration continues until the selection algorithm
+% converges.\par
+
+% Two optimizations are implemented in the exact selection algorithm in order 
+% to avoid unnecessary exploration. Optimization 1 performs a look up in order 
+% to determine whether the maximum recorded merit can be reached by the 
+% regions contained in $P$ or not. If not the exploration stops and backtracks.
+% Optimization 2 ranks the valid regions in terms of merit so that the first 
+% region considered for inclusion in $X$ is the one with the maximum merit.
+
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
+\label{fig:regions_aladdin}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
+\label{fig:regions_vivado}
+\end{figure}
+
+\section{Experimental Results}
+\label{subsec:exp}
+
+This section investigates and quantitatively assesses the results and
+contributions of \rseeker\ from multiple perspectives. First, the speedup 
+deriving from considering regions as targets for acceleration is evaluated, 
+with respect to \SoTA\ solutions based on functions and basic blocks. Then, the
+performance of the algorithms proposed to solve the \rsprobname\ Problem
+is analyzed.  Finally, the robustness of region-based acceleration when varying
+architectural-specific parameters is explored.\par
+
+
+\subsection{Regions as a Choice for Accelerators}
+\label{subsec:res_llvm}
+
+In order to evaluate the benefits of \rseeker, we comparatively assess
+it against two \SoTA\ alternatives.  The first is to
+identify accelerators \emph{automatically}, but only within the scope
+of \dataflow\ --- which means within the scope of single basic blocks
+--- as done by \SoTA\ approaches such as \cite{YuSep04},
+\cite{PozziJul06}, \cite{ChenFeb07}, \cite{ReddingtonAug09}, and
+\cite{GiaquintaMar15} to name only a few. In particular, the \SoTA\ algorithm 
+proposed in \cite{VermaOct07} and used in \cite{PothineniJan07} and in
+\cite{GiaquintaMar15} was implemented, that identifies maximum convex subgraphs within
+basic blocks. These methods identify the largest part that can be
+synthesized and accelerated within a basic block, and hence represent
+an upper-bound on the speedup that can be achieved by identification
+methods that work at the data-flow (basic block) level. The second is
+to mimic the \emph{manual} approach of selecting entire functions,
+which is also the scope supported by high-level synthesis tools
+\cite{CanisSep13} \cite{VillarrealMay10} \cite{VivadoHLSMar17}.\par
+
+In the experiments, \rseeker\ with the \exactC\ selection method was
+used, discarding regions that provide less than 10\% of the maximum
+merit. Two sets of experiments were performed: first Aladdin, and then
+Vivado HLS were used to estimate merit and cost, highlighting that
+the \rseeker\ methodology can be used
+% leads to superior results than \SoTA\ methodologies
+across different high-level synthesis tools, and more importantly
+verifying that the regions selected are largely the same,
+independently of the cost and merit estimation model used.\par
+
+Figure~\ref{fig:regions_aladdin} showcases the achieved
+speedup, when employing Aladdin, by the accelerators selected by
+\rseeker\ (labeled \texttt{regions} in the figure), with respect to
+the entire run-time of the applications and for different area
+constraints.  For small-to-medium size applications such as \adpcm,
+\aes, \gsm\ and \sha\ speedup gains for \rseeker\ vary from 1.6x up to
+3.2x. For smaller kernels, larger variations can be observed, as for
+\dfmul\ and \dfsin\ the speedup reaches 1.12x and 3.9x respectively.
+Finally, for larger benchmarks such as \jpeg\ and \mpeg\, speedup is
+fairly significant: 2.5x for the former and up to 4.3x for the latter
+can be reached using \rseeker.\par
+
+Similar trends are observed when Vivado HLS is instead used for the
+accelerator synthesis, as reported in
+Figure~\ref{fig:regions_vivado}: \rseeker\ consistently outperforms
+\SoTA\ approaches which target either single basic blocks or
+entire functions, across all benchmarks. These results 
+highlight that the achievable speedups
+are highly influenced by which segments of applications are selected
+for accelerations, and that such choice is only marginally influenced
+by the adopted merit and cost estimation tool. In fact, it was verified
+that across the two sets of experiments, the regions chosen were
+\emph{the same} in 80\% of the cases. As an example, out of 10 regions
+selected to achieve a 2.2x speedup for the \jpeg\ benchmark, 8 are the
+same when using either Aladdin or Vivado HLS for merit and cost
+estimation, and the ones that differ contribute to less than 14\% of
+the provided gain.\par
+
+The speedup that can be obtained by accelerating basic blocks is
+hampered by their small granularity and, consequently, the high number
+of switches between software and hardware execution. Moreover, in this
+setting many optimization opportunities
+during the hardware implementation of the accelerators are missed,
+because they only arise when control flow is considered, as is instead the case
+for regions.
+On the other hand, the speedup derived by selecting whole functions
+trails the one corresponding to regions, because of two
+reasons. First, function selection is limited to the ones which do not
+present forbidden nodes, and this might rule out promising regions
+within them. Second and more importantly, it is also inflexible from
+an area viewpoint, which is especially visible when few hardware
+resources are available for acceleration. In those cases, the
+selection of functions often detects only few feasible candidates,
+with a small merit (e.g., in \jpeg\ and \mpeg, for an area of less
+than 0.5 $mM^2$).\par
+
+This limitation is not present for regions, as only the part
+pertaining to individual hotspots inside a function can be
+selected. Indeed, the performance of \rseeker\ stems from the high
+flexibility of the selection approach, as it allows the consideration of
+the entire spectrum of granularity ranging from whole functions to
+single loops, ultimately enabling a better exploitation of speedup for
+a given area budget.
+
+\begin{figure}[h]
+\centering
+%\hspace*{-2cm}
+\includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
+\caption{Normalized Speedup of RegionSeeker with respect to function and basic block selection, 
+considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.}
+\label{fig:regions_all}
+\end{figure}
+
+A summary of the performed experimental exploration is presented in
+Figure \ref{fig:regions_all}.  It reports the normalized speedups
+obtained by \rseeker\ compared to basic block and function
+identification, when the maximum considered area budget and
+Vivado\_HLS are employed.  The rightmost column set illustrates that,
+on average, \rseeker\ harnesses approximately 30\% higher speedups
+with respect to the two baseline methods. Moreover, while in some
+cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
+for basic blocks, \dfsin\ for functions), neither of them can do that
+consistently across different area constraints and across
+applications, showcasing the suitability of control-flow regions as
+accelerator candidates.
+
+\subsection{Performance of Selection Algorithms}
+\label{subsec:algo-perf}
+
+\begin{figure*}[h]
+\centering
+  \hspace*{-2cm}
+\subfigure{
+\includegraphics[width=0.5\textwidth]{figs//h264-reg.pdf}
+\label{fig:h264-reg}
+}
+\subfigure{
+\includegraphics[width=0.5\textwidth]{figs//h264-pr-reg.pdf}
+\label{fig:h264-pr-reg}
+}
+  \hspace*{-2cm}
+\caption{Left: The \numofhtsfregs\ regions of \htsf\ are partitioned here
+  in ten bins, according to their merit $M()$. Regions providing up to
+  10\% of the maximum merit fall in the first bin, from 10\% to 20\%
+  in the second bin etc. Notice that the distribution is extremely
+  skewed.  Right: The nine most profitable bins are here shown in linear
+  scale, for clarity.  The skewness of this distribution is leveraged
+  by the \exactC\ selection algorithm.  }
+\label{fig:h264-regions}
+\end{figure*}
+
+In Section~\ref{sec:rs_algos}, three selection algorithms were presented:
+an exact algorithm that might not scale for large benchmarks, a naive
+greedy, and a meet-in-the-middle approach where the exact algorithm is
+applied only to a cropped list of regions, as opposed to all regions
+of a benchmark. In this section, the performance of these algorithms
+is evaluated, in terms of scalability and of goodness of the solution
+found.\par
+
+To this end, a complex benchmark is targeted (namely, \htsf\
+\cite{H264May15}), which has a code size of more than ten thousand
+lines of code and contains thousands of regions. Note that, while
+Aladdin provides merit and cost estimation for a region very quickly
+(a matter of milliseconds per region) and therefore could have been
+employed for this experiment of algorithm scalability, it does,
+however, require the outlining of the selected accelerator
+specifically \emph{as a function call} within the application source
+code --- and this currently needs to be done manually. This technical
+limitation means that Aladdin estimations cannot be used for the
+scalability experiments in this section.
+Hence, a more abstract model was employed, which could be implemented
+directly within the LLVM toolchain, relying on the LLVM intermediate
+representation and without needing manual intervention on benchmark
+source code. The cost of a region was estimated as the area required to
+implement its DFG nodes, and its merit as the cycles saved between SW
+and HW execution, where the latter is the delay of the nodes on the
+DFG critical paths, each multiplied by their respective frequency.
+
+% OLD START
+%
+%
+%
+%
+
+% Figure~\ref{fig:regions_aladdin} showcases the achieved
+% speedup, when employing Aladdin, by the accelerators selected by
+% \rseeker\ (labeled \texttt{regions} in the figure), with respect to
+% the entire run-time of the applications and for different area
+% constraints.  For small-to-medium size applications such as \adpcm,
+% \aes, \gsm\ and \sha\ speedup gains for \rseeker\ vary from 1.6x up to
+% 3.2x. For smaller kernels, larger variations can be observed, as for
+% \dfmul\ and \dfsin\ the speedup reaches 1.12x and 3.9x respectively.
+% Finally, for larger benchmarks such as \jpeg\ and \mpeg\, speedup is
+% fairly significant: 2.5x for the former and up to 4.3x for the latter
+% can be reached using \rseeker.\par
+
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
+% \caption{Comparison of speedups obtained on eight CHStone benchmarks
+%   by selecting regions, only basic blocks and only functions, varying
+%   the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
+% \label{fig:regions_vivado}
+% \end{figure}
+
+% Similar trends are observed when Vivado HLS is instead used for the
+% accelerator synthesis, as reported in
+% Figure~\ref{fig:regions_vivado}: \rseeker\ consistently outperforms
+% \SoTA\ approaches which target either single basic blocks or
+% entire functions, across all benchmarks. These results 
+% highlight that the achievable speedups
+% are highly influenced by which segments of applications are selected
+% for accelerations, and that such choice is only marginally influenced
+% by the adopted merit and cost estimation tool. In fact, this was verified 
+% across the two sets of experiments, as the regions chosen were
+% the same in 80\% of the cases. As an example, out of 10 regions
+% selected to achieve a 2.2x speedup for the \jpeg\ benchmark, 8 are the
+% same when using either Aladdin or Vivado HLS for merit and cost
+% estimation, and the ones that differ contribute to less than 14\% of
+% the provided gain.\par
+
+
+% \begin{figure}[h]
+% \centering
+% %\hspace*{-2cm}
+% \includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
+% \caption{Normalized Speedup of RegionSeeker with respect to function and basic block selection, 
+% considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.}
+% \label{fig:regions_all}
+% \end{figure}
+
+% Finally, in Figure \ref{fig:regions_all} a summary of the performed experimental 
+% exploration is presented. It reports the normalized speedups
+% obtained by \rseeker\ compared to basic block and function
+% identification, when a fixed area budget is considered and
+% Vivado HLS are employed. The mean column illustrates that,
+% on average, \rseeker\ achieves approximately 30\% higher speedups
+% with respect to the two baseline methods. Moreover, while in some
+% cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
+% for basic blocks, \dfsin\ for functions), neither of them can achieve that
+% consistently across applications, stressing the suitability of control-flow regions as
+% HW accelerator candidates.\par
+
+% The speedup that can be obtained by accelerating basic blocks is
+% hindered by their small granularity and, consequently, the high number
+% of HW accelerators invocations by the SW processor, i.e., the switches 
+% between software and hardware execution. Moreover, in this
+% setting many optimization opportunities
+% during the hardware implementation of the accelerators are missed,
+% because they only arise when control flow is considered, as is instead the case
+% for regions.\par
+
+% On the other hand, the speedup derived by selecting whole functions
+% trails the one corresponding to regions, because of two
+% reasons. First, function selection is limited to the ones which do not
+% present forbidden nodes, and this may rule out promising regions
+% within them. Second and more importantly, it is inflexible from
+% an area viewpoint, which is especially visible when few hardware
+% resources are available for acceleration. In those cases, the
+% selection of functions often detects only few feasible candidates,
+% with a small merit (e.g. in Figure \ref{fig:regions_aladdin}: \jpeg\ and 
+% \mpeg, for an area of less than 0.5 $mM^2$).\par
+
+% This limitation, though, is not present in regions, as simply the part
+% referring to individual hotspots inside a function can be available
+% for selection. Indeed, the performance of \rseeker\ stems from the high
+% flexibility of the selection approach, as it allows the consideration of
+% the entire spectrum of granularity ranging from whole functions to
+% single loops, ultimately enabling a better exploitation of speedup for
+% a given area budget.
+
+% OLD END!
+%
+%
+%
+%
+
+% \newpage
+%
+%
+%     RegionSeeker MuLTiVersioning
+%
+%
+%
+%
+\section{RegionSeeker MuLTiVersioning}
+
+\HLS\ (HLS) tools, such as Vivado HLS by Xilinx, may employ %additional 
+optimizations to HW accelerators
+design in order to increase performance, i.e. obtain faster execution. These 
+%pragma-directed 
+HLS optimizations were not taken into account by \rseeker\ framework in the
+previous section. Default, non optimized versions of HW accelerators were identified
+and selected instead. In this
+section an extended \rseeker\ framework is presented, which performs the selection not 
+only among possible CFG subgraphs, but also among different versions of each identified 
+subgraph, namely different versions of the regions identified. 
+This extension is referred to in the rest of the document as RegionSeeker: the 
+MuLTiVersioning approach.
+
+% The \rseeker\ framework, as detailed in the previous section, was designed in order to identify
+% the most efficient HW accelerators under a given constraint, but was targeting default HW
+% implementations. Pragma-directed HLS optimizations were not taken into account. In this 
+% section we present an extended \rseeker\ framework, which performs the selection not 
+% only among possible CFG subgraphs, but also among different versions of each identified 
+% subgraph of the CFG, namely different versions of the regions identified. 
+% We call this extension the RegionSeeker: MuLTiVersioning approach.
+
+\subsection{Methodology}
+\label{subsec:mv_meth}
+
+The rationale, supporting the extension of \rseeker\ framework, is to achieve improved
+speedup that can be provided by exploiting a more varied set of HW accelerators to select from, 
+with different optimizations implemented onto them. This is being achieved by instantiating 
+different versions of each HW accelerator with the same functionality, yet different speedup gains 
+and different area (HW resources) requirements. The set of optimizations that were considered in 
+order to design different HW implementations of the same accelerators are: 
+\begin{enumerate}
+\item The Loop Unrolling 
+(LU) factor, in accelerators that contain loops.
+\item The loop pipelining option, being either on or off.
+\item The array partition factor, 
+which is the number of input and output ports of the memory buffer (scratchpad) attached 
+to the accelerator.
+\end{enumerate}\par
+
+Loop unrolling optimization is an HLS directive that, in the context of \HLS\, instantiates multiple 
+copies of the logic implementing the functionality defined in a loop body, drastically impacting the 
+performance of HW accelerators \cite{KurraApr07} \cite{KulkarniOct12}. This directive can be applied in HW
+accelerators containing loops whose trip count can be statically defined. It should nonetheless
+be applied in a careful manner, as it entails a high area cost for the duplicated logic. Furthermore,
+the resulting benefits can be hampered by loop-carried dependencies and frequent memory
+accesses.\par
+Loop pipelining is an additional HLS directive applied in loops that allows the pipelining of 
+the operations contained in a single body of a loop and across consecutive iterations. Restrictions 
+regarding loop-carried dependencies across consecutive iterations can limit the application of the loop
+pipelining optimization, as the result of the output of a loop iteration would be required in the following
+one, thus not allowing the pipelining of the loop body operations.\par
+
+Given an initial set of HW accelerators, i.e., a set of regions that is derived by the \rseeker\ framework, 
+multiple versions for each region can be generated that maintain the same functionality.
+Each version may employ one of the optimizations listed above, or a combination of them.
+\par
+
+
+All versions of the HW accelerators were evaluated by exploiting the Aladdin HW accelerator simulator.  
+Aladdin targets ASIC implementations. It
+provides a fast evaluation, but does not generate a synthesizable netlist,
+as opposed to Vivado HLS. Nonetheless, the estimations provided are
+within 1\% of the ones derived from a Register-transfer level (RTL) implementation, according to 
+the developers of Aladdin \cite{ShaoJul14}.
+For all simulated versions of the selected regions (or HW accelerators), the number of Cycles and number 
+of Functional Units (FU) Area were retrieved. For the SW execution time the gem5 simulator 
+\cite{BinkertFeb11}
+was used with two CPU settings: a) TimingCPU  (a simple and slow CPU with only two pipeline stages)
+and b) O3CPU (a complex and fast CPU with five pipeline stages and other resources such as a 
+branch predictor, reorder buffer etc). \par
+
+
+The \exact\ selection algorithm, as detailed in Subsection \ref{subsec:meth}  was used subsequently to 
+perform the optimal subset selection, 
+given an initial set of HW accelerators along with their respective versions, as well as a specific 
+area (HW resources) budget. An important note is that no more than one version of each candidate 
+can be selected, as only one realization of the respective SW execution is required.
+To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
+containing the basic block indexes included in each region. As a result the set of basic block indexes for 
+multiple versions of the same region would be identical.
+Experiments were run in \jpeg\ benchmark and four different selection
+approaches are presented, comparing three of them to the \multi\ approach.\par
+
+\subsection{Experimental Results}
+\label{subsec:mv_res}
+
+The experimental setup was the same as in the \rseeker\ framework, with a system comprising a single 
+SW processor and multiple loosely coupled HW accelerators, exchanging shared data with \plms.
+The processor invokes the accelerators via a memory-mapped
+interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete,
+control returns to the SW processor.\par
+
+The speedup achieved on \jpeg\ benchmark, over the respective SW 
+time of the same set of selected regions (kernels) %, and the whole application 
+are showcased. 
+The four different approaches compared are:
+a) the \emph{min} where the regions with the least amount of area are included in the set
+and hence can be selected, b) the \emph{base} 
+where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
+area regions can be selected and finally d) the \multi\ approach where any possible version 
+of the regions can be selected. \par
+
+\begin{figure*}[h]
+\centering
+\hspace*{-1cm}
+\includegraphics[width= 0.7 \linewidth]{figs/plot_O3CPU_SW_large}
+\caption{Comparison of speedup obtained on jpeg benchmark, over the
+SW time of the equivalent kernels (regions), varying the area constraint, using 
+Aladdin and gem5 for Speedup and Area evaluation.
+Four approaches are compared: The 
+min where the regions with least amount of area are selected, the base
+where the regions with median values of area are selected, the max where 
+only the maximum area regions can be selected and finally the \multi\
+approach where any version of the regions can be selected.
+}
+\label{fig:mlv_aladdin}
+\end{figure*}
+
+The strength of the \multi\ approach and the benefit of having 
+a variety of potential candidates to select from 
+%for any equivalent computation, throughout the \jpeg\  application 
+is demonstrated by the experimental outcome of the \jpeg\ application (kernels run-time). 
+In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
+methodology. For a medium area point ($200 * 10^3 uM^2$), the 
+speedup achieved with \multi\ is 1.7x more than the second best, \emph{base} approach. For 
+a large area constraint ($400 * 10^3 uM^2$) the \multi\ speedup is more than 2x compared to
+\emph{base} and more than 6x compared to \emph{min}.\par
+
+% In Figure \ref{fig:mlv_speed_aladdin} the same trend is depicted in the speedup of the whole application
+% for the MuLTiVersioning methodology, where it constantly outperforms every other competitive method while
+% reaching a maximum speedup of 1.8x over the entire jpeg application.\par
+
+
+
+% \begin{figure}[h]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 0.7 \linewidth]{Figs/plot_O3CPU}
+% \caption{Comparison of speedup obtained on jpeg benchmark, 
+% varying the area constraint, using 
+% Aladdin and Gem5 for Speedup and Area evaluation.
+% Four approaches are compared: The 
+% min where the regions with least amount of area are selected, the base
+% where the regions with median values of area are selected, the max where 
+% only the maximum area regions can be selected and finally the MuLTiVersioning
+% approach where any version of the regions can be selected.}
+% \label{fig:mlv_speed_aladdin}
+% \end{figure}
+
 
 \section{Related Work}
 \label{sec:rw}
@@ -547,529 +1612,6 @@ from Xilinx (for FPGAs) and StratusHLS \cite{StratusHLSApr16} from
 Cadence (for ASIC development).
 However, these HLS frameworks place the responsibility of
 partitioning a SW application on the application developer.\par
-
-\section{The RegionSeeker Framework}
-\label{sec:rs}
-
-The RegionSeeker framework is an automated methodology that 
-identifies candidates for HW acceleration from application source 
-code. An extensive SW analysis, based on the LLVM compiler infrastructure,
-performs, apart from
-the identification, an estimation of the performance gain, along with
-the HW resources cost, of each candidate. Subsequently given a HW resources
-constraint, a selection of the identified HW accelerators takes place that
-maximizes the cumulative performance gain.
-In the following subsections the methodology is presented in detail, as well as
-experimental results from the CHStone benchmark \cite{HaraMay08} suite.
-
-\subsection{Methodology}
-\label{subsec:meth}
-
-There are three parts comprising the methodology, detailed as follows.
-The first step is to automatically identify valid regions that are suitable candidates
-for HW acceleration. Secondly, an estimation of their potential merit, in terms of cycles saved
-(the difference between SW and HW execution cycles),
-is computed along with the respective cost, which is the HW resources (area) required
-for each region. Finally, a selection algorithm is utilized in order to optimally solve the 
-problem of selecting a subset of these
-regions that maximize the accumulated merit under a given cost, i.e., an area constraint.
-
-\subsubsection{Region Identification}
-\label{subsec:reg_id}
-
-To identify regions in both an automatic and efficient way, a
- \emph{Region Identification} pass was developed under the version 3.8 
-of the \emph{LLVM Compiler framework} \cite{LattnerMar04}. 
-The pass receives as input applications developed in C or C++ and performs 
-their analysis at the Intermediate Representation (IR) level, a type
-of code used internally by LLVM to represent source code and allow
-data flow analysis and optimizations.\par
-
-The pass iterates over every function of an
- application and, using the existing \emph{RegionInfo} LLVM pass 
-\cite{GrosserApr12}, identifies regions within every function.
-%, as seen in Figure \ref{fig:region}. 
-Subsequently, nodes that cannot be synthesized, such as system
-calls or calls to functions that are not inlined, are identified 
-and labeled as forbidden.
-%forbidden nodes inside regions are identified and labeled, such as system
-%calls or calls to functions that are not inlined. 
-The regions containing
-these nodes are marked as invalid. Conversely, the valid regions are 
-evaluated by a profiling-via-instrumentation routine.
-Profiling via
-instrumentation requires generating an instrumented version of the
-code, which gives more detailed results than a sampling
-profiler. 
-The output of the profiling is a file that contains information regarding 
-the execution frequency of each basic block and the total number of calls to each 
-function, i.e., the execution frequency of each function.
-Using this information, the basic blocks are annotated
- in each function with their respective execution frequency. 
-% with the aid of \emph{ClrFreqCFGPrinter} LLVM pass \cite{ZacharopoulosMar17},
- %that I have developed.
-
-
-% LLVM RegionSeeker Analysis Pass.
-% %
-\begin{algorithm}[t]
-\begin{flushleft}
-\textbf{Input:}  Application written in C/C++\\
-\textbf{Output:} List of Identified and Profiled Regions\\
-\end{flushleft}
-\begin{algorithmic}[1]
-\Function{$RunOnFunction()$}{}
-\State\Call{$Region\_List=NULL$}{}
-\State\Call{$RI=getRegionInfoAnalysis()$}{}
-  \For {$Region\ in\ Function$}
-    \If {\Call{$RegionIsValid()$}{}}
-      \State\Call{$EvaluateRegion$}{Region}
-      \State{$Region\_List.Add(Region)$}     
-    \EndIf
-  \EndFor
-  \State{$return\ Region\_List$}  
-\EndFunction
-
-\State
-\State{$/* Estimate\ Merit\ for\ Region*/$}
-\Function{$EvaluateRegion$}{Region}
-  \For {$Basic\ Block\ in\ Region$}
-    \State\Call{$getProfilingInfo$}{Basic\ Block}
-  \EndFor
-\EndFunction
-\end{algorithmic}
-\caption{LLVM Analysis Pass - Region Identification} 
-\label{algo:reg}
-\end{algorithm}
-
-\subsubsection{Merit and Cost Estimation}
-\label{subsec:mer_cost}
-
-The Region Identification pass, apart from the identification of regions detailed above, 
-performs an early evaluation of the merit and cost of a region, implemented
-directly within the LLVM tool-chain. The evaluation relies on the LLVM intermediate
-representation and does not need any manual modification to perform function out-lining
-on the benchmark source code. 
-The estimation of merit and the cost of a region is performed as follows.\par
-
-\emph{Merit Estimation.} 
-The merit of a region is defined as the total number of cycles saved in a HW accelerator 
-implementation compared to the respective SW implementation of the same piece of runtime 
-of a given application. Therefore the merit of a HW accelerator is estimated as the 
-difference between the \HW\ and \SW\ run time, across all its invocations in an application,
-taking into account the invocation overhead of calling a HW accelerator in a specific 
-heterogeneous architecture. The estimation of the HW run time is computed first in the 
-basic block (BB) level as the the critical path of the latency (in clock cycles) of the Data 
-Flow Graph (DFG) nodes. Runtime profiling information is used in order to determine the execution 
-frequency of each BB.
-Subsequently the delay of the entire region in HW is estimated by multiplying the critical path
-delay of each BB with the respective execution frequency and finally summing up the products, 
-according to the specific BBs that comprise the region.
-Software run-times are estimated in a similar fashion, but instead of computing critical paths 
-at the BB level, the sum of the latency (in clock cycles) of all its constituent operations is 
-computed, modeling that these are processed sequentially in software.\par
-
-\emph{Cost Estimation.} On the other side of the evaluation, the cost of a region 
-is estimated as the area (or HW resources) required to implement its DFG nodes. The area 
-is computed as the sum of look-up tables that is required for
-the DFG nodes of the respective HW accelerator. Each DFG node may take up a different amount
-of loop-up tables according to its complexity. The characterization for each DFG node was carried
-out with the aid of Vivado, a commercial \HLS\ tool, targeting a Virtex7 FPGA.\par
-% and its merit as the cycles saved between SW
-% and HW execution, where the latter is the delay of the nodes on the
-% DFG critical paths. Runtime profiling information is used in both SW and
-% HW latency estimations in order to determine the number of invocations for
-% each candidate.\par
-The final output of the analysis pass is a list of valid regions, 
-or else accelerator candidates, each annotated with an estimated merit and cost.
-The region list output is in turn processed by the 
-\exact\ selection algorithm implemented as standalone program in C++.
-% selection algorithms exact and greedy implemented as standalone programs in C++.
-
-
-\subsubsection{Region Selection Algorithm}
-\label{subsec:sel_algo}
-
-Given a merit $M()$ and cost $C()$ function for each region 
-we can formulate the problem of selecting accelerators as follows:\\
-\textbf{Problem: Region Selection}
-Let $\mathcal{R} = \{ R_1, R_2, \ldots, R_n \}$ be a set of regions,
-with associated cost and merit functions $C$ and $M$.
-For any subset $X\subseteq \{1,2,\ldots,n\}$ of regions,
-we denote by $M(X) = \sum_{i\in X} M(R_i)$ the sum of the merits of
-its regions, and we denote by $C(X) = \sum_{i\in X} C(R_i)$ the sum of
-the costs of its regions.
-
-We want to select a subset $X$ of regions such that
-\begin{enumerate}
-\item No two regions belonging to the same CFG overlap, i.e.,
-  $V(R_i)\cap V(R_j) = \emptyset$, for all $1\le i,j\le n$
-\item The cost $C(X)$ is within a user-given cost budget $C_{\max}$
-\item The merit $M(X)$ is maximized
-\end{enumerate}
-
-
-This problem definition maps to what we have identified in
-Section~\ref{sec:mot} as the designer aim: given an available
-accelerator area, extract as much as possible of the computation,
-under the constraint to require no more than that area, in order to
-maximize the resulting speedup.\par
-
-\begin{figure*}[t]
-\centering
-%\includegraphics[width= \linewidth]{figs/figs_from_pptx/exact_tree.pdf}
-\includegraphics[width= .9 \linewidth]{Figs/exact_tree.pdf}
-\caption{Tree exploration performed by \exact, for the running example
-  of Figure~\ref{fig:cfg-example}, and for a cost budget of 35.}
-\label{fig:exact_tree}
-\end{figure*}
-
-An exponential, \exact\ branch-and-bound method
-based on a binary-tree search was derived in order to solve optimally 
-the Region Selection problem. The algorithm converges to an
-% is implemented so that it finds the 
-independent set of regions that maximizes merit under 
-a given cost.
-This process can be exemplified through
- Figure~\ref{fig:exact_tree}: given an initial set $P$, that includes all
- valid regions identified, and a set $X$, that is initially an empty set and 
-is going to be the subset of $P$ that maximizes merit under a given cost.
-The root of the tree represents the empty set, and set $P$ at this
-point contains all regions. Furthermore an overlapping graph among regions 
-shows whether there is overlapping among valid regions contained in $P$, 
-such that it poses the restriction of not allowing the selection of regions 
-that overlap with each other, i.e., containing at least one BB that is common. 
-The overlapping graph is seen as well in Figure~\ref{fig:exact_tree}.
-As the algorithm starts the exploration, inclusion of region A is first
-considered, and the set P is updated by removing all regions overlapping
-with A: $P = \{E\}$. According to the merit and costs of all regions
-in this example, shown in the table within the picture, the merit (60)
-and cost (35) of the solution currently explored is also updated.\par
-
-At every point of the exploration, a new node $u$ is considered for
-addition in the current independent set.
-If there is no node $u$
-satisfying condition $2$ of the Region Selection Problem, the algorithm
-records the set $X$ and backtracks, as $X$ is maximal with respect to
-condition $2$.  For the running example in
-Figure~\ref{fig:exact_tree}, the cost budget $C_{\max}$ is equal to
-$35$. Hence, exploration stops at $X=\{A\}$ because the cost budget
-has been reached, and backtracks. The next region chosen is $B$, sets
-$X$ and $P$ are again updated accordingly, to $X=\{B\}$ and
-$P=\{C,D,E\}$, and exploration continues until the selection algorithm
-converges.\par
-
-Two optimizations are implemented in the exact selection algorithm in order 
-to avoid unnecessary exploration. Optimization 1 performs a look up in order 
-to determine whether the maximum recorded merit can be reached by the 
-regions contained in $P$ or not. If not the exploration stops and backtracks.
-Optimization 2 ranks the valid regions in terms of merit so that the first 
-region considered for inclusion in $X$ is the one with the maximum merit.
-
-\begin{figure}[h!]
-\centering
-\hspace*{-1cm}
-\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
-\caption{Comparison of speedups obtained on eight CHStone benchmarks
-  by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
-\label{fig:regions_aladdin}
-\end{figure}
-
-\subsection{Experimental Results}
-\label{subsec:exp}
-
-The evaluation of the \rseeker\ framework took place by assuming a system constituting a single 
-SW processor and multiple HW accelerators, exchanging shared data with \plms. The processor 
-activates the accelerators via a memory-mapped interface, thus requiring a transaction on the 
-system bus. When activated, accelerators read and write data to and from the \plms, computing 
-their outputs, which can then be accessed by the processor. Accelerators are interfaced to \plms\ 
-with ports having a latency of one clock cycle. The control interface between the processor and 
-the accelerators was modeled with a latency of 10 clock cycles.\par
-
-The run-times of the non-accelerated SW part of the considered
-benchmarks were measured using the Gem5
-simulator~\cite{BinkertFeb11}, modeling an ARMv8-A processor with an
-issue width of 1. The processor model is atomic, with in-order
-execution. It is interfaced with separate instruction and data
-memories with an access latency of one clock cycle.\par
-
-Hardware execution times were retrieved using two different HLS 
-frameworks: the Aladdin simulator and the Xilinx Vivado HLS
-commercial tool-suite.  Aladdin targets ASIC implementations.  It
-provides a fast evaluation, but does not produce a synthesizable netlist
-as output; nonetheless, the estimations offered by this tool are
-within 1\% of the ones derived from an RTL implementation
-\cite{ShaoJul14}.  Hardware instances generated with Vivado HLS are
-instead intended for FPGA designs. Synthesis-runs within this
-framework are more time-consuming, but provide exact area (HW resources
-in terms of Look Up Tables and Flip Flops)
-and latency (number of cycles) values of each accelerator, as well as a direct
-path to its realization.  In both cases, default implementations of
-the accelerators were considered, i.e., no optimizations were applied to the
-implemented HW accelerators.\par
-
-The benchmarks that were used during the experimental phase are embedded applications
-of varying size from the CHStone benchmark suite \cite{HaraMay08}.
-\adpcm\ performs an encoding routine and \aes\ is a symmetric-key encryption algorithm. 
-\dfmul\ and \dfsin\ are small kernels that perform double-precision 
-floating-point multiplication and sine functions employing integer arithmetics. 
-\gsm\ performs a linear predictive coding analysis, used in mobile communication. 
-\jpeg\ and \mpeg\ are larger applications, implementing JPEG and MPEG-2 compression, respectively.
-Finally, \sha\ is a secure hash encryption algorithm, used for 
-the generation of digital signatures and the exchange of cryptographic keys.\par
-
-% \begin{figure}[h!]
-% \centering
-% \hspace*{-1cm}
-% \includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
-% \caption{Comparison of speedups obtained on eight CHStone benchmarks
-%   by selecting regions, only basic blocks and only functions, varying
-%   the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
-% \label{fig:regions_aladdin}
-% \end{figure}
-
-Figure~\ref{fig:regions_aladdin} showcases the achieved
-speedup, when employing Aladdin, by the accelerators selected by
-\rseeker\ (labeled \texttt{regions} in the figure), with respect to
-the entire run-time of the applications and for different area
-constraints.  For small-to-medium size applications such as \adpcm,
-\aes, \gsm\ and \sha\ speedup gains for \rseeker\ vary from 1.6x up to
-3.2x. For smaller kernels, larger variations can be observed, as for
-\dfmul\ and \dfsin\ the speedup reaches 1.12x and 3.9x respectively.
-Finally, for larger benchmarks such as \jpeg\ and \mpeg\, speedup is
-fairly significant: 2.5x for the former and up to 4.3x for the latter
-can be reached using \rseeker.\par
-
-\begin{figure}[h!]
-\centering
-\hspace*{-1cm}
-\includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
-\caption{Comparison of speedups obtained on eight CHStone benchmarks
-  by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
-\label{fig:regions_vivado}
-\end{figure}
-
-Similar trends are observed when Vivado HLS is instead used for the
-accelerator synthesis, as reported in
-Figure~\ref{fig:regions_vivado}: \rseeker\ consistently outperforms
-\SoTA\ approaches which target either single basic blocks or
-entire functions, across all benchmarks. These results 
-highlight that the achievable speedups
-are highly influenced by which segments of applications are selected
-for accelerations, and that such choice is only marginally influenced
-by the adopted merit and cost estimation tool. In fact, this was verified 
-across the two sets of experiments, as the regions chosen were
-the same in 80\% of the cases. As an example, out of 10 regions
-selected to achieve a 2.2x speedup for the \jpeg\ benchmark, 8 are the
-same when using either Aladdin or Vivado HLS for merit and cost
-estimation, and the ones that differ contribute to less than 14\% of
-the provided gain.\par
-
-
-\begin{figure}[h!]
-\centering
-%\hspace*{-2cm}
-\includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
-\caption{Normalized Speedup of RegionSeeker with respect to function and basic block selection, 
-considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.}
-\label{fig:regions_all}
-\end{figure}
-
-Finally, in Figure \ref{fig:regions_all} a summary of the performed experimental 
-exploration is presented. It reports the normalized speedups
-obtained by \rseeker\ compared to basic block and function
-identification, when a fixed area budget is considered and
-Vivado HLS are employed. The mean column illustrates that,
-on average, \rseeker\ achieves approximately 30\% higher speedups
-with respect to the two baseline methods. Moreover, while in some
-cases the baselines match the performance of \rseeker\ (e.g.: \gsm\
-for basic blocks, \dfsin\ for functions), neither of them can achieve that
-consistently across applications, stressing the suitability of control-flow regions as
-HW accelerator candidates.\par
-
-The speedup that can be obtained by accelerating basic blocks is
-hindered by their small granularity and, consequently, the high number
-of HW accelerators invocations by the SW processor, i.e., the switches 
-between software and hardware execution. Moreover, in this
-setting many optimization opportunities
-during the hardware implementation of the accelerators are missed,
-because they only arise when control flow is considered, as is instead the case
-for regions.\par
-
-On the other hand, the speedup derived by selecting whole functions
-trails the one corresponding to regions, because of two
-reasons. First, function selection is limited to the ones which do not
-present forbidden nodes, and this may rule out promising regions
-within them. Second and more importantly, it is inflexible from
-an area viewpoint, which is especially visible when few hardware
-resources are available for acceleration. In those cases, the
-selection of functions often detects only few feasible candidates,
-with a small merit (e.g. in Figure \ref{fig:regions_aladdin}: \jpeg\ and 
-\mpeg, for an area of less than 0.5 $mm^2$).\par
-
-This limitation, though, is not present in regions, as simply the part
-referring to individual hotspots inside a function can be available
-for selection. Indeed, the performance of \rseeker\ stems from the high
-flexibility of the selection approach, as it allows the consideration of
-the entire spectrum of granularity ranging from whole functions to
-single loops, ultimately enabling a better exploitation of speedup for
-a given area budget.
-
-
-\newpage
-\section{RegionSeeker MuLTiVersioning}
-
-\HLS\ (HLS) tools, such as Vivado HLS by Xilinx, may employ %additional 
-optimizations to HW accelerators
-design in order to increase performance, i.e. obtain faster execution. These 
-%pragma-directed 
-HLS optimizations were not taken into account by \rseeker\ framework in the
-previous section. Default, non optimized versions of HW accelerators were identified
-and selected instead. In this
-section an extended \rseeker\ framework is presented, which performs the selection not 
-only among possible CFG subgraphs, but also among different versions of each identified 
-subgraph, namely different versions of the regions identified. 
-This extension is referred to in the rest of the document as RegionSeeker: the 
-MuLTiVersioning approach.
-
-% The \rseeker\ framework, as detailed in the previous section, was designed in order to identify
-% the most efficient HW accelerators under a given constraint, but was targeting default HW
-% implementations. Pragma-directed HLS optimizations were not taken into account. In this 
-% section we present an extended \rseeker\ framework, which performs the selection not 
-% only among possible CFG subgraphs, but also among different versions of each identified 
-% subgraph of the CFG, namely different versions of the regions identified. 
-% We call this extension the RegionSeeker: MuLTiVersioning approach.
-
-\subsection{Methodology}
-\label{subsec:mv_meth}
-
-The rationale, supporting the extension of \rseeker\ framework, is to achieve improved
-speedup that can be provided by exploiting a more varied set of HW accelerators to select from, 
-with different optimizations implemented onto them. This is being achieved by instantiating 
-different versions of each HW accelerator with the same functionality, yet different speedup gains 
-and different area (HW resources) requirements. The set of optimizations that were considered in 
-order to design different HW implementations of the same accelerators are: 
-\begin{enumerate}
-\item The Loop Unrolling 
-(LU) factor, in accelerators that contain loops.
-\item The loop pipelining option, being either on or off.
-\item The array partition factor, 
-which is the number of input and output ports of the memory buffer (scratchpad) attached 
-to the accelerator.
-\end{enumerate}\par
-
-Loop unrolling optimization is an HLS directive that, in the context of \HLS\, instantiates multiple 
-copies of the logic implementing the functionality defined in a loop body, drastically impacting the 
-performance of HW accelerators \cite{KurraApr07} \cite{KulkarniOct12}. This directive can be applied in HW
-accelerators containing loops whose trip count can be statically defined. It should nonetheless
-be applied in a careful manner, as it entails a high area cost for the duplicated logic. Furthermore,
-the resulting benefits can be hampered by loop-carried dependencies and frequent memory
-accesses.\par
-Loop pipelining is an additional HLS directive applied in loops that allows the pipelining of 
-the operations contained in a single body of a loop and across consecutive iterations. Restrictions 
-regarding loop-carried dependencies across consecutive iterations can limit the application of the loop
-pipelining optimization, as the result of the output of a loop iteration would be required in the following
-one, thus not allowing the pipelining of the loop body operations.\par
-
-Given an initial set of HW accelerators, i.e., a set of regions that is derived by the \rseeker\ framework, 
-multiple versions for each region can be generated that maintain the same functionality.
-Each version may employ one of the optimizations listed above, or a combination of them.
-\par
-
-
-All versions of the HW accelerators were evaluated by exploiting the Aladdin HW accelerator simulator.  
-Aladdin targets ASIC implementations. It
-provides a fast evaluation, but does not generate a synthesizable netlist,
-as opposed to Vivado HLS. Nonetheless, the estimations provided are
-within 1\% of the ones derived from a Register-transfer level (RTL) implementation, according to 
-the developers of Aladdin \cite{ShaoJul14}.
-For all simulated versions of the selected regions (or HW accelerators), the number of Cycles and number 
-of Functional Units (FU) Area were retrieved. For the SW execution time the gem5 simulator 
-\cite{BinkertFeb11}
-was used with two CPU settings: a) TimingCPU  (a simple and slow CPU with only two pipeline stages)
-and b) O3CPU (a complex and fast CPU with five pipeline stages and other resources such as a 
-branch predictor, reorder buffer etc). \par
-
-
-The \exact\ selection algorithm, as detailed in Subsection \ref{subsec:meth}  was used subsequently to 
-perform the optimal subset selection, 
-given an initial set of HW accelerators along with their respective versions, as well as a specific 
-area (HW resources) budget. An important note is that no more than one version of each candidate 
-can be selected, as only one realization of the respective SW execution is required.
-To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
-containing the basic block indexes included in each region. As a result the set of basic block indexes for 
-multiple versions of the same region would be identical.
-Experiments were run in \jpeg\ benchmark and four different selection
-approaches are presented, comparing three of them to the \multi\ approach.\par
-
-\subsection{Experimental Results}
-\label{subsec:mv_res}
-
-The experimental setup was the same as in the \rseeker\ framework, with a system comprising a single 
-SW processor and multiple loosely coupled HW accelerators, exchanging shared data with \plms.
-The processor invokes the accelerators via a memory-mapped
-interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete,
-control returns to the SW processor.\par
-
-The speedup achieved on \jpeg\ benchmark, over the respective SW 
-time of the same set of selected regions (kernels) %, and the whole application 
-are showcased. 
-The four different approaches compared are:
-a) the \emph{min} where the regions with the least amount of area are included in the set
-and hence can be selected, b) the \emph{base} 
-where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
-area regions can be selected and finally d) the \multi\ approach where any possible version 
-of the regions can be selected. \par
-
-\begin{figure*}[h!]
-\centering
-\hspace*{-1cm}
-\includegraphics[width= 0.7 \linewidth]{figs/plot_O3CPU_SW_large}
-\caption{Comparison of speedup obtained on jpeg benchmark, over the
-SW time of the equivalent kernels (regions), varying the area constraint, using 
-Aladdin and gem5 for Speedup and Area evaluation.
-Four approaches are compared: The 
-min where the regions with least amount of area are selected, the base
-where the regions with median values of area are selected, the max where 
-only the maximum area regions can be selected and finally the \multi\
-approach where any version of the regions can be selected.
-}
-\label{fig:mlv_aladdin}
-\end{figure*}
-
-The strength of the \multi\ approach and the benefit of having 
-a variety of potential candidates to select from 
-%for any equivalent computation, throughout the \jpeg\  application 
-is demonstrated by the experimental outcome of the \jpeg\ application (kernels run-time). 
-In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
-methodology. For a medium area point ($200 * 10^3 uM^2$), the 
-speedup achieved with \multi\ is 1.7x more than the second best, \emph{base} approach. For 
-a large area constraint ($400 * 10^3 uM^2$) the \multi\ speedup is more than 2x compared to
-\emph{base} and more than 6x compared to \emph{min}.\par
-
-% In Figure \ref{fig:mlv_speed_aladdin} the same trend is depicted in the speedup of the whole application
-% for the MuLTiVersioning methodology, where it constantly outperforms every other competitive method while
-% reaching a maximum speedup of 1.8x over the entire jpeg application.\par
-
-
-
-% \begin{figure}[h]
-% \centering
-% \hspace*{-1cm}
-% \includegraphics[width= 0.7 \linewidth]{Figs/plot_O3CPU}
-% \caption{Comparison of speedup obtained on jpeg benchmark, 
-% varying the area constraint, using 
-% Aladdin and Gem5 for Speedup and Area evaluation.
-% Four approaches are compared: The 
-% min where the regions with least amount of area are selected, the base
-% where the regions with median values of area are selected, the max where 
-% only the maximum area regions can be selected and finally the MuLTiVersioning
-% approach where any version of the regions can be selected.}
-% \label{fig:mlv_speed_aladdin}
-% \end{figure}
-
 
 \section{Conclusions}
 \label{sec:rs_conclusions}
@@ -1420,7 +1962,7 @@ performance with respect to Vivado\_norew ones. Conf.1 accelerators
 efficient as Vivado\_rew ones. Conf.2 and Conf. 3 that are
 supported only by the framework presented in \ref{sec:dr_meth}, dramatically decrease
 run-times, with an order-of-magnitude speed up on average between
-Conf.1 and Conf.3. The other state of the art tools \emph{fail to 
+Conf.1 and Conf.3. The other \SoTA\ tools \emph{fail to 
 provide an equivalent solution with such low execution time}.
 Figure \ref{fig:area_fpga} reports the amount of area resources required by
 ROCCC, Vivado HLS and our own generated accelerators.
@@ -2076,7 +2618,7 @@ so prominent that even control-flow structures inside functions fail
 to deliver performance. Suitable accelerator candidates must then
 encompass entire functions, including in turn all functions called
 within their call tree. \aseeker\ considers this same granularity
-(Figure~\ref{fig:soa-evolution}c), advancing the state of the art in
+(Figure~\ref{fig:soa-evolution}c), advancing the \SoTA\ in
 automatic accelerators identification.
 
 \subsection{Methodology}
@@ -2338,12 +2880,12 @@ logical units (LUTs), contributing to the total area.
 
 \subsubsection{Selection Algorithm}
 
-Solving the \probname\ problem on the function-call graph of the
+Solving the \asprobname\ problem on the function-call graph of the
 application corresponds to solving the \emph{independent set
   problem} on the resulting conflict graph. The conflict graph, in
 fact, expresses which pairs of \candidates\ are in conflict; thus, an
 \emph{independent set} of the conflict graph satisfies condition $3$ of the
-\probname\ Problem.
+\asprobname\ Problem.
 
 We therefore implement an algorithm that recursively explores the
 independent sets of the conflict graph, similarly to the Bron-Kerbosch
@@ -2353,7 +2895,7 @@ formulation) and whose cost $C(S)$ does not exceed a user-given
 maximum cost $C_{max}$ (hence satisfying condition $2$ of the
 problem formulation).  
 This returned set represents the optimal
-solution to the \probname\ Problem.
+solution to the \asprobname\ Problem.
 
 An algorithm solving an independent set problem is of course one of
 non-polynomial complexity. Our exact implementation is still able to
@@ -2416,6 +2958,52 @@ outperforms choices that are solely based on profiling information.
 \section{EnergySeeker: Accelerators for Energy Efficiency}
 
 \subsection{Motivation}
+
+eterogeneous Computing calls for specialized \HW\ (HW) that can serve the purpose of
+both accelerating applications and saving significant amounts of energy.
+Vivado High Level Synthesis (HLS) 
+\cite{VivadoHLSMar17} is one of the state-of-the-art, HLS tools that are used to 
+build accelerators and synthesize parts of software applications to HW. Such HLS 
+and HW Description Language (HDL) tools, however efficient, are far from optimal 
+since they require a lot of manual decisions from the programmer's part. When 
+facing a tight area budget, the decision of which parts of the computation to 
+accelerate or which parts to materialize in low power HW accelerators is not 
+trivial. It requires a deep understanding of the \SW\ (SW) application 
+and its characteristics, as aspects of computation intensity and memory 
+management are complex and hard to identify.
+
+Furthermore, the long time required for hardware
+synthesis, coupled with the huge space of alternative implementations
+exposed by real-world applications, limit in practice the number of
+candidate choices that can be considered manually by a designer
+before HW/SW partitioning is settled.
+Simulation tools such as Aladdin \cite{ShaoJul14} have been
+introduced that allow orders-of-magnitude faster evaluation of the
+performance of hardware-accelerated applications. These frameworks are
+not generating a functional hardware implementation, but
+only provide an representation of the run-time
+characteristics, the energy requirements and of the required resources of a 
+selected target for
+acceleration. Nonetheless, these simulation tools still require considerable
+manual effort to set up experimental environments, a task that must be
+repeated for every considered candidate.
+
+In order to address these challenges we present \eseeker, a methodology to
+estimate the suitability of acceleration candidates from application
+source code, subsequently allowing their automatic identification and
+selection. \eseeker, implemented within the LLVM
+\cite{LattnerMar04} compiler infrastructure, first provides a measure
+of the cost (required resources) and merit (potential energy saved)
+of candidate accelerators, and then selects the set that maximizes 
+the estimated energy efficiency gain, within a specified HW resources 
+budget. The use of \eseeker\ could guide HW engineers in the early design phases,
+highlighting which parts of computation are power-hungry and
+should be targeted for the synthesis of low-power accelerators, and which parts,
+instead, are not likely to lead to any significant energy savings. The reason for
+the latter would be that the computation time in HW could be drastically increased
+compared to the one in SW (e.g. they have a high memory communication overhead) or
+that the HW resources required are so energy costly that they match, or exceed, the 
+respective energy requirements of the SW-only side.
 
 \subsection{Related Work}
 
