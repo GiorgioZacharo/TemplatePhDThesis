@@ -13,48 +13,49 @@
 \contentsline {subsection}{\numberline {1.4.3}Benchmarks}{17}{subsection.1.4.3}
 \contentsline {section}{\numberline {1.5}Experimental Results}{17}{section.1.5}
 \contentsline {subsection}{\numberline {1.5.1}Regions as a Choice for Accelerators}{17}{subsection.1.5.1}
-\contentsline {subsection}{\numberline {1.5.2}Performance of Selection Algorithms}{19}{subsection.1.5.2}
-\contentsline {section}{\numberline {1.6}RegionSeeker MuLTiVersioning}{20}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}Methodology}{20}{subsection.1.6.1}
-\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{22}{subsection.1.6.2}
-\contentsline {section}{\numberline {1.7}Related Work}{22}{section.1.7}
-\contentsline {section}{\numberline {1.8}Conclusions}{24}{section.1.8}
-\contentsline {chapter}{\numberline {2}Automatic Optimizations for Accelerators}{31}{chapter.2}
-\contentsline {section}{\numberline {2.1}Data reuse Analysis}{32}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Motivation}{32}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Related Work}{33}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}Methodology}{34}{subsection.2.1.3}
-\contentsline {subsubsection}{Data Reuse Analysis}{34}{section*.18}
-\contentsline {subsubsection}{Hardware Implementation}{35}{section*.19}
-\contentsline {subsection}{\numberline {2.1.4}Experimental Results}{37}{subsection.2.1.4}
-\contentsline {subsection}{\numberline {2.1.5}Conclusions}{38}{subsection.2.1.5}
-\contentsline {section}{\numberline {2.2}Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{39}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Motivation}{39}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Related Work}{40}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Methodology}{41}{subsection.2.2.3}
-\contentsline {subsubsection}{Optimal Loop Unrolling Factor -- Objective Function}{41}{section*.23}
-\contentsline {subsubsection}{LLVM Analysis Pass -- Loop Features Extraction}{42}{section*.24}
-\contentsline {subsubsection}{Latency and Area Estimation}{43}{section*.26}
-\contentsline {subsubsection}{Random Forest Classification}{44}{section*.27}
-\contentsline {subsection}{\numberline {2.2.4}Experimental Results}{45}{subsection.2.2.4}
-\contentsline {subsubsection}{Classification Models and Features}{46}{section*.29}
-\contentsline {subsubsection}{Iterative Refinement}{46}{section*.31}
-\contentsline {subsection}{\numberline {2.2.5}Conclusions}{48}{subsection.2.2.5}
-\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{49}{chapter.3}
-\contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{49}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Motivation}{49}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Related Work}{51}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Methodology}{52}{subsection.3.1.3}
-\contentsline {subsubsection}{Candidate Identification}{53}{section*.35}
-\contentsline {subsubsection}{Cost and Merit Estimation}{54}{section*.37}
-\contentsline {subsubsection}{Compiler Analysis}{56}{section*.39}
-\contentsline {subsubsection}{Selection Algorithm}{58}{section*.40}
-\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{59}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Conclusions}{59}{subsection.3.1.5}
-\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{59}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Motivation}{59}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Related Work}{60}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{62}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Conclusions}{62}{section.3.3}
-\contentsline {chapter}{Conclusions}{63}{chapter*.41}
-\contentsline {chapter}{Bibliography}{65}{section*.43}
+\contentsline {subsection}{\numberline {1.5.2}Performance of Selection Algorithms}{22}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}Impact of the Interface Overhead}{24}{subsection.1.5.3}
+\contentsline {section}{\numberline {1.6}RegionSeeker MuLTiVersioning}{26}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}Methodology}{26}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}
+\contentsline {section}{\numberline {1.7}Related Work}{29}{section.1.7}
+\contentsline {section}{\numberline {1.8}Conclusions}{31}{section.1.8}
+\contentsline {chapter}{\numberline {2}Automatic Optimizations for Accelerators}{33}{chapter.2}
+\contentsline {section}{\numberline {2.1}Data reuse Analysis}{34}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Motivation}{34}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Related Work}{35}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Methodology}{36}{subsection.2.1.3}
+\contentsline {subsubsection}{Data Reuse Analysis}{36}{section*.21}
+\contentsline {subsubsection}{Hardware Implementation}{37}{section*.22}
+\contentsline {subsection}{\numberline {2.1.4}Experimental Results}{39}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Conclusions}{40}{subsection.2.1.5}
+\contentsline {section}{\numberline {2.2}Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{41}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Motivation}{41}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Related Work}{42}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Methodology}{43}{subsection.2.2.3}
+\contentsline {subsubsection}{Optimal Loop Unrolling Factor -- Objective Function}{43}{section*.26}
+\contentsline {subsubsection}{LLVM Analysis Pass -- Loop Features Extraction}{44}{section*.27}
+\contentsline {subsubsection}{Latency and Area Estimation}{45}{section*.29}
+\contentsline {subsubsection}{Random Forest Classification}{46}{section*.30}
+\contentsline {subsection}{\numberline {2.2.4}Experimental Results}{47}{subsection.2.2.4}
+\contentsline {subsubsection}{Classification Models and Features}{48}{section*.32}
+\contentsline {subsubsection}{Iterative Refinement}{48}{section*.34}
+\contentsline {subsection}{\numberline {2.2.5}Conclusions}{50}{subsection.2.2.5}
+\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{51}{chapter.3}
+\contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{51}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Motivation}{51}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Related Work}{53}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Methodology}{54}{subsection.3.1.3}
+\contentsline {subsubsection}{Candidate Identification}{55}{section*.38}
+\contentsline {subsubsection}{Cost and Merit Estimation}{56}{section*.40}
+\contentsline {subsubsection}{Compiler Analysis}{58}{section*.42}
+\contentsline {subsubsection}{Selection Algorithm}{60}{section*.43}
+\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{61}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Conclusions}{61}{subsection.3.1.5}
+\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{61}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Motivation}{61}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Related Work}{62}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{64}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Conclusions}{64}{section.3.3}
+\contentsline {chapter}{Conclusions}{65}{chapter*.44}
+\contentsline {chapter}{Bibliography}{67}{section*.46}

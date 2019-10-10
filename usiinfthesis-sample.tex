@@ -1048,25 +1048,100 @@ MPEG-2 compression, respectively.
 % Optimization 2 ranks the valid regions in terms of merit so that the first 
 % region considered for inclusion in $X$ is the one with the maximum merit.
 
-\begin{figure}[h!]
-\centering
-\hspace*{-1cm}
-\includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
-\caption{Comparison of speedups obtained on eight CHStone benchmarks
-  by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
-\label{fig:regions_aladdin}
-\end{figure}
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 1.1 \linewidth]{figs/regions_aladdin}
+% \caption{Comparison of speedups obtained on eight CHStone benchmarks
+%   by selecting regions, only basic blocks and only functions, varying
+%   the area constraint, using Aladdin and Gem5 for Speedup and Area evaluation.}
+% \label{fig:regions_aladdin}
+% \end{figure}
 
-\begin{figure}[h!]
+%
+% Figures of all Benchmarks simulations - ALADDIN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}
 \centering
-\hspace*{-1cm}
-\includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/adpcm}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/aes}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/dfmul}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/dfsin}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/gsm}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/jpeg}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/mpeg2}
+}\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone_aladdin/sha}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/legend}
+}
 \caption{Comparison of speedups obtained on eight CHStone benchmarks
   by selecting regions, only basic blocks and only functions, varying
-  the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
+  the area constraint, using Aladdin and Gem5 for merit and cost evaluation. }
+\label{fig:regions_aladdin}
+\end{figure*}
+
+% \begin{figure}[h!]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 1.1 \linewidth]{figs/regions_vivado}
+% \caption{Comparison of speedups obtained on eight CHStone benchmarks
+%   by selecting regions, only basic blocks and only functions, varying
+%   the area constraint, using Vivado HLS and Gem5 for Speedup and Area evaluation.}
+% \label{fig:regions_vivado}
+% \end{figure}
+
+%
+% Figures of all Benchmarks simulations.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}
+\centering
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/adpcm}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/aes}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/dfmul}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/dfsin}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/gsm}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/jpeg}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/mpeg2}
+}\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/sha}
+}
+\subfigure{
+\includegraphics[width=0.44\textwidth]{figs/CHstone/legend}
+}
+\caption{Comparison of speedups obtained on eight CHStone benchmarks
+  by selecting regions, only basic blocks and only functions, varying
+  the area constraint, using Vivado\_HLS and Gem5 for merit and cost
+  evaluation. }
 \label{fig:regions_vivado}
-\end{figure}
+\end{figure*}
 
 \section{Experimental Results}
 \label{subsec:exp}
@@ -1167,7 +1242,7 @@ a given area budget.
 \begin{figure}[h]
 \centering
 %\hspace*{-2cm}
-\includegraphics[width= 0.9 \linewidth]{figs/rbf_max_norm_all}
+\includegraphics[width= 0.8 \linewidth]{figs/rbf_max_norm_all}
 \caption{Normalized Speedup of RegionSeeker with respect to function and basic block selection, 
 considering, for each benchmark, a fixed area constraint. Synthesis performed with Vivado HLS.}
 \label{fig:regions_all}
@@ -1188,6 +1263,14 @@ accelerator candidates.
 
 \subsection{Performance of Selection Algorithms}
 \label{subsec:algo-perf}
+
+In Section~\ref{sec:rs_algos}, three selection algorithms were presented:
+an exact algorithm that might not scale for large benchmarks, a naive
+greedy, and a meet-in-the-middle approach where the exact algorithm is
+applied only to a cropped list of regions, as opposed to all regions
+of a benchmark. In this section, the performance of these algorithms
+is evaluated, in terms of scalability and of goodness of the solution
+found.\par
 
 \begin{figure*}[h]
 \centering
@@ -1211,14 +1294,6 @@ accelerator candidates.
 \label{fig:h264-regions}
 \end{figure*}
 
-In Section~\ref{sec:rs_algos}, three selection algorithms were presented:
-an exact algorithm that might not scale for large benchmarks, a naive
-greedy, and a meet-in-the-middle approach where the exact algorithm is
-applied only to a cropped list of regions, as opposed to all regions
-of a benchmark. In this section, the performance of these algorithms
-is evaluated, in terms of scalability and of goodness of the solution
-found.\par
-
 To this end, a complex benchmark is targeted (namely, \htsf\
 \cite{H264May15}), which has a code size of more than ten thousand
 lines of code and contains thousands of regions. Note that, while
@@ -1236,7 +1311,125 @@ representation and without needing manual intervention on benchmark
 source code. The cost of a region was estimated as the area required to
 implement its DFG nodes, and its merit as the cycles saved between SW
 and HW execution, where the latter is the delay of the nodes on the
-DFG critical paths, each multiplied by their respective frequency.
+DFG critical paths, each multiplied by their respective frequency.\par
+
+
+Firstly, in Figure \ref{fig:h264-regions} it is shown, for the \htsf\
+benchmark, the distribution of all regions with respect to their merit
+$M()$.
+It becomes apparent in this figure that the distribution is extremely
+skewed, with very few regions having high merit and the majority
+providing a negligible one. This is to be expected, as it is well
+known that a large percentage of time, in running a software
+application, is typically spent on a small percentage of code. And of
+course a region merit is proportional to the frequency of execution of
+its corresponding code segment.\par
+
+\begin{figure}[t]
+\centering
+\hspace*{-2cm}
+\subfigure{
+\includegraphics[width=0.5 \textwidth]{figs/ex_gr_speed_h264}
+\label{fig:h264-speed}
+}
+\subfigure{
+\includegraphics[width=0.5 \textwidth]{figs/ex_gr_time_h264}
+\label{fig:h264-time}
+}
+\hspace*{-2cm}
+\caption{Left: Speedup achieved on the \htsf\ benchmark by \exactC,
+  cropped by considering only regions providing at least 5\%, 10\% and
+  20\% of the maximum merit, and by \greedy.  Right: Corresponding
+  algorithms execution time.}
+\label{fig:h264-ex-gr}
+\end{figure}
+
+% Region h264 Exact Versions.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{figs/exact_versions}
+\caption{Execution time of the \exactC\ algorithm (cropping
+  level at 10\%), when the two optimizations described in subsection
+  \ref{sec:algo-exact} are removed.  }
+\label{fig:h264-exact-versions}
+\end{figure}
+
+For a large benchmark such as \htsf, the \exact\ algorithm does not
+scale if it is fed all \numofhtsfregs\ regions. However, it is reasonable
+to expect that, given the distribution seen, the goodness of the
+solution found should decrease only slightly when discarding a large
+number of low-potential regions, while scalability
+could grow tangibly.
+This assumption is confirmed by the data in
+Figure~\ref{fig:h264-ex-gr}, where the comparison of performance and
+scalability of the \exactC\ selection algorithm is performed, at three different
+levels of cropping --- that is, considering regions providing at
+least 5\%, 10\% and 20\% of the maximum merit, respectively.\par
+
+Figure~\ref{fig:h264-ex-gr} (left) plots the estimated speedup achieved by
+implementing a set of regions in hardware, selected by the three \exactC\
+levels, and by \greedy, for different area constraints. It can be seen
+that, when changing the level of cropping, the goodness of the
+solutions found by \exactC\ differs only slightly (as expected, little
+is lost when some low-potential regions are ignored) and it is
+altogether largely superior to fast but naive \greedy.\par
+
+However, as a second issue worth observing, the exploration space for
+the three different levels of cropping differs greatly, and hence the
+time spent by each of these algorithms to terminate. This can be seen
+in Figure~\ref{fig:h264-ex-gr} (right) : orders of magnitude separate
+the time spent by each, with \exactC\ at 5\% taking hours, and at 10\%
+taking seconds.\par
+
+Last, the effect of the optimizations that were devised for
+improving search tree exploration is shown. These optimizations were 
+described in Section~\ref{sec:algo-exact} and exemplified in
+Figure~\ref{fig:exact_tree}. They are 1: pruning the
+exploration tree when a certain best merit, found so far, cannot be
+reached, and 2: processing regions in order of decreasing merit. In
+Figure~\ref{fig:h264-exact-versions} it can be seen how the two
+optimizations affect the algorithm run time. When pruning is turned
+off, more than three orders of magnitude are lost, in time. When the
+list of regions is processed in an order different than that of
+decreasing merit (in this experiment, an order of decreasing
+\emph{density} is considered, i.e. \emph{merit divided by cost}) more
+than two orders of magnitude are lost.
+
+\subsection{Impact of the Interface Overhead}
+\label{subsec:res_overhead}
+
+The initiation of an accelerated routine on a dedicated hardware block
+always entails a timing penalty $T_{Overhead}$.  Such overhead is
+highly dependent on the interface protocol between the processor and
+the application-specific accelerators. While the definition of such
+protocol is outside the scope of this work, the
+impact of adopting different values for this parameter is worthy to investigate, 
+when different selection methods are employed.\par
+
+Two observations can be made by analyzing the results of Figure
+\ref{fig:overhead}, reported for the \sha\ benchmark. Firstly, the speedup 
+obtained by \rseeker\ is not
+affected in any significant way by the variation of the value of
+$T_{Overhead}$ among one, ten and twenty cycles, while the speedup for
+basic blocks is indeed affected. This is to be expected, since basic
+block level accelerators require a higher number of invocations (e.g.:
+for each iteration of an intensive loop) than region-level
+accelerators. Secondly, while by decreasing the value of
+$T_{Overhead}$ the speedup of basic block increases, it does not
+increase in a significant way and is still %much
+less tangible than the speedup achieved by \rseeker.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6 \linewidth]
+{figs/overhead_sha}
+\caption{Impact of the initiation overhead for regions and basic
+  blocks selection strategies, considering $T_{Overhead}$ values of 1,
+  10, and 20 clock cycles.}
+\label{fig:overhead}
+\end{figure}
+
+
 
 % OLD START
 %
@@ -1338,7 +1531,7 @@ DFG critical paths, each multiplied by their respective frequency.
 %
 %
 
-% \newpage
+\newpage
 %
 %
 %     RegionSeeker MuLTiVersioning
@@ -1397,7 +1590,7 @@ accesses.\par
 Loop pipelining is an additional HLS directive applied in loops that allows the pipelining of 
 the operations contained in a single body of a loop and across consecutive iterations. Restrictions 
 regarding loop-carried dependencies across consecutive iterations can limit the application of the loop
-pipelining optimization, as the result of the output of a loop iteration would be required in the following
+pipelining optimization as the result of the output of a loop iteration would be required in the following
 one, thus not allowing the pipelining of the loop body operations.\par
 
 Given an initial set of HW accelerators, i.e., a set of regions that is derived by the \rseeker\ framework, 
@@ -1405,10 +1598,9 @@ multiple versions for each region can be generated that maintain the same functi
 Each version may employ one of the optimizations listed above, or a combination of them.
 \par
 
-
-All versions of the HW accelerators were evaluated by exploiting the Aladdin HW accelerator simulator.  
-Aladdin targets ASIC implementations. It
-provides a fast evaluation, but does not generate a synthesizable netlist,
+All versions of the HW accelerators were evaluated by the Aladdin HW accelerator simulator.  
+Aladdin targets ASIC implementations. It provides a fast evaluation, but does not generate a 
+synthesizable netlist,
 as opposed to Vivado HLS. Nonetheless, the estimations provided are
 within 1\% of the ones derived from a Register-transfer level (RTL) implementation, according to 
 the developers of Aladdin \cite{ShaoJul14}.
@@ -1420,11 +1612,12 @@ and b) O3CPU (a complex and fast CPU with five pipeline stages and other resourc
 branch predictor, reorder buffer etc). \par
 
 
-The \exact\ selection algorithm, as detailed in Subsection \ref{subsec:meth}  was used subsequently to 
-perform the optimal subset selection, 
+The \exact\ selection algorithm, as detailed in Subsection \ref{sec:algo-exact}, was used subsequently 
+to perform the optimal subset selection, 
 given an initial set of HW accelerators along with their respective versions, as well as a specific 
 area (HW resources) budget. An important note is that no more than one version of each candidate 
 can be selected, as only one realization of the respective SW execution is required.
+
 To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
 containing the basic block indexes included in each region. As a result the set of basic block indexes for 
 multiple versions of the same region would be identical.
@@ -1453,7 +1646,7 @@ of the regions can be selected. \par
 \begin{figure*}[h]
 \centering
 \hspace*{-1cm}
-\includegraphics[width= 0.7 \linewidth]{figs/plot_O3CPU_SW_large}
+\includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU_SW_large}
 \caption{Comparison of speedup obtained on jpeg benchmark, over the
 SW time of the equivalent kernels (regions), varying the area constraint, using 
 Aladdin and gem5 for Speedup and Area evaluation.
@@ -1627,8 +1820,9 @@ execution. This work was published in IEEE Transactions on Computer-Aided Design
 Circuits and Systems (TCAD) journal \cite{ZacharopoulosApr19}.
 The \multi\ approach extends the initial selection pool of candidates and, compared
 to default HW accelerators configurations, offers enhanced speedup on the \jpeg\ application of up
-to 1.7x speedup on the entire application and up to 65x speedup on the relative kernels that 
-are synthesized into HW.
+to 1.8 on the entire application and up to 65x speedup on the relative kernels that 
+are synthesized into HW, meaning the computation time that is synthesized in HW excluding the time 
+that is left to SW.
 
 % \begin{figure}
 % \centering
