@@ -53,12 +53,14 @@
 \contentsline {subsubsection}{Merit Estimation.}{59}{section*.43}
 \contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}
 \contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}
-\contentsline {subsection}{\numberline {3.1.8}Experimental Results}{63}{subsection.3.1.8}
-\contentsline {subsection}{\numberline {3.1.9}Conclusions}{63}{subsection.3.1.9}
-\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{64}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Motivation}{64}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Related Work}{65}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{66}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Conclusions}{66}{section.3.3}
-\contentsline {chapter}{Conclusions}{67}{chapter*.45}
-\contentsline {chapter}{Bibliography}{69}{section*.47}
+\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{63}{subsection.3.1.8}
+\contentsline {subsubsection}{Baselines for comparative evaluation}{63}{section*.46}
+\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{64}{subsection.3.1.9}
+\contentsline {subsection}{\numberline {3.1.10}Conclusions}{64}{subsection.3.1.10}
+\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{65}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Motivation}{65}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Related Work}{66}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{67}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Conclusions}{67}{section.3.3}
+\contentsline {chapter}{Conclusions}{69}{chapter*.47}
+\contentsline {chapter}{Bibliography}{71}{section*.49}

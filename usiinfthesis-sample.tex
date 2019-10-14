@@ -3199,11 +3199,10 @@ logical units (LUTs), contributing to the total area.
 \subsection{Selection Algorithm}
 
 Solving the \asprobname\ problem on the function-call graph of the
-application corresponds to solving the \emph{independent set
-  problem} on the resulting conflict graph. The conflict graph, in
-fact, expresses which pairs of \candidates\ are in conflict; thus, an
-\emph{independent set} of the conflict graph satisfies condition $3$ of the
-\asprobname\ Problem.\par
+application corresponds to solving the \emph{independent set problem} on 
+the resulting conflict graph. The conflict graph expresses which pairs of 
+\candidates\ are in conflict; thus, an \emph{independent set} of the conflict 
+graph satisfies condition $3$ of the \asprobname\ Problem.\par
 
 \begin{figure}[!t]
   %\vskip -1.5em
@@ -3228,19 +3227,16 @@ algorithm~\cite{BronKerbosch73}, and that returns the set $S$ with the
 highest merit $M(S)$ (hence satisfying condition $1$ of the problem
 formulation) and whose cost $C(S)$ does not exceed a user-given
 maximum cost $C_{max}$ (hence satisfying condition $2$ of the
-problem formulation).  
-This returned set represents the optimal
-solution to the \asprobname\ Problem.
+problem formulation). This returned set represents the optimal
+solution to the \asprobname\ Problem.\par
 
 An algorithm solving an independent set problem is of course one of
-non-polynomial complexity. Our exact implementation is still able to
+non-polynomial complexity. The exact implementation is still able to
 find the optimal solution for the experiments in this paper in a
 matter of milliseconds, even for the considerable dimension of the
 function-call graph of the application considered (a function-call
-graph of \numberOfcandidates\ nodes, as detailed in the experiments section). 
-%Non-exact
-%versions of the algorithm should of course be devised and considered,
-%if larger function-call graphs required it.
+graph of \numberOfcandidates\ nodes, as detailed in the experiments 
+section).\par
 
 An example of selection can be seen in
 Figure~\ref{fig:max-set-examples}. First the example call graph is
@@ -3248,24 +3244,80 @@ depicted, which has 8 nodes and hence 8 \candidates, each
 \emph{rooted} in one of the 8 nodes. The eight corresponding
 \candidates\ are not depicted in this figure, but some of them can be
 seen in Figure~\ref{fig:overlap-examples}a: for example, the
-\candidate\ rooted in node 2 is depicted there and labelled A, the
+\candidate\ rooted in node 2 is depicted there and labeled A, the
 \candidate\ rooted in node 3 is also depicted in the same Figure and
-labelled B, etc.  Figure~\ref{fig:max-set-examples}b depicts the
+labeled B, etc.  Figure~\ref{fig:max-set-examples}b depicts the
 complete conflict graph corresponding to this example. As can be seen,
 candidate 1 (corresponding to the whole graph) is in conflict with all
 other candidates, candidates 2 and 3 are not in conflict (they only
 overlap in function 7) etc. Now, given example values of cost and
 merit for each candidate (in Figure~\ref{fig:overlap-examples}c), the
 maximum independent set is found in the conflict graph, which
-maximises the sum of merits of the candidates selected, does not
+maximizes the sum of merits of the candidates selected, does not
 overcome a maximum sum of cost, and does not include conflicts. Two
 examples (for $C_{max} = 25$ and for $C_{max} = 40$) are shown in
 Figure~\ref{fig:overlap-examples}d.
 
 
 
+\subsection{Experimental Setup}
+\label{sec:setup_as}
+
+
+% \subsubsection{Validation} 
+The outcome of the selection of candidates was evaluated by implementing the 
+corresponding hardware-accelerated systems on a Xilinx Zynq Ultrascale+ PSoC running the
+Linux operating systems. The system is clocked at 100MHz, with one of
+its Cortex A53 processors being dedicated to the execution of the
+software (non-accelerated) parts of the considered benchmark.
+
+
+  \begin{table}[t!]
+   % \vspace{-1.5em}
+  \centering
+   \resizebox{\linewidth}{!}{
+    \begin{tabular}{|l||c||c|c|} 
+\hline
+     & \textbf{Validation}  & \textbf{Estimation}   &  \textbf{Estimation} \\
+\textbf{Candidate} & \textbf{Ranking}  & \textbf{Ranking}   &  \textbf{Ranking}  \\
+            & \textbf{}   & \textbf{(\rseeker)} & \textbf{(gprof)} \\ \hline  \hline
+  residual-block-cavlc-16     &  1               &  1       &   4  \\ \hline 
+  TrailingOnes-TotalCoeff     &  2               &  2       &   2    \\ \hline 
+  inter-prediction-chroma     &  3               &  3       &   5     \\ \hline
+  scale-residual4x4            &  4              &  7       &   6   \\ \hline  
+  total-zeros                  &  5              &  5       &   9    \\ \hline 
+  prediction-Chroma            &  6               &  10       &  13  \\ \hline    
+  % write-chroma                  &  7              &  15       &   14     & \iobound \\ \hline 
+  IntraInfo                     &  7               &  9       &  18  \\ \hline  
+  run-before                  &  8              &  4       &   15  \\ \hline 
+  ...                  &  ...              &  ...       &   ...    \\ \hline 
+  showbits                    &  17               &  17      &  1  \\ \hline  
+  Clip3               &  18               &  18       &   3  \\ \hline    
+
+  \end{tabular}
+
+  }  
+  \vspace{0em}
+  \caption{Ranking of \candidates, based on application speedup when
+    implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation
+    strategies (\rseeker, column 3, and gprof, column 4).}
+  \label{tab:candidates}
+  \end{table}
+
+\subsubsection{Baselines for comparative evaluation} 
+The quality of the choice of accelerators given by \rseeker\ was compared against 
+the ones a designer would obtain when guided solely by a software profiling tool
+instead. For such baseline solutions, the \emph{gprof} tool \cite{GrahamJun82} 
+was utilized. Gprof retrieves the software execution time of all
+functions, but provides no support for the estimation of hardware
+execution times, hardware area, nor I/O and invocation
+overheads. Mimicking the possible strategies a designer would follow
+based on profiling data, three possible alternatives were considered:
+
 \subsection{Experimental Results}
 \label{sec:results_as}
+
+
 
 \subsection{Conclusions}
 \label{sec:conclusions_as}

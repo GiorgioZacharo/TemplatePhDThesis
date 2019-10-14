@@ -178,6 +178,12 @@ E.~Giaquinta, A.~Mishra, and L.~Pozzi.
 \newblock {\em {IEEE} Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 34(3):483--494, 2015.
 
+\bibitem{GrahamJun82}
+S.~L. Graham, P.~B. Kessler, and M.~K. Mckusick.
+\newblock Gprof: a call graph execution profiler.
+\newblock In {\em ACM Sigplan Notices}, volume~17, pages 120--126. ACM, June
+  1982.
+
 \bibitem{GruttnerNov13}
 K.~Gr{\"u}ttner, P.~A. Hartmann, K.~Hylla, S.~Rosinger, W.~Nebel, F.~Herrera,
   E.~Villar, C.~Brandolese, W.~Fornaciari, G.~Palermo, et~al.
