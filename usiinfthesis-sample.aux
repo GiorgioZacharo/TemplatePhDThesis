@@ -125,8 +125,8 @@
 \citation{BinkertFeb11}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}}
 \newlabel{subsec:mv_res}{{1.6.2}{27}{Experimental Results}{subsection.1.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the MuLTiVersioning\ approach where any version of the regions can be selected. \relax }}{28}{figure.caption.18}}
-\newlabel{fig:mlv_aladdin}{{1.12}{28}{Comparison of speedup obtained on jpeg benchmark, over the SW time of the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the \multi \^^Mapproach where any version of the regions can be selected. \relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Comparison of the speedup obtained on jpeg benchmark, over the Top: Total run time of the application and Bottom: SW time of only the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the MuLTiVersioning\ approach where any version of the regions can be selected. \relax }}{28}{figure.caption.18}}
+\newlabel{fig:mlv_aladdin}{{1.12}{28}{Comparison of the speedup obtained on jpeg benchmark, over the Top: Total run time of the application and Bottom: SW time of only the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the \multi \^^Mapproach where any version of the regions can be selected. \relax }{figure.caption.18}{}}
 \citation{YuSep04}
 \citation{PozziJul06}
 \citation{ChenFeb07}
@@ -310,47 +310,57 @@
 \citation{ZacharopoulosApr19}
 \citation{OppermannJul16}
 \citation{CotaJun15}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Methodology}{54}{subsection.3.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{54}{subsection.3.1.3}}
+\newlabel{subsec:identification}{{3.1.3}{54}{Candidate Identification}{subsection.3.1.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The phases of the {AccelSeeker}\ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, {AccelSeeker}\ performs selection of a subset of such candidates.\relax }}{55}{figure.caption.37}}
 \newlabel{fig:flow}{{3.2}{55}{The phases of the \aseeker \ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, \aseeker \^^Mperforms selection of a subset of such candidates.\relax }{figure.caption.37}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Candidate Identification}{55}{section*.38}}
-\newlabel{subsec:identification}{{3.1.3}{55}{Candidate Identification}{section*.38}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{55}{figure.caption.39}}
-\newlabel{fig:subgraph-examples}{{3.3}{55}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.39}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Cost and Merit Estimation}{56}{section*.40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{57}{figure.caption.41}}
-\newlabel{fig:hw-comp}{{3.4}{57}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{55}{figure.caption.38}}
+\newlabel{fig:subgraph-examples}{{3.3}{55}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.38}{}}
+\citation{ZacharopoulosApr19}
+\citation{ZacharopoulosApr19}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces a) Three overlapping {AccelCand}s: A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite  {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }}{56}{figure.caption.39}}
+\newlabel{fig:overlap-examples}{{3.4}{56}{a) Three overlapping \candidates : A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{56}{subsection.3.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Cost and Merit Estimation}{58}{subsection.3.1.5}}
+\newlabel{sec:estimation}{{3.1.5}{58}{Cost and Merit Estimation}{subsection.3.1.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Architectural characterization.}{58}{section*.40}}
+\@writefile{toc}{\contentsline {subsubsection}{Cost Estimation.}{58}{section*.42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{59}{figure.caption.41}}
+\newlabel{fig:hw-comp}{{3.5}{59}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Merit Estimation.}{59}{section*.43}}
 \citation{LattnerMar04}
-\newlabel{eq:inference}{{3.1.3}{58}{Cost and Merit Estimation}{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Compiler Analysis}{58}{section*.42}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces LLVM Analysis Pass - Cost and Merit Estimation\relax }}{59}{algorithm.5}}
-\newlabel{Algo_LLVM}{{5}{59}{LLVM Analysis Pass - Cost and Merit Estimation\relax }{algorithm.5}{}}
+\newlabel{eq:inference}{{3.1.5}{60}{Merit Estimation}{section*.43}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces LLVM Analysis Pass - Cost and Merit Estimation\relax }}{61}{algorithm.5}}
+\newlabel{Algo_LLVM}{{5}{61}{LLVM Analysis Pass - Cost and Merit Estimation\relax }{algorithm.5}{}}
 \citation{BronKerbosch73}
-\@writefile{toc}{\contentsline {subsubsection}{Selection Algorithm}{60}{section*.43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }}{62}{figure.caption.44}}
+\newlabel{fig:max-set-examples}{{3.6}{62}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.44}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}}
 \citation{VivadoHLSMar17}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Experimental Results}{61}{subsection.3.1.4}}
-\newlabel{sec:results_as}{{3.1.4}{61}{Experimental Results}{subsection.3.1.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Conclusions}{61}{subsection.3.1.5}}
-\newlabel{sec:conclusions_as}{{3.1.5}{61}{Conclusions}{subsection.3.1.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{61}{section.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{61}{subsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}Experimental Results}{63}{subsection.3.1.8}}
+\newlabel{sec:results_as}{{3.1.8}{63}{Experimental Results}{subsection.3.1.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.9}Conclusions}{63}{subsection.3.1.9}}
+\newlabel{sec:conclusions_as}{{3.1.9}{63}{Conclusions}{subsection.3.1.9}{}}
 \citation{ShaoJul14}
 \citation{LattnerMar04}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{64}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{64}{subsection.3.2.1}}
 \citation{MelpignanoJune12}
 \citation{ContiSep16}
 \citation{SchiavoneSep17}
 \citation{PulliniJan17}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{62}{subsection.3.2.2}}
 \citation{ReagenJun16}
 \citation{ShaoJul14}
 \citation{LeeApr13}
 \citation{XiaoMay18}
 \citation{OpensslDec98}
 \citation{GruttnerNov13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{64}{subsection.3.2.3}}
-\newlabel{sec:results_es}{{3.2.3}{64}{Experimental Results}{subsection.3.2.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{64}{section.3.3}}
-\@writefile{toc}{\contentsline {chapter}{Conclusions}{65}{chapter*.44}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{65}{subsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{66}{subsection.3.2.3}}
+\newlabel{sec:results_es}{{3.2.3}{66}{Experimental Results}{subsection.3.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{66}{section.3.3}}
+\@writefile{toc}{\contentsline {chapter}{Conclusions}{67}{chapter*.45}}
 \bibstyle{abbrv}
 \bibdata{biblio}
 \bibcite{AgakovMar06}{{1}{}{{}}{{}}}
@@ -360,7 +370,7 @@
 \bibcite{ArriaNov16}{{5}{}{{}}{{}}}
 \bibcite{AtasuApr07}{{6}{}{{}}{{}}}
 \bibcite{BaleaniMay02}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{67}{section*.46}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{69}{section*.47}}
 \bibcite{BinkertFeb11}{{8}{}{{}}{{}}}
 \bibcite{BiswasMar06}{{9}{}{{}}{{}}}
 \bibcite{BronKerbosch73}{{10}{}{{}}{{}}}

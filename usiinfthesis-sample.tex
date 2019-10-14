@@ -47,6 +47,8 @@
 
 \newcommand{\candidate}{{AccelCand}} 
 \newcommand{\candidates}{{AccelCand}s} 
+\newcommand{\candidateW}{candidate} 
+\newcommand{\candidatesW}{candidates} 
 
 % \newcommand{\htsf}{\texttt{h264}}
 \newcommand{\adpcm}{\texttt{adpcm}}
@@ -1613,16 +1615,20 @@ branch predictor, reorder buffer etc). \par
 
 
 The \exact\ selection algorithm, as detailed in Subsection \ref{sec:algo-exact}, was used subsequently 
-to perform the optimal subset selection, 
+to perform the subset selection that maximizes speedup, 
 given an initial set of HW accelerators along with their respective versions, as well as a specific 
 area (HW resources) budget. An important note is that no more than one version of each candidate 
 can be selected, as only one realization of the respective SW execution is required.
+To ensure that, each version is marked with the same set of basic block indexes and the selection
+takes place by considering the overlapping graph presented in Figure \ref{fig:exact_tree}.
+As a result multiple versions of the same region cannot be selected during the selection phase as this 
+would violate the first condition of the \rsprobname\ problem as defined in Subsection \ref{sec:prob}.
 
-To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
-containing the basic block indexes included in each region. As a result the set of basic block indexes for 
-multiple versions of the same region would be identical.
-Experiments were run in \jpeg\ benchmark and four different selection
-approaches are presented, comparing three of them to the \multi\ approach.\par
+% To ensure that, the selection took place utilizing the overlapping graph presented in Figure \ref{fig:exact_tree} 
+% containing the basic block indexes included in each region. As a result the set of basic block indexes for 
+% multiple versions of the same region would be identical.
+% Experiments were run in \jpeg\ benchmark and four different selection
+% approaches are presented, comparing three of them to the \multi\ approach.\par
 
 \subsection{Experimental Results}
 \label{subsec:mv_res}
@@ -1630,25 +1636,34 @@ approaches are presented, comparing three of them to the \multi\ approach.\par
 The experimental setup was the same as in the \rseeker\ framework, with a system comprising a single 
 SW processor and multiple loosely coupled HW accelerators, exchanging shared data with \plms.
 The processor invokes the accelerators via a memory-mapped
-interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete,
-control returns to the SW processor.\par
+interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete, control returns to the SW processor.\par
 
-The speedup achieved on \jpeg\ benchmark, over the respective SW 
-time of the same set of selected regions (kernels) %, and the whole application 
-are showcased. 
-The four different approaches compared are:
+Experiments were run in \jpeg\ benchmark from the CHStone embedded applications benchmark suite.
+Four different approaches were compared:
 a) the \emph{min} where the regions with the least amount of area are included in the set
 and hence can be selected, b) the \emph{base} 
 where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
 area regions can be selected and finally d) the \multi\ approach where any possible version 
-of the regions can be selected. \par
+of the regions can be selected.
+The speedup achieved on \jpeg\ over the whole run time of the application (Figure \ref{fig:mlv_aladdin} Top), 
+as well as over solely the SW time of the selected regions Figure \ref{fig:mlv_aladdin} Bottom) is 
+showcased.
+% The four different approaches compared are:
+% a) the \emph{min} where the regions with the least amount of area are included in the set
+% and hence can be selected, b) the \emph{base} 
+% where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
+% area regions can be selected and finally d) the \multi\ approach where any possible version 
+% of the regions can be selected. \par
 
 \begin{figure*}[h]
 \centering
 \hspace*{-1cm}
+\includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU}
+\hspace*{-1cm}
 \includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU_SW_large}
-\caption{Comparison of speedup obtained on jpeg benchmark, over the
-SW time of the equivalent kernels (regions), varying the area constraint, using 
+\caption{Comparison of the speedup obtained on jpeg benchmark, over the
+Top: Total run time of the application and Bottom: SW time of only the equivalent 
+kernels (regions), varying the area constraint, using 
 Aladdin and gem5 for Speedup and Area evaluation.
 Four approaches are compared: The 
 min where the regions with least amount of area are selected, the base
@@ -1658,6 +1673,22 @@ approach where any version of the regions can be selected.
 }
 \label{fig:mlv_aladdin}
 \end{figure*}
+
+% \begin{figure*}[h]
+% \centering
+% \hspace*{-1cm}
+% \includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU_SW_large}
+% \caption{Comparison of speedup obtained on jpeg benchmark, over the
+% SW time of the equivalent kernels (regions), varying the area constraint, using 
+% Aladdin and gem5 for Speedup and Area evaluation.
+% Four approaches are compared: The 
+% min where the regions with least amount of area are selected, the base
+% where the regions with median values of area are selected, the max where 
+% only the maximum area regions can be selected and finally the \multi\
+% approach where any version of the regions can be selected.
+% }
+% \label{fig:mlv_aladdin}
+% \end{figure*}
 
 The strength of the \multi\ approach and the benefit of having 
 a variety of potential candidates to select from 
@@ -1704,11 +1735,11 @@ the \controlflow\ level.\par
 
 %\subsection{Data Flow Level}
 \emph{Data Flow Level}.
-\SoTA methods have been
-published in literature in order to automatically identify,
-\emph{within a single basic block}, the subgraph of \dataflow\ 
-according to varying architectural constraints and maximizing speedup
-when implemented in HW as a custom instruction. A non-extensive list
+State-of-the-art methods have been
+published in literature to automatically identify,
+\emph{within a single basic block}, the subgraph of \dataflow\  
+that maximize speedup when implemented in HW as a custom instruction
+according to varying architectural constraints. A non-extensive list
 include works \cite{YuSep04}, \cite{PozziJul06}, \cite{ChenFeb07},
 \cite{ReddingtonAug09}, \cite{GiaquintaMar15} and \cite{MartiFeb12},
 where the problem of identifying subgraphs under convexity, I/O
@@ -1726,7 +1757,7 @@ a single instruction.\par
 
 In none of the above pieces of research, though, the inclusion of the
 \controlflow\ of the application is considered during the
-identification process. The technique proposed in Section \ref{sec:rs}, 
+identification process. The technique proposed in this chapter, 
 instead, pushes 
 identification \emph{beyond} the basic block level and identifies 
 entire regions of the \CFG\ of the
@@ -1734,7 +1765,7 @@ application as candidates for acceleration. Compiler
 transformations such as if-conversion and loop-unrolling can be, and
 are, used by several of the techniques mentioned above in order to
 enlarge the scope of within-basic-block identification, by enlarging 
-themselves. Nevertheless, the scope remains limited to those
+basic blocks. Nevertheless, the scope remains limited to those
 techniques and cannot include \emph{all} kinds of
 \controlflow.\par
 
@@ -1752,7 +1783,7 @@ model. While it targets \controlflow\ to a certain extent, their
 methodology is limited to applications that can be modeled using
 EFSMs, therefore considering a much more limited scope than that of
 generic Control Data Flow Graphs compiled from source code, as does 
-the methodology proposed in Section \ref{sec:rs}.
+the methodology proposed in this chapter.
 
 Finally, the authors of a recent work \cite{AguilarJune16} consider
 Single Entry Single Exit regions but their target is to identify
@@ -2815,7 +2846,7 @@ within their call tree. \aseeker\ considers this same granularity
 (Figure~\ref{fig:soa-evolution}c), advancing the \SoTA\ in
 automatic accelerators identification.
 
-\subsection{Methodology}
+% \subsection{Methodology}
 
 The methodology embedded in \aseeker, whose high-level scheme is depicted in Figure 
 \ref{fig:flow}, is detailed.  
@@ -2837,7 +2868,7 @@ performance and resource requirements (B in the figure) is presented.
       % \vskip -0.5em
 \end{figure}
 
-\subsubsection{Candidate Identification}
+\subsection{Candidate Identification}
 \label{subsec:identification}
 
 In order to discover which parts of an application can be most
@@ -2888,7 +2919,100 @@ The methodology is limited to considering call graphs that are
 acyclic, and hence constructs such as recursion cannot be dealt with. This 
 is in line with the limitations of HLS tools.
 
-\subsubsection{Cost and Merit Estimation}
+\subsection{Problem Statement and Candidate Selection}
+
+\begin{figure}[!t]
+  %\vskip -1.5em
+  \centering
+  \includegraphics[width=.5\linewidth]{figs/overlap_examples.pdf}
+      % \vskip -1em
+  \caption{a) Three overlapping \candidates: A, B, C. b)
+          Conflict graph considered in the problem formulation:
+          complete overlap is a conflict, while partial overlap is
+          allowed c) Conflict graph adopted in
+          \cite{ZacharopoulosApr19} instead, where any kind of overlap
+          is considered a conflict. 
+}
+  \label{fig:overlap-examples}
+        % \vskip -1.5em
+\end{figure}
+
+Given a call graph $G(N,E)$, there exist $|N|$ \candidates\ in it;
+every node of $G$ is, in fact, the root of one and only \candidate.
+The problem of \emph{Selection} is that of choosing, among all of the
+$|N|$ \candidates, the subset to be realized as accelerators.\par
+
+Each \candidate\ is associated with a merit $M()$ -- an estimation of the
+number of cycles saved by it when implemented in HW as opposed to SW --
+and a cost $C()$ --  an estimation of the area needed by it when
+implemented in HW. Note that the methodology here proposed is agnostic to
+the way cost and merit are defined.
+Of course, their definition should correctly reflect the SW and HW
+architectures that the methodology is targeting, and the details of
+how functions $M()$ and $C()$ are defined for the experiments in this
+paper are given in Subsection~\ref{sec:estimation}.\par
+
+Given a set of \candidates, defined and identified as described
+in the previous subsection, and given a cost and merit associated to
+each of them, the problem that is tackled is the following.\par
+
+\textbf{Problem: \asprobname}
+
+Let $A = \{ A_1, A_2, \ldots, A_n \}$ be a set of
+\candidates, with associated cost and merit functions $C$ and $M$.
+For any subset $S\subseteq A$, it is denoted by $M(S) = \sum_{i\in S} M(A_i)$ the 
+\emph{sum} of the candidate merits, and by $C(S) = \sum_{i\in S} 
+C(A_i)$ the \emph{sum} of their costs.\par
+
+A subset $S$ of \candidates\ is selected such that:
+\begin{enumerate}
+\item The merit $M(S)$ is maximized
+\item The cost $C(S)$ is within a user-given cost budget $C_{\max}$
+\item No two \candidatesW\ in set $S$ are in \emph{conflict}
+\end{enumerate}
+
+The concept of \emph{conflict} is defined in the following way: two
+\candidatesW\ $A_i$ and $A_j$ in $S$ are in conflict if and only if
+$A_i\subset A_j \lor A_j\subset A_i$, i.e., if one completely includes the other.\par
+
+The concept of conflict that is considered in the problem formulation is
+exemplified with the help of Figure~\ref{fig:overlap-examples}. A call
+graph is shown, where 3 \candidates\ (out of the possible 8, as there
+are 8 nodes in the call graph) are highlighted, and they are labeled
+A, B, and C. A \emph{conflict graph} is presented as well, in Figure
+~\ref{fig:overlap-examples}b, which is an undirected graph where nodes
+represent \candidates, and an edge is added between two nodes if the
+two candidates are in conflict. A and B are in conflict because B is
+completely contained in A.\par
+
+The reason behind the concept of conflict is that, in the problem
+formulation (and in the implementation to solve it) the merit of a set
+of candidates is defined as \emph{additive}: it is the sum of the
+individual merits of candidates selected. Since the merit of B is
+already completely counted within the merit of A, the two candidates
+should not be both selected (and their merit should not be counted
+twice).
+Note that, if the overlap is instead only partial -- as is the case for 
+candidates A and C, which in this example share a call to a single function 
+-- the two merits are correctly modeled separately, as it can be 
+identified how many calls to the ``shared'' functions come from within candidate A, 
+and how many come from within candidate B. Hence, partial overlap does not constitute 
+a conflict.\par
+
+The problem formulation of \asprobname\
+borrows from that found in Chapter 1. It has however
+an important difference. Since in Section \ref{sec:prob} Regions are targeted 
+within a the control-flow graph of a single functions as
+candidates for acceleration, no overlaps are allowed within the same
+selection. Conversely, in the current section, subgraphs of the function-call
+graph are considered, hence allowing solutions including partially overlapping
+\candidates.
+
+
+
+
+\subsection{Cost and Merit Estimation}
+\label{sec:estimation}
 
 Herein, the abstract cost and merit, which are automatically computed from 
 source code, are detailed (Figure~\ref{fig:flow}, B). As the goal of the 
@@ -2902,7 +3026,7 @@ be performed within the limited scope of the candidate set retrieved
 by \aseeker\ (as opposed to the whole design) thereby easing the
 ensuing effort.\par
 
-\emph{Architectural characterization.}
+\subsubsection{Architectural characterization.}
 \aseeker\ bases its estimations on few parameters characterizing the
 target platform.  Being them only related to the modeled architecture, but 
 independent from the application, the characterization represents a one-time 
@@ -2928,7 +3052,7 @@ systems).\par
       % \vskip -1.5em
 \end{figure}
 
-\emph{Cost Estimation.}
+\subsubsection{Cost Estimation.}
 The cost $C()$ of an \candidate\ is computed as the sum of its estimated logic and memory 
 real estates. Regarding logic, the sum of the required resources (independently for look-up 
 tables and DSP blocks) is performed of the arithmetic operations present in its top function.
@@ -2942,7 +3066,7 @@ parameters list of the candidate top function, while the memory required for int
 derived from the variable declarations in each candidate, ultimately determining the number of required 
 BRAM blocks. In line with the limitation of HLS tools, dynamic memory allocations are not supported.\par
 
-\emph{Merit Estimation.}
+\subsubsection{Merit Estimation.}
 The merit $M()$ of an \candidate\ is expressed in terms of the number of clock cycles that are saved by 
 implementing it as a hardware accelerator instead of executing it in software. In turn, the estimation 
 of hardware run times must account both for computation bounds and host-accelerator communication overheads.  
@@ -2977,7 +3101,7 @@ run-times when $i$ is hardware-accelerated, assuming its performance
 is either computation or communication bound.  Finally, $n_{exec}$ is
 the number of times the \candidate\ is executed in the application.
 
-\subsubsection{Compiler Analysis}
+\subsection{Compiler Analysis}
 
 AccelSeeker is implemented as a compiler pass within the LLVM
 3.8~\cite{LattnerMar04} infrastructure as seen in Algorithm \ref{Algo_LLVM}. 
@@ -3072,16 +3196,33 @@ resources required for a Master AXI port, the parameter list of each
 candidate is analyzed. Every array identified accounts for extra
 logical units (LUTs), contributing to the total area.
 
-\subsubsection{Selection Algorithm}
+\subsection{Selection Algorithm}
 
 Solving the \asprobname\ problem on the function-call graph of the
 application corresponds to solving the \emph{independent set
   problem} on the resulting conflict graph. The conflict graph, in
 fact, expresses which pairs of \candidates\ are in conflict; thus, an
 \emph{independent set} of the conflict graph satisfies condition $3$ of the
-\asprobname\ Problem.
+\asprobname\ Problem.\par
 
-We therefore implement an algorithm that recursively explores the
+\begin{figure}[!t]
+  %\vskip -1.5em
+  \centering
+  \includegraphics[width=0.8\linewidth]{figs/max_set_examples.pdf}
+      % \vskip -1em
+  \caption{a) An example call graph with eight nodes, and hence
+          eight \candidates, and b) the corresponding conflict graph.
+          c) Given example merits and cost values associated to the eight
+          \candidates, d) and given a maximum tolerated cost
+          $C_{max}$, maximum independent sets that solve problem
+          \asprobname\ are shown. A maximum independent set maximises
+          merit, while not exceeding the given cost, and not including
+          conflicts.}
+              % \vskip -1.5em
+  \label{fig:max-set-examples}
+\end{figure}
+
+An algorithm is therefore implemented that recursively explores the
 independent sets of the conflict graph, similarly to the Bron-Kerbosch
 algorithm~\cite{BronKerbosch73}, and that returns the set $S$ with the
 highest merit $M(S)$ (hence satisfying condition $1$ of the problem
