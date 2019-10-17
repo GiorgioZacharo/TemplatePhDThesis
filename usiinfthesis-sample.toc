@@ -54,13 +54,17 @@
 \contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}
 \contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}
 \contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{63}{subsection.3.1.8}
-\contentsline {subsubsection}{Baselines for comparative evaluation}{63}{section*.46}
-\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{64}{subsection.3.1.9}
-\contentsline {subsection}{\numberline {3.1.10}Conclusions}{64}{subsection.3.1.10}
-\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{65}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Motivation}{65}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Related Work}{66}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Experimental Results}{67}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Conclusions}{67}{section.3.3}
-\contentsline {chapter}{Conclusions}{69}{chapter*.47}
-\contentsline {chapter}{Bibliography}{71}{section*.49}
+\contentsline {subsubsection}{Baselines for Comparative Evaluation}{63}{section*.46}
+\contentsline {subsubsection}{Benchmark Application}{65}{section*.48}
+\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{65}{subsection.3.1.9}
+\contentsline {subsubsection}{Ranking of Acceleration Candidates}{65}{section*.49}
+\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{66}{section*.51}
+\contentsline {subsubsection}{Design Effort Analysis}{69}{section*.55}
+\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{70}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Motivation}{70}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Related Work}{71}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Methodology}{73}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Experimental Results}{74}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Conclusions}{74}{section.3.3}
+\contentsline {chapter}{Conclusions}{77}{chapter*.58}
+\contentsline {chapter}{Bibliography}{79}{section*.60}
