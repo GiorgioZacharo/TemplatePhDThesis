@@ -2713,8 +2713,12 @@ and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
 computational latency of candidates for acceleration. The granularity of the candidates for acceleration 
 is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
-communication overhead between main memory and the HW accelerators. 
-\textbf{NOTE:} Write for EnergySeeker.
+communication overhead between main memory and the HW accelerators.
+Apart from accelerators targeting speedup, an extension of this methodology can account for power estimation
+of the hardware and target energy efficient hardware accelerators. \eseeker\ performs the identification
+and selection of accelerators that can offer substantial energy benefits to a heterogeneous computing 
+system.
+% \textbf{NOTE:} Write for EnergySeeker.
 
 % AccelSSeeker 3.1
 % 
@@ -3900,8 +3904,7 @@ Experimental evidence highlights that the hardware/software partitioning selecte
 outperforms choices that are solely based on profiling information.
 \eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections
 due to a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ 
-framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a 
-software-only approach and a consistent  
+framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}
