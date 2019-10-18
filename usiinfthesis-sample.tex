@@ -3718,16 +3718,16 @@ method partitions incoming encryption tasks to \HW\ implementations or extended 
 implementations of the existing \SW\ processor. These methodologies focus on implementing 
 energy efficient HW realizations on a) specific applications while b) automating some of the 
 processes of identification, estimation and selection of the parts of the execution to be 
-materialized in \HW. Our methodology instead is general enough to accept any application as 
+materialized in \HW. \eseeker\ is instead general enough to accept any application as 
 input written in C or C++ while fully automating all three processes required to identify and 
 select the most suitable \HW\ accelerators that would lead to enhanced energy efficiency.\par
 
 Finally in \cite{GruttnerNov13} an automated methodology that performs estimation on performance 
 and power for SW/HW partitioning is suggested. Given a functional C/C++ description and user 
 defined HW/SW mapping, an estimation is provided and subsequently a design space exploration 
-and optimization phase in order to improve a given configuration. Contrary to our methodology, 
-the selection process of the \HW\ candidates is not automated and an area resources budget is 
-not being taken into account.
+and optimization phase in order to improve a given configuration. Contrary to the suggested 
+methodology, the selection process of the \HW\ candidates is not automated and an area 
+ resources budget is not being taken into account.
 %
 %
 %
@@ -3746,8 +3746,12 @@ in cycles saved but in energy saved. Note that as stated in \ref{sec:estimation}
 is not limited to a given target and can be adapted to different values associated to Merit and/or
 Cost.\par
 
-The energy saved estimation, or Merit $M()$, for a hardware accelerator $i$ is measured in nanoJoules (nJ) 
-and derived by the following formulation:
+The cost $C()$ is estimated as the sum of its estimated logic and memory real estates. The first is 
+the sum of look-up tables (LUTs) and DSP blocks. 
+% Additional logic is required by a master axi port for each array present in the candidate parameters list
+The latter depends on the I/O requirements of the accelerator that determine the number of necessary 
+BRAM blocks. The energy saved estimation, or Merit $M()$, for a hardware accelerator $i$ is instead 
+measured in nanoJoules (nJ) and derived by the following formulation:
 
 \begin{equation*}
 M(i)  = Energy_{SW}(i) - Energy_{HW}(i)
@@ -3797,41 +3801,77 @@ analysis for \eseeker\ is extended. HW latency, SW latency and HW latency due to
 of the main memory and the accelerators are carried out as detailed in Subsection 
 \ref{sec:llvm_analysis}. Furthermore, the area of HW logic estimation is carried out, along
 with the area estimation of Master AXI ports, as described in \ref{sec:llvm_analysis}. Additionally,
-a power estimation for the hardware accelerators takes place that requires, apart from the logical
-units area, the number of BRAMs, the number of DSPs and the number of arrays interfaced to every 
+a power estimation for the hardware accelerators takes place that requires, apart from a) the logical
+units area, b) the number of BRAMs, c) the number of DSPs and d) the number of arrays interfaced to every 
 accelerator, as the latter are going to account for the estimation of the power consumption due to
 their interconnects.
 
 % performing not only latency estimation for every hardware candidate, but 
 % also a power estimation both for the software and the hardware side. 
 
+\subsection{Experimental Setup}
+\label{sec:results_set}
+
+The selection of candidates be \eseeker\ was evaluated by implementing the 
+hardware accelerators on a Xilinx Zynq Ultrascale+ PSoC board. The software 
+Cortex A53 processor was clocked at 1.2 GHz and the hardware accelerators at 100MHz.
+The main memory of the system is a DDR4 SDRAM.
+For the power requirements of both the software CPU and the accelerators, the Xilinx
+Power Estimator (XPE) \cite{XpeSep19} was utilized. XPE by Xilinx offers a worst-case
+power analysis tool that estimates the power consumption of a given design at any 
+phase of the design cycle. To serve the purpose of the following experimentation section
+and compare the energy consumption between the software and the hardware parts, only dynamic 
+power was considered. \par 
+
+The baselines for the comparative evaluation were profiling strategies based on the 
+gprof tool (gprof1, gprof2 and gprof3), as detailed in Subsection \ref{sec:setup_as}. 
+The application benchmark used to carry out the experimentation was H.264 decoder 
+\cite{LiuFeb16}, the same that was used in the Subsection \ref{sec:results_as}, processing 
+as input a video of QCIF (176x144) format.
+
+
 \subsection{Experimental Results}
 \label{sec:results_es}
 
-Dynamic Power only\\
-\\
-Power SW: PS-A53. Clock: 1.2 GHz Load: 100\% + DDR4 \\
-Power HW: Clock: 100 MHz a)Power Logic (LUTs, FFs (Registers))
-b) Power BRAMs, c) POwer DSPs, d) POwer Interconnects (master (1)/slaves(N: Number of Arrays))\\
-\\
-% $Energy SW = Power SW * Time SW$ \\
-% $Energy HW = Power HW * Time HW$
+% Dynamic Power only\\
+% \\
+% Power SW: PS-A53. Clock: 1.2 GHz Load: 100\% + DDR4 \\
+% Power HW: Clock: 100 MHz a)Power Logic (LUTs, FFs (Registers))
+% b) Power BRAMs, c) POwer DSPs, d) POwer Interconnects (master (1)/slaves(N: Number of Arrays))\\
+% \\
+
+To perform the evaluation of the performance of \eseeker, the application energy efficiency of the 
+hardware-accelerated parts selected by \eseeker, under different area constraints (maximum number of 
+LUTs), to those selected by the baseline methods are compared.
+The energy efficiency is retrieved by comparing the energy consumption for the whole run-time of the 
+benchmark application on the software processor over the energy consumption for the hybrid design, where 
+selected hardware accelerators are used along with the the non-accelerated parts that remain to the  
+software processor. Figure \ref{fig:energy} comparatively shows the energy efficiency obtained when using 
+the three profiling-based strategies outlined in Section \ref{sec:setup_as} against \eseeker.\par
+
+Three different rounds of experiments took place. One where a single software CPU core was active, one
+with two active cores and one with four. It can be observed that \eseeker\ consistently outperforms all
+three, gprof based, profiling strategies for various area constraints and in all three settings (one, two 
+and four active CPU cores). A HW/SW approach guided by \eseeker\ is up to 2.2x more energy efficient compared to 
+a SW-only approach due to the fact that the hardware used utilizes significantly less power compared to a power-hungry, yet faster, CPU processor. Comparing \eseeker\ to the profiling based only methodologies, the accelerators selected by
+the suggested framework offer a more accurate latency estimation leading to more speedup, as shown in the previous section \ref{sec:results_as}. Paired with a fairly accurate power estimation due to the resources used, \eseeker\ 
+leads to more efficient energy-wise choices, as less time is spent keeping the accelerators selected running compared
+to selections based on gprof.
 
 \begin{figure*}[t!]
 \centering
 \subfigure{
-  \includegraphics[width=0.7\textwidth]{figs/h264_energy.pdf}
+  \includegraphics[width=0.7\textwidth]{figs/gprof_vs_llvm_h264_1c.pdf}
 }
 \subfigure{
-  \includegraphics[width=0.7\textwidth]{figs/h264_2c_energy.pdf}
+  \includegraphics[width=0.7\textwidth]{figs/gprof_vs_llvm_h264_2c.pdf}
 }
 \subfigure{  
-  \includegraphics[width=0.7\textwidth]{figs/h264_3c_energy.pdf}
+  \includegraphics[width=0.7\textwidth]{figs/gprof_vs_llvm_h264_3c.pdf}
 }
 \caption{Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware 
 accelerators, the candidate sets obtained with \eseeker\ and the ones retrieved by gprof1, gprof2 and 
-gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: A) One Core 
-B) Two Cores C) Four Cores.}
+gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.}
 \label{fig:energy}
 \end{figure*}
 
@@ -3858,6 +3898,10 @@ lengthy and detailed evaluations of each acceleration candidate individually. It
 selects the set of candidates that maximize estimated speedup under a given resource constraint. 
 Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly
 outperforms choices that are solely based on profiling information.
+\eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections
+due to a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ 
+framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a 
+software-only approach and a consistent  
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}

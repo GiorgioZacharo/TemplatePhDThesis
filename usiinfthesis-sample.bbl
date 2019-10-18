@@ -534,6 +534,10 @@ Xilinx.
 \newblock Xilinx all programmable {SoC} portfolio.
 \newblock \url{www.xilinx.com/products/silicon-devices/soc.html}, Mar. 2017.
 
+\bibitem{XpeSep19}
+Xilinx.
+\newblock {\em Xilinx {P}ower {E}stimator ({XPE})}, Sept. 2019.
+
 \bibitem{XilinxESTRef18}
 Xilinx embedded system tools reference manual, 2018.
 
