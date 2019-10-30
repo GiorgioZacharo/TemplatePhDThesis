@@ -2703,17 +2703,21 @@ published in the 2018 International Conference on High Performance Computing \& 
 {System Aware Accelerators Identification}
 % {System Aware Accelerators Identification --- Speedup and Energy Efficiency}
 
-In the final Chapter of the dissertation the notion of automatic selection of HW accelerators is extended
-by taking into account the underlying system where the specialized accelerators are hosted. The knowledge
+In this Chapter of the dissertation the notion of automatic selection of HW accelerators is extended
+by increasing the scope of the candidates for acceleration to that of a subgraph of the entire function 
+call graph of an application. Moreover, the underlying system is taken into account where the specialized 
+accelerators are hosted. The knowledge
 of the characteristics of the system that is targeted can be critical for the choice of the HW accelerators
 to be implemented. The memory system of a platform for instance can vastly affect the latency due to data
 exchange between the main memory of the system and the HW accelerators. 
 \aseeker, an LLVM-based tool-chain, is presented as a framework that performs automatic identification 
 and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
-computational latency of candidates for acceleration. The granularity of the candidates for acceleration 
+computational latency of candidates for acceleration. 
+The granularity of the candidates for acceleration 
 is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
 communication overhead between main memory and the HW accelerators.
+
 Apart from accelerators targeting speedup, an extension of this methodology can account for power estimation
 of the hardware and target energy efficient hardware accelerators. \eseeker\ performs the identification
 and selection of accelerators that can offer substantial energy benefits to a heterogeneous computing 
@@ -2734,7 +2738,7 @@ system.
 System-level design, and heterogeneous computing as a whole, is witnessing a breakthrough. 
 Emerging best practices based on High Level Synthesis (HLS) allow unprecedented productivity levels. 
 HLS dramatically shortens development cycles by employing C/C++ descriptions as entry points 
-for the development of both \SW\ (SW) and \HW\ (HW) greatly facilitating the task of migrating 
+for the development of both \SW\ (SW) and \HW\ (HW), greatly facilitating the task of migrating 
 functionalities between the two.\par
 
 However, the design of heterogeneous systems comprising SW processors and HW accelerators is 
@@ -2743,6 +2747,16 @@ designer expertise \cite{CacciottiSep18} \cite{NouriJun17}. Furthermore, the lon
 for HW synthesis, coupled with the huge space of alternative implementations exposed by real-world 
 applications, limits in practice the number of accelerator choices that can be considered manually 
 by a designer before HW/SW partitioning is settled.\par
+
+Addressing these issues, performance estimators have been proposed
+that, while not providing working hardware implementations, can gauge
+the characteristics of different accelerator implementation
+alternatives  \cite{ShaoOct16} \cite{KathailFeb16}.  
+Nonetheless, these tools can only evaluate one choice of accelerated
+function at once. Hence, when using them, the evaluation of each
+potentially viable hardware/software partitioning alternative requires
+distinct experimental runs, a time-consuming task for large-sized
+target applications.\par
 
 In order to limit the entailed design effort, it is therefore crucial to identify the set of viable 
 acceleration options quickly, and also early in the design process, before performing later and more 
@@ -2769,7 +2783,7 @@ candidates are identified in a single, high-level exploration, reducing the scop
 estimations. It also differs from approaches based solely on profiling information, as profilers do not offer a 
 measure of costs and run-times of HW implementations. Furthermore, they do not account for invocation overheads -- 
 potentially leading to the selection of frequently called, but small, candidates. Finally, data transfers is an 
-important factor that \SoTA\ profilersdo not take into account -- hence potentially suggesting candidates 
+important factor that \SoTA\ profilers do not take into account -- hence potentially suggesting candidates 
 requiring an excessive amount of communication, that in turn can significantly weaken any potential performance 
 gained. \aseeker, instead, takes into account both the communication overhead and all the characteristics of the 
 platform that are required in order to generate an estimation model which leads
@@ -2792,8 +2806,8 @@ implementations specified in low-level Hardware Description Languages (HDL) such
   \caption{Evolution of the SoA in automatic selection of custom
           instructions/accelerators: (a) from data-flow level
           \cite{PozziJul06} \cite{GiaquintaMar15}, (b) to control-flow
-          level \cite{ZacharopoulosApr19} \cite{OppermannJul16}, (c)
-          to function-call graph level (this work).}
+          level (\rseeker\ in Chapter 1) \cite{ZacharopoulosApr19} \cite{OppermannJul16}, (c)
+          to function-call graph level (\aseeker\ in this chapter).}
   \label{fig:soa-evolution}
   \vskip -1em
 \end{figure}
@@ -3084,7 +3098,7 @@ To assess the computation time of candidates in hardware, a bottom-up approach w
 exemplified in Figure \ref{fig:hw-comp}. First, the maximum propagation delay of each of the Basic Blocks 
 (BBs) present in an \candidate\ (both in the top function and in its callees) is computed.  This is 
 achieved by traversing their DFGs and accounting for the operations delays, thus retrieving the longest 
-input-to-output paths (Figure \ref{fig:hw-comp}a).  Critical paths ofBBs are then expressed in clock cycles, 
+input-to-output paths (Figure \ref{fig:hw-comp}a).  Critical paths of BBs are then expressed in clock cycles, 
 dividing the propagation delays with the period of the system clock. By multiplying the critical paths with 
 the number of executions of each BB, the associated workload is computed. Finally, an estimate of the computation time of an \candidate\ is the sum of the workloads of its constituent BBs 
 (Figure \ref{fig:hw-comp}b-c).\par
@@ -3223,7 +3237,7 @@ graph satisfies condition $3$ of the \asprobname\ Problem.\par
           c) Given example merits and cost values associated to the eight
           \candidates, d) and given a maximum tolerated cost
           $C_{max}$, maximum independent sets that solve problem
-          \asprobname\ are shown. A maximum independent set maximises
+          \asprobname\ are shown. A maximum independent set maximizes
           merit, while not exceeding the given cost, and not including
           conflicts.}
               % \vskip -1.5em
@@ -3289,7 +3303,7 @@ software (non-accelerated) parts of the considered benchmark.
 \hline
      & \textbf{Validation}  & \textbf{Estimation}   &  \textbf{Estimation} \\
 \textbf{Candidate} & \textbf{Ranking}  & \textbf{Ranking}   &  \textbf{Ranking}  \\
-            & \textbf{Zynq Ultrascale+}   & \textbf{(\rseeker)} & \textbf{(gprof)} \\ \hline  \hline
+            & \textbf{Zynq Ultrascale+}   & \textbf{(\aseeker)} & \textbf{(gprof)} \\ \hline  \hline
   residual-block-cavlc-16     &  1               &  1       &   4  \\ \hline 
   TrailingOnes-TotalCoeff     &  2               &  2       &   2    \\ \hline 
   inter-prediction-chroma-double     &  3               &  3       &   5     \\ \hline
@@ -3309,7 +3323,7 @@ software (non-accelerated) parts of the considered benchmark.
   \vspace{0em}
   \caption{Ranking of \candidates, based on application speedup when
     implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation
-    strategies (\rseeker, column 3, and gprof, column 4).}
+    strategies (\aseeker, column 3, and gprof, column 4).}
   \label{tab:candidates}
   \end{table}
 
@@ -3317,7 +3331,7 @@ software (non-accelerated) parts of the considered benchmark.
 %
 %
 \subsubsection{Baselines for Comparative Evaluation} 
-The quality of the choice of accelerators given by \rseeker\ was compared against 
+The quality of the choice of accelerators given by \aseeker\ was compared against 
 the ones a designer would obtain when guided solely by a software profiling tool
 instead. For such baseline solutions, the \emph{gprof} tool \cite{GrahamJun82} 
 was utilized. Gprof retrieves the software execution time of all
@@ -3415,7 +3429,7 @@ to VGA ranking.
    \resizebox{\linewidth}{!}{
     \begin{tabular}{|l||c||c|c|} 
 \hline
-     & \textbf{\rseeker}  & \textbf{\rseeker}   &  \textbf{\rseeker} \\
+     & \textbf{\aseeker}  & \textbf{\aseeker}   &  \textbf{\aseeker} \\
 \textbf{Candidate} & \textbf{Ranking}  & \textbf{Ranking}   &  \textbf{Ranking}  \\
             & \textbf{QCIF (176x144)}   & \textbf{CIF (352x288)} & \textbf{VGA (640x480)} \\ \hline  \hline
   residual-block-cavlc-16     &  1               &  1       &   1  \\ \hline 
@@ -3433,7 +3447,7 @@ to VGA ranking.
   }  
   \vspace{0em}
   \caption{Ranking of \candidates, based on merit estimation
-    by \rseeker\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). }
+    by \aseeker\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). }
   \label{tab:candidates_input}
   \end{table}
 
@@ -3784,7 +3798,7 @@ translates to 10 nanoSecs per cycle.
 Finally the initial Merit equation becomes: 
 
 \begin{equation*}
-M(i)  = [ (Power_{SW} \times Time_{SW}) - (Power_{HW} \times Time_{HW}) ] \times n_{exec}
+M(i)  = [ (Power_{SW}(i) \times Time_{SW}(i)) - (Power_{HW}(i) \times Time_{HW}(i)) ] \times n_{exec}
 \end{equation*}
 
 % \begin{equation*}
@@ -3908,6 +3922,44 @@ framework. Experimentation revealed significant energy savings of up to 55\% les
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}
+
+Heterogeneous Computing emerges in order to provide improved performance on future
+computing systems 
+Research to build and design efficient, as well as effective, HW/SW execution platforms calls for great 
+attention and 
+challenges.\par
+
+In both Chapters 1 and 2 novel methodologies were described that present insights 
+addressing the research questions of {\em what} part, or which parts, of an application 
+should be synthesized to HW and {\em how}, meaning which kind of optimizations a selected 
+HW accelerator should be synthesized with. Experimentation
+showcased a tangible performance increase with respect to many \SoTA\ proposed methods.
+Chapter 3 presents the idea of extending the  framework by shifting the attention 
+to candidates for acceleration that are subgraphs of the entire function call graph, instead 
+of the function control flow graph of single functions. Furthermore the underlying system 
+that hosts the accelerators is analyzed so that both computation and communication effort 
+is taken into account.
+Chapter 3 is still part of ongoing research work, although preliminary results on a complex 
+benchmark such as \htsf\ have  demonstrated improved speedup on simulated heterogeneous systems 
+compared to profiling-only based methodologies.\par
+
+There are a number of objectives that will conclude the third and final Chapter:
+
+\begin{itemize}
+\item{} Establish a candidate selection process according to a number of rules that 
+both allow for increased performance gains and limit HW resources usage/repetition.
+%differentiates conflicts due to overlapping regions.
+\item{} Define a cost and merit estimation model that takes into account computation and
+communication effort, as well as the architectural characteristics of a given target system. 
+\item{} Perform experiments of all \htsf\ candidates on a real SoC platform, such as Zynq Ultrascale, 
+and investigate the performance achieved on it.
+\end{itemize}
+% Among future plans is the completion of the \candidates\ framework experimental phase on 
+% a real SoC platform, such as Zynq Ultrascale and investigate the performance of 
+% the \candidates\ framework on platforms with different memory hierarchies and 
+% increased silicon real estate.
+The completion of these milestones will conclude my research work as a whole and contribute towards a fully automated
+framework that assists the design of heterogeneous computing systems.
 
 
 \backmatter

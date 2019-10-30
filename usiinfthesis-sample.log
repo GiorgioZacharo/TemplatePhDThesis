@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.27)  19 OCT 2019 01:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.27)  30 OCT 2019 18:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -976,7 +976,7 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.498 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.500 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 ? 
 )
@@ -1724,190 +1724,192 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [51
 
 ]
+Overfull \hbox (28.65956pt too wide) in paragraph at lines 2751--2759
+\T1/mdbch/m/n/12 soft-ware par-ti-tion-ing al-ter-na-tive re-quires dis-tinct e
+x-per-i-men-tal runs, a time-consuming
+ []
+
 [52]
-Overfull \hbox (1.77094pt too wide) in paragraph at lines 2780--2785
+Overfull \hbox (1.77094pt too wide) in paragraph at lines 2794--2799
 \T1/mdbch/m/n/12 High Level Syn-the-sis tools have con-sid-er-ably ma-tured in 
 re-cent years [[]]. Nowa-
  []
 
-<figs/soa_evolution.pdf, id=1475, 571.19305pt x 289.87036pt>
+<figs/soa_evolution.pdf, id=1479, 571.19305pt x 289.87036pt>
 File: figs/soa_evolution.pdf Graphic file (type pdf)
 
 <use figs/soa_evolution.pdf>
-Package pdftex.def Info: figs/soa_evolution.pdf used on input line 2790.
+Package pdftex.def Info: figs/soa_evolution.pdf used on input line 2804.
 (pdftex.def)             Requested size: 320.26456pt x 162.52974pt.
- [53 <./figs/soa_evolution.pdf>] [54]
-<figs/flow.pdf, id=1544, 505.89pt x 280.04625pt>
+ [53] [54 <./figs/soa_evolution.pdf>]
+<figs/flow.pdf, id=1545, 505.89pt x 280.04625pt>
 File: figs/flow.pdf Graphic file (type pdf)
  <use figs/flow.pdf>
-Package pdftex.def Info: figs/flow.pdf used on input line 2866.
+Package pdftex.def Info: figs/flow.pdf used on input line 2880.
 (pdftex.def)             Requested size: 280.2292pt x 155.12837pt.
 
-<figs/subgraph_examples.pdf, id=1546, 468.75125pt x 169.63374pt>
+<figs/subgraph_examples.pdf, id=1547, 468.75125pt x 169.63374pt>
 File: figs/subgraph_examples.pdf Graphic file (type pdf)
 
 <use figs/subgraph_examples.pdf>
-Package pdftex.def Info: figs/subgraph_examples.pdf used on input line 2896.
+Package pdftex.def Info: figs/subgraph_examples.pdf used on input line 2910.
 (pdftex.def)             Requested size: 280.2292pt x 101.4083pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [55 <./figs/flow.pdf>]
-<figs/overlap_examples.pdf, id=1590, 315.1775pt x 196.735pt>
+<figs/overlap_examples.pdf, id=1592, 315.1775pt x 196.735pt>
 File: figs/overlap_examples.pdf Graphic file (type pdf)
 
 <use figs/overlap_examples.pdf>
-Package pdftex.def Info: figs/overlap_examples.pdf used on input line 2934.
+Package pdftex.def Info: figs/overlap_examples.pdf used on input line 2948.
 (pdftex.def)             Requested size: 200.16458pt x 124.94333pt.
- [56 <./figs/subgraph_examples.pdf> <./figs/overlap_examples.pdf>] [57]
-<figs/merit_estimation.pdf, id=1652, 464.73625pt x 231.86626pt>
+ [56 <./figs/subgraph_examples.pdf>] [57 <./figs/overlap_examples.pdf>] [58]
+<figs/merit_estimation.pdf, id=1659, 464.73625pt x 231.86626pt>
 File: figs/merit_estimation.pdf Graphic file (type pdf)
 
 <use figs/merit_estimation.pdf>
-Package pdftex.def Info: figs/merit_estimation.pdf used on input line 3054.
+Package pdftex.def Info: figs/merit_estimation.pdf used on input line 3068.
 (pdftex.def)             Requested size: 320.26456pt x 159.78975pt.
 
-Underfull \vbox (badness 4779) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [58]
-[59 <./figs/merit_estimation.pdf>] [60] [61]
-<figs/max_set_examples.pdf, id=1710, 646.415pt x 297.11pt>
+ [59 <./figs/merit_estimation.pdf>] [60] [61]
+<figs/max_set_examples.pdf, id=1712, 646.415pt x 297.11pt>
 File: figs/max_set_examples.pdf Graphic file (type pdf)
 
 <use figs/max_set_examples.pdf>
-Package pdftex.def Info: figs/max_set_examples.pdf used on input line 3219.
+Package pdftex.def Info: figs/max_set_examples.pdf used on input line 3233.
 (pdftex.def)             Requested size: 320.26456pt x 147.20363pt.
 
 
 LaTeX Font Warning: Font shape `T1/uop/m/it' undefined
-(Font)              using `T1/uop/m/n' instead on input line 3228.
+(Font)              using `T1/uop/m/n' instead on input line 3242.
 
 [62]
-Underfull \vbox (badness 4316) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [63 <./figs/max_set_examples.pdf>]
 LaTeX Font Info:    Try loading font information for TS1+mdbch on input line 33
-30.
+44.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/ts1mdbch.fd
 File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
 )
 LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 3330.
+(Font)              scaled to size 11.52008pt on input line 3344.
 
-[64] <figs/call_graph_w_no_names.pdf, id=1761, 817.0525pt x 287.0725pt>
+[64] <figs/call_graph_w_no_names.pdf, id=1763, 817.0525pt x 287.0725pt>
 File: figs/call_graph_w_no_names.pdf Graphic file (type pdf)
 
 <use figs/call_graph_w_no_names.pdf>
-Package pdftex.def Info: figs/call_graph_w_no_names.pdf used on input line 3358
+Package pdftex.def Info: figs/call_graph_w_no_names.pdf used on input line 3372
 .
 (pdftex.def)             Requested size: 400.32918pt x 140.65799pt.
-
-Underfull \vbox (badness 5374) has occurred while \output is active []
-
  [65 <./figs/call_graph_w_no_names.pdf>]
-<figs/h264_speedup.pdf, id=1804, 433.62pt x 271.0125pt>
+<figs/h264_speedup.pdf, id=1806, 433.62pt x 271.0125pt>
 File: figs/h264_speedup.pdf Graphic file (type pdf)
 
 <use figs/h264_speedup.pdf>
-Package pdftex.def Info: figs/h264_speedup.pdf used on input line 3449.
+Package pdftex.def Info: figs/h264_speedup.pdf used on input line 3463.
 (pdftex.def)             Requested size: 320.26456pt x 200.17392pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [66]
-[67 <./figs/h264_speedup.pdf>]
-<figs//selection_AS_30k.pdf, id=1826, 816.04875pt x 284.06125pt>
+Underfull \vbox (badness 1454) has occurred while \output is active []
+
+ [67 <./figs/h264_speedup.pdf>]
+<figs//selection_AS_30k.pdf, id=1828, 816.04875pt x 284.06125pt>
 File: figs//selection_AS_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_AS_30k.pdf>
-Package pdftex.def Info: figs//selection_AS_30k.pdf used on input line 3501.
+Package pdftex.def Info: figs//selection_AS_30k.pdf used on input line 3515.
 (pdftex.def)             Requested size: 280.2292pt x 97.54611pt.
 
-<figs//selection_G1_30k.pdf, id=1827, 817.0525pt x 286.06876pt>
+<figs//selection_G1_30k.pdf, id=1829, 817.0525pt x 286.06876pt>
 File: figs//selection_G1_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G1_30k.pdf>
-Package pdftex.def Info: figs//selection_G1_30k.pdf used on input line 3504.
+Package pdftex.def Info: figs//selection_G1_30k.pdf used on input line 3518.
 (pdftex.def)             Requested size: 280.2292pt x 98.11327pt.
 
-<figs//selection_G2_30k.pdf, id=1828, 817.0525pt x 285.065pt>
+<figs//selection_G2_30k.pdf, id=1830, 817.0525pt x 285.065pt>
 File: figs//selection_G2_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G2_30k.pdf>
-Package pdftex.def Info: figs//selection_G2_30k.pdf used on input line 3507.
+Package pdftex.def Info: figs//selection_G2_30k.pdf used on input line 3521.
 (pdftex.def)             Requested size: 280.2292pt x 97.76901pt.
 
-<figs//selection_G3_30k.pdf, id=1829, 817.0525pt x 285.065pt>
+<figs//selection_G3_30k.pdf, id=1831, 817.0525pt x 285.065pt>
 File: figs//selection_G3_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G3_30k.pdf>
-Package pdftex.def Info: figs//selection_G3_30k.pdf used on input line 3510.
+Package pdftex.def Info: figs//selection_G3_30k.pdf used on input line 3524.
 (pdftex.def)             Requested size: 280.2292pt x 97.76901pt.
 
-Underfull \vbox (badness 3713) has occurred while \output is active []
+Underfull \vbox (badness 1565) has occurred while \output is active []
 
  [68]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [69 <./figs//selection_AS_30k.pdf> <./figs//selection_G1_30k.pdf> <./figs//sel
 ection_G2_30k.pdf> <./figs//selection_G3_30k.pdf>]
-<figs/h264_effort.pdf, id=1966, 433.62pt x 271.0125pt>
+<figs/h264_effort.pdf, id=1968, 433.62pt x 271.0125pt>
 File: figs/h264_effort.pdf Graphic file (type pdf)
 
 <use figs/h264_effort.pdf>
-Package pdftex.def Info: figs/h264_effort.pdf used on input line 3608.
+Package pdftex.def Info: figs/h264_effort.pdf used on input line 3622.
 (pdftex.def)             Requested size: 320.26456pt x 200.17392pt.
 
-<figs/area_size.pdf, id=1967, 588.72983pt x 25.87115pt>
+<figs/area_size.pdf, id=1969, 588.72983pt x 25.87115pt>
 File: figs/area_size.pdf Graphic file (type pdf)
 
 <use figs/area_size.pdf>
-Package pdftex.def Info: figs/area_size.pdf used on input line 3610.
+Package pdftex.def Info: figs/area_size.pdf used on input line 3624.
 (pdftex.def)             Requested size: 320.26456pt x 14.07362pt.
  [70 <./figs/h264_effort.pdf> <./figs/area_size.pdf>]
 [71] [72] [73] [74]
-<figs/gprof_vs_llvm_h264_1c.pdf, id=2066, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_1c.pdf, id=2067, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_1c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_1c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_1c.pdf used on input line 3869
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_1c.pdf used on input line 3883
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
-<figs/gprof_vs_llvm_h264_2c.pdf, id=2067, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_2c.pdf, id=2068, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_2c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_2c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_2c.pdf used on input line 3872
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_2c.pdf used on input line 3886
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
-<figs/gprof_vs_llvm_h264_3c.pdf, id=2068, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_3c.pdf, id=2069, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_3c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_3c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_3c.pdf used on input line 3875
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_3c.pdf used on input line 3889
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
 
-LaTeX Warning: Float too large for page by 47.04839pt on input line 3880.
+LaTeX Warning: Float too large for page by 47.04839pt on input line 3894.
 
-[75] [76] [77 <./figs/gprof_vs_llvm_h264_1c.pdf> <./figs/gprof_vs_llvm_h264_2c.
-pdf> <./figs/gprof_vs_llvm_h264_3c.pdf>] [78
 
-] [79] [80
+Underfull \vbox (badness 2680) has occurred while \output is active []
 
-]
-(./usiinfthesis-sample.bbl
+ [75]
+[76] [77 <./figs/gprof_vs_llvm_h264_1c.pdf> <./figs/gprof_vs_llvm_h264_2c.pdf> 
+<./figs/gprof_vs_llvm_h264_3c.pdf>] [78
+
+] [79] [80] (./usiinfthesis-sample.bbl
 Underfull \hbox (badness 1960) in paragraph at lines 32--38
 \T1/mdbch/m/n/12 duc-tion.  []$\T1/fvm/m/n/12 www . altera . com / products / s
 oc / portfolio / arria-[]10-[]soc /
  []
 
 [81
+
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 80--85
@@ -1958,11 +1960,11 @@ FiXme Summary: Number of notes: 0,
 (FiXme)        Total: 0.
 
 [90]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3932.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3932.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3984.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3984.
  (./usiinfthesis-sample.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3932.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3932.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3984.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3984.
 
 Package rerunfilecheck Info: File `usiinfthesis-sample.out' has not changed.
 (rerunfilecheck)             Checksum: A6C8BE39E6A6BD04AFF4469615BEFE8F;9098.
@@ -1973,12 +1975,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3932.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3984.
  ) 
 Here is how much of TeX's memory you used:
  27059 strings out of 493089
  475376 string characters out of 6134842
- 629668 words of memory out of 5000000
+ 629665 words of memory out of 5000000
  29668 multiletter control sequences out of 15000+600000
  83451 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2003,10 +2005,10 @@ local/texlive/2015/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chri8t.pfb
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr
 /local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/l
 ocal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb>
-Output written on usiinfthesis-sample.pdf (104 pages, 2651677 bytes).
+Output written on usiinfthesis-sample.pdf (104 pages, 2653777 bytes).
 PDF statistics:
- 2308 PDF objects out of 2487 (max. 8388607)
- 1915 compressed objects within 20 object streams
+ 2310 PDF objects out of 2487 (max. 8388607)
+ 1917 compressed objects within 20 object streams
  353 named destinations out of 1000 (max. 500000)
  743 words of extra memory for PDF output out of 10000 (max. 10000000)
 

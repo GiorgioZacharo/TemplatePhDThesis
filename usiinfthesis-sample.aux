@@ -273,6 +273,8 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{CacciottiSep18}
 \citation{NouriJun17}
+\citation{ShaoOct16}
+\citation{KathailFeb16}
 \citation{XilinxESTRef18}
 \citation{LattnerMar04}
 \citation{SyrowikJun18}
@@ -298,8 +300,6 @@
 \citation{ShaoJul14}
 \citation{ShaoOct16}
 \citation{KathailFeb16}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite  {PozziJul06} \cite  {GiaquintaMar15}, (b) to control-flow level \cite  {ZacharopoulosApr19} \cite  {OppermannJul16}, (c) to function-call graph level (this work).\relax }}{53}{figure.caption.36}}
-\newlabel{fig:soa-evolution}{{3.1}{53}{Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite {PozziJul06} \cite {GiaquintaMar15}, (b) to control-flow level \cite {ZacharopoulosApr19} \cite {OppermannJul16}, (c) to function-call graph level (this work).\relax }{figure.caption.36}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Related Work}{53}{subsection.3.1.2}}
 \citation{SchaferJun12}
 \citation{ZuluagaJun12}
@@ -310,6 +310,8 @@
 \citation{ZacharopoulosApr19}
 \citation{OppermannJul16}
 \citation{CotaJun15}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite  {PozziJul06} \cite  {GiaquintaMar15}, (b) to control-flow level ({RegionSeeker}\ in Chapter 1) \cite  {ZacharopoulosApr19} \cite  {OppermannJul16}, (c) to function-call graph level ({AccelSeeker}\ in this chapter).\relax }}{54}{figure.caption.36}}
+\newlabel{fig:soa-evolution}{{3.1}{54}{Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite {PozziJul06} \cite {GiaquintaMar15}, (b) to control-flow level (\rseeker \ in Chapter 1) \cite {ZacharopoulosApr19} \cite {OppermannJul16}, (c) to function-call graph level (\aseeker \ in this chapter).\relax }{figure.caption.36}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The phases of the {AccelSeeker}\ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, {AccelSeeker}\ performs selection of a subset of such candidates.\relax }}{55}{figure.caption.37}}
 \newlabel{fig:flow}{{3.2}{55}{The phases of the \aseeker \ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, \aseeker \^^Mperforms selection of a subset of such candidates.\relax }{figure.caption.37}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{55}{subsection.3.1.3}}
@@ -318,18 +320,18 @@
 \citation{ZacharopoulosApr19}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{56}{figure.caption.38}}
 \newlabel{fig:subgraph-examples}{{3.3}{56}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.38}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces a) Three overlapping {AccelCand}s: A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite  {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }}{56}{figure.caption.39}}
-\newlabel{fig:overlap-examples}{{3.4}{56}{a) Three overlapping \candidates : A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }{figure.caption.39}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{56}{subsection.3.1.4}}
 \newlabel{sec:as_prob}{{3.1.4}{56}{Problem Statement and Candidate Selection}{subsection.3.1.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces a) Three overlapping {AccelCand}s: A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite  {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }}{57}{figure.caption.39}}
+\newlabel{fig:overlap-examples}{{3.4}{57}{a) Three overlapping \candidates : A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }{figure.caption.39}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Cost and Merit Estimation}{58}{subsection.3.1.5}}
 \newlabel{sec:estimation}{{3.1.5}{58}{Cost and Merit Estimation}{subsection.3.1.5}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Architectural characterization.}{58}{section*.40}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{59}{figure.caption.41}}
 \newlabel{fig:hw-comp}{{3.5}{59}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.41}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Cost Estimation.}{59}{section*.42}}
-\@writefile{toc}{\contentsline {subsubsection}{Merit Estimation.}{59}{section*.43}}
 \citation{LattnerMar04}
+\@writefile{toc}{\contentsline {subsubsection}{Merit Estimation.}{60}{section*.43}}
 \newlabel{eq:inference}{{3.1.5}{60}{Merit Estimation}{section*.43}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}}
 \newlabel{sec:llvm_analysis}{{3.1.6}{60}{Compiler Analysis}{subsection.3.1.6}{}}
@@ -338,13 +340,13 @@
 \citation{BronKerbosch73}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}}
 \newlabel{sec:algo}{{3.1.7}{62}{Selection Algorithm}{subsection.3.1.7}{}}
-\citation{GrahamJun82}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }}{63}{figure.caption.44}}
 \newlabel{fig:max-set-examples}{{3.6}{63}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.44}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{63}{subsection.3.1.8}}
-\newlabel{sec:setup_as}{{3.1.8}{63}{Experimental Setup}{subsection.3.1.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Ranking of {AccelCand}s, based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies ({RegionSeeker}, column 3, and gprof, column 4).\relax }}{64}{table.caption.45}}
-\newlabel{tab:candidates}{{3.1}{64}{Ranking of \candidates , based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies (\rseeker , column 3, and gprof, column 4).\relax }{table.caption.45}{}}
+\citation{GrahamJun82}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Ranking of {AccelCand}s, based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies ({AccelSeeker}, column 3, and gprof, column 4).\relax }}{64}{table.caption.45}}
+\newlabel{tab:candidates}{{3.1}{64}{Ranking of \candidates , based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies (\aseeker , column 3, and gprof, column 4).\relax }{table.caption.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{64}{subsection.3.1.8}}
+\newlabel{sec:setup_as}{{3.1.8}{64}{Experimental Setup}{subsection.3.1.8}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Baselines for Comparative Evaluation}{64}{section*.46}}
 \citation{LiuFeb16}
 \citation{H264May15}
@@ -352,15 +354,15 @@
 \newlabel{fig:call-graph-w-no-names}{{3.7}{65}{Call graph of H.264, with a few function names highlighted.\relax }{figure.caption.47}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Benchmark Application}{65}{section*.48}}
 \citation{ZynqMar17}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Ranking of {AccelCand}s, based on merit estimation by {RegionSeeker}\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }}{66}{table.caption.50}}
-\newlabel{tab:candidates_input}{{3.2}{66}{Ranking of \candidates , based on merit estimation by \rseeker \ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }{table.caption.50}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{66}{subsection.3.1.9}}
 \newlabel{sec:results_as}{{3.1.9}{66}{Experimental Results}{subsection.3.1.9}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Ranking of Acceleration Candidates}{66}{section*.49}}
+\@writefile{toc}{\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{66}{section*.51}}
+\newlabel{subsec:perf}{{3.1.9}{66}{Performance of resource constrained accelerator selections}{section*.51}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Ranking of {AccelCand}s, based on merit estimation by {AccelSeeker}\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }}{67}{table.caption.50}}
+\newlabel{tab:candidates_input}{{3.2}{67}{Ranking of \candidates , based on merit estimation by \aseeker \ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }{table.caption.50}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {AccelSeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref  {subsec:perf} ), varying the area constraint.\relax }}{67}{figure.caption.52}}
 \newlabel{fig:speedups}{{3.8}{67}{Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \aseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref {subsec:perf} ), varying the area constraint.\relax }{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{67}{section*.51}}
-\newlabel{subsec:perf}{{3.1.9}{67}{Performance of resource constrained accelerator selections}{section*.51}{}}
 \citation{LiuFeb16}
 \citation{LiuFeb16}
 \@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Root function of the selected H.264 candidates, from the reference code in \cite  {LiuFeb16}, for different methods and resource budgets.\relax }}{68}{table.caption.54}}
@@ -372,9 +374,9 @@
 \@writefile{toc}{\contentsline {subsubsection}{Design Effort Analysis}{70}{section*.55}}
 \citation{VivadoHLSMar17}
 \citation{ShaoJul14}
-\citation{LattnerMar04}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{71}{section.3.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{71}{subsection.3.2.1}}
+\citation{LattnerMar04}
 \citation{MelpignanoJune12}
 \citation{ContiSep16}
 \citation{SchiavoneSep17}
@@ -382,21 +384,21 @@
 \citation{ReagenJun16}
 \citation{ShaoJul14}
 \citation{LeeApr13}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{72}{subsection.3.2.2}}
 \citation{XiaoMay18}
 \citation{OpensslDec98}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{72}{subsection.3.2.2}}
 \citation{GruttnerNov13}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Methodology}{73}{subsection.3.2.3}}
 \newlabel{sec:meth_es}{{3.2.3}{73}{Methodology}{subsection.3.2.3}{}}
-\newlabel{eq:energy_simple}{{3.2.3}{73}{Methodology}{subsection.3.2.3}{}}
 \citation{XpeSep19}
+\newlabel{eq:energy_simple}{{3.2.3}{74}{Methodology}{subsection.3.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{74}{subsection.3.2.4}}
 \newlabel{sec:results_set}{{3.2.4}{74}{Experimental Setup}{subsection.3.2.4}{}}
 \citation{LiuFeb16}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{75}{subsection.3.2.5}}
 \newlabel{sec:results_es}{{3.2.5}{75}{Experimental Results}{subsection.3.2.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{75}{section.3.3}}
-\newlabel{sec:conclusions_as}{{3.3}{75}{Conclusions}{section.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{76}{section.3.3}}
+\newlabel{sec:conclusions_as}{{3.3}{76}{Conclusions}{section.3.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {EnergySeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }}{77}{figure.caption.57}}
 \newlabel{fig:energy}{{3.11}{77}{Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \eseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }{figure.caption.57}{}}
 \@writefile{toc}{\contentsline {chapter}{Conclusions}{79}{chapter*.58}}

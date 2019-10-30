@@ -50,15 +50,15 @@
 \contentsline {subsection}{\numberline {3.1.5}Cost and Merit Estimation}{58}{subsection.3.1.5}
 \contentsline {subsubsection}{Architectural characterization.}{58}{section*.40}
 \contentsline {subsubsection}{Cost Estimation.}{59}{section*.42}
-\contentsline {subsubsection}{Merit Estimation.}{59}{section*.43}
+\contentsline {subsubsection}{Merit Estimation.}{60}{section*.43}
 \contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}
 \contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}
-\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{63}{subsection.3.1.8}
+\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{64}{subsection.3.1.8}
 \contentsline {subsubsection}{Baselines for Comparative Evaluation}{64}{section*.46}
 \contentsline {subsubsection}{Benchmark Application}{65}{section*.48}
 \contentsline {subsection}{\numberline {3.1.9}Experimental Results}{66}{subsection.3.1.9}
 \contentsline {subsubsection}{Ranking of Acceleration Candidates}{66}{section*.49}
-\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{67}{section*.51}
+\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{66}{section*.51}
 \contentsline {subsubsection}{Design Effort Analysis}{70}{section*.55}
 \contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{71}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Motivation}{71}{subsection.3.2.1}
@@ -66,6 +66,6 @@
 \contentsline {subsection}{\numberline {3.2.3}Methodology}{73}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{74}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Experimental Results}{75}{subsection.3.2.5}
-\contentsline {section}{\numberline {3.3}Conclusions}{75}{section.3.3}
+\contentsline {section}{\numberline {3.3}Conclusions}{76}{section.3.3}
 \contentsline {chapter}{Conclusions}{79}{chapter*.58}
 \contentsline {chapter}{Bibliography}{81}{section*.60}
