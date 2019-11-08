@@ -18,7 +18,7 @@
 \contentsline {section}{\numberline {1.6}RegionSeeker MuLTiVersioning}{26}{section.1.6}
 \contentsline {subsection}{\numberline {1.6.1}Methodology}{26}{subsection.1.6.1}
 \contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}
-\contentsline {section}{\numberline {1.7}Related Work}{29}{section.1.7}
+\contentsline {section}{\numberline {1.7}Related Work}{28}{section.1.7}
 \contentsline {section}{\numberline {1.8}Conclusions}{31}{section.1.8}
 \contentsline {chapter}{\numberline {2}Automatic Optimizations for Accelerators}{33}{chapter.2}
 \contentsline {section}{\numberline {2.1}Data reuse Analysis}{34}{section.2.1}
@@ -64,7 +64,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Motivation}{71}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Related Work}{72}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Methodology}{73}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{74}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{75}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Experimental Results}{75}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}Conclusions}{76}{section.3.3}
 \contentsline {chapter}{Conclusions}{79}{chapter*.58}

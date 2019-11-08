@@ -125,8 +125,6 @@
 \citation{BinkertFeb11}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}}
 \newlabel{subsec:mv_res}{{1.6.2}{27}{Experimental Results}{subsection.1.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Comparison of the speedup obtained on jpeg benchmark, over the Top: Total run time of the application and Bottom: SW time of only the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the MuLTiVersioning\ approach where any version of the regions can be selected. \relax }}{28}{figure.caption.18}}
-\newlabel{fig:mlv_aladdin}{{1.12}{28}{Comparison of the speedup obtained on jpeg benchmark, over the Top: Total run time of the application and Bottom: SW time of only the equivalent kernels (regions), varying the area constraint, using Aladdin and gem5 for Speedup and Area evaluation. Four approaches are compared: The min where the regions with least amount of area are selected, the base where the regions with median values of area are selected, the max where only the maximum area regions can be selected and finally the \multi \^^Mapproach where any version of the regions can be selected. \relax }{figure.caption.18}{}}
 \citation{YuSep04}
 \citation{PozziJul06}
 \citation{ChenFeb07}
@@ -142,10 +140,12 @@
 \citation{CongFeb04}
 \citation{GaluzziOct06}
 \citation{AlippiMar99}
+\@writefile{toc}{\contentsline {section}{\numberline {1.7}Related Work}{28}{section.1.7}}
+\newlabel{sec:rw}{{1.7}{28}{Related Work}{section.1.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }}{29}{figure.caption.18}}
+\newlabel{fig:mlv_aladdin}{{1.12}{29}{Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }{figure.caption.18}{}}
 \citation{ZuluagaJul09}
 \citation{BaleaniMay02}
-\@writefile{toc}{\contentsline {section}{\numberline {1.7}Related Work}{29}{section.1.7}}
-\newlabel{sec:rw}{{1.7}{29}{Related Work}{section.1.7}{}}
 \citation{AguilarJune16}
 \citation{HankSep93}
 \citation{JohnsonJun94}
@@ -268,6 +268,7 @@
 \newlabel{fig:iter_ref_score}{{2.8}{49}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.35}{}}
 \citation{ZacharopoulosJul18}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Conclusions}{50}{subsection.2.2.5}}
+\citation{LiuFeb16}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{51}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -340,8 +341,8 @@
 \citation{BronKerbosch73}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}}
 \newlabel{sec:algo}{{3.1.7}{62}{Selection Algorithm}{subsection.3.1.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }}{63}{figure.caption.44}}
-\newlabel{fig:max-set-examples}{{3.6}{63}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximises merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }}{63}{figure.caption.44}}
+\newlabel{fig:max-set-examples}{{3.6}{63}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.44}{}}
 \citation{GrahamJun82}
 \@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Ranking of {AccelCand}s, based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies ({AccelSeeker}, column 3, and gprof, column 4).\relax }}{64}{table.caption.45}}
 \newlabel{tab:candidates}{{3.1}{64}{Ranking of \candidates , based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies (\aseeker , column 3, and gprof, column 4).\relax }{table.caption.45}{}}
@@ -392,9 +393,9 @@
 \newlabel{sec:meth_es}{{3.2.3}{73}{Methodology}{subsection.3.2.3}{}}
 \citation{XpeSep19}
 \newlabel{eq:energy_simple}{{3.2.3}{74}{Methodology}{subsection.3.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{74}{subsection.3.2.4}}
-\newlabel{sec:results_set}{{3.2.4}{74}{Experimental Setup}{subsection.3.2.4}{}}
 \citation{LiuFeb16}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{75}{subsection.3.2.4}}
+\newlabel{sec:results_set}{{3.2.4}{75}{Experimental Setup}{subsection.3.2.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{75}{subsection.3.2.5}}
 \newlabel{sec:results_es}{{3.2.5}{75}{Experimental Results}{subsection.3.2.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{76}{section.3.3}}

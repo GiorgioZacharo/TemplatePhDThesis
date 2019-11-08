@@ -353,7 +353,9 @@ new paths to future work.
 
 Moving towards a heterogeneous era, HW accelerators, dedicated to a specific task, can
 improve both speedup of execution and energy efficiency in comparison to a general 
-purpose CPU or a set of homogeneous CPUs. Nonetheless, the identification and selection 
+purpose CPU or a set of homogeneous CPUs. 
+Under the scope of the current chapter, the focus will be on HW accelerators that minimize
+latency and increase speedup. Nonetheless, the identification and selection 
 of which parts of the computation are to be implemented in HW is a complex and demanding task. 
 A thorough understanding of the application to be accelerated is necessary, the HW resources
 (area) budget is often tight and the granularity of the candidates for acceleration 
@@ -579,7 +581,8 @@ on. Examples of independent sets in this graph are $\{A\}$, $\{B,D\}$,
 $\{B,C,E\}$.\par
 
 The algorithm recursively explores the independent sets of $G$,
-similarly to the Bron-Kerbosch algorithm~\cite{BronKerbosch73}, and
+similarly to %the Bron-Kerbosch algorithm~
+\cite{BronKerbosch73}, and
 its steps will be followed with the aid of the running example, and
 with its corresponding tree exploration, shown in
 Figure~\ref{fig:exact_tree}. The algorithm maintains a set $X$, which
@@ -1547,12 +1550,17 @@ less tangible than the speedup achieved by \rseeker.
 
 \HLS\ (HLS) tools, such as Vivado HLS by Xilinx, may employ %additional 
 optimizations to HW accelerators
-design in order to increase performance, i.e. obtain faster execution. These 
-%pragma-directed 
-HLS optimizations were not taken into account by \rseeker\ framework in the
-previous section. Default, non optimized versions of HW accelerators were identified
-and selected instead. In this
-section an extended \rseeker\ framework is presented, which performs the selection not 
+design in order to increase performance, i.e. obtain faster execution. 
+To support different optimization levels, an extension of \rseeker\ framework 
+is presented in this section, 
+% These 
+% %pragma-directed 
+% HLS optimizations were not taken into account by \rseeker\ framework in the
+% previous section. Default, non optimized versions of HW accelerators were identified
+% and selected instead. 
+% In this
+% section an extended \rseeker\ framework is presented, which 
+which performs the selection not 
 only among possible CFG subgraphs, but also among different versions of each identified 
 subgraph, namely different versions of the regions identified. 
 This extension is referred to in the rest of the document as RegionSeeker: the 
@@ -1570,8 +1578,8 @@ MuLTiVersioning approach.
 \label{subsec:mv_meth}
 
 The rationale, supporting the extension of \rseeker\ framework, is to achieve improved
-speedup that can be provided by exploiting a more varied set of HW accelerators to select from, 
-with different optimizations implemented onto them. This is being achieved by instantiating 
+speedup by exploiting a more varied set of HW accelerators to select from, 
+with different optimizations implemented onto them. This goal is being achieved by instantiating 
 different versions of each HW accelerator with the same functionality, yet different speedup gains 
 and different area (HW resources) requirements. The set of optimizations that were considered in 
 order to design different HW implementations of the same accelerators are: 
@@ -1589,11 +1597,12 @@ copies of the logic implementing the functionality defined in a loop body, drast
 performance of HW accelerators \cite{KurraApr07} \cite{KulkarniOct12}. This directive can be applied in HW
 accelerators containing loops whose trip count can be statically defined. It should nonetheless
 be applied in a careful manner, as it entails a high area cost for the duplicated logic. Furthermore,
-the resulting benefits can be hampered by loop-carried dependencies and frequent memory
-accesses.\par
+the resulting benefits can be hampered by frequent memory accesses and loop-carried dependencies, which 
+impose a serialization of the run-time execution, thus negating any benefits resulting from loop unrolling.\par
+
 Loop pipelining is an additional HLS directive applied in loops that allows the pipelining of 
 the operations contained in a single body of a loop and across consecutive iterations. Restrictions 
-regarding loop-carried dependencies across consecutive iterations can limit the application of the loop
+regarding loop-carried dependencies across consecutive iterations can also limit the application of the loop
 pipelining optimization as the result of the output of a loop iteration would be required in the following
 one, thus not allowing the pipelining of the loop body operations.\par
 
@@ -1638,17 +1647,27 @@ would violate the first condition of the \rsprobname\ problem as defined in Subs
 The experimental setup was the same as in the \rseeker\ framework, with a system comprising a single 
 SW processor and multiple loosely coupled HW accelerators, exchanging shared data with \plms.
 The processor invokes the accelerators via a memory-mapped
-interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete, control returns to the SW processor.\par
+interface, thus requiring a transaction on the system bus and as soon as the HW accelerators execution is complete, control returns to the SW processor.
+Experiments were run on \jpeg, image encoding/decoding, benchmark from the CHStone embedded applications benchmark suite, as detailed in Subsection \ref{subsec:benchmarks}.\par
 
-Experiments were run in \jpeg\ benchmark from the CHStone embedded applications benchmark suite.
-Four different approaches were compared:
-a) the \emph{min} where the regions with the least amount of area are included in the set
-and hence can be selected, b) the \emph{base} 
-where the regions with median values of area are selected, c) the \emph{max} where only the maximum 
-area regions can be selected and finally d) the \multi\ approach where any possible version 
-of the regions can be selected.
+Three single-version approaches were compared against the \multi\ approach.
+%a) 
+A) The \emph{min} approach where exclusively the regions with the least amount of area are included in the initial set of regions, and hence can be selected by the \emph{exact} algorithm. This approach 
+takes into account candidates for acceleration that require the least possible HW resources and, thus, 
+have no optimizations embedded onto them.
+B) The \emph{base} approach
+where only single versions of regions with median values of area are considered. These versions are
+optimized, yet not to their fullest potential according to the number of optimizations that were
+considered in the previous subsection (\ref{subsec:mv_meth}). As a result they can offer greater speedup compared to \emph{min}
+but they require more HW resources as well.
+C) Finally the \emph{max} approach where single versions of regions with maximum 
+area were considered for selection. These single version candidates are fully optimized, with respect
+to the set of optimizations considered in \ref{subsec:mv_meth}, and require the largest area budget 
+compared to the previous single-version approaches.\par
+
+The \multi\ approach takes, instead, all possible optimized versions of the initial region set into account and, subsequently, all versions are available for selection.
 The speedup achieved on \jpeg\ over the whole run time of the application (Figure \ref{fig:mlv_aladdin} Top), 
-as well as over solely the SW time of the selected regions Figure \ref{fig:mlv_aladdin} Bottom) is 
+as well as over the run time of solely the selected regions Figure \ref{fig:mlv_aladdin} Bottom) is 
 showcased.
 % The four different approaches compared are:
 % a) the \emph{min} where the regions with the least amount of area are included in the set
@@ -1663,15 +1682,18 @@ showcased.
 \includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU}
 \hspace*{-1cm}
 \includegraphics[width= 0.6 \linewidth]{figs/plot_O3CPU_SW_large}
-\caption{Comparison of the speedup obtained on jpeg benchmark, over the
-Top: Total run time of the application and Bottom: SW time of only the equivalent 
-kernels (regions), varying the area constraint, using 
-Aladdin and gem5 for Speedup and Area evaluation.
-Four approaches are compared: The 
-min where the regions with least amount of area are selected, the base
-where the regions with median values of area are selected, the max where 
-only the maximum area regions can be selected and finally the \multi\
-approach where any version of the regions can be selected.
+\caption{Comparison of the speedup obtained by MuLTiVersioning to single 
+versioning approaches on jpeg benchmark
+varying the area constraint, using Aladdin and gem5 respectively, for HW and 
+SW latency evaluation.
+Top: Over the
+total run time of the application. Bottom: Over the run time of the regions 
+selected.  
+% Four approaches are compared: The 
+% min where the regions with least amount of area are selected, the base
+% where the regions with median values of area are selected, the max where 
+% only the maximum area regions can be selected and finally the \multi\
+% approach where any version of the regions can be selected.
 }
 \label{fig:mlv_aladdin}
 \end{figure*}
@@ -1695,7 +1717,7 @@ approach where any version of the regions can be selected.
 The strength of the \multi\ approach and the benefit of having 
 a variety of potential candidates to select from 
 %for any equivalent computation, throughout the \jpeg\  application 
-is demonstrated by the experimental outcome of the \jpeg\ application (kernels run-time). 
+is demonstrated by the experimental outcome of the \jpeg\ application for different area constraints. 
 In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
 methodology. For a medium area point ($200 * 10^3 uM^2$), the 
 speedup achieved with \multi\ is 1.7x more than the second best, \emph{base} approach. For 
@@ -1851,11 +1873,15 @@ level candidates, across applications of widely different sizes and for varied a
 As an example, \rseeker\ offers up to 4.5x speedup for the \mpeg\ benchmark compared to as SW
 execution. This work was published in IEEE Transactions on Computer-Aided Design of Integrated 
 Circuits and Systems (TCAD) journal \cite{ZacharopoulosApr19}.
-The \multi\ approach extends the initial selection pool of candidates and, compared
-to default HW accelerators configurations, offers enhanced speedup on the \jpeg\ application of up
-to 1.8 on the entire application and up to 65x speedup on the relative kernels that 
-are synthesized into HW, meaning the computation time that is synthesized in HW excluding the time 
-that is left to SW.
+The \multi\ approach extends the initial pool of candidates by introducing multiple optimized
+versions of these candidates. Compared
+to default HW accelerators configurations, \rseeker\ \multi\ offers enhanced speedup on the 
+\jpeg\ application of up
+% to 1.8 on the entire application and up 
+to 65x speedup on the parts of the computation that 
+are synthesized into HW compared to single-version approaches.
+% meaning the computation time that is synthesized in HW excluding the time 
+% that is left to SW.
 
 % \begin{figure}
 % \centering
@@ -2703,25 +2729,33 @@ published in the 2018 International Conference on High Performance Computing \& 
 {System Aware Accelerators Identification}
 % {System Aware Accelerators Identification --- Speedup and Energy Efficiency}
 
-In this Chapter of the dissertation the notion of automatic selection of HW accelerators is extended
-by increasing the scope of the candidates for acceleration to that of a subgraph of the entire function 
-call graph of an application. Moreover, the underlying system is taken into account where the specialized 
-accelerators are hosted. The knowledge
+In this chapter of the dissertation the notion of automatic selection of HW accelerators is extended
+by increasing the scope of the candidates for acceleration, in order to accelerate large and complex
+applications such as the H.264 decoder \cite{LiuFeb16}, and by taking into account the underlying system 
+where the specialized accelerators are hosted. The granularity of the candidates for acceleration is 
+expanded to that of a subgraph of the entire call graph of an application and subsequently the need to 
+accommodate for the communication overhead between main memory and the HW accelerators emerges.
+% to that of a subgraph of the entire function call graph of an application.
+%  Moreover, the underlying system is taken into account where the specialized 
+% accelerators are hosted. 
+The knowledge
 of the characteristics of the system that is targeted can be critical for the choice of the HW accelerators
 to be implemented. The memory system of a platform for instance can vastly affect the latency due to data
-exchange between the main memory of the system and the HW accelerators. 
+exchange between the main memory of the system and the HW accelerators.\par
+
 \aseeker, an LLVM-based tool-chain, is presented as a framework that performs automatic identification 
 and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
-computational latency of candidates for acceleration. 
-The granularity of the candidates for acceleration 
-is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
-communication overhead between main memory and the HW accelerators.
-
-Apart from accelerators targeting speedup, an extension of this methodology can account for power estimation
-of the hardware and target energy efficient hardware accelerators. \eseeker\ performs the identification
-and selection of accelerators that can offer substantial energy benefits to a heterogeneous computing 
-system.
+computational latency of candidates for acceleration. \aseeker\ selects accelerators that can minimize the
+overall latency of an application and can offer increased speedup compared to %\SoTA\ 
+profiling-based only approaches that mimic the manual decisions of a designer.\par
+% The granularity of the candidates for acceleration 
+% is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
+% communication overhead between main memory and the HW accelerators.
+In addition to accelerators targeting speedup, an extension of this methodology can focus on energy saving 
+heterogeneous designs. \eseeker\ extends the latency estimation of the previous framework and accounts for power
+ estimation of hardware and software in order to target energy efficient HW accelerators. \eseeker\ performs the identification and selection of accelerators that can offer substantial energy benefits to a heterogeneous computing 
+system compared to a powerful, yet power-hungry, SW processor and against profiling-driven only methodologies.
 % \textbf{NOTE:} Write for EnergySeeker.
 
 % AccelSSeeker 3.1
@@ -3180,8 +3214,8 @@ frequencies to be annotated back to the IR level.\par
 
 \emph{SW Latency Estimation}. The SW latency estimation is being
 computed by an implemented function within the LLVM analysis pass
-according to the number of instructions included in a given candidate,
-as well as the number of instructions included in function calls, if
+according to the number of IR instructions included in a given candidate,
+as well as the number of IR instructions included in function calls, if
 any. The frequency of execution of each Basic Block that the
 instructions reside is taken into account as well, for a single
 invocation of the candidate.\par
@@ -3659,15 +3693,19 @@ Figures~\ref{fig:speedups} and~\ref{fig:effort}.
 
 \subsection{Motivation}
 
-Heterogeneous Computing calls for specialized \HW\ (HW) that can serve the purpose of
-not only accelerating applications, but saving significant amounts of energy as well.
+Since battery-powered \SoC\ devices become more prominent and are in high demand, the need
+%Heterogeneous Computing calls 
+for specialized \HW\ (HW) that can serve the purpose of 
+saving significant amounts of energy, in addition to accelerating applications as seen 
+in the previous section, becomes higher. 
 Vivado High Level Synthesis (HLS) 
 \cite{VivadoHLSMar17} is one of the state-of-the-art, HLS tools that are used to 
 build accelerators and synthesize parts of software applications to HW. Such HLS 
 and HW Description Language (HDL) tools, however efficient, are far from optimal 
 since they require a lot of manual decisions from the programmer's part. When 
-facing a tight area budget, the decision of which parts of the computation to 
- materialize in low power HW accelerators is not 
+facing a tight area budget, the decision of which parts of the computation are more
+demanding in terms of energy consumption, in order to 
+ materialize them in low power HW accelerators, is not 
 trivial. It requires a deep understanding of the \SW\ (SW) application 
 and its characteristics, as aspects of computation intensity and memory 
 management are complex and hard to identify.\par
@@ -3677,8 +3715,8 @@ synthesis, coupled with the huge space of alternative implementations
 exposed by real-world applications, limit in practice the number of
 candidate choices that can be considered manually by a designer
 before HW/SW partitioning is settled.
-Simulation tools such as Aladdin \cite{ShaoJul14} have been
-introduced that allow orders-of-magnitude faster evaluation of the
+Simulation tools that offer energy estimation, such as Aladdin \cite{ShaoJul14}, 
+have been introduced that allow orders-of-magnitude faster evaluation of the
 performance of hardware-accelerated applications. These frameworks are
 not generating a functional hardware implementation, but
 only provide an representation of the run-time
@@ -3688,7 +3726,10 @@ acceleration. Nonetheless, these simulation tools still require considerable
 manual effort to set up experimental environments, a task that must be
 repeated for every considered candidate.\par
 
-In order to address these challenges \eseeker\ is presented in this section. 
+In order to offer a solution to the problem of identifying and selecting
+which parts of an application would offer the most energy saving benefits,
+under a given area budget ,
+\eseeker\ is presented in this section. 
 It is a methodology to
 estimate the suitability of acceleration candidates from application
 source code, subsequently allowing their automatic identification and
@@ -3709,7 +3750,7 @@ respective energy requirements of the SW-only side.
 \subsection{Related Work}
 
 A large body of research work has been dedicated to energy efficiency in heterogeneous computing
-systems. In \cite{MelpignanoJune12} \cite{ContiSep16} the authors present a clustered many core 
+systems. In \cite{MelpignanoJune12} \cite{ContiSep16} the authors present a clustered many-core 
 computing system with tightly coupled OpenRISC 32-bit processing elements. Energy efficiency is 
 achieved through parallelism, yet it is stated that more attention to the memory hierarchy and 
 more specialization in HW realizations would improve both performance and energy efficiency in 
@@ -3767,7 +3808,7 @@ Cost.\par
 The cost $C()$ is estimated as the sum of its estimated logic and memory real estates. The first is 
 the sum of look-up tables (LUTs) and DSP blocks. 
 % Additional logic is required by a master axi port for each array present in the candidate parameters list
-The latter depends on the I/O requirements of the accelerator that determine the number of necessary 
+The latter (memory) depends on the I/O requirements of the accelerator that determine the number of necessary 
 BRAM blocks. The energy saved estimation, or Merit $M()$, for a hardware accelerator $i$ is instead 
 measured in nanoJoules (nJ) and derived by the following formulation:
 
@@ -3793,7 +3834,7 @@ accelerator the power required for the same unit of time depends on its hardware
 (e.g. number of LUTs, DSPs, BRAMs etc). The running time $Time_{SW}$ of the software processor 
 is measured in cycles (0.83 nanoSec per cycle for 1.2 GHz CPU frequency) and for the respective
 running time of the hardware accelerator, $Time_{HW}$ is clocked at 100 MHz frequency which
-translates to 10 nanoSecs per cycle.
+translates to 10 nanoseconds per cycle.
 
 Finally the initial Merit equation becomes: 
 
@@ -3819,7 +3860,7 @@ analysis for \eseeker\ is extended. HW latency, SW latency and HW latency due to
 of the main memory and the accelerators are carried out as detailed in Subsection 
 \ref{sec:llvm_analysis}. Furthermore, the area of HW logic estimation is carried out, along
 with the area estimation of Master AXI ports, as described in \ref{sec:llvm_analysis}. Additionally,
-a power estimation for the hardware accelerators takes place that requires, apart from a) the logical
+a power estimation for the hardware accelerators takes place that requires: a) the logical
 units area, b) the number of BRAMs, c) the number of DSPs and d) the number of arrays interfaced to every 
 accelerator, as the latter are going to account for the estimation of the power consumption due to
 their interconnects.
@@ -3830,16 +3871,18 @@ their interconnects.
 \subsection{Experimental Setup}
 \label{sec:results_set}
 
-The selection of candidates be \eseeker\ was evaluated by implementing the 
-hardware accelerators on a Xilinx Zynq Ultrascale+ PSoC board. The software 
-Cortex A53 processor was clocked at 1.2 GHz and the hardware accelerators at 100MHz.
+The selection of candidates by \eseeker\ was evaluated by implementing the 
+hardware accelerators on a Xilinx Zynq Ultrascale+ PSoC board considering the reduction of 
+dynamic power. The software 
+Cortex A53 processor was clocked at 1.2 GHz and the hardware accelerators at 100 MHz.
 The main memory of the system is a DDR4 SDRAM.
 For the power requirements of both the software CPU and the accelerators, the Xilinx
 Power Estimator (XPE) \cite{XpeSep19} was utilized. XPE by Xilinx offers a worst-case
 power analysis tool that estimates the power consumption of a given design at any 
-phase of the design cycle. To serve the purpose of the following experimentation section
-and compare the energy consumption between the software and the hardware parts, only dynamic 
-power was considered. \par 
+phase of the design cycle.\par
+% To serve the purpose of the following experimentation section
+% and compare the energy consumption between the software and the hardware parts, only dynamic 
+% power was considered. \par 
 
 The baselines for the comparative evaluation were profiling strategies based on the 
 gprof tool (gprof1, gprof2 and gprof3), as detailed in Subsection \ref{sec:setup_as}. 
@@ -3871,7 +3914,8 @@ Three different rounds of experiments took place. One where a single software CP
 with two active cores and one with four. It can be observed that \eseeker\ consistently outperforms all
 three, gprof based, profiling strategies for various area constraints and in all three settings (one, two 
 and four active CPU cores). A HW/SW approach guided by \eseeker\ is up to 2.2x more energy efficient compared to 
-a SW-only approach due to the fact that the hardware used utilizes significantly less power compared to a power-hungry, yet faster, CPU processor. Comparing \eseeker\ to the profiling based only methodologies, the accelerators selected by
+a SW-only approach due to the fact that the hardware used utilizes significantly less power compared to a power-hungry 
+CPU processor, that is clocked at a higher frequency with respect to programmable logic. Comparing \eseeker\ to the profiling based only methodologies, the accelerators selected by
 the suggested framework offer a more accurate latency estimation leading to more speedup, as shown in the previous section \ref{sec:results_as}. Paired with a fairly accurate power estimation due to the resources used, \eseeker\ 
 leads to more efficient energy-wise choices, as less time is spent keeping the accelerators selected running compared
 to selections based on gprof.
@@ -3910,7 +3954,7 @@ hardware-accelerated systems. By automatically assessing the potential speedup o
 acceleration choices, in their default implementation, as well as the hardware resources they demand, 
 \aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more 
 detailed analysis and optimization.
-\aseeker\ performs the identification of candidate accelerators, as well as their area and speedup 
+\aseeker\ performs the identification of candidate accelerators, as well as  their area and speedup 
 estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring 
 lengthy and detailed evaluations of each acceleration candidate individually. It then automatically 
 selects the set of candidates that maximize estimated speedup under a given resource constraint. 
@@ -3923,11 +3967,11 @@ framework. Experimentation revealed significant energy savings of up to 55\% les
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}
 
-Heterogeneous Computing emerges in order to provide improved performance on future
-computing systems 
-Research to build and design efficient, as well as effective, HW/SW execution platforms calls for great 
-attention and 
-challenges.\par
+\textbf{NOTE: Work in Progress}\\
+Heterogeneous computing emerges in order to provide improved performance on future computing systems 
+
+Research to build and design efficient, as well as effective, HW/SW execution platforms calls for 
+great attention and challenges.\par
 
 In both Chapters 1 and 2 novel methodologies were described that present insights 
 addressing the research questions of {\em what} part, or which parts, of an application 
@@ -3943,23 +3987,23 @@ Chapter 3 is still part of ongoing research work, although preliminary results o
 benchmark such as \htsf\ have  demonstrated improved speedup on simulated heterogeneous systems 
 compared to profiling-only based methodologies.\par
 
-There are a number of objectives that will conclude the third and final Chapter:
+% There are a number of objectives that will conclude the third and final Chapter:
 
-\begin{itemize}
-\item{} Establish a candidate selection process according to a number of rules that 
-both allow for increased performance gains and limit HW resources usage/repetition.
-%differentiates conflicts due to overlapping regions.
-\item{} Define a cost and merit estimation model that takes into account computation and
-communication effort, as well as the architectural characteristics of a given target system. 
-\item{} Perform experiments of all \htsf\ candidates on a real SoC platform, such as Zynq Ultrascale, 
-and investigate the performance achieved on it.
-\end{itemize}
-% Among future plans is the completion of the \candidates\ framework experimental phase on 
-% a real SoC platform, such as Zynq Ultrascale and investigate the performance of 
-% the \candidates\ framework on platforms with different memory hierarchies and 
-% increased silicon real estate.
-The completion of these milestones will conclude my research work as a whole and contribute towards a fully automated
-framework that assists the design of heterogeneous computing systems.
+% \begin{itemize}
+% \item{} Establish a candidate selection process according to a number of rules that 
+% both allow for increased performance gains and limit HW resources usage/repetition.
+% %differentiates conflicts due to overlapping regions.
+% \item{} Define a cost and merit estimation model that takes into account computation and
+% communication effort, as well as the architectural characteristics of a given target system. 
+% \item{} Perform experiments of all \htsf\ candidates on a real SoC platform, such as Zynq Ultrascale, 
+% and investigate the performance achieved on it.
+% \end{itemize}
+% % Among future plans is the completion of the \candidates\ framework experimental phase on 
+% % a real SoC platform, such as Zynq Ultrascale and investigate the performance of 
+% % the \candidates\ framework on platforms with different memory hierarchies and 
+% % increased silicon real estate.
+% The completion of these milestones will conclude my research work as a whole and contribute towards a fully automated
+% framework that assists the design of heterogeneous computing systems.
 
 
 \backmatter
