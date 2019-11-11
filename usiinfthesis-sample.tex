@@ -1665,7 +1665,7 @@ area were considered for selection. These single version candidates are fully op
 to the set of optimizations considered in \ref{subsec:mv_meth}, and require the largest area budget 
 compared to the previous single-version approaches.\par
 
-The \multi\ approach takes, instead, all possible optimized versions of the initial region set into account and, subsequently, all versions are available for selection.
+The \multi\ approach takes into account all available optimized versions of the initial region set and, subsequently, all versions are available for selection.
 The speedup achieved on \jpeg\ over the whole run time of the application (Figure \ref{fig:mlv_aladdin} Top), 
 as well as over the run time of solely the selected regions Figure \ref{fig:mlv_aladdin} Bottom) is 
 showcased.
@@ -1718,10 +1718,10 @@ The strength of the \multi\ approach and the benefit of having
 a variety of potential candidates to select from 
 %for any equivalent computation, throughout the \jpeg\  application 
 is demonstrated by the experimental outcome of the \jpeg\ application for different area constraints. 
-In Figure \ref{fig:mlv_aladdin} for any given area point, the speedup obtained is higher than any other 
-methodology. For a medium area point ($200 * 10^3 uM^2$), the 
+In Figure \ref{fig:mlv_aladdin} (Top) for any given area point, the speedup obtained is higher than any other 
+methodology. In Figure \ref{fig:mlv_aladdin} (Bottom) the distinction among the four different strategies, i.e., \multi\ compared to the three single-version methods, becomes more apparent. For a medium area point (200K  $uM^2$), the 
 speedup achieved with \multi\ is 1.7x more than the second best, \emph{base} approach. For 
-a large area constraint ($400 * 10^3 uM^2$) the \multi\ speedup is more than 2x compared to
+a large area constraint (400K $uM^2$) the \multi\ speedup is more than 2x compared to
 \emph{base} and more than 6x compared to \emph{min}.\par
 
 % In Figure \ref{fig:mlv_speed_aladdin} the same trend is depicted in the speedup of the whole application
