@@ -2725,14 +2725,18 @@ published in the 2018 International Conference on High Performance Computing \& 
 %
 
 
-\chapter[System Aware Accelerators Identification]
-{System Aware Accelerators Identification}
+\chapter[Identification and Selection of System Aware Accelerators]
+{Identification and Selection of \\ System Aware Accelerators}
 % {System Aware Accelerators Identification --- Speedup and Energy Efficiency}
 
 In this chapter of the dissertation the notion of automatic selection of HW accelerators is extended
-by increasing the scope of the candidates for acceleration, in order to accelerate large and complex
-applications such as the H.264 decoder \cite{LiuFeb16}, and by taking into account the underlying system 
-where the specialized accelerators are hosted. The granularity of the candidates for acceleration is 
+by increasing the scope of the candidates for acceleration, in order to target demanding platforms 
+with a complex memory hierarchy, such as a Xilinx Zynq Ultrascale+ PSoC board.
+The acceleration of large and complex
+applications, such as the H.264 decoder \cite{LiuFeb16}, necessitates the need to take into account the 
+underlying system where the specialized accelerators are hosted. 
+%and the latency due to communication between the main memory and the accelerators. 
+The granularity of the candidates for acceleration is 
 expanded to that of a subgraph of the entire call graph of an application and subsequently the need to 
 accommodate for the communication overhead between main memory and the HW accelerators emerges.
 % to that of a subgraph of the entire function call graph of an application.
@@ -2748,14 +2752,16 @@ and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
 computational latency of candidates for acceleration. \aseeker\ selects accelerators that can minimize the
 overall latency of an application and can offer increased speedup compared to %\SoTA\ 
-profiling-based only approaches that mimic the manual decisions of a designer.\par
+profiling-only based approaches that mimic the manual decisions of a designer.\par
 % The granularity of the candidates for acceleration 
 % is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
 % communication overhead between main memory and the HW accelerators.
-In addition to accelerators targeting speedup, an extension of this methodology can focus on energy saving 
-heterogeneous designs. \eseeker\ extends the latency estimation of the previous framework and accounts for power
- estimation of hardware and software in order to target energy efficient HW accelerators. \eseeker\ performs the identification and selection of accelerators that can offer substantial energy benefits to a heterogeneous computing 
-system compared to a powerful, yet power-hungry, SW processor and against profiling-driven only methodologies.
+In addition to accelerators targeting speedup, an extension of this methodology can focus on 
+energy-saving 
+heterogeneous designs. \eseeker\ extends the latency estimation of the previous framework and accounts for 
+power estimation of hardware and software in order to target energy efficient HW accelerators. \eseeker\ 
+performs identification and selection of accelerators that can offer substantial energy benefits to a 
+heterogeneous computing system compared to a powerful, yet power-hungry, software processor and against  methodologies based solely on profiling information.
 % \textbf{NOTE:} Write for EnergySeeker.
 
 % AccelSSeeker 3.1
@@ -2788,7 +2794,7 @@ the characteristics of different accelerator implementation
 alternatives  \cite{ShaoOct16} \cite{KathailFeb16}.  
 Nonetheless, these tools can only evaluate one choice of accelerated
 function at once. Hence, when using them, the evaluation of each
-potentially viable hardware/software partitioning alternative requires
+potentially viable HW/SW partitioning alternative requires
 distinct experimental runs, a time-consuming task for large-sized
 target applications.\par
 
@@ -2799,10 +2805,10 @@ detailed estimations. This key step is currently poorly supported by design auto
 \cite{LattnerMar04} which, as was also shown by the authors of \cite{SyrowikJun18}, may often be 
 misleading.\par
 
-To fill this gap and offer an efficient solution to the problem stated above, \aseeker is presented. 
+To fill this gap and offer an efficient solution to the problem stated above, \aseeker\ is presented. 
 \aseeker\ offers a methodology to identify and select the suitable acceleration candidates in an
 application, from its software source code. Being implemented within the LLVM \cite{LattnerMar04} compiler 
-infrastructure, first models an estimation of the cost (required resources) and merit (potential speedup) 
+infrastructure, it first models an estimation of the cost (required resources) and merit (potential speedup) 
 of all candidate accelerators in a single, quick pass, and then selects the set that maximizes the estimated 
 speedup, while not exceeding a resource target. The use of \aseeker\ can therefore guide Integrated Circuit 
 architects in the early design phases, highlighting which segments of a computing flow should be
@@ -2816,10 +2822,10 @@ The approach of \aseeker\ is markedly different from that of performance estimat
 candidates are identified in a single, high-level exploration, reducing the scope of further, and more detailed, 
 estimations. It also differs from approaches based solely on profiling information, as profilers do not offer a 
 measure of costs and run-times of HW implementations. Furthermore, they do not account for invocation overheads -- 
-potentially leading to the selection of frequently called, but small, candidates. Finally, data transfers is an 
+potentially leading to the selection of frequently called, but small, candidates. Finally, the transfer of data is an 
 important factor that \SoTA\ profilers do not take into account -- hence potentially suggesting candidates 
 requiring an excessive amount of communication, that in turn can significantly weaken any potential performance 
-gained. \aseeker, instead, takes into account both the communication overhead and all the characteristics of the 
+gained. \aseeker, instead, takes into account both the communication overhead and a number of the characteristics of the 
 platform that are required in order to generate an estimation model which leads
 to high-performance HW accelerators choices.
 
@@ -2885,9 +2891,9 @@ field target customizable processors augmented with
 application-specific functional units, within the processor pipelines.
 Hence, these techniques usually constrain their search to the scope of
 single basic blocks \cite{PozziJul06} \cite{GiaquintaMar15}, as
-depicted in Figure~\ref{fig:soa-evolution}a.  Recently, the authors of
-\cite{ZacharopoulosApr19} and \cite{OppermannJul16} have instead
-targeted the identification of larger code segments, including
+depicted in Figure~\ref{fig:soa-evolution}a. In Chapter 1, with the 
+presentation of the \rseeker\ framework, and in \cite{OppermannJul16} 
+there was instead a focus on the identification of larger code segments, including
 control-flow structures belonging to single functions (depicted in
 Figure~\ref{fig:soa-evolution}b).  However, such scope still falls
 short of the one employed in HLS tools, which are devoted to the
@@ -2902,12 +2908,12 @@ automatic accelerators identification.
 
 % \subsection{Methodology}
 
-The methodology embedded in \aseeker, whose high-level scheme is depicted in Figure 
-\ref{fig:flow}, is detailed.  
-First, the definition of a candidate for acceleration is provided, and then how the 
-selection of a subset of potential candidates to be implemented in hardware is being performed
-(A and C in the figure). Subsequently, the approach employed to estimate the candidates 
-performance and resource requirements (B in the figure) is presented.
+The methodology of \aseeker, as depicted in Figure \ref{fig:flow}, is presented in 
+more detail in the following subsections.  
+First, the definition of a candidate for acceleration is given. Then the selection 
+process of a subset of candidates, among a pool of such candidates, to be implemented in 
+hardware is described (A and C in the figure). Finally, the approach employed to estimate 
+the candidates performance (Merit) and resource requirements (Cost) (B in the figure) is presented.
 
 \begin{figure}[!t]
   \centering
@@ -3004,12 +3010,12 @@ implemented in HW. Note that the methodology here proposed is agnostic to
 the way cost and merit are defined.
 Of course, their definition should correctly reflect the SW and HW
 architectures that the methodology is targeting, and the details of
-how functions $M()$ and $C()$ are defined for the experiments in this
-paper are given in Subsection~\ref{sec:estimation}.\par
+how functions $M()$ and $C()$ are defined for the evaluation
+of \aseeker\ are given in Subsection~\ref{sec:estimation}.\par
 
 Given a set of \candidates, defined and identified as described
 in the previous subsection, and given a cost and merit associated to
-each of them, the problem that is tackled is the following.\par
+each of them, the problem that is addressed is the following.\par
 
 \textbf{Problem: \asprobname}
 
@@ -3056,12 +3062,75 @@ a conflict.\par
 
 The problem formulation of \asprobname\
 borrows from that found in Chapter 1. It has however
-an important difference. Since in Section \ref{sec:prob} Regions are targeted 
-within a the control-flow graph of a single functions as
-candidates for acceleration, no overlaps are allowed within the same
-selection. Conversely, in the current section, subgraphs of the function-call
-graph are considered, hence allowing solutions including partially overlapping
-\candidates.
+an important difference. In Section \ref{sec:prob} candidates for acceleration % are targeted 
+are within the scope of the control-flow graph of a single function, therefore 
+no overlaps are allowed within the same selection. Conversely, in the current section, 
+subgraphs of the function-call graph are considered, hence allowing solutions including 
+partially overlapping \candidates.
+
+
+\subsection{Selection Algorithm}
+\label{sec:algo}
+
+Solving the \asprobname\ problem on the function-call graph of the
+application corresponds to solving the \emph{independent set problem} on 
+the resulting conflict graph. The conflict graph expresses which pairs of 
+\candidates\ are in conflict; thus, an \emph{independent set} of the conflict 
+graph satisfies condition $3$ of the \asprobname\ Problem.\par
+
+\begin{figure}[!t]
+  %\vskip -1.5em
+  \centering
+  \includegraphics[width=0.8\linewidth]{figs/max_set_examples.pdf}
+      % \vskip -1em
+  \caption{a) An example call graph with eight nodes, and hence
+          eight \candidates, and b) the corresponding conflict graph.
+          c) Given example merits and cost values associated to the eight
+          \candidates, d) and given a maximum tolerated cost
+          $C_{max}$, maximum independent sets that solve problem
+          \asprobname\ are shown. A maximum independent set maximizes
+          merit, while not exceeding the given cost, and not including
+          conflicts.}
+              % \vskip -1.5em
+  \label{fig:max-set-examples}
+\end{figure}
+
+An algorithm is therefore implemented that recursively explores the
+independent sets of the conflict graph, similarly to the Bron-Kerbosch
+algorithm~\cite{BronKerbosch73}, and that returns the set $S$ with the
+highest merit $M(S)$ (hence satisfying condition $1$ of the problem
+formulation) and whose cost $C(S)$ does not exceed a user-given
+maximum cost $C_{max}$ (hence satisfying condition $2$ of the
+problem formulation). This returned set represents the optimal
+solution to the \asprobname\ Problem.\par
+
+An algorithm solving an independent set problem is of course one of
+non-polynomial complexity. The exact implementation is still able to
+find the optimal solution for the experiments in this paper in a
+matter of milliseconds, even for the considerable dimension of the
+function-call graph of the application considered (a function-call
+graph of \numberOfcandidates\ nodes, as detailed in the experiments 
+section).\par
+
+An example of selection can be seen in
+Figure~\ref{fig:max-set-examples}. First the example call graph is
+depicted, which has 8 nodes and hence 8 \candidates, each
+\emph{rooted} in one of the 8 nodes. The eight corresponding
+\candidates\ are not depicted in this figure, but some of them can be
+seen in Figure~\ref{fig:overlap-examples}a: for example, the
+\candidate\ rooted in node 2 is depicted there and labeled A, the
+\candidate\ rooted in node 3 is also depicted in the same Figure and
+labeled B, etc.  Figure~\ref{fig:max-set-examples}b depicts the
+complete conflict graph corresponding to this example. As can be seen,
+candidate 1 (corresponding to the whole graph) is in conflict with all
+other candidates, candidates 2 and 3 are not in conflict (they only
+overlap in function 7) etc. Now, given example values of cost and
+merit for each candidate (in Figure~\ref{fig:overlap-examples}c), the
+maximum independent set is found in the conflict graph, which
+maximizes the sum of merits of the candidates selected, does not
+overcome a maximum sum of cost, and does not include conflicts. Two
+examples (for $C_{max} = 25$ and for $C_{max} = 40$) are shown in
+Figure~\ref{fig:overlap-examples}d.
 
 
 
@@ -3251,69 +3320,6 @@ locks included in a candidate.\par
 resources required for a Master AXI port, the parameter list of each
 candidate is analyzed. Every array identified accounts for extra
 logical units (LUTs), contributing to the total area.
-
-\subsection{Selection Algorithm}
-\label{sec:algo}
-
-Solving the \asprobname\ problem on the function-call graph of the
-application corresponds to solving the \emph{independent set problem} on 
-the resulting conflict graph. The conflict graph expresses which pairs of 
-\candidates\ are in conflict; thus, an \emph{independent set} of the conflict 
-graph satisfies condition $3$ of the \asprobname\ Problem.\par
-
-\begin{figure}[!t]
-  %\vskip -1.5em
-  \centering
-  \includegraphics[width=0.8\linewidth]{figs/max_set_examples.pdf}
-      % \vskip -1em
-  \caption{a) An example call graph with eight nodes, and hence
-          eight \candidates, and b) the corresponding conflict graph.
-          c) Given example merits and cost values associated to the eight
-          \candidates, d) and given a maximum tolerated cost
-          $C_{max}$, maximum independent sets that solve problem
-          \asprobname\ are shown. A maximum independent set maximizes
-          merit, while not exceeding the given cost, and not including
-          conflicts.}
-              % \vskip -1.5em
-  \label{fig:max-set-examples}
-\end{figure}
-
-An algorithm is therefore implemented that recursively explores the
-independent sets of the conflict graph, similarly to the Bron-Kerbosch
-algorithm~\cite{BronKerbosch73}, and that returns the set $S$ with the
-highest merit $M(S)$ (hence satisfying condition $1$ of the problem
-formulation) and whose cost $C(S)$ does not exceed a user-given
-maximum cost $C_{max}$ (hence satisfying condition $2$ of the
-problem formulation). This returned set represents the optimal
-solution to the \asprobname\ Problem.\par
-
-An algorithm solving an independent set problem is of course one of
-non-polynomial complexity. The exact implementation is still able to
-find the optimal solution for the experiments in this paper in a
-matter of milliseconds, even for the considerable dimension of the
-function-call graph of the application considered (a function-call
-graph of \numberOfcandidates\ nodes, as detailed in the experiments 
-section).\par
-
-An example of selection can be seen in
-Figure~\ref{fig:max-set-examples}. First the example call graph is
-depicted, which has 8 nodes and hence 8 \candidates, each
-\emph{rooted} in one of the 8 nodes. The eight corresponding
-\candidates\ are not depicted in this figure, but some of them can be
-seen in Figure~\ref{fig:overlap-examples}a: for example, the
-\candidate\ rooted in node 2 is depicted there and labeled A, the
-\candidate\ rooted in node 3 is also depicted in the same Figure and
-labeled B, etc.  Figure~\ref{fig:max-set-examples}b depicts the
-complete conflict graph corresponding to this example. As can be seen,
-candidate 1 (corresponding to the whole graph) is in conflict with all
-other candidates, candidates 2 and 3 are not in conflict (they only
-overlap in function 7) etc. Now, given example values of cost and
-merit for each candidate (in Figure~\ref{fig:overlap-examples}c), the
-maximum independent set is found in the conflict graph, which
-maximizes the sum of merits of the candidates selected, does not
-overcome a maximum sum of cost, and does not include conflicts. Two
-examples (for $C_{max} = 25$ and for $C_{max} = 40$) are shown in
-Figure~\ref{fig:overlap-examples}d.
 
 
 

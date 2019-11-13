@@ -41,29 +41,29 @@
 \contentsline {subsubsection}{Classification Models and Features}{48}{section*.32}
 \contentsline {subsubsection}{Iterative Refinement}{48}{section*.34}
 \contentsline {subsection}{\numberline {2.2.5}Conclusions}{50}{subsection.2.2.5}
-\contentsline {chapter}{\numberline {3}System Aware Accelerators Identification}{51}{chapter.3}
+\contentsline {chapter}{\numberline {3}Identification and Selection of System Aware Accelerators}{51}{chapter.3}
 \contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{52}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Motivation}{52}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Related Work}{53}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{55}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{56}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Cost and Merit Estimation}{58}{subsection.3.1.5}
-\contentsline {subsubsection}{Architectural characterization.}{58}{section*.40}
-\contentsline {subsubsection}{Cost Estimation.}{59}{section*.42}
-\contentsline {subsubsection}{Merit Estimation.}{60}{section*.43}
-\contentsline {subsection}{\numberline {3.1.6}Compiler Analysis}{60}{subsection.3.1.6}
-\contentsline {subsection}{\numberline {3.1.7}Selection Algorithm}{62}{subsection.3.1.7}
+\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{56}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{57}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Selection Algorithm}{58}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Cost and Merit Estimation}{60}{subsection.3.1.6}
+\contentsline {subsubsection}{Architectural characterization.}{60}{section*.41}
+\contentsline {subsubsection}{Cost Estimation.}{60}{section*.43}
+\contentsline {subsubsection}{Merit Estimation.}{61}{section*.44}
+\contentsline {subsection}{\numberline {3.1.7}Compiler Analysis}{62}{subsection.3.1.7}
 \contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{64}{subsection.3.1.8}
-\contentsline {subsubsection}{Baselines for Comparative Evaluation}{64}{section*.46}
+\contentsline {subsubsection}{Baselines for Comparative Evaluation}{65}{section*.46}
 \contentsline {subsubsection}{Benchmark Application}{65}{section*.48}
 \contentsline {subsection}{\numberline {3.1.9}Experimental Results}{66}{subsection.3.1.9}
 \contentsline {subsubsection}{Ranking of Acceleration Candidates}{66}{section*.49}
-\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{66}{section*.51}
+\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{67}{section*.51}
 \contentsline {subsubsection}{Design Effort Analysis}{70}{section*.55}
 \contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{71}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Motivation}{71}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Related Work}{72}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Methodology}{73}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}Methodology}{74}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{75}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Experimental Results}{75}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}Conclusions}{76}{section.3.3}
