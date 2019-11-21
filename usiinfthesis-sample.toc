@@ -59,7 +59,7 @@
 \contentsline {subsection}{\numberline {3.1.9}Experimental Results}{66}{subsection.3.1.9}
 \contentsline {subsubsection}{Ranking of Acceleration Candidates}{66}{section*.49}
 \contentsline {subsubsection}{Performance of resource constrained accelerator selections}{67}{section*.51}
-\contentsline {subsubsection}{Design Effort Analysis}{70}{section*.55}
+\contentsline {subsubsection}{Designer Effort Analysis}{70}{section*.55}
 \contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{71}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Motivation}{71}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Related Work}{72}{subsection.3.2.2}

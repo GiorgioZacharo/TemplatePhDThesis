@@ -2798,7 +2798,7 @@ potentially viable HW/SW partitioning alternative requires
 distinct experimental runs, a time-consuming task for large-sized
 target applications.\par
 
-In order to limit the entailed design effort, it is therefore crucial to identify the set of viable 
+In order to limit the entailed designer effort, it is therefore crucial to identify the set of viable 
 acceleration options quickly, and also early in the design process, before performing later and more 
 detailed estimations. This key step is currently poorly supported by design automation tools. Indeed, 
 \SoTA\ early partitioning strategies are solely based on profiling information \cite{XilinxESTRef18} 
@@ -3106,7 +3106,7 @@ solution to the \asprobname\ Problem.\par
 
 An algorithm solving an independent set problem is of course one of
 non-polynomial complexity. The exact implementation is still able to
-find the optimal solution for the experiments in this paper in a
+find the optimal solution for the experiments in Subsection \ref{sec:results_as} in a
 matter of milliseconds, even for the considerable dimension of the
 function-call graph of the application considered (a function-call
 graph of \numberOfcandidates\ nodes, as detailed in the experiments 
@@ -3179,11 +3179,11 @@ systems).\par
 \subsubsection{Cost Estimation.}
 The cost $C()$ of an \candidate\ is computed as the sum of its estimated logic and memory 
 real estates. Regarding logic, the sum of the required resources (independently for look-up 
-tables and DSP blocks) is performed of the arithmetic operations present in its top function.
+tables and DSP blocks) of the arithmetic operations present in its top function is computed.
 If function calls are present, then recursively the area of the called functions is taken into
 account as well. Furthermore, mimicking the default implementation of Xilinx PSoC accelerators, 
 the addition of the cost of the logic required by a \texttt{master axi} port for each array 
-present in the \candidate\ parameters list.
+present in the \candidate\ parameters list is added.
 Then, the memory area is derived from the size of the arrays storing the input/output and intermediate 
 values required by the accelerator. The I/O size is determined by analyzing the elements in the 
 parameters list of the candidate top function, while the memory required for intermediate values is 
@@ -3267,7 +3267,7 @@ analysis.\par
 \emph{AccelCands identification and analysis.} For the generation of
 the call graph, every function is annotated with caller/callee relationships; 
 the call graph is subsequently traversed to identify all valid \candidates\ as 
-defined in section~\ref{subsec:identification}. At this level information is 
+defined in section~\ref{subsec:identification}. At this level, information is 
 detected regarding the overlapping of such \candidates, needed for the creation 
 of the conflict graph, and for subsequent selection. The control flow graph of 
 each candidate, and the data flow graph of each basic block are extracted so 
@@ -3281,22 +3281,26 @@ profiling-via-instrumentation routine is used, which requires the generation
 of an instrumented version of the code, and then enables the obtained
 frequencies to be annotated back to the IR level.\par
 
-\emph{SW Latency Estimation}. The SW latency estimation is being
+\emph{SW Latency Estimation}. The SW latency estimation is 
 computed by an implemented function within the LLVM analysis pass
 according to the number of IR instructions included in a given candidate,
 as well as the number of IR instructions included in function calls, if
-any. The frequency of execution of each Basic Block that the
-instructions reside is taken into account as well, for a single
-invocation of the candidate.\par
+any.
+The number of invocations of each candidate is taken into account 
+as well via the execution frequency obtained by runtime profiling.
+% The runtime frequency of execution of each Basic Block that the
+% instructions reside is taken into account as well, for a single
+% invocation of the candidate.
+\par
 
 \emph{HW Latency Computation Estimation}. Conversely, the HW latency
-estimation takes place by estimating the latency of the string of
+estimation is performed by computing the latency of the string of
 instructions that have been characterized for the HW implementation
-that is being targeted. The implemented function estimates the HW
+that is being targeted. The implemented function computes the HW
 latency of each Basic Block as the critical path of the Basic Block
 multiplied by its respective execution frequency. The total HW latency
-of a candidate is estimated as the
-sum of all estimated HW latencies of all Basic Blocks included in the candidate. 
+of a candidate is retrieved by summing up all HW latencies of all Basic 
+Blocks included in the candidate. 
 Both the SW and the HW estimation take place in a bottom-up fashion,
 by first performing the estimations of the leave candidates and moving
 onwards to the ones containing calls to others.\par
@@ -3310,8 +3314,8 @@ of each candidate and obtaining the data requirements of
 each candidate type (e.g. size of array of integers, size of a struct etc).\par
 
 \emph{Area of HW Logic Estimation}. The cost of the candidate is
-estimated as the total area resources required. The area estimation
-of logical units is carried out by accounting for the Look Up Tables
+estimated as the total area resources required. The area of logical units is 
+computed by accounting for the Look Up Tables
 (LUTs) and the DSPs of characterized operations within a single Basic
 Block, and subsequently summing up all the resources of all Basic
 locks included in a candidate.\par
@@ -3403,7 +3407,7 @@ than 0.5\% to the total run-time, as these will not be of interest to
 a designer. In the following subsection it is shown that \aseeker\ 
 outperforms the strategies above, outlining that the more
 comprehensive insights it offers are crucial towards pinpointing the
-candidates leading to higher speedups, and in defining
+candidates leading to higher speedups, and defines
 higher-performance hardware/software partitioning under a given resource
 constraint.
 
@@ -3441,7 +3445,7 @@ functions.
 %
 \subsubsection{Ranking of Acceleration Candidates} 
 
-The effectiveness of \aseeker{} in identifying
+In this subsection the effectiveness of \aseeker{} in identifying
 the \candidates\ most amenable to hardware acceleration is demonstrated. 
 For this round of experiments, we implemented the best suggested candidates
 either by gprof or by \aseeker{}, disregarding those which are too
@@ -3460,8 +3464,11 @@ validation.
 Results refer to the QCIF test video. Very similar outcomes were retrieved 
 using the CIF and VGA inputs, as seen in Table \ref{tab:candidates_input}. 
 9 out of 10 of the highest-merit candidates are the same, with almost identical ranking,
-as on average the ranking varies by 0.7, comparing QCIF to CIF, and 0.3, comparing QCIF 
-to VGA ranking.
+as on average the ranking varies by 0.7 spots in the ranking sequence, comparing QCIF 
+to CIF, and 0.3 spots, comparing QCIF to VGA ranking.
+% 9 out of 10 of the highest-merit candidates are the same, with almost identical ranking,
+% as on average the ranking varies by 0.7, comparing QCIF to CIF, and 0.3, comparing QCIF 
+% to VGA ranking.
 
   \begin{table}[t!]
    % \vspace{-1.5em}
@@ -3477,7 +3484,7 @@ to VGA ranking.
   inter-prediction-chroma-double     &  3        &  3       &   3     \\ \hline
   run-before                  &  4               &  4       &   4  \\ \hline 
   total-zeros                  &  5              &  6       &   5    \\ \hline 
-  inter-prediction-chroma-single     &  6        &  4       &   -     \\ \hline
+  inter-prediction-chroma-single     &  6        &  5       &   -     \\ \hline
   residual-block-cavlc-4     &  7               &  9       &   6  \\ \hline 
   scale-residual4x4            &  8              &  8       &   8   \\ \hline  
   TrailingOnes-ChromaDc           &  9               &  10       &  10  \\ \hline    
@@ -3510,14 +3517,14 @@ to VGA ranking.
 In order to evaluate the performance of the proposed method, the
 application speedups of the hardware-accelerated systems selected by
 \aseeker, under different
-$C_{max}$ constraints, to those selected by the baseline methods are compared.  
+$C_{max}$ constraints, are compared to those selected by the baseline methods.  
 Such constraint is expressed as a maximum number
 of LUTs dedicated to the accelerators implementation (including that
 of two real-world PSoCs, namely Xilinx Artix Z-7007S and Z-7012S
 \cite{ZynqMar17}); similar considerations could be derived by limiting BRAMs 
 or DSPs, or combinations of the three.\par
 
-Figure \ref{fig:speedups} shows these results for the QCIF test input.
+Figure \ref{fig:speedups} shows these results for the QCIF test input. 
 The speedups are obtained by comparing the run-time of the benchmark 
 application on accelerated systems (where selected \candidates\ are 
 executed in hardware) with the non-accelerated one (where all parts are 
@@ -3525,7 +3532,7 @@ run on the PSoC processor).
 The figure comparatively
 reports also the speedups obtained when using the three
 profiling-based strategies outlined in Section \ref{sec:setup_as}.
-The results show that this approach returns a performance increase
+The results show that the approach proposed here returns a performance increase
 even for very low area constraints, and a 1.9X speedup for an area
 budget of 34400 look-up tables (the amount available on the mid-range
 Artix Z-7012S).\par
@@ -3654,7 +3661,7 @@ guide this complex challenge.
 %
 %
 %
-\subsubsection{Design Effort Analysis}
+\subsubsection{Designer Effort Analysis}
 
 
 \begin{figure}[t]
@@ -3682,7 +3689,7 @@ effort is reported in Figure \ref{fig:effort}: the majority of the
 candidates identified by profiling ultimately violate the resource
 constraints, across different strategies and amounts of available
 resources. The synthesis of such candidates is avoided by instead
-employing \aseeker, hence greatly reducing the design effort towards
+employing \aseeker, hence greatly reducing the designer effort towards
 the selection of highly effective hardware/software partitionings.
 Indeed, the collection of all \aseeker\ phases took a time in the
 order of milliseconds for the experiments in
@@ -3819,7 +3826,7 @@ BRAM blocks. The energy saved estimation, or Merit $M()$, for a hardware acceler
 measured in nanoJoules (nJ) and derived by the following formulation:
 
 \begin{equation*}
-M(i)  = Energy_{SW}(i) - Energy_{HW}(i)
+M(i)  = E_{SW}(i) - E_{HW}(i)
 \label{eq:energy_simple}
 \end{equation*}
 
@@ -3828,24 +3835,24 @@ accelerators are given by:
 
 \begin{equation*}
 \begin{aligned}
-Energy_{SW}(i) = Power_{SW}(i) \times Time_{SW}(i) \times n_{exec}\\
-Energy_{HW}(i) = Power_{HW}(i) \times Time_{HW}(i) \times n_{exec}\\
+E_{SW}(i) = P_{SW}(i) \times T_{SW}(i) \times n_{exec}\\
+E_{HW}(i) = P_{HW}(i) \times T_{HW}(i) \times n_{exec}\\
 \end{aligned}
 \end{equation*}
 
 Where Energy is expressed as the product of Power, Time and the number of invocations of a 
-given accelerator. $Power_{SW}$ and $Power_{HW}$ are measured in Watts (W) and even though 
+given accelerator. $P_{SW}$ and $P_{HW}$ are measured in Watts (W) and even though 
 the power consumption for a software CPU is fixed for a given unit of time, for a hardware 
 accelerator the power required for the same unit of time depends on its hardware realization 
-(e.g. number of LUTs, DSPs, BRAMs etc). The running time $Time_{SW}$ of the software processor 
+(e.g. number of LUTs, DSPs, BRAMs etc). The running time $T_{SW}$ of the software processor 
 is measured in cycles (0.83 nanoSec per cycle for 1.2 GHz CPU frequency) and for the respective
-running time of the hardware accelerator, $Time_{HW}$ is clocked at 100 MHz frequency which
+running time of the hardware accelerator, $T_{HW}$ is clocked at 100 MHz frequency which
 translates to 10 nanoseconds per cycle.
 
 Finally the initial Merit equation becomes: 
 
 \begin{equation*}
-M(i)  = [ (Power_{SW}(i) \times Time_{SW}(i)) - (Power_{HW}(i) \times Time_{HW}(i)) ] \times n_{exec}
+M(i)  = [ (P_{SW}(i) \times T_{SW}(i)) - (P_{HW}(i) \times T_{HW}(i)) ] \times n_{exec}
 \end{equation*}
 
 % \begin{equation*}
@@ -3955,60 +3962,72 @@ gprof3 profiling data strategies, varying the area constraint. Number of softwar
 \section{Conclusions}
 \label{sec:conclusions_as}
 
-\aseeker\ was presented, a framework for assisting system architects during the early design phase of 
-hardware-accelerated systems. By automatically assessing the potential speedup of different hardware 
-acceleration choices, in their default implementation, as well as the hardware resources they demand, 
-\aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more 
-detailed analysis and optimization.
-\aseeker\ performs the identification of candidate accelerators, as well as  their area and speedup 
-estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring 
-lengthy and detailed evaluations of each acceleration candidate individually. It then automatically 
-selects the set of candidates that maximize estimated speedup under a given resource constraint. 
-Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly
-outperforms choices that are solely based on profiling information.
-\eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections
-due to a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ 
-framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.
+\aseeker\ was presented, a framework for assisting system architects during the early design phase of hardware-accelerated systems. By automatically assessing the potential speedup of different hardware acceleration choices, in their default implementation, as well as the hardware resources they demand, \aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more detailed analysis and optimization. \aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring lengthy and detailed evaluations of each acceleration candidate individually. It then automatically selects the set of candidates that maximize estimated speedup under a given resource constraint. Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly outperforms choices that are solely based on profiling information.
+%
+%
+\eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.
+
+
+
+
+%
+%
+%
+%
+%
+% 4 Conclusions
+%
+%
+%
+%
+%
+
+
 
 \chapter*{Conclusions}
 \addcontentsline{toc}{chapter}{Conclusions}
 
-\textbf{NOTE: Work in Progress}\\
-Heterogeneous computing emerges in order to provide improved performance on future computing systems 
+% \textbf{NOTE: Work in Progress}\\
+Heterogeneous computing emerges in order acquire improved performance on future computing systems. Nonetheless, research to build and design efficient, as well as effective, HW/SW execution platforms calls for great attention and challenges.
+The selection of which parts of an application to be accelerated in HW in an automatic
+fashion, the choice of optimizations to be applied on the HW accelerated parts that were
+selected, as well as the consideration of the platform characteristics that the HW
+accelerators are implemented onto are all complex problems and research questions.\par
 
-Research to build and design efficient, as well as effective, HW/SW execution platforms calls for 
-great attention and challenges.\par
+In Chapter 1 a novel methodology, \rseeker, was described that presents insights addressing the research question of {\em what} part, or which parts, of an application should be synthesized to HW under a constrained area budget. \rseeker\ performs automatic identification and selection of HW accelerators whose granularity is within the boundaries 
+of the control flow graph of a function.
+Control flow inclusion in candidates selection for HW acceleration showcased a tangible performance increase with respect to \SoTA\ 
+proposed methods, as nn up to 4.5x speedup was attained compared to SW-only execution.\par
 
-In both Chapters 1 and 2 novel methodologies were described that present insights 
-addressing the research questions of {\em what} part, or which parts, of an application 
-should be synthesized to HW and {\em how}, meaning which kind of optimizations a selected 
-HW accelerator should be synthesized with. Experimentation
-showcased a tangible performance increase with respect to many \SoTA\ proposed methods.
-Chapter 3 presents the idea of extending the  framework by shifting the attention 
-to candidates for acceleration that are subgraphs of the entire function call graph, instead 
-of the function control flow graph of single functions. Furthermore the underlying system 
-that hosts the accelerators is analyzed so that both computation and communication effort 
-is taken into account.
-Chapter 3 is still part of ongoing research work, although preliminary results on a complex 
-benchmark such as \htsf\ have  demonstrated improved speedup on simulated heterogeneous systems 
-compared to profiling-only based methodologies.\par
+Chapter 2 details methodologies that address the research questions of {\em how} HW
+accelerators should be synthesized, namely which type of optimizations should be implemented
+to specific HW accelerators upon their selection. Section 1 describes an automated 
+methodology that identifies the data reuse potential of a specific type of applications
+(sliding window applications) with the aid of polyhedral analysis. This information is 
+exploited in order to design memory buffers, tailored to the requirements of every application. The experimental results showcased an order-of-magnitude performance 
+improvement compared to \SoTA\ methodologies.
+In Section 2 a novel loop-unrolling factor prediction 
+method, with the aid of Machine Learning classification, was presented. An automated compiler
+analysis was used to extract loop characteristics that are used for the training of a \RF\ classification algorithm. This approach achieved better prediction score 
+in comparison to \SoTA\ Machine Learning methods. Experimental evidence revealed that 
+accurate predictions of loop unrolling factors resulted into high performance accelerator implementations, while simultaneously avoiding time-consuming exhaustive explorations.\par
 
-% There are a number of objectives that will conclude the third and final Chapter:
+Finally Chapter 3 takes into account the target platform {\em where} the HW implementations are synthesized. In cases where demanding computing systems with complex memory hierarchies are 
+targeted, latency due to communication between the main memory and the HW accelerators
+can be crucial. \aseeker\ in Section 1 is presented that offers an extended scope of candidates for acceleration -- that of the entire function call graph of an application.
+\aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes. Subsequently, automatic selection of the set of candidates that maximizes estimated speedup under a given resource constraint takes place. Experimental evaluation on a complex benchmark, such as \htsf\ decoder, demonstrated that 
+\aseeker\ vastly outperforms choices that are solely based on profiling information.
+As an extension of the previous tool-chain, \eseeker\ (Section 2) focuses on energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the previous framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.\par
 
-% \begin{itemize}
-% \item{} Establish a candidate selection process according to a number of rules that 
-% both allow for increased performance gains and limit HW resources usage/repetition.
-% %differentiates conflicts due to overlapping regions.
-% \item{} Define a cost and merit estimation model that takes into account computation and
-% communication effort, as well as the architectural characteristics of a given target system. 
-% \item{} Perform experiments of all \htsf\ candidates on a real SoC platform, such as Zynq Ultrascale, 
-% and investigate the performance achieved on it.
-% \end{itemize}
-% % Among future plans is the completion of the \candidates\ framework experimental phase on 
-% % a real SoC platform, such as Zynq Ultrascale and investigate the performance of 
-% % the \candidates\ framework on platforms with different memory hierarchies and 
-% % increased silicon real estate.
-% The completion of these milestones will conclude my research work as a whole and contribute towards a fully automated
+This collective research work attempts to both automate the HW/SW co-design process, thus providing a smoother and faster approach, and achieve better performance in terms of speedup of execution and energy efficiency in future heterogeneous computing systems. As future work, 
+\aseeker\ framework can be extended to address domain specific applications, such as Machine
+Learning algorithms and scientific  simulations that require lengthy and time-consuming
+execution times. Furthermore, more optimizations can be considered in order to apply them 
+automatically on candidates for acceleration and integrate the entire process of suggesting optimizations (Chapter 2) to the identification and selection process (Chapter 1 and 3).
+% presents the idea of extending the  framework by shifting the attention 
+% to candidates for acceleration that are subgraphs of the entire function call graph, instead of the function control flow graph of single functions. Furthermore the underlying system that hosts the accelerators is analyzed so that both computation and communication effort is taken into account.
+% Chapter 3 is still part of ongoing research work, although preliminary results on a complex benchmark such as \htsf\ have  demonstrated improved speedup on simulated heterogeneous systems compared to profiling-only based methodologies.\par
+
 % framework that assists the design of heterogeneous computing systems.
 
 
