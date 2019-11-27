@@ -217,6 +217,12 @@ M.~Haa\ss, L.~Bauer, and J.~Henkel.
 \newblock In {\em Proceedings of the International Conference on Compilers,
   Architectures, and Synthesis for Embedded Systems}, pages 1--9, Oct. 2014.
 
+\bibitem{HameedOct11}
+R.~Hameed, W.~Qadeer, M.~Wachs, O.~Azizi, A.~Solomatnikov, B.~C. Lee,
+  S.~Richardson, C.~Kozyrakis, and M.~Horowitz.
+\newblock Understanding sources of inefficiency in general-purpose chips.
+\newblock {\em Commun. ACM}, 54(10):85--93, 2011.
+
 \bibitem{HankSep93}
 R.~Hank, S.~Mahlke, R.~Bringmann, J.~Gyllenhall, and W.~Hwu.
 \newblock Superblock formation using static program analysis.
