@@ -569,6 +569,11 @@ P.~Yu and T.~Mitra.
   Architectures, and Synthesis for Embedded Systems}, pages 69--78, Washington,
   DC, Sept. 2004.
 
+\bibitem{ZacharopoulosMay15}
+G.~Zacharopoulos.
+\newblock Employing hardware transactional memory in prefetching for energy
+  efficiency, 2015.
+
 \bibitem{ZacharopoulosJan17}
 G.~Zacharopoulos, G.~Ansaloni, and L.~Pozzi.
 \newblock Data reuse analysis for automated synthesis of custom instructions in

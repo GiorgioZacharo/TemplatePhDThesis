@@ -3951,7 +3951,9 @@ Things (IoT) applications \cite{SchiavoneSep17}. Convolutional Neural Networks (
 present in IoT devices as well. In \cite{PulliniJan17} a dedicated \HW\ realization is 
 suggested to carry out the execution of CNNs on a 65-nm SoC, and thus achieve reduced energy
 consumption. In none of these instances, though, identification, estimation or selection of
-the parts of execution to be synthesized in \HW\ are challenged.\par
+the parts of execution to be synthesized in \HW\ are challenged. Methods including automatic
+insertion of Hardware Transactional Memory in the prefetching phase of applications for
+energy efficiency have been investigated as well \cite{ZacharopoulosMay15}.\par
 
 In \cite{ReagenJun16} an automated methodology that performs estimation of performance and 
 applies optimizations on \HW\ accelerators for low-power Deep Neural Networks (DNNs) is presented. 
@@ -4167,11 +4169,22 @@ gprof3 profiling data strategies, varying the area constraint. Number of softwar
 \addcontentsline{toc}{chapter}{Conclusions}
 
 % \textbf{NOTE: Work in Progress}\\
-Heterogeneous computing emerges in order acquire improved performance on future computing systems. Nonetheless, research to build and design efficient, as well as effective, HW/SW execution platforms calls for great attention and challenges.
+Heterogeneous computing emerges as the most promising approach to acquire improved performance on future computing systems. Nonetheless, research to build and design efficient, as well as effective, HW/SW execution platforms calls for great attention and challenges.
 The selection of which parts of an application to be accelerated in HW in an automatic
-fashion, the choice of optimizations to be applied on the HW accelerated parts that were
+fashion, the choice of optimizations to be applied on the HW accelerated parts that are
 selected, as well as the consideration of the platform characteristics that the HW
 accelerators are implemented onto are all complex problems and research questions.\par
+
+In order to address them, I have developed novel compiler-driven methodologies that perform 
+analysis in the source code of software applications. The main benefits spawning from such an 
+approach is twofold. First manual work and decisions performed by designers and engineers are dealt in 
+a systematic and automatic manner that result into faster and less error-prone processes.
+Second the performance achieved, either translated as speedup or as energy 
+efficiency, in the implemented heterogeneous designs is vastly improved compared to \SoTA\ methods.
+Following is the summary of my contributions as detailed in the previous chapters of the dissertation.
+\par
+
+\subsubsection{Contributions}
 
 In Chapter 1 a novel methodology, \rseeker, was described that presents insights addressing the research question of {\em what} part, or which parts, of an application should be synthesized to HW under a constrained area budget. \rseeker\ performs automatic identification and selection of HW accelerators whose granularity is within the boundaries 
 of the control flow graph of a function.
@@ -4197,6 +4210,14 @@ can be crucial. \aseeker\ in Section 1 is presented that offers an extended scop
 \aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes. Subsequently, automatic selection of the set of candidates that maximizes estimated speedup under a given resource constraint takes place. Experimental evaluation on a complex benchmark, such as \htsf\ decoder, demonstrated that 
 \aseeker\ vastly outperforms choices that are solely based on profiling information.
 As an extension of the previous tool-chain, \eseeker\ (Section 2) focuses on energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the previous framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.\par
+
+\subsubsection{Limitations}
+
+The methodologies summarized above address the research questions posed in the Introduction of this
+document but leave room for extending and improving my research work. The 
+
+
+\subsubsection{Future Work}
 
 This collective research work attempts to both automate the HW/SW co-design process, thus providing a smoother and faster approach, and achieve better performance in terms of speedup of execution and energy efficiency in future heterogeneous computing systems. As future work, 
 \aseeker\ framework can be extended to address domain specific applications, such as Machine
