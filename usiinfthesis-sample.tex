@@ -1547,6 +1547,7 @@ less tangible than the speedup achieved by \rseeker.
 %
 %
 \section{RegionSeeker MuLTiVersioning}
+\label{sec:multi}
 
 \HLS\ (HLS) tools, such as Vivado HLS by Xilinx, may employ %additional 
 optimizations to HW accelerators
@@ -1937,6 +1938,7 @@ optimizations available, I have focused on two major categories: a) Data Reuse a
 factor prediction. Both of these instances are explained in more detail in the following two sections.
 
 \section{Data reuse Analysis}
+\label{sec:dr}
 
 
 \subsection{Motivation}
@@ -2328,6 +2330,7 @@ HiPEAC IMPACT 2017 Seventh International Workshop on Polyhedral Compilation Tech
 
 \section[Machine Learning Approach for Loop Unrolling\\ Factor Prediction]
 {Machine Learning Approach for Loop Unrolling\\ Factor Prediction}
+\label{sec:ml}
 
 \subsection{Motivation}
 
@@ -2937,6 +2940,7 @@ heterogeneous computing system compared to a powerful, yet power-hungry, softwar
 %
 
 \section{\aseeker: Accelerators for Speedup}
+\label{sec:accel}
 
 \subsection{Motivation}
 
@@ -3870,6 +3874,7 @@ Figures~\ref{fig:speedups} and~\ref{fig:effort}.
 %
 
 \section{EnergySeeker: Accelerators for Energy Efficiency}
+\label{sec:energy}
 
 \subsection{Motivation}
 
@@ -4169,7 +4174,7 @@ gprof3 profiling data strategies, varying the area constraint. Number of softwar
 \addcontentsline{toc}{chapter}{Conclusions}
 
 % \textbf{NOTE: Work in Progress}\\
-Heterogeneous computing emerges as the most promising approach to acquire improved performance on future computing systems. Nonetheless, research to build and design efficient, as well as effective, HW/SW execution platforms calls for great attention and challenges.
+Heterogeneous computing emerges among the most promising approaches to acquire improved performance on future computing systems. Nonetheless, research to build and design efficient, as well as effective, HW/SW execution platforms calls for great attention and challenges.
 The selection of which parts of an application to be accelerated in HW in an automatic
 fashion, the choice of optimizations to be applied on the HW accelerated parts that are
 selected, as well as the consideration of the platform characteristics that the HW
@@ -4189,16 +4194,16 @@ Following is the summary of my contributions as detailed in the previous chapter
 In Chapter 1 a novel methodology, \rseeker, was described that presents insights addressing the research question of {\em what} part, or which parts, of an application should be synthesized to HW under a constrained area budget. \rseeker\ performs automatic identification and selection of HW accelerators whose granularity is within the boundaries 
 of the control flow graph of a function.
 Control flow inclusion in candidates selection for HW acceleration showcased a tangible performance increase with respect to \SoTA\ 
-proposed methods, as nn up to 4.5x speedup was attained compared to SW-only execution.\par
+proposed methods, as an up to 4.5x speedup was attained compared to SW-only execution.\par
 
 Chapter 2 details methodologies that address the research questions of {\em how} HW
 accelerators should be synthesized, namely which type of optimizations should be implemented
-to specific HW accelerators upon their selection. Section 1 describes an automated 
+to specific HW accelerators upon their selection. Section \ref{sec:dr} describes an automated 
 methodology that identifies the data reuse potential of a specific type of applications
 (sliding window applications) with the aid of polyhedral analysis. This information is 
 exploited in order to design memory buffers, tailored to the requirements of every application. The experimental results showcased an order-of-magnitude performance 
 improvement compared to \SoTA\ methodologies.
-In Section 2 a novel loop-unrolling factor prediction 
+In Section \ref{sec:ml} a novel loop-unrolling factor prediction 
 method, with the aid of Machine Learning classification, was presented. An automated compiler
 analysis was used to extract loop characteristics that are used for the training of a \RF\ classification algorithm. This approach achieved better prediction score 
 in comparison to \SoTA\ Machine Learning methods. Experimental evidence revealed that 
@@ -4206,29 +4211,76 @@ accurate predictions of loop unrolling factors resulted into high performance ac
 
 Finally Chapter 3 takes into account the target platform {\em where} the HW implementations are synthesized. In cases where demanding computing systems with complex memory hierarchies are 
 targeted, latency due to communication between the main memory and the HW accelerators
-can be crucial. \aseeker\ in Section 1 is presented that offers an extended scope of candidates for acceleration -- that of the entire function call graph of an application.
+can be crucial. \aseeker\ in Section \ref{sec:accel} is presented that offers an extended scope of candidates for acceleration -- that of the entire function call graph of an application.
 \aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes. Subsequently, automatic selection of the set of candidates that maximizes estimated speedup under a given resource constraint takes place. Experimental evaluation on a complex benchmark, such as \htsf\ decoder, demonstrated that 
 \aseeker\ vastly outperforms choices that are solely based on profiling information.
-As an extension of the previous tool-chain, \eseeker\ (Section 2) focuses on energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the previous framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.\par
+As an extension of the previous tool-chain, \eseeker\ (Section \ref{sec:energy}) focuses on energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the previous framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.\par
 
 \subsubsection{Limitations}
 
 The methodologies summarized above address the research questions posed in the Introduction of this
-document but leave room for extending and improving my research work. The 
+document but leave room for extending and improving my research work. 
+For instance the analysis performed by both \rseeker\ (\ref{sec:rs}) and \aseeker\ (\ref{sec:accel}) is 
+considering default HW implementations without optimizations. This analysis can be 
+extended to estimate automatically the performance and HW resources of multiple versions of candidates for acceleration that acquire a number of optimizations such as Loop Unrolling, Loop Pipelining and
+array partitioning as described in Section \ref{sec:multi}. This would require a more complex and
+rigorous analysis and offer an intermediate tool between my current developed frameworks and simulation
+tools such as Aladdin \cite{ShaoJul14}.\par
+
+The automatic optimizations methodologies in Section \ref{sec:dr} and Section \ref{sec:ml} can be used
+as standalone tools to aid the employment of optimizations to HW accelerators, but each targets a specific
+optimization feature, i.e., Loop Unrolling factor prediction and memory buffers design respectively. An 
+integration of these methodologies with \rseeker\ and \aseeker\ would lead to a more complete and unified 
+solution regarding HW/SW co-design. Furthermore, more optimizations than the ones already considered
+can be included in the potential optimizations applied onto HW implementations, such as more complex
+memory buffers (e.g. ping-pong buffer) and combinations of optimizations in special cases (e.g. loop 
+unrolling and cyclic array partitioning).
+These limitations leads me to the consideration of the subsequent steps in my research which are presented as
+future work in the following section.
+
 
 
 \subsubsection{Future Work}
 
-This collective research work attempts to both automate the HW/SW co-design process, thus providing a smoother and faster approach, and achieve better performance in terms of speedup of execution and energy efficiency in future heterogeneous computing systems. As future work, 
-\aseeker\ framework can be extended to address domain specific applications, such as Machine
-Learning algorithms and scientific  simulations that require lengthy and time-consuming
-execution times. Furthermore, more optimizations can be considered in order to apply them 
-automatically on candidates for acceleration and integrate the entire process of suggesting optimizations (Chapter 2) to the identification and selection process (Chapter 1 and 3).
-% presents the idea of extending the  framework by shifting the attention 
-% to candidates for acceleration that are subgraphs of the entire function call graph, instead of the function control flow graph of single functions. Furthermore the underlying system that hosts the accelerators is analyzed so that both computation and communication effort is taken into account.
-% Chapter 3 is still part of ongoing research work, although preliminary results on a complex benchmark such as \htsf\ have  demonstrated improved speedup on simulated heterogeneous systems compared to profiling-only based methodologies.\par
+% address domain specific applications, such as Machine
+% Learning algorithms and scientific  simulations that require lengthy and time-consuming
+% execution times. 
+% Furthermore, more optimizations can be considered in order to apply them 
+% automatically on candidates for acceleration and integrate the entire process of suggesting optimizations (Chapter 2) to the identification and selection process (Chapter 1 and 3).
 
-% framework that assists the design of heterogeneous computing systems.
+This collective research work attempts to both automate the HW/SW co-design process, thus providing a smoother and 
+faster approach, and achieve better performance in terms of speedup of execution and energy efficiency in 
+heterogeneous computing systems.\par
+
+As future work, \aseeker\ framework can be extended to domain specific applications 
+in order to obtain even more efficient choices, tailored to a specific type of applications and identify patterns 
+that are recurring in these applications.
+For instance in Machine Learning applications there are many matrix-to-matrix or matrix-to-vectors multiplications.
+Identifying automatically these patterns could lead to the realization of high performance Machine Learning
+HW accelerators. Similar patterns can be found in applications that researchers in other scientific disciplines
+use as the ground of their experimentation routines. These experiments include quite demanding and lengthy 
+simulations that engage in repetitive tasks that could be accelerated with the aid of suitable HW 
+accelerators.\par
+
+Furthermore I consider the integration of \aseeker\ with the two pieces of research work I have performed on identifying automatically potential optimizations on HW accelerators (Section \ref{sec:dr} 
+and Section \ref{sec:ml}).
+This would constitute, among others, potential data 
+reuse analysis during the execution of the HW accelerators and analysis of the loops 
+to extract information regarding their unrolling potential. The first could lead to 
+the generation of more efficient memory structures to hold data that are reused. The latter would lead to 
+suggestions from the tool in order to apply optimizations related to minimizing the latency of loops 
+computation time. A more thorough analysis can lead to an early estimation of the performance and the 
+required HW resources of optimized accelerators that can subsequently be selected for HW implementation.\par
+
+Independently from the integration phase, I would attempt to expand the 
+capabilities of both of these automatic optimization generation methods by extending the current LLVM based 
+analysis methodology for data reuse and loop information. This would lead to more complex combinations of the optimizations applied simultaneously by estimating and predicting their suitability with the aid of both an 
+LLVM based analysis model and a trained Machine Learning classification algorithm.\par
+
+All these are interesting and motivating future research directions that I plan to explore in the next phase 
+of my academic career. Research is, after all, a never-ending journey.
+
+
 
 
 \backmatter
