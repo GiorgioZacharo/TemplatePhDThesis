@@ -14,7 +14,7 @@
 \contentsline {section}{\numberline {1.5}Experimental Results}{17}{section.1.5}
 \contentsline {subsection}{\numberline {1.5.1}Regions as a Choice for Accelerators}{17}{subsection.1.5.1}
 \contentsline {subsection}{\numberline {1.5.2}Performance of Selection Algorithms}{22}{subsection.1.5.2}
-\contentsline {subsection}{\numberline {1.5.3}Impact of the Interface Overhead}{24}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {1.5.3}Impact of the Interface Overhead}{25}{subsection.1.5.3}
 \contentsline {section}{\numberline {1.6}RegionSeeker MuLTiVersioning}{26}{section.1.6}
 \contentsline {subsection}{\numberline {1.6.1}Methodology}{26}{subsection.1.6.1}
 \contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}

@@ -14,13 +14,16 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 
+\usepackage[keeplastbox]{flushend}
+\usepackage{soul}
+
 \newcommand{\aseeker}{{AccelSeeker}} 
 \newcommand{\eseeker}{{EnergySeeker}} 
 \newcommand{\rseeker}{{RegionSeeker}} 
 \newcommand{\multi}{MuLTiVersioning}
 \newcommand{\simulator}{\texttt{gem5-aladdin}} 
-\newcommand{\HW}{{Hardware}}
-\newcommand{\SW}{{Software}}
+\newcommand{\HW}{{hardware}}
+\newcommand{\SW}{{software}}
 \newcommand{\HLS}{{High Level Synthesis}}
 \newcommand{\SoC}{{System-on-Chip}}
 \newcommand{\htsf}{{H.264}}
@@ -82,11 +85,11 @@ morecomment=[l]{//s},
 }
 
 
-\title{Software Analysis for\\ Heterogeneous Computing Architectures} %compulsory
-\subtitle{A research automation framework 
-towards more efficient\\ HW/SW co-design} %optional 
+% \title{Software Analysis for\\ Heterogeneous Computing Architectures} %compulsory
+\title{Compiler Analysis for Hardware/Software Co-design and Optimization}
+\subtitle{ An automation framework towards more efficient Heterogeneous Computing} %optional 
 \author{Georgios Zacharopoulos} %compulsory
-\advisor{Professor Laura Pozzi} %compulsory
+\advisor{Prof. Laura Pozzi} %compulsory
 %\coadvisor{Co-Advisor} %optional
 \Day{21} %compulsory
 \Month{October} %compulsory
@@ -125,8 +128,8 @@ The breakdown of Dennard scaling, along with the seemingly inevitable end of
 Moore's law economic aspect, present a new challenge to computer architects striving to achieve
 better performance in the modern computer systems. Heterogeneous computing is 
 emerging as one of the solutions to overcome these limitations in order to keep the performance 
-trend rising. This is achieved by turning the focus to specialized Hardware (HW) that 
-can accelerate the execution of a Software (SW) application or a part of that application.
+trend rising. This is achieved by turning the focus to specialized \HW\ that 
+can accelerate the execution of a \SW\ (SW) application or a part of that application.
 The goal is to design efficient HW/SW computer architectures, where a general purpose CPU
 is coupled with a number of specialized HW accelerators.\\
 The choice of which parts of an application to be accelerated, though, as well as the type 
@@ -197,8 +200,8 @@ end of Moore's law economic aspect \cite{simonite2016moore}, present a new chall
 architects striving to achieve
 better performance in the modern computer systems.
 Heterogeneous computing is emerging as one of the solutions in order to keep the performance 
-trend rising. This is achieved by turning the focus to specialized Hardware (HW) that 
-can accelerate the execution of a Software (SW) application or a part of that application. Specialized HW 
+trend rising. This is achieved by turning the focus to specialized \HW\ (HW) that 
+can accelerate the execution of a \SW\ (SW) application or a part of that application. Specialized HW 
 accelerators are implemented in platforms where they can be either reprogrammable, 
 thus allowing for a large degree of flexibility as various implementations may take place utilizing
 the HW resources of the platform (e.g. an FPGA board), or hardwired, such as an Application-Specific Integrated 
@@ -241,6 +244,22 @@ time latency and energy requirements are ever decreasing. The heterogeneous syst
 that I considered during my research comprises a general purpose CPU, loosely coupled with a number of 
 specialized HW accelerators, dedicated to the acceleration of specific parts of an application.\par
 
+%
+%  I am here!
+%
+\hl{
+High Level Synthesis (HLS) tools, that generate hardware instances given a function of an
+application as input,
+have improved significantly in recent years
+}
+ \cite{MeeusSep12}. Commercial tools such as Xilinx Vivado HLS \cite{VivadoHLSMar17} 
+\hl{
+support the design of large accelerators 
+directly from application source code (e.g. C/C++ code). HLS dramatically shortens development cycles by employing C/C++ descriptions as entry points for the development of both software and hardware, greatly facilitating the task of migrating functionalities between the two.
+}
+\par
+
+
 The choice of which parts of an application to be accelerated, though, as well as the type 
 of accelerators to be used, while taking into account the underlying memory system, are all
 non-trivial research questions and depend heavily on the SW applications characteristics that
@@ -262,7 +281,17 @@ few seconds) and can be portable to other target applications or platforms.
 The research during my PhD has revolved around various ways that SW
 analysis, by extending the LLVM compiler framework \cite{LattnerMar04} and, hence, its potential,
 can guide a HW engineer %synthesizing HW accelerators 
-by making informed decisions early in the development cycle.
+by making informed decisions early in the development cycle. 
+\hl{
+Moreover, with this work I attempt to bring automation of the 
+HW/SW co-design one step forward by bridging the gap between the application that we aim to accelerate and the  
+current
+} 
+\SoTA\ 
+\hl{
+HLS tools, that require the selection of the parts of an application to be accelerated to be done manually.
+}
+\par
 
 \begin{figure}[t]
 \centering
@@ -346,7 +375,7 @@ new paths to future work.
 %
 %
 
-% \chapter[Short title]{A chapter title which will run over two lines --- it's for
+% \chapter[Short title]{A chapter title which will run over two lines -- it's for
 %   testing purpose}
 \chapter%[Automatic Identification and Selection of HW Accelerators]
 {Automatic Identification and Selection of Accelerators}
@@ -354,8 +383,9 @@ new paths to future work.
 Moving towards a heterogeneous era, HW accelerators, dedicated to a specific task, can
 improve both speedup of execution and energy efficiency in comparison to a general 
 purpose CPU or a set of homogeneous CPUs. 
-Under the scope of the current chapter, the focus will be on HW accelerators that minimize
-latency and increase speedup. Nonetheless, the identification and selection 
+% Under the scope of the current chapter, the focus will be on HW accelerators that minimize
+% latency and increase speedup. 
+Nonetheless, the identification and selection 
 of which parts of the computation are to be implemented in HW is a complex and demanding task. 
 A thorough understanding of the application to be accelerated is necessary, the HW resources
 (area) budget is often tight and the granularity of the candidates for acceleration 
@@ -390,8 +420,8 @@ What is the rationale behind designer choices, when manually choosing
 application parts to be accelerated in HW, and how can those choices
 be replicated by an automated tool instead? Although it is possible,
 perhaps, that \emph{all} of a designer's rationale cannot be
-replicated automatically --- potentially because it requires a deep
-knowledge of the application at hand --- it is certainly still
+replicated automatically -- potentially because it requires a deep
+knowledge of the application at hand -- it is certainly still
 desirable to identify at least a subset of the actions that can be
 automated.\par
 
@@ -409,10 +439,10 @@ corresponds to the moment of execution when the accelerator is called,
 and a single exit point, hence duly returning to a single location in
 software when the accelerator is done. Note that this type of
 \controlflow\ subgraph has been previously proposed and explored in
-compiler research --- under the name of \emph{SESE} (Single Entry
+compiler research -- under the name of \emph{SESE} (Single Entry
 Single Exit) in~\cite{AguilarJune16}, \cite{JohnsonJun94}, and under
 the name of \emph{Simple Region} in an LLVM
-implementation~\cite{LattnerMar04} --- with the aim of improving the
+implementation~\cite{LattnerMar04} -- with the aim of improving the
 quality of \emph{SW code generation}, and as a scope for applying
 compiler optimizations and parallelization. The idea of
 identifying the same type of subgraph is borrowed and applied here in a 
@@ -429,12 +459,12 @@ might not be ideal, as the downside can be twofold: 1) a part of a
 function might be less frequently executed than other parts (the right
 side of the CFG, in the example in Figure~\ref{fig:cfg-example}a),
 therefore effectively wasting accelerator real estate. 2) a part of a
-function might contain non-synthesizable constructs --- such as the
-``write to file" system call in Figure~\ref{fig:cfg-example}a or a function 
+function might contain non-synthesizable constructs -- such as the
+``write to file" system call in Figure~\ref{fig:cfg-example}a, or a function 
 call that cannot be inlined.  On the
 other side of the spectrum, choosing simply within the scope of single
-basic blocks --- therefore, the body of the frequently executed loop
-in the picture --- may not be ideal either, as the accelerator will be
+basic blocks -- therefore, the body of the frequently executed loop
+in the picture -- may not be ideal either, as the accelerator will be
 called once in every iteration of the loop, which may results in a
 large overhead. Furthermore, some speedup potential might be missed,
 as larger CFG regions might expose better synthesis optimizations.\par
@@ -472,7 +502,7 @@ A source node is added, connected only to the entry basic block of
 the function, and a sink node, connected only to the exit of the
 function. Figure \ref{fig:cfg-example}b shows an example of CFG. A
 node in the CFG is marked as forbidden if it corresponds to a basic
-block containing instructions that cannot be synthesized in HW --- for
+block containing instructions that cannot be synthesized in HW -- for
 example operating system calls.\par
 
 Definition: \textbf{Valid Subgraph.}  A Valid Subgraph is any subgraph
@@ -540,7 +570,7 @@ explained in the following.\par
 \includegraphics[width= .7 \linewidth]{figs/exact_example.pdf}
 \caption{a) Running example, used to explain the selection algorithms:
   the CFGs of two functions are depicted, with five regions identified
-  in them --- labelled from A to E. b) The overlap graph for the five
+  in them -- labelled from A to E. b) The overlap graph for the five
   regions.}
 \label{fig:exact_example}
 \end{figure}
@@ -561,7 +591,7 @@ $$
 \{ (i, j)\ |\ V(R_i)\cap V(R_j) \neq \emptyset \}\,.
 $$
 The edges of the graph represented in Figure ~\ref{fig:exact_example}b
-correspond to the set $O$ of region overlaps, for the running example.
+correspond to the elements of set $O$ of region overlaps, for the running example.
 
 
 \subsection{Exact Method}
@@ -584,7 +614,7 @@ The algorithm recursively explores the independent sets of $G$,
 similarly to %the Bron-Kerbosch algorithm~
 \cite{BronKerbosch73}, and
 its steps will be followed with the aid of the running example, and
-with its corresponding tree exploration, shown in
+of its corresponding tree exploration, shown in
 Figure~\ref{fig:exact_tree}. The algorithm maintains a set $X$, which
 is the active independent set (initialized to $\emptyset$) and a set
 $P$ of available nodes (initialized to $V(G)$). At each iteration, the
@@ -634,7 +664,7 @@ $X=\{B,C,E\}$), while the current merit $M(\{B\})$ is $30$, and the
 remaining potential gain of $P=\{D,E\}$ is $40$. $M_{\max}$ cannot be
 reached, and the algorithm can backtrack.
 
-\emph{Optimization 2:} To make the above exact pruning strategy
+\emph{Optimization 2:} To make the above exact pruning action
 effective, the algorithm adopts the strategy of choosing the node $u$
 with maximum merit among the ones which satisfy condition $2$ of the
 \rsprobname\ Problem. In practice, this means that candidate regions are
@@ -674,7 +704,7 @@ exploration at set $X=\{A\}$.
 
 Since the greedy method never backtracks, it is often trapped in local
 minima, and therefore cannot guarantee optimality. On the other hand,
-it converges to a solution very fast, and is used as a naive solution
+it converges to a solution very fast, and is used as a naive strategy
 for generating comparative results (Subsection \ref{subsec:algo-perf}).
 
 \subsection{Exact-on-cropped Method}
@@ -683,9 +713,9 @@ The previous two algorithms represent two ends of the spectrum: exact
 and exponential on one side; non-exact, fast and naive on the other.
 A third solution, which strikes a balance between them, comes from the
 observation that while the list of regions identified in an
-application is long --- potentially too long to be processed exactly
---- the list of \emph{meaningful} regions is short, where by
-meaningful is mean contributing tangibly to the overall speedup. In
+application is long -- potentially too long to be processed exactly
+-- the list of \emph{meaningful} regions is short, where by
+meaningful is meant contributing tangibly to the overall speedup. In
 other words, the distribution of regions with respect to speedup
 provided is very skewed.
 
@@ -702,14 +732,13 @@ solutions.
 \label{sec:rs}
 
 The RegionSeeker framework is an automated methodology that 
-identifies candidates for HW acceleration from application source 
+identifies and selects candidates for HW acceleration from application source 
 code. An extensive SW analysis, based on the LLVM compiler infrastructure,
-performs, apart from
-the identification, an estimation of the performance gain (merit), along with
+performs, apart from identification, an estimation of the performance gain (merit), along with
 the HW resources (cost), of each candidate. Subsequently given a HW resources
 constraint, a selection of the identified HW accelerators takes place that
 maximizes the cumulative performance gain, as detailed in Section~\ref{sec:rs_algos}.
-First the LLVM toolchain built for this purpose is analyzed, then the employed 
+First the LLVM toolchain built for this purpose is analyzed; then, the employed 
 platform model and the benchmarks used for a comparative evaluation are detailed.
 
 \subsection{LLVM Toolchain}
@@ -746,18 +775,18 @@ platform model and the benchmarks used for a comparative evaluation are detailed
 \label{algo:reg}
 \end{algorithm}
 
-The analysis passes of \rseeker\ were built within the latest version (3.8) of the \emph{LLVM
+The analysis passes of \rseeker\ were built within version 3.8 of the \emph{LLVM
   Compiler and Toolchain} \cite{LattnerMar04}. The LLVM infrastructure
 provided the compiler ground in order to develop my own analysis
 passes, as well as the tools used for profiling. 
-\emph{Region Identification} pass, as depicted in Algorithm \ref{algo:reg}, 
-was developed to identify and provide an initial estimated evaluation to 
+A \emph{Region Identification} pass, as depicted in Algorithm \ref{algo:reg}, 
+was developed to identify and provide an initial estimate of the cost and merit of 
 the identified regions. The pass receives as input applications developed
 in C or C++ and performs the analysis in the Intermediate Representation
 (IR) level. \par
 
-\emph{Region Identification} pass iterates over every function of the provided 
-input applications and, using the existing \emph{RegionInfo} LLVM pass 
+The \emph{Region Identification} pass iterates over every function of the provided 
+input application and, using the existing \emph{RegionInfo} LLVM pass 
 \cite{GrosserApr12}, identifies regions within every function. Subsequently, 
 forbidden nodes within regions are identified and labeled, such as system
 calls or calls to functions that are not inlined. The regions containing
@@ -767,19 +796,19 @@ Profiling via
 instrumentation requires generating an instrumented version of the
 code, which gives more detailed results than a sampling
 profiler. Using this information, the basic blocks are annotated
- in each function with their respective execution frequency, along
- with the aid of \emph{ClrFreqCFGPrinter} LLVM pass \cite{ZacharopoulosMar17}.\par
+ in each function with their respective execution frequency, with the aid of \emph{ClrFreqCFGPrinter} LLVM pass \cite{ZacharopoulosMar17}.\par
  
 
-By exploiting the execution frequency of every basic block, the respective evaluation 
-for every region is computed, which is being associated to the region as estimated merit, 
-and the region is being added to the list of identified regions.
-The final output of our analysis pass is a list of valid regions, 
-or else accelerator candidates, with an estimated merit attached to them.\par
+\hl{
+The \emph{Region Identification} also performs an early evaluation of a region merit and cost, implemented directly within the LLVM toolchain. Such evaluation relies on the LLVM IR and does not need any manual modification to perform function outlining on the benchmark source code. It estimates the cost of a region as the area required to implement its DFG nodes, and its merit as the cycles saved between SW and HW execution, where the latter is the delay of the nodes on the DFG critical paths.
+% By exploiting the execution frequency of every basic block, the respective evaluation 
+% for every region is computed, which is being associated to the region as estimated merit, 
+% and the region is being added to the list of identified regions.
+}
+The final output of our analysis pass is a list of valid regions, or else accelerator candidates, each annotated with an estimated merit and cost.\par
 
 The region list output is saved in a file, which is in turn processed by the 
-selection algorithms \exact, \greedy\ and \exactC, which are 
-implemented as standalone programs in C++.
+selection algorithms \exact, \greedy\ and \exactC, implemented as standalone programs in C++.
 
 \begin{figure}
 \centering
@@ -822,11 +851,18 @@ issue width of 1. The processor model is atomic, with in-order
 execution. It is interfaced with separate instruction and data
 memories with an access latency of one clock cycle.\par
 
-Hardware execution times are retrieved using \emph{two different HLS
+\HLS\ 
+\hl{
+tools, as mentioned in Introduction, have matured over the 
+years and, once a target for acceleration is selected, they can produce
+the respective HW instance to be implemented in a heterogeneous system.
+}
+Under the scope of our evaluation, hardware execution times are retrieved 
+using \emph{two different HLS
   frameworks}: the Aladdin simulator and the Xilinx Vivado HLS
 commercial tool-suite. Aladdin targets ASIC implementations. It
 allows a fast evaluation, but does not produce a synthesizable netlist
-as output; nonetheless, the estimations offered by this tool are
+as output; nonetheless, the estimations offered by this tool are claimed to be
 within 1\% of the ones derived from an RTL implementation
 \cite{ShaoJul14}. Hardware instances generated with Vivado HLS are
 instead intended for FPGA designs. Synthesis-runs within this
@@ -1168,12 +1204,12 @@ architectural-specific parameters is explored.\par
 In order to evaluate the benefits of \rseeker, we comparatively assess
 it against two \SoTA\ alternatives.  The first is to
 identify accelerators \emph{automatically}, but only within the scope
-of \dataflow\ --- which means within the scope of single basic blocks
---- as done by \SoTA\ approaches such as \cite{YuSep04},
-\cite{PozziJul06}, \cite{ChenFeb07}, \cite{ReddingtonAug09}, and
-\cite{GiaquintaMar15} to name only a few. In particular, the \SoTA\ algorithm 
-proposed in \cite{VermaOct07} and used in \cite{PothineniJan07} and in
-\cite{GiaquintaMar15} was implemented, that identifies maximum convex subgraphs within
+of \dataflow\ -- which means within the scope of single basic blocks
+-- as done by \SoTA\ approaches such as \cite{ChenFeb07}, \cite{GiaquintaMar15}, 
+\cite{PozziJul06}, \cite{ReddingtonAug09}, and
+ \cite{YuSep04} to name only a few. In particular, the \SoTA\ algorithm 
+proposed in \cite{VermaOct07} and used in \cite{GiaquintaMar15} and in
+ \cite{PothineniJan07}  was implemented, that identifies maximum convex subgraphs within
 basic blocks. These methods identify the largest part that can be
 synthesized and accelerated within a basic block, and hence represent
 an upper-bound on the speedup that can be achieved by identification
@@ -1182,15 +1218,16 @@ to mimic the \emph{manual} approach of selecting entire functions,
 which is also the scope supported by high-level synthesis tools
 \cite{CanisSep13} \cite{VillarrealMay10} \cite{VivadoHLSMar17}.\par
 
-In the experiments, \rseeker\ with the \exactC\ selection method was
-used, discarding regions that provide less than 10\% of the maximum
-merit. Two sets of experiments were performed: first Aladdin, and then
+Two sets of experiments were performed: first Aladdin, and then
 Vivado HLS were used to estimate merit and cost, highlighting that
 the \rseeker\ methodology can be used
 % leads to superior results than \SoTA\ methodologies
 across different high-level synthesis tools, and more importantly
 verifying that the regions selected are largely the same,
-independently of the cost and merit estimation model used.\par
+independently of the cost and merit estimation model used.
+In the experiments, \rseeker\ with the \exactC\ selection method was
+used, discarding regions that provide less than 10\% of the maximum
+merit.\par
 
 Figure~\ref{fig:regions_aladdin} showcases the achieved
 speedup, when employing Aladdin, by the accelerators selected by
@@ -1232,8 +1269,8 @@ trails the one corresponding to regions, because of two
 reasons. First, function selection is limited to the ones which do not
 present forbidden nodes, and this might rule out promising regions
 within them. Second and more importantly, it is also inflexible from
-an area viewpoint, which is especially visible when few hardware
-resources are available for acceleration. In those cases, the
+an area viewpoint, which is especially visible when only a small amount of 
+hardware resources are available for acceleration. In those cases, the
 selection of functions often detects only few feasible candidates,
 with a small merit (e.g., in \jpeg\ and \mpeg, for an area of less
 than 0.5 $mM^2$).\par
@@ -1309,7 +1346,7 @@ Aladdin provides merit and cost estimation for a region very quickly
 employed for this experiment of algorithm scalability, it does,
 however, require the outlining of the selected accelerator
 specifically \emph{as a function call} within the application source
-code --- and this currently needs to be done manually. This technical
+code -- and this currently needs to be done manually. This technical
 limitation means that Aladdin estimations cannot be used for the
 scalability experiments in this section.
 Hence, a more abstract model was employed, which could be implemented
@@ -1370,7 +1407,7 @@ could grow tangibly.
 This assumption is confirmed by the data in
 Figure~\ref{fig:h264-ex-gr}, where the comparison of performance and
 scalability of the \exactC\ selection algorithm is performed, at three different
-levels of cropping --- that is, considering regions providing at
+levels of cropping -- that is, considering regions providing at
 least 5\%, 10\% and 20\% of the maximum merit, respectively.\par
 
 Figure~\ref{fig:h264-ex-gr} (left) plots the estimated speedup achieved by
@@ -2017,7 +2054,7 @@ The methodology
 described in \cite{MeeusMar14} employs reuse buffers spanning multiple
 frame columns, which pose a significant area
 overhead. Both \cite{GuoJun04} and \cite{MeeusMar14} are not able
-to combine Hardware unrolling and pipelining, which are instead jointly
+to combine \HW\ unrolling and pipelining, which are instead jointly
 supported the methodology detailed in \ref{sec:dr_meth}. An alternative 
 approach, described in
 ~\cite{DongMar07}, requires a great deal of \HW\ resources as well, as it 
@@ -2251,7 +2288,7 @@ is extracted from
 a targeted Xilinx Virtex7 FPGA platform. 
 It can be observed that ROCCC systems have similar
 performance with respect to Vivado\_norew ones. Conf.1 accelerators 
---- even though they do not require code modifications --- are as 
+-- even though they do not require code modifications -- are as 
 efficient as Vivado\_rew ones. Conf.2 and Conf. 3 that are
 supported only by the framework presented in \ref{sec:dr_meth}, dramatically decrease
 run-times, with an order-of-magnitude speed up on average between
@@ -2303,7 +2340,7 @@ The framework presented in \ref{sec:dr_meth} brings High-Level Synthesis
  mimics the rationale followed there, but is able to do so
  \emph{automatically}. HLS state of the art tools can automate some of
  the decisions taken by the framework presented in this section, but not 
- all --- in particular,
+ all -- in particular,
  they cannot automatically and jointly exploit unrolling and
  pipelining while considering reuse, and hence deliver the levels of
  speedup provided here.
@@ -2895,7 +2932,7 @@ published in the 2018 International Conference on High Performance Computing \& 
 
 \chapter[Identification and Selection of System Aware Accelerators]
 {Identification and Selection of \\ System Aware Accelerators}
-% {System Aware Accelerators Identification --- Speedup and Energy Efficiency}
+% {System Aware Accelerators Identification -- Speedup and Energy Efficiency}
 
 In this chapter of the dissertation the notion of automatic selection of HW accelerators is extended
 by increasing the scope of the candidates for acceleration, in order to target demanding platforms 
@@ -2944,11 +2981,13 @@ heterogeneous computing system compared to a powerful, yet power-hungry, softwar
 
 \subsection{Motivation}
 
+NOTE: Rewrite the following paragraph
 System-level design, and heterogeneous computing as a whole, is witnessing a breakthrough. 
 Emerging best practices based on High Level Synthesis (HLS) allow unprecedented productivity levels. 
 HLS dramatically shortens development cycles by employing C/C++ descriptions as entry points 
 for the development of both \SW\ (SW) and \HW\ (HW), greatly facilitating the task of migrating 
 functionalities between the two.\par
+END NOTE
 
 However, the design of heterogeneous systems comprising SW processors and HW accelerators is 
 still a demanding endeavor, during which key decisions are left solely to manual effort and 
@@ -2983,7 +3022,7 @@ speedup, while not exceeding a resource target. The use of \aseeker\ can therefo
 architects in the early design phases, highlighting which segments of a computing flow should be
 targeted with HLS, and hence where to focus the process of applying optimizations to.\par
 
-On the other hand, it indicates which parts are not likely to yield tangible benefits if realized in HW --- either 
+On the other hand, it indicates which parts are not likely to yield tangible benefits if realized in HW -- either 
 because they present a low computational footprint, or because their characteristics hamper their potential for HW 
 acceleration, e.g. they require an excessive amount of data transfers while performing limited computations.\par
 
