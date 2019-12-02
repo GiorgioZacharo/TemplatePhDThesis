@@ -120,27 +120,34 @@ is what people are pleased to call the fruit of genius. It is the fruit of labor
 \frontmatter %generates the frontmatter, this is FIXED
 
 \begin{abstract}
-\textbf{NOTE: The abstract will be written in the end of the thesis.}\\
-Performance increase, in terms of faster execution and higher energy efficiency, 
-is a never-ending research endeavor  %story 
-and does not come for free.
+% \textbf{NOTE: The abstract will be written in the end of the thesis.}\\
+Time and energy are finite. Contrary to the need for faster and more energy efficient computing 
+systems in our every day life.
 The breakdown of Dennard scaling, along with the seemingly inevitable end of 
 Moore's law economic aspect, present a new challenge to computer architects striving to achieve
 better performance in the modern computer systems. Heterogeneous computing is 
 emerging as one of the solutions to overcome these limitations in order to keep the performance 
-trend rising. This is achieved by turning the focus to specialized \HW\ that 
+trend rising. This is achieved by turning the focus to specialized \HW\ (HW) that 
 can accelerate the execution of a \SW\ (SW) application or a part of that application.
 The goal is to design efficient HW/SW computer architectures, where a general purpose CPU
 is coupled with a number of specialized HW accelerators.\\
-The choice of which parts of an application to be accelerated, though, as well as the type 
-of accelerators to be used, while taking into account the underlying memory system, are all
-non-trivial research questions and depend heavily on the SW applications characteristics that
-are going to be accelerated. Therefore, an in-depth SW analysis can be crucial, prior to 
+The choice of which parts of an application to be accelerated, though, as well as the 
+optimizations to be applied on the HW accelerated parts, while taking into account the underlying 
+memory system and the platform characteristics that the HW accelerators are implemented onto, are 
+all non-trivial research questions and depend heavily on the SW applications characteristics that
+are going to be accelerated. 
+Therefore, an in-depth SW analysis can be crucial, prior to 
 designing a heterogeneous system, as it can provide valuable information and subsequently 
-highly benefit performance. My initial research is revolving around various ways that SW
-analysis, by extending the compiler frameworks and, hence, their potential, can offer this 
-type of information and move one step closer towards optimizing and automating the design of 
-hybrid HW/SW systems.
+highly benefit performance. 
+My research has revolved around building automation frameworks that can aid HW engineers in the
+early stages of the design process. I have extended the capabilities of compiler infrastructures,
+while addressing these research questions, 
+% of \emph{what} should be accelerated, \emph{how} an 
+% accelerator should be implemented and consider \emph{where} is it going to be hosted. 
+so that
+better decisions are made, which lead to faster execution and improved energy efficiency.
+The expansion and integration of these frameworks in the future can move automation and optimization 
+of hybrid HW/SW systems designs one step forward.
 \end{abstract}
 
 % \begin{abstract}[Zusammenfassung]
