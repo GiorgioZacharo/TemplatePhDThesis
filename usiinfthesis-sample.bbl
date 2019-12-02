@@ -507,6 +507,12 @@ F.~Valina.
   {HLS} tool.
 \newblock In {\em Xilinx}, Sept. 2012.
 
+\bibitem{verdoolaege2010isl}
+S.~Verdoolaege.
+\newblock isl: An integer set library for the polyhedral model.
+\newblock In {\em International Congress on Mathematical Software}, pages
+  299--302. Springer, 2010.
+
 \bibitem{VermaOct07}
 A.~K. Verma, P.~Brisk, and P.~Ienne.
 \newblock Rethinking custom {ISE} identification: A new processor-agnostic

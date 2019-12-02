@@ -118,37 +118,38 @@
 \newlabel{subsec:res_overhead}{{1.5.3}{25}{Impact of the Interface Overhead}{subsection.1.5.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.11}{\ignorespaces Impact of the initiation overhead for regions and basic blocks selection strategies, considering $T_{Overhead}$ values of 1, 10, and 20 clock cycles.\relax }}{25}{figure.caption.17}}
 \newlabel{fig:overhead}{{1.11}{25}{Impact of the initiation overhead for regions and basic blocks selection strategies, considering $T_{Overhead}$ values of 1, 10, and 20 clock cycles.\relax }{figure.caption.17}{}}
-\citation{KurraApr07}
 \citation{KulkarniOct12}
+\citation{KurraApr07}
 \@writefile{toc}{\contentsline {section}{\numberline {1.6}RegionSeeker MuLTiVersioning}{26}{section.1.6}}
 \newlabel{sec:multi}{{1.6}{26}{RegionSeeker MuLTiVersioning}{section.1.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.6.1}Methodology}{26}{subsection.1.6.1}}
 \newlabel{subsec:mv_meth}{{1.6.1}{26}{Methodology}{subsection.1.6.1}{}}
-\citation{ShaoJul14}
 \citation{BinkertFeb11}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{27}{subsection.1.6.2}}
-\newlabel{subsec:mv_res}{{1.6.2}{27}{Experimental Results}{subsection.1.6.2}{}}
-\citation{YuSep04}
-\citation{PozziJul06}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces  Left: Example of an overlapping graph for three candidates for acceleration. Right: The equivalent overlapping graph for multiple versions of the same candidates, where A and B have two versions and C has three versions. \relax }}{27}{figure.caption.18}}
+\newlabel{fig:mlv_overlap}{{1.12}{27}{Left: Example of an overlapping graph for three candidates for acceleration. Right: The equivalent overlapping graph for multiple versions of the same candidates, where A and B have two versions and C has three versions. \relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.6.2}Experimental Results}{28}{subsection.1.6.2}}
+\newlabel{subsec:mv_res}{{1.6.2}{28}{Experimental Results}{subsection.1.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.13}{\ignorespaces Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }}{29}{figure.caption.19}}
+\newlabel{fig:mlv_aladdin}{{1.13}{29}{Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }{figure.caption.19}{}}
 \citation{ChenFeb07}
-\citation{ReddingtonAug09}
 \citation{GiaquintaMar15}
 \citation{MartiFeb12}
-\citation{VermaOct07}
+\citation{PozziJul06}
+\citation{ReddingtonAug09}
+\citation{YuSep04}
 \citation{PothineniJan07}
+\citation{VermaOct07}
+\citation{AhnJan13}
+\citation{AtasuApr07}
 \citation{PozziSep05}
 \citation{VermaOct07}
-\citation{AtasuApr07}
-\citation{AhnJan13}
 \citation{CongFeb04}
 \citation{GaluzziOct06}
 \citation{AlippiMar99}
-\@writefile{toc}{\contentsline {section}{\numberline {1.7}Related Work}{28}{section.1.7}}
-\newlabel{sec:rw}{{1.7}{28}{Related Work}{section.1.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }}{29}{figure.caption.18}}
-\newlabel{fig:mlv_aladdin}{{1.12}{29}{Comparison of the speedup obtained by MuLTiVersioning to single versioning approaches on jpeg benchmark varying the area constraint, using Aladdin and gem5 respectively, for HW and SW latency evaluation. Top: Over the total run time of the application. Bottom: Over the run time of the regions selected. \relax }{figure.caption.18}{}}
 \citation{ZuluagaJul09}
 \citation{BaleaniMay02}
+\@writefile{toc}{\contentsline {section}{\numberline {1.7}Related Work}{30}{section.1.7}}
+\newlabel{sec:rw}{{1.7}{30}{Related Work}{section.1.7}{}}
 \citation{AguilarJune16}
 \citation{HankSep93}
 \citation{JohnsonJun94}
@@ -161,26 +162,24 @@
 \citation{VivadoHLSMar17}
 \citation{StratusHLSApr16}
 \citation{ZacharopoulosApr19}
-\@writefile{toc}{\contentsline {section}{\numberline {1.8}Conclusions}{31}{section.1.8}}
-\newlabel{sec:rs_conclusions}{{1.8}{31}{Conclusions}{section.1.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.8}Conclusions}{32}{section.1.8}}
+\newlabel{sec:rs_conclusions}{{1.8}{32}{Conclusions}{section.1.8}{}}
 \citation{VivadoHLSMar17}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Automatic Optimizations for Accelerators}{33}{chapter.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Automatic Optimizations for HW/SW Co-design}{33}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Data reuse Analysis}{34}{section.2.1}}
-\newlabel{sec:dr}{{2.1}{34}{Data reuse Analysis}{section.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Motivation}{34}{subsection.2.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces At each iteration, sliding window applications process a subset of the input data (a). The managed set of subsequent iterations present a high degree of overlap, both in the horizontal (b) and vertical (c) dimensions. The framework in \ref  {sec:dr_meth} automatically leverages both, maximizing data reuse (d). \relax }}{34}{figure.caption.19}}
-\newlabel{fig:dr_intro}{{2.1}{34}{At each iteration, sliding window applications process a subset of the input data (a). The managed set of subsequent iterations present a high degree of overlap, both in the horizontal (b) and vertical (c) dimensions. The framework in \ref {sec:dr_meth} automatically leverages both, maximizing data reuse (d). \relax }{figure.caption.19}{}}
 \citation{Vivado12}
 \citation{PouchetFeb13}
 \citation{SchmidJul15}
 \citation{GrosserApr12}
-\citation{TensilicaWeb}
 \citation{GiaquintaMar15}
 \citation{GutinFeb12}
 \citation{BiswasMar06}
 \citation{HaaBOct2014}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Data reuse Analysis}{34}{section.2.1}}
+\newlabel{sec:dr}{{2.1}{34}{Data reuse Analysis}{section.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Motivation}{34}{subsection.2.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Related Work}{34}{subsection.2.1.2}}
 \citation{GuoJun04}
 \citation{VillarrealMay10}
 \citation{MeeusMar14}
@@ -188,39 +187,54 @@
 \citation{MeeusMar14}
 \citation{DongMar07}
 \citation{LeeserApr06}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Related Work}{35}{subsection.2.1.2}}
+\citation{GiaquintaMar15}
+\citation{GutinFeb12}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Methodology}{35}{subsection.2.1.3}}
+\newlabel{sec:dr_meth}{{2.1.3}{35}{Methodology}{subsection.2.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Custom Instructions (CI) Identification}{35}{section*.21}}
+\newlabel{subsec:id-an}{{2.1.3}{35}{Custom Instructions (CI) Identification}{section*.21}{}}
 \citation{GrosserApr12}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Methodology}{36}{subsection.2.1.3}}
-\newlabel{sec:dr_meth}{{2.1.3}{36}{Methodology}{subsection.2.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Data Reuse Analysis}{36}{section*.21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Data Reuse of memory accesses (66.6\%) across consecutive iterations of a loop, in a sliding window application.\relax }}{37}{figure.caption.20}}
-\newlabel{fig:data_reuse}{{2.2}{37}{Data Reuse of memory accesses (66.6\%) across consecutive iterations of a loop, in a sliding window application.\relax }{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Hardware Implementation}{37}{section*.22}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces LLVM Analysis Pass - SCoP Identification and Data Reuse Analysis\relax }}{38}{algorithm.2}}
-\newlabel{dr_Algo}{{2}{38}{LLVM Analysis Pass - SCoP Identification and Data Reuse Analysis\relax }{algorithm.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Summary of the features of the accelerators generated by our framework, compared with state-of-the-art tools.\relax }}{39}{table.caption.23}}
-\newlabel{tab:tools}{{2.1}{39}{Summary of the features of the accelerators generated by our framework, compared with state-of-the-art tools.\relax }{table.caption.23}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Benchmarks characteristics and employed configurations. Conf.1 presents a single datapath, while Conf.2 and Conf.3 have a moderate to large number of datapaths. Window sizes and input widths are expressed in bytes.\relax }}{39}{table.caption.24}}
-\newlabel{tab:benchs}{{2.2}{39}{Benchmarks characteristics and employed configurations. Conf.1 presents a single datapath, while Conf.2 and Conf.3 have a moderate to large number of datapaths. Window sizes and input widths are expressed in bytes.\relax }{table.caption.24}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}Experimental Results}{39}{subsection.2.1.4}}
-\newlabel{sec:dr_exp}{{2.1.4}{39}{Experimental Results}{subsection.2.1.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Execution time to process a 100x100 frame.\relax }}{40}{figure.caption.25}}
-\newlabel{fig:exec_time_fpga}{{2.3}{40}{Execution time to process a 100x100 frame.\relax }{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Comparison of required resources for our generated systems and for baseline approaches: LUTs (a) and Flip-Flops (b).\relax }}{40}{figure.caption.26}}
-\newlabel{fig:area_fpga}{{2.4}{40}{Comparison of required resources for our generated systems and for baseline approaches: LUTs (a) and Flip-Flops (b).\relax }{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Block scheme of our framework. Code analysis retrieves the parameters of SCoP kernels, which are employed, along with input/output constraints, to guide the automated design of highly efficient hardware accelerators.\relax }}{36}{figure.caption.20}}
+\newlabel{fig:framework}{{2.1}{36}{Block scheme of our framework. Code analysis retrieves the parameters of SCoP kernels, which are employed, along with input/output constraints, to guide the automated design of highly efficient hardware accelerators.\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces An identification algorithm traditionally focus on dataflow computation only (subgraph A). In this section, instead, the control flow graph (CFG) of the application is also analyzed, in search for static control parts (SCoPs) -- subgraphs of the CFG where the flow of control is known \emph  {statically}. The whole SCoP region (subgraph B) is hence identified and selected as accelerator.\relax }}{37}{figure.caption.22}}
+\newlabel{fig:identification}{{2.2}{37}{An identification algorithm traditionally focus on dataflow computation only (subgraph A). In this section, instead, the control flow graph (CFG) of the application is also analyzed, in search for static control parts (SCoPs) -- subgraphs of the CFG where the flow of control is known \emph {statically}. The whole SCoP region (subgraph B) is hence identified and selected as accelerator.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Reuse Opportunities}{37}{section*.23}}
+\newlabel{subsec:hls}{{2.1.3}{37}{Data Reuse Opportunities}{section*.23}{}}
+\citation{GrosserApr12}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces At each iteration, sliding window applications process a subset of the input data (a). The managed set of subsequent iterations present a high degree of overlap, both in the horizontal (b) and vertical (c) dimensions. Our framework automatically leverages both, maximizing data reuse (d). \relax }}{38}{figure.caption.24}}
+\newlabel{fig:intro}{{2.3}{38}{At each iteration, sliding window applications process a subset of the input data (a). The managed set of subsequent iterations present a high degree of overlap, both in the horizontal (b) and vertical (c) dimensions. Our framework automatically leverages both, maximizing data reuse (d). \relax }{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Reuse Analysis}{38}{section*.25}}
+\newlabel{subsec:reuse-analysis}{{2.1.3}{38}{Data Reuse Analysis}{section*.25}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces LLVM Analysis Pass - SCoP Identification and Data Reuse Analysis\relax }}{39}{algorithm.2}}
+\newlabel{dr_Algo}{{2}{39}{LLVM Analysis Pass - SCoP Identification and Data Reuse Analysis\relax }{algorithm.2}{}}
+\citation{verdoolaege2010isl}
+\@writefile{toc}{\contentsline {subsubsection}{Hardware Implementation}{40}{section*.26}}
+\newlabel{subsec:impl}{{2.1.3}{40}{Hardware Implementation}{section*.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces The automatically generated accelerators include multiple datapaths, executing the loop body of two-dimensional SCoPs. \relax }}{41}{figure.caption.27}}
+\newlabel{fig:arch}{{2.4}{41}{The automatically generated accelerators include multiple datapaths, executing the loop body of two-dimensional SCoPs. \relax }{figure.caption.27}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Summary of the features of the accelerators generated by our framework, compared with state-of-the-art tools.\relax }}{41}{table.caption.28}}
+\newlabel{tab:tools}{{2.1}{41}{Summary of the features of the accelerators generated by our framework, compared with state-of-the-art tools.\relax }{table.caption.28}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Benchmarks characteristics and employed configurations. Conf.1 presents a single datapath, while Conf.2 and Conf.3 have a moderate to large number of datapaths. Window sizes and input widths are expressed in bytes.\relax }}{42}{table.caption.29}}
+\newlabel{tab:benchs}{{2.2}{42}{Benchmarks characteristics and employed configurations. Conf.1 presents a single datapath, while Conf.2 and Conf.3 have a moderate to large number of datapaths. Window sizes and input widths are expressed in bytes.\relax }{table.caption.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}Experimental Results}{42}{subsection.2.1.4}}
+\newlabel{sec:dr_exp}{{2.1.4}{42}{Experimental Results}{subsection.2.1.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Execution time to process a 100x100 frame.\relax }}{42}{figure.caption.30}}
+\newlabel{fig:exec_time_fpga}{{2.5}{42}{Execution time to process a 100x100 frame.\relax }{figure.caption.30}{}}
 \citation{HameedOct11}
 \citation{TensilicaWeb}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Comparison of required resources for our generated systems and for baseline approaches: LUTs (a) and Flip-Flops (b).\relax }}{43}{figure.caption.31}}
+\newlabel{fig:area_fpga}{{2.6}{43}{Comparison of required resources for our generated systems and for baseline approaches: LUTs (a) and Flip-Flops (b).\relax }{figure.caption.31}{}}
 \citation{ZacharopoulosJan17}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Comparison of multi-datapath and optimised Vivado implementations.\relax }}{41}{figure.caption.27}}
-\newlabel{fig:compar}{{2.5}{41}{Comparison of multi-datapath and optimised Vivado implementations.\relax }{figure.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Comparison of multi-datapath and optimised Vivado implementations.\relax }}{44}{figure.caption.32}}
+\newlabel{fig:compar}{{2.7}{44}{Comparison of multi-datapath and optimised Vivado implementations.\relax }{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Conclusions}{44}{subsection.2.1.5}}
 \citation{ShaoJul14}
 \citation{LattnerMar04}
 \citation{KurraApr07}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Conclusions}{42}{subsection.2.1.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{42}{section.2.2}}
-\newlabel{sec:ml}{{2.2}{42}{Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{section.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Motivation}{42}{subsection.2.2.1}}
 \citation{LattnerMar04}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{45}{section.2.2}}
+\newlabel{sec:ml}{{2.2}{45}{Machine Learning Approach for Loop Unrolling\\ Factor Prediction}{section.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Motivation}{45}{subsection.2.2.1}}
 \citation{AgakovMar06}
 \citation{MonsifrotAug02}
 \citation{KulkarniOct12}
@@ -232,51 +246,53 @@
 \citation{ZuluagaJun12}
 \citation{OzisikyilmazJun08}
 \citation{KurraApr07}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Related Work}{43}{subsection.2.2.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Overview of the Loop Unrolling Prediction methodology.\relax }}{44}{figure.caption.28}}
-\newlabel{fig:lup_method}{{2.6}{44}{Overview of the Loop Unrolling Prediction methodology.\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Methodology}{44}{subsection.2.2.3}}
-\newlabel{sec:ml_meth}{{2.2.3}{44}{Methodology}{subsection.2.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Related Work}{46}{subsection.2.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Overview of the Loop Unrolling Prediction methodology.\relax }}{47}{figure.caption.33}}
+\newlabel{fig:lup_method}{{2.8}{47}{Overview of the Loop Unrolling Prediction methodology.\relax }{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Methodology}{47}{subsection.2.2.3}}
+\newlabel{sec:ml_meth}{{2.2.3}{47}{Methodology}{subsection.2.2.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Optimal Loop Unrolling Factor -- Objective Function}{47}{section*.34}}
 \citation{LattnerMar04}
 \citation{StephensonApr05}
 \citation{StephensonApr05}
-\@writefile{toc}{\contentsline {subsubsection}{Optimal Loop Unrolling Factor -- Objective Function}{45}{section*.29}}
-\@writefile{toc}{\contentsline {subsubsection}{LLVM Analysis Pass -- Loop Features Extraction}{45}{section*.30}}
 \citation{ShaoJul14}
-\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces Features extracted by LLVM LU Analysis Pass.\relax }}{46}{table.caption.31}}
-\newlabel{tab:X}{{2.3}{46}{Features extracted by LLVM LU Analysis Pass.\relax }{table.caption.31}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Feature vectors selected by Stephenson et al. \cite  {StephensonApr05}.\relax }}{46}{table.caption.31}}
-\newlabel{tab:St_X1_X2}{{2.4}{46}{Feature vectors selected by Stephenson et al. \cite {StephensonApr05}.\relax }{table.caption.31}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Latency and Area Estimation}{46}{section*.32}}
-\newlabel{sec:ml_la}{{2.2.3}{46}{Latency and Area Estimation}{section*.32}{}}
+\@writefile{toc}{\contentsline {subsubsection}{LLVM Analysis Pass -- Loop Features Extraction}{48}{section*.35}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces Features extracted by LLVM LU Analysis Pass.\relax }}{49}{table.caption.36}}
+\newlabel{tab:X}{{2.3}{49}{Features extracted by LLVM LU Analysis Pass.\relax }{table.caption.36}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Feature vectors selected by Stephenson et al. \cite  {StephensonApr05}.\relax }}{49}{table.caption.36}}
+\newlabel{tab:St_X1_X2}{{2.4}{49}{Feature vectors selected by Stephenson et al. \cite {StephensonApr05}.\relax }{table.caption.36}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Latency and Area Estimation}{49}{section*.37}}
+\newlabel{sec:ml_la}{{2.2.3}{49}{Latency and Area Estimation}{section*.37}{}}
 \citation{LiuJun13}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces LLVM Analysis Pass - Loop Unrolling Prediction Analysis\relax }}{47}{algorithm.3}}
-\newlabel{Algo_LLVM}{{3}{47}{LLVM Analysis Pass - Loop Unrolling Prediction Analysis\relax }{algorithm.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Random Forest Classification}{47}{section*.33}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces LLVM Analysis Pass - Loop Unrolling Prediction Analysis\relax }}{50}{algorithm.3}}
+\newlabel{Algo_LLVM}{{3}{50}{LLVM Analysis Pass - Loop Unrolling Prediction Analysis\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Random Forest Classification}{50}{section*.38}}
 \citation{HaraMay08}
 \citation{DanalisMar10}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Random Forest Classification - Training and Test\relax }}{48}{algorithm.4}}
-\newlabel{algo:RF}{{4}{48}{Random Forest Classification - Training and Test\relax }{algorithm.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Experimental Results}{48}{subsection.2.2.4}}
-\newlabel{sec:ml_exp}{{2.2.4}{48}{Experimental Results}{subsection.2.2.4}{}}
 \citation{PedregosaOct11}
 \citation{StephensonApr05}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Random Forest Classification - Training and Test\relax }}{51}{algorithm.4}}
+\newlabel{algo:RF}{{4}{51}{Random Forest Classification - Training and Test\relax }{algorithm.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Experimental Results}{51}{subsection.2.2.4}}
+\newlabel{sec:ml_exp}{{2.2.4}{51}{Experimental Results}{subsection.2.2.4}{}}
 \citation{StephensonApr05}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Distribution of Loop Unrolling Factor Prediction Errors over 18.000 out-of-sample predictions.\relax }}{49}{figure.caption.34}}
-\newlabel{fig:dist}{{2.7}{49}{Distribution of Loop Unrolling Factor Prediction Errors over 18.000 out-of-sample predictions.\relax }{figure.caption.34}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Classification Models and Features}{49}{section*.35}}
-\newlabel{subsec:mode_feature}{{2.2.4}{49}{Classification Models and Features}{section*.35}{}}
 \citation{StephensonApr05}
 \citation{StephensonApr05}
 \citation{MarianiApr12}
 \citation{PalermoNov09}
 \citation{XydisMar13}
 \citation{ZuluagaJun12}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Distribution of Loop Unrolling Factor Prediction Errors over 18.000 out-of-sample predictions.\relax }}{52}{figure.caption.39}}
+\newlabel{fig:dist}{{2.9}{52}{Distribution of Loop Unrolling Factor Prediction Errors over 18.000 out-of-sample predictions.\relax }{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Classification Models and Features}{52}{section*.40}}
+\newlabel{subsec:mode_feature}{{2.2.4}{52}{Classification Models and Features}{section*.40}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Iterative Refinement}{52}{section*.42}}
 \citation{StephensonApr05}
 \citation{StephensonApr05}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }}{50}{figure.caption.36}}
-\newlabel{fig:mod_score}{{2.8}{50}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.36}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Iterative Refinement}{50}{section*.37}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }}{53}{figure.caption.41}}
+\newlabel{fig:mod_score}{{2.10}{53}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }}{53}{figure.caption.43}}
+\newlabel{fig:iter_ref_score}{{2.11}{53}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.43}{}}
 \citation{MarianiApr12}
 \citation{PalermoNov09}
 \citation{XydisMar13}
@@ -285,21 +301,19 @@
 \citation{PalermoNov09}
 \citation{XydisMar13}
 \citation{ZuluagaJun12}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }}{51}{figure.caption.38}}
-\newlabel{fig:iter_ref_score}{{2.9}{51}{Left: Comparison of the Prediction Score across Random Forest, Nearest Neighbor, Support Vector Machines models and the respective feature selection: X vector, Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: Features extracted by my LLVM Loop Unrolling Analysis Pass.\relax }{figure.caption.38}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Convergence Time Comparison}{51}{section*.40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Comparison of the Speedup, Area and Impact achieved for every function by our Algorithm and by an {Iterative Refinement}\ approach \cite  {MarianiApr12} \cite  {PalermoNov09} \cite  {XydisMar13} \cite  {ZuluagaJun12}, compared to the optimal solutions derived from exhaustive explorations. Speedup and Area numbers are normalized with respect to fully rolled configurations.\relax }}{52}{figure.caption.39}}
-\newlabel{fig:speed_ir}{{2.10}{52}{Comparison of the Speedup, Area and Impact achieved for every function by our Algorithm and by an \ItRef \ approach \cite {MarianiApr12} \cite {PalermoNov09} \cite {XydisMar13} \cite {ZuluagaJun12}, compared to the optimal solutions derived from exhaustive explorations. Speedup and Area numbers are normalized with respect to fully rolled configurations.\relax }{figure.caption.39}{}}
 \citation{ShaoJul14}
 \citation{VivadoHLSMar17}
 \citation{StephensonApr05}
 \citation{StephensonApr05}
 \citation{ZacharopoulosJul18}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Left: time required to converge for {state-of-the-art}\ {Machine Learning}\ models with our X feature vector and Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: convergence time of our algorithm and {Iterative Refinement}\ across all three Y vectors. \relax }}{53}{figure.caption.41}}
-\newlabel{fig:time}{{2.11}{53}{Left: time required to converge for \SoTA \ \ML \ models with our X feature vector and Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: convergence time of our algorithm and \ItRef \ across all three Y vectors. \relax }{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Conclusions}{53}{subsection.2.2.5}}
+\@writefile{toc}{\contentsline {subsubsection}{Convergence Time Comparison}{54}{section*.45}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Comparison of the Speedup, Area and Impact achieved for every function by our Algorithm and by an {Iterative Refinement}\ approach \cite  {MarianiApr12} \cite  {PalermoNov09} \cite  {XydisMar13} \cite  {ZuluagaJun12}, compared to the optimal solutions derived from exhaustive explorations. Speedup and Area numbers are normalized with respect to fully rolled configurations.\relax }}{55}{figure.caption.44}}
+\newlabel{fig:speed_ir}{{2.12}{55}{Comparison of the Speedup, Area and Impact achieved for every function by our Algorithm and by an \ItRef \ approach \cite {MarianiApr12} \cite {PalermoNov09} \cite {XydisMar13} \cite {ZuluagaJun12}, compared to the optimal solutions derived from exhaustive explorations. Speedup and Area numbers are normalized with respect to fully rolled configurations.\relax }{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.13}{\ignorespaces Left: time required to converge for {state-of-the-art}\ {Machine Learning}\ models with our X feature vector and Stephenson et al. X1 and X2 vectors \cite  {StephensonApr05}. Right: convergence time of our algorithm and {Iterative Refinement}\ across all three Y vectors. \relax }}{56}{figure.caption.46}}
+\newlabel{fig:time}{{2.13}{56}{Left: time required to converge for \SoTA \ \ML \ models with our X feature vector and Stephenson et al. X1 and X2 vectors \cite {StephensonApr05}. Right: convergence time of our algorithm and \ItRef \ across all three Y vectors. \relax }{figure.caption.46}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Conclusions}{56}{subsection.2.2.5}}
 \citation{LiuFeb16}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Identification and Selection of System Aware Accelerators}{55}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Identification and Selection of System Aware Accelerators}{57}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{CacciottiSep18}
@@ -310,9 +324,9 @@
 \citation{LattnerMar04}
 \citation{SyrowikJun18}
 \citation{LattnerMar04}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{56}{section.3.1}}
-\newlabel{sec:accel}{{3.1}{56}{\aseeker : Accelerators for Speedup}{section.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Motivation}{56}{subsection.3.1.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}{AccelSeeker}: Accelerators for Speedup}{58}{section.3.1}}
+\newlabel{sec:accel}{{3.1}{58}{\aseeker : Accelerators for Speedup}{section.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Motivation}{58}{subsection.3.1.1}}
 \citation{MeeusSep12}
 \citation{VivadoHLSMar17}
 \citation{StratusHLSApr16}
@@ -332,7 +346,7 @@
 \citation{ShaoJul14}
 \citation{ShaoOct16}
 \citation{KathailFeb16}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Related Work}{57}{subsection.3.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Related Work}{59}{subsection.3.1.2}}
 \citation{SchaferJun12}
 \citation{ZuluagaJun12}
 \citation{FerrettiJan18}
@@ -341,72 +355,72 @@
 \citation{GiaquintaMar15}
 \citation{OppermannJul16}
 \citation{CotaJun15}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite  {PozziJul06} \cite  {GiaquintaMar15}, (b) to control-flow level ({RegionSeeker}\ in Chapter 1) \cite  {ZacharopoulosApr19} \cite  {OppermannJul16}, (c) to function-call graph level ({AccelSeeker}\ in this chapter).\relax }}{58}{figure.caption.42}}
-\newlabel{fig:soa-evolution}{{3.1}{58}{Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite {PozziJul06} \cite {GiaquintaMar15}, (b) to control-flow level (\rseeker \ in Chapter 1) \cite {ZacharopoulosApr19} \cite {OppermannJul16}, (c) to function-call graph level (\aseeker \ in this chapter).\relax }{figure.caption.42}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The phases of the {AccelSeeker}\ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, {AccelSeeker}\ performs selection of a subset of such candidates.\relax }}{59}{figure.caption.43}}
-\newlabel{fig:flow}{{3.2}{59}{The phases of the \aseeker \ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, \aseeker \^^Mperforms selection of a subset of such candidates.\relax }{figure.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite  {PozziJul06} \cite  {GiaquintaMar15}, (b) to control-flow level ({RegionSeeker}\ in Chapter 1) \cite  {ZacharopoulosApr19} \cite  {OppermannJul16}, (c) to function-call graph level ({AccelSeeker}\ in this chapter).\relax }}{60}{figure.caption.47}}
+\newlabel{fig:soa-evolution}{{3.1}{60}{Evolution of the SoA in automatic selection of custom instructions/accelerators: (a) from data-flow level \cite {PozziJul06} \cite {GiaquintaMar15}, (b) to control-flow level (\rseeker \ in Chapter 1) \cite {ZacharopoulosApr19} \cite {OppermannJul16}, (c) to function-call graph level (\aseeker \ in this chapter).\relax }{figure.caption.47}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The phases of the {AccelSeeker}\ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, {AccelSeeker}\ performs selection of a subset of such candidates.\relax }}{61}{figure.caption.48}}
+\newlabel{fig:flow}{{3.2}{61}{The phases of the \aseeker \ approach. A) Candidates for acceleration are identified, from source code analysis. B) Given an estimation of merit and cost for each candidate, and C) given a maximum available cost, \aseeker \^^Mperforms selection of a subset of such candidates.\relax }{figure.caption.48}{}}
 \citation{ZacharopoulosApr19}
 \citation{ZacharopoulosApr19}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{60}{subsection.3.1.3}}
-\newlabel{subsec:identification}{{3.1.3}{60}{Candidate Identification}{subsection.3.1.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{60}{figure.caption.44}}
-\newlabel{fig:subgraph-examples}{{3.3}{60}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces a) Three overlapping {AccelCand}s: A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite  {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }}{61}{figure.caption.45}}
-\newlabel{fig:overlap-examples}{{3.4}{61}{a) Three overlapping \candidates : A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }{figure.caption.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{61}{subsection.3.1.4}}
-\newlabel{sec:as_prob}{{3.1.4}{61}{Problem Statement and Candidate Selection}{subsection.3.1.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Candidate Identification}{62}{subsection.3.1.3}}
+\newlabel{subsec:identification}{{3.1.3}{62}{Candidate Identification}{subsection.3.1.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an {AccelCand}. b) Subgraphs B and C are not {AccelCand}s\ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }}{62}{figure.caption.49}}
+\newlabel{fig:subgraph-examples}{{3.3}{62}{a) An example call graph. Black nodes are the functions present in a SW application, and edges represent function calls. Subgraph A is an \candidate . b) Subgraphs B and C are not \candidates \ (B has outgoing edges, C has no root). c) Call graph resulting from selection of A as accelerator.\relax }{figure.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces a) Three overlapping {AccelCand}s: A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite  {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }}{63}{figure.caption.50}}
+\newlabel{fig:overlap-examples}{{3.4}{63}{a) Three overlapping \candidates : A, B, C. b) Conflict graph considered in the problem formulation: complete overlap is a conflict, while partial overlap is allowed c) Conflict graph adopted in \cite {ZacharopoulosApr19} instead, where any kind of overlap is considered a conflict. \relax }{figure.caption.50}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Problem Statement and Candidate Selection}{63}{subsection.3.1.4}}
+\newlabel{sec:as_prob}{{3.1.4}{63}{Problem Statement and Candidate Selection}{subsection.3.1.4}{}}
 \citation{BronKerbosch73}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Selection Algorithm}{62}{subsection.3.1.5}}
-\newlabel{sec:algo}{{3.1.5}{62}{Selection Algorithm}{subsection.3.1.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }}{63}{figure.caption.46}}
-\newlabel{fig:max-set-examples}{{3.5}{63}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.46}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Cost and Merit Estimation}{64}{subsection.3.1.6}}
-\newlabel{sec:estimation}{{3.1.6}{64}{Cost and Merit Estimation}{subsection.3.1.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Architectural characterization.}{64}{section*.47}}
-\@writefile{toc}{\contentsline {subsubsection}{Cost Estimation.}{64}{section*.49}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{65}{figure.caption.48}}
-\newlabel{fig:hw-comp}{{3.6}{65}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.48}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Merit Estimation.}{65}{section*.50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Selection Algorithm}{64}{subsection.3.1.5}}
+\newlabel{sec:algo}{{3.1.5}{64}{Selection Algorithm}{subsection.3.1.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces a) An example call graph with eight nodes, and hence eight {AccelCand}s, and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight {AccelCand}s, d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \emph  {Accel Selection}\ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }}{65}{figure.caption.51}}
+\newlabel{fig:max-set-examples}{{3.5}{65}{a) An example call graph with eight nodes, and hence eight \candidates , and b) the corresponding conflict graph. c) Given example merits and cost values associated to the eight \candidates , d) and given a maximum tolerated cost $C_{max}$, maximum independent sets that solve problem \asprobname \ are shown. A maximum independent set maximizes merit, while not exceeding the given cost, and not including conflicts.\relax }{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Cost and Merit Estimation}{66}{subsection.3.1.6}}
+\newlabel{sec:estimation}{{3.1.6}{66}{Cost and Merit Estimation}{subsection.3.1.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Architectural characterization.}{66}{section*.52}}
+\@writefile{toc}{\contentsline {subsubsection}{Cost Estimation.}{66}{section*.54}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Estimation of hardware computation times at the basic block (a), function (b) and {AccelCand}\ (c) levels.\relax }}{67}{figure.caption.53}}
+\newlabel{fig:hw-comp}{{3.6}{67}{Estimation of hardware computation times at the basic block (a), function (b) and \candidate \ (c) levels.\relax }{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Merit Estimation.}{67}{section*.55}}
 \citation{LattnerMar04}
-\newlabel{eq:inference}{{3.1.6}{66}{Merit Estimation}{section*.50}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Compiler Analysis}{66}{subsection.3.1.7}}
-\newlabel{sec:llvm_analysis}{{3.1.7}{66}{Compiler Analysis}{subsection.3.1.7}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces LLVM Analysis Pass - Cost and Merit Estimation\relax }}{67}{algorithm.5}}
-\newlabel{Algo_LLVM}{{5}{67}{LLVM Analysis Pass - Cost and Merit Estimation\relax }{algorithm.5}{}}
+\newlabel{eq:inference}{{3.1.6}{68}{Merit Estimation}{section*.55}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Compiler Analysis}{68}{subsection.3.1.7}}
+\newlabel{sec:llvm_analysis}{{3.1.7}{68}{Compiler Analysis}{subsection.3.1.7}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces LLVM Analysis Pass - Cost and Merit Estimation\relax }}{69}{algorithm.5}}
+\newlabel{Algo_LLVM}{{5}{69}{LLVM Analysis Pass - Cost and Merit Estimation\relax }{algorithm.5}{}}
 \citation{GrahamJun82}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{68}{subsection.3.1.8}}
-\newlabel{sec:setup_as}{{3.1.8}{68}{Experimental Setup}{subsection.3.1.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Baselines for Comparative Evaluation}{68}{section*.52}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}Experimental Setup}{70}{subsection.3.1.8}}
+\newlabel{sec:setup_as}{{3.1.8}{70}{Experimental Setup}{subsection.3.1.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Baselines for Comparative Evaluation}{70}{section*.57}}
 \citation{LiuFeb16}
 \citation{H264May15}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Ranking of {AccelCand}s, based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies ({AccelSeeker}, column 3, and gprof, column 4).\relax }}{69}{table.caption.51}}
-\newlabel{tab:candidates}{{3.1}{69}{Ranking of \candidates , based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies (\aseeker , column 3, and gprof, column 4).\relax }{table.caption.51}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Benchmark Application}{69}{section*.54}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Call graph of H.264, with a few function names highlighted.\relax }}{70}{figure.caption.53}}
-\newlabel{fig:call-graph-w-no-names}{{3.7}{70}{Call graph of H.264, with a few function names highlighted.\relax }{figure.caption.53}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{70}{subsection.3.1.9}}
-\newlabel{sec:results_as}{{3.1.9}{70}{Experimental Results}{subsection.3.1.9}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Ranking of Acceleration Candidates}{70}{section*.55}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Ranking of {AccelCand}s, based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies ({AccelSeeker}, column 3, and gprof, column 4).\relax }}{71}{table.caption.56}}
+\newlabel{tab:candidates}{{3.1}{71}{Ranking of \candidates , based on application speedup when implemented as accelerators on the Zynq PSoC implementation (column 2), as well as according to early estimation strategies (\aseeker , column 3, and gprof, column 4).\relax }{table.caption.56}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Benchmark Application}{71}{section*.59}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Call graph of H.264, with a few function names highlighted.\relax }}{72}{figure.caption.58}}
+\newlabel{fig:call-graph-w-no-names}{{3.7}{72}{Call graph of H.264, with a few function names highlighted.\relax }{figure.caption.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.9}Experimental Results}{72}{subsection.3.1.9}}
+\newlabel{sec:results_as}{{3.1.9}{72}{Experimental Results}{subsection.3.1.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Ranking of Acceleration Candidates}{72}{section*.60}}
 \citation{ZynqMar17}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Ranking of {AccelCand}s, based on merit estimation by {AccelSeeker}\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }}{71}{table.caption.56}}
-\newlabel{tab:candidates_input}{{3.2}{71}{Ranking of \candidates , based on merit estimation by \aseeker \ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }{table.caption.56}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {AccelSeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref  {subsec:perf} ), varying the area constraint.\relax }}{71}{figure.caption.58}}
-\newlabel{fig:speedups}{{3.8}{71}{Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \aseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref {subsec:perf} ), varying the area constraint.\relax }{figure.caption.58}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{71}{section*.57}}
-\newlabel{subsec:perf}{{3.1.9}{71}{Performance of resource constrained accelerator selections}{section*.57}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Ranking of {AccelCand}s, based on merit estimation by {AccelSeeker}\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }}{73}{table.caption.61}}
+\newlabel{tab:candidates_input}{{3.2}{73}{Ranking of \candidates , based on merit estimation by \aseeker \ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). \relax }{table.caption.61}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {AccelSeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref  {subsec:perf} ), varying the area constraint.\relax }}{73}{figure.caption.63}}
+\newlabel{fig:speedups}{{3.8}{73}{Speedup obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \aseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling strategies (as detailed in \ref {subsec:perf} ), varying the area constraint.\relax }{figure.caption.63}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Performance of resource constrained accelerator selections}{73}{section*.62}}
+\newlabel{subsec:perf}{{3.1.9}{73}{Performance of resource constrained accelerator selections}{section*.62}{}}
 \citation{LiuFeb16}
 \citation{LiuFeb16}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces H.264 call-graphs highlighting the acceleration candidates selected by by {AccelSeeker}, and by the three gprof strategies, for a 30k LUTs area budget.\relax }}{73}{figure.caption.59}}
-\newlabel{fig:selection-example-h264}{{3.9}{73}{H.264 call-graphs highlighting the acceleration candidates selected by by \aseeker , and by the three gprof strategies, for a 30k LUTs area budget.\relax }{figure.caption.59}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Root function of the selected H.264 candidates, from the reference code in \cite  {LiuFeb16}, for different methods and resource budgets.\relax }}{74}{table.caption.60}}
-\newlabel{tab:selections}{{3.3}{74}{Root function of the selected H.264 candidates, from the reference code in \cite {LiuFeb16}, for different methods and resource budgets.\relax }{table.caption.60}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Designer Effort Analysis}{74}{section*.61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces H.264 call-graphs highlighting the acceleration candidates selected by by {AccelSeeker}, and by the three gprof strategies, for a 30k LUTs area budget.\relax }}{75}{figure.caption.64}}
+\newlabel{fig:selection-example-h264}{{3.9}{75}{H.264 call-graphs highlighting the acceleration candidates selected by by \aseeker , and by the three gprof strategies, for a 30k LUTs area budget.\relax }{figure.caption.64}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Root function of the selected H.264 candidates, from the reference code in \cite  {LiuFeb16}, for different methods and resource budgets.\relax }}{76}{table.caption.65}}
+\newlabel{tab:selections}{{3.3}{76}{Root function of the selected H.264 candidates, from the reference code in \cite {LiuFeb16}, for different methods and resource budgets.\relax }{table.caption.65}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Designer Effort Analysis}{76}{section*.66}}
 \citation{VivadoHLSMar17}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Number of candidates selected by {AccelSeeker}\ and, for comparison, by the gprof-based strategies, while varying the area constraints. Candidate accelerators selected by gprof exceeding resource constraints can only be discarded after their implementation. \relax }}{75}{figure.caption.62}}
-\newlabel{fig:effort}{{3.10}{75}{Number of candidates selected by \aseeker \ and, for comparison, by the gprof-based strategies, while varying the area constraints. Candidate accelerators selected by gprof exceeding resource constraints can only be discarded after their implementation. \relax }{figure.caption.62}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{75}{section.3.2}}
-\newlabel{sec:energy}{{3.2}{75}{EnergySeeker: Accelerators for Energy Efficiency}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{75}{subsection.3.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Number of candidates selected by {AccelSeeker}\ and, for comparison, by the gprof-based strategies, while varying the area constraints. Candidate accelerators selected by gprof exceeding resource constraints can only be discarded after their implementation. \relax }}{77}{figure.caption.67}}
+\newlabel{fig:effort}{{3.10}{77}{Number of candidates selected by \aseeker \ and, for comparison, by the gprof-based strategies, while varying the area constraints. Candidate accelerators selected by gprof exceeding resource constraints can only be discarded after their implementation. \relax }{figure.caption.67}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{77}{section.3.2}}
+\newlabel{sec:energy}{{3.2}{77}{EnergySeeker: Accelerators for Energy Efficiency}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Motivation}{77}{subsection.3.2.1}}
 \citation{ShaoJul14}
 \citation{LattnerMar04}
 \citation{MelpignanoJune12}
@@ -414,31 +428,31 @@
 \citation{SchiavoneSep17}
 \citation{PulliniJan17}
 \citation{ZacharopoulosMay15}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{76}{subsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Related Work}{78}{subsection.3.2.2}}
 \citation{ReagenJun16}
 \citation{ShaoJul14}
 \citation{LeeApr13}
 \citation{XiaoMay18}
 \citation{OpensslDec98}
 \citation{GruttnerNov13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Methodology}{78}{subsection.3.2.3}}
-\newlabel{sec:meth_es}{{3.2.3}{78}{Methodology}{subsection.3.2.3}{}}
-\newlabel{eq:energy_simple}{{3.2.3}{78}{Methodology}{subsection.3.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Methodology}{80}{subsection.3.2.3}}
+\newlabel{sec:meth_es}{{3.2.3}{80}{Methodology}{subsection.3.2.3}{}}
+\newlabel{eq:energy_simple}{{3.2.3}{80}{Methodology}{subsection.3.2.3}{}}
 \citation{XpeSep19}
 \citation{LiuFeb16}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{79}{subsection.3.2.4}}
-\newlabel{sec:results_set}{{3.2.4}{79}{Experimental Setup}{subsection.3.2.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{79}{subsection.3.2.5}}
-\newlabel{sec:results_es}{{3.2.5}{79}{Experimental Results}{subsection.3.2.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{80}{section.3.3}}
-\newlabel{sec:conclusions_as}{{3.3}{80}{Conclusions}{section.3.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {EnergySeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }}{82}{figure.caption.63}}
-\newlabel{fig:energy}{{3.11}{82}{Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \eseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }{figure.caption.63}{}}
-\@writefile{toc}{\contentsline {chapter}{Conclusions}{83}{chapter*.64}}
-\@writefile{toc}{\contentsline {subsubsection}{Contributions}{83}{section*.65}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{81}{subsection.3.2.4}}
+\newlabel{sec:results_set}{{3.2.4}{81}{Experimental Setup}{subsection.3.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{81}{subsection.3.2.5}}
+\newlabel{sec:results_es}{{3.2.5}{81}{Experimental Results}{subsection.3.2.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusions}{82}{section.3.3}}
+\newlabel{sec:conclusions_as}{{3.3}{82}{Conclusions}{section.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with {EnergySeeker}\ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }}{84}{figure.caption.68}}
+\newlabel{fig:energy}{{3.11}{84}{Energy efficiency obtained over the whole runtime of H.264 decoder by implementing, as hardware accelerators, the candidate sets obtained with \eseeker \ and the ones retrieved by gprof1, gprof2 and gprof3 profiling data strategies, varying the area constraint. Number of software CPU active cores: One Core, Two Cores and Four Cores.\relax }{figure.caption.68}{}}
+\@writefile{toc}{\contentsline {chapter}{Conclusions}{85}{chapter*.69}}
+\@writefile{toc}{\contentsline {subsubsection}{Contributions}{85}{section*.70}}
 \citation{ShaoJul14}
-\@writefile{toc}{\contentsline {subsubsection}{Limitations}{84}{section*.66}}
-\@writefile{toc}{\contentsline {subsubsection}{Future Work}{85}{section*.67}}
+\@writefile{toc}{\contentsline {subsubsection}{Limitations}{86}{section*.71}}
+\@writefile{toc}{\contentsline {subsubsection}{Future Work}{87}{section*.72}}
 \bibstyle{abbrv}
 \bibdata{biblio}
 \bibcite{AgakovMar06}{{1}{}{{}}{{}}}
@@ -448,7 +462,7 @@
 \bibcite{ArriaNov16}{{5}{}{{}}{{}}}
 \bibcite{AtasuApr07}{{6}{}{{}}{{}}}
 \bibcite{BaleaniMay02}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{87}{section*.69}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{89}{section*.74}}
 \bibcite{BinkertFeb11}{{8}{}{{}}{{}}}
 \bibcite{BiswasMar06}{{9}{}{{}}{{}}}
 \bibcite{BronKerbosch73}{{10}{}{{}}{{}}}
@@ -519,21 +533,22 @@
 \bibcite{TensilicaWeb}{{75}{}{{}}{{}}}
 \bibcite{GrosserApr12}{{76}{}{{}}{{}}}
 \bibcite{Vivado12}{{77}{}{{}}{{}}}
-\bibcite{VermaOct07}{{78}{}{{}}{{}}}
-\bibcite{VillarrealMay10}{{79}{}{{}}{{}}}
-\bibcite{XiaoMay18}{{80}{}{{}}{{}}}
-\bibcite{VivadoHLSMar17}{{81}{}{{}}{{}}}
-\bibcite{ZynqMar17}{{82}{}{{}}{{}}}
-\bibcite{XpeSep19}{{83}{}{{}}{{}}}
-\bibcite{XilinxESTRef18}{{84}{}{{}}{{}}}
-\bibcite{XydisMar13}{{85}{}{{}}{{}}}
-\bibcite{LeeserApr06}{{86}{}{{}}{{}}}
-\bibcite{YuSep04}{{87}{}{{}}{{}}}
-\bibcite{ZacharopoulosMay15}{{88}{}{{}}{{}}}
-\bibcite{ZacharopoulosJan17}{{89}{}{{}}{{}}}
-\bibcite{ZacharopoulosJul18}{{90}{}{{}}{{}}}
-\bibcite{ZacharopoulosApr19}{{91}{}{{}}{{}}}
-\bibcite{ZacharopoulosMar17}{{92}{}{{}}{{}}}
-\bibcite{ZuluagaJul09}{{93}{}{{}}{{}}}
-\bibcite{ZuluagaJun12}{{94}{}{{}}{{}}}
+\bibcite{verdoolaege2010isl}{{78}{}{{}}{{}}}
+\bibcite{VermaOct07}{{79}{}{{}}{{}}}
+\bibcite{VillarrealMay10}{{80}{}{{}}{{}}}
+\bibcite{XiaoMay18}{{81}{}{{}}{{}}}
+\bibcite{VivadoHLSMar17}{{82}{}{{}}{{}}}
+\bibcite{ZynqMar17}{{83}{}{{}}{{}}}
+\bibcite{XpeSep19}{{84}{}{{}}{{}}}
+\bibcite{XilinxESTRef18}{{85}{}{{}}{{}}}
+\bibcite{XydisMar13}{{86}{}{{}}{{}}}
+\bibcite{LeeserApr06}{{87}{}{{}}{{}}}
+\bibcite{YuSep04}{{88}{}{{}}{{}}}
+\bibcite{ZacharopoulosMay15}{{89}{}{{}}{{}}}
+\bibcite{ZacharopoulosJan17}{{90}{}{{}}{{}}}
+\bibcite{ZacharopoulosJul18}{{91}{}{{}}{{}}}
+\bibcite{ZacharopoulosApr19}{{92}{}{{}}{{}}}
+\bibcite{ZacharopoulosMar17}{{93}{}{{}}{{}}}
+\bibcite{ZuluagaJul09}{{94}{}{{}}{{}}}
+\bibcite{ZuluagaJun12}{{95}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
