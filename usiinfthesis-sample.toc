@@ -63,12 +63,12 @@
 \contentsline {subsubsection}{Ranking of Acceleration Candidates}{72}{section*.60}
 \contentsline {subsubsection}{Performance of resource constrained accelerator selections}{73}{section*.62}
 \contentsline {subsubsection}{Designer Effort Analysis}{76}{section*.66}
-\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{77}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Motivation}{77}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Related Work}{78}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.2}EnergySeeker: Accelerators for Energy Efficiency}{78}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Motivation}{78}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Related Work}{79}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Methodology}{80}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{81}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{81}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.5}Experimental Results}{82}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}Conclusions}{82}{section.3.3}
 \contentsline {chapter}{Conclusions}{85}{chapter*.69}
 \contentsline {subsubsection}{Contributions}{85}{section*.70}

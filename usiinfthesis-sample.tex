@@ -145,7 +145,7 @@ while addressing these research questions,
 % of \emph{what} should be accelerated, \emph{how} an 
 % accelerator should be implemented and consider \emph{where} is it going to be hosted. 
 so that
-better decisions are made, which lead to faster execution and improved energy efficiency.
+better decisions are made and, in turn, faster execution and improved energy efficiency is achieved.
 The expansion and integration of these frameworks in the future can move automation and optimization 
 of hybrid HW/SW systems designs one step forward.
 \end{abstract}
@@ -2037,7 +2037,7 @@ transfer between main memory and the HW accelerators.
 \begin{figure}[t]
 \vskip -.5em
  \centering
-\includegraphics[width=0.6\textwidth]{figs/identification.png}
+\includegraphics[width=0.6\textwidth]{figs/scop}
 \vskip -.5em
 \caption{An identification algorithm traditionally focus
   on dataflow computation only (subgraph A). In this section, instead,
@@ -3052,33 +3052,28 @@ published in the 2018 International Conference on High Performance Computing \& 
 In this chapter of the dissertation the notion of automatic selection of HW accelerators is extended
 by increasing the scope of the candidates for acceleration, in order to target demanding platforms 
 with a complex memory hierarchy, such as a Xilinx Zynq Ultrascale+ PSoC board.
-The acceleration of large and complex
-applications, such as the H.264 decoder \cite{LiuFeb16}, necessitates the need to take into account the 
-underlying system where the specialized accelerators are hosted. 
-%and the latency due to communication between the main memory and the accelerators. 
-The granularity of the candidates for acceleration is 
-expanded to that of a subgraph of the entire call graph of an application and subsequently the need to 
-accommodate for the communication overhead between main memory and the HW accelerators emerges.
-% to that of a subgraph of the entire function call graph of an application.
-%  Moreover, the underlying system is taken into account where the specialized 
-% accelerators are hosted. 
-The knowledge
-of the characteristics of the system that is targeted can be critical for the choice of the HW accelerators
+The knowledge of the characteristics of the system that is targeted can be critical for the choice of the HW accelerators
 to be implemented. The memory system of a platform for instance can vastly affect the latency due to data
 exchange between the main memory of the system and the HW accelerators.\par
+
+The acceleration of large and complex applications, such as the H.264 decoder \cite{LiuFeb16}, in a demanding platform necessitates the need to take into account the communication overhead, as in many instances exceeds the computation
+time of a HW accelerator. To tackle this issue,
+the granularity of the candidates for acceleration is 
+expanded to that of a subgraph of the entire call graph of an application and subsequently we
+accommodate for the communication overhead between main memory and the HW accelerators.\par
 
 \aseeker, an LLVM-based tool-chain, is presented as a framework that performs automatic identification 
 and selection of HW accelerators targeted to a specific \SoC\ (SoC).
 \aseeker\ performs thorough analysis of applications source code and estimates memory latency along with 
 computational latency of candidates for acceleration. \aseeker\ selects accelerators that can minimize the
-overall latency of an application and can offer increased speedup compared to %\SoTA\ 
-profiling-only based approaches that mimic the manual decisions of a designer.\par
+overall latency of an application and can offer increased speedup compared to approaches based 
+on profiling-only information that mimic the manual decisions of a designer.\par
 % The granularity of the candidates for acceleration 
 % is expanded to that of a subgraph of the entire call graph of an application to accommodate for the 
 % communication overhead between main memory and the HW accelerators.
 In addition to accelerators targeting speedup, an extension of this methodology can focus on 
 energy-saving 
-heterogeneous designs. \eseeker\ extends the latency estimation of the previous framework and accounts for 
+heterogeneous designs. \eseeker\ extends the latency estimation of the previous framework and considers 
 power estimation of hardware and software in order to target energy efficient HW accelerators. \eseeker\ 
 performs identification and selection of accelerators that can offer substantial energy benefits to a 
 heterogeneous computing system compared to a powerful, yet power-hungry, software processor and against  methodologies based solely on profiling information.
@@ -3096,20 +3091,27 @@ heterogeneous computing system compared to a powerful, yet power-hungry, softwar
 
 \subsection{Motivation}
 
-NOTE: Rewrite the following paragraph
+% NOTE: Rewrite the following paragraph
 System-level design, and heterogeneous computing as a whole, is witnessing a breakthrough. 
-Emerging best practices based on High Level Synthesis (HLS) allow unprecedented productivity levels. 
-HLS dramatically shortens development cycles by employing C/C++ descriptions as entry points 
-for the development of both \SW\ (SW) and \HW\ (HW), greatly facilitating the task of migrating 
-functionalities between the two.\par
-END NOTE
+Emerging best practices based on High Level Synthesis allow unprecedented productivity levels. 
+\hl{
+HLS tools, as mentioned in previous chapters, reduce the time needed to synthesize HW accelerators
+by accepting the respective part of the application source code to be accelerated as input.
+}
+\par
+% C/C++ descriptions as entry points for the development of both \SW\ (SW) and \HW\ (HW), greatly 
+% facilitating the task of migrating functionalities between the two.\par
 
 However, the design of heterogeneous systems comprising SW processors and HW accelerators is 
 still a demanding endeavor, during which key decisions are left solely to manual effort and 
-designer expertise \cite{CacciottiSep18} \cite{NouriJun17}. Furthermore, the long time required 
-for HW synthesis, coupled with the huge space of alternative implementations exposed by real-world 
-applications, limits in practice the number of accelerator choices that can be considered manually 
-by a designer before HW/SW partitioning is settled.\par
+designer expertise \cite{CacciottiSep18} \cite{NouriJun17}. 
+\hl{
+Furthermore, as already discussed, 
+HW synthesis requires significant amounts of time and, coupled with the huge space of alternative 
+implementations exposed by real-world applications, limits in practice the number of accelerator 
+choices that can be considered manually by a designer before HW/SW partitioning is settled.
+}
+\par
 
 Addressing these issues, performance estimators have been proposed
 that, while not providing working hardware implementations, can gauge
@@ -3148,7 +3150,7 @@ measure of costs and run-times of HW implementations. Furthermore, they do not a
 potentially leading to the selection of frequently called, but small, candidates. Finally, the transfer of data is an 
 important factor that \SoTA\ profilers do not take into account -- hence potentially suggesting candidates 
 requiring an excessive amount of communication, that in turn can significantly weaken any potential performance 
-gained. \aseeker, instead, takes into account both the communication overhead and a number of the characteristics of the 
+gained. \aseeker, instead, takes into account both the communication overhead and the characteristics of the 
 platform that are required in order to generate an estimation model which leads
 to high-performance HW accelerators choices.
 
@@ -3255,8 +3257,8 @@ the candidates performance (Merit) and resource requirements (Cost) (B in the fi
 \label{subsec:identification}
 
 In order to discover which parts of an application can be most
-profitably accelerated in hardware, the investigation of its function-call
-graph takes place, i.e., a Directed Acyclic Graph $G(N,E)$, where every node $n
+profitably accelerated in hardware, we investigate its function-call
+graph, i.e., a Directed Acyclic Graph $G(N,E)$, where every node $n
 \in N$ corresponds to a function and every edge $e=(u,v) \in E$
 corresponds to a call from function $u$ to function $v$. A \emph{root}
 is a node that reaches all other nodes of the graph, i.e., for every
@@ -3434,8 +3436,8 @@ non-polynomial complexity. The exact implementation is still able to
 find the optimal solution for the experiments in Subsection \ref{sec:results_as} in a
 matter of milliseconds, even for the considerable dimension of the
 function-call graph of the application considered (a function-call
-graph of \numberOfcandidates\ nodes, as detailed in the experiments 
-section).\par
+graph of \numberOfcandidates\ nodes, as detailed in the Experimental 
+Results Subsection \ref{sec:results_as}).\par
 
 An example of selection can be seen in
 Figure~\ref{fig:max-set-examples}. First the example call graph is
@@ -3628,7 +3630,7 @@ of a candidate is retrieved by summing up all HW latencies of all Basic
 Blocks included in the candidate. 
 Both the SW and the HW estimation take place in a bottom-up fashion,
 by first performing the estimations of the leave candidates and moving
-onwards to the ones containing calls to others.\par
+upwards to the ones containing calls to others.\par
 
 \emph{HW Latency Communication Estimation}. In order to take into
 account the memory latency overhead due to data exchange between the
@@ -3788,9 +3790,9 @@ in software, and are ranked poorly both by \aseeker{} and by
 validation.
 Results refer to the QCIF test video. Very similar outcomes were retrieved 
 using the CIF and VGA inputs, as seen in Table \ref{tab:candidates_input}. 
-9 out of 10 of the highest-merit candidates are the same, with almost identical ranking,
-as on average the ranking varies by 0.7 spots in the ranking sequence, comparing QCIF 
-to CIF, and 0.3 spots, comparing QCIF to VGA ranking.
+Nine out of ten of the highest-merit candidates are the same, with almost identical ranking,
+as on average the ranking varies by 0.7 in the ranking sequence, comparing QCIF 
+to CIF, and 0.3, comparing QCIF to VGA ranking.
 % 9 out of 10 of the highest-merit candidates are the same, with almost identical ranking,
 % as on average the ranking varies by 0.7, comparing QCIF to CIF, and 0.3, comparing QCIF 
 % to VGA ranking.
@@ -3819,7 +3821,7 @@ to CIF, and 0.3 spots, comparing QCIF to VGA ranking.
   }  
   \vspace{0em}
   \caption{Ranking of \candidates, based on merit estimation
-    by \aseeker\ for varied size inputs (QCIF, column 2, CIF, column 3 and VGA, column 4). }
+    by \aseeker\ for different input sizes (QCIF, column 2, CIF, column 3 and VGA, column 4). }
   \label{tab:candidates_input}
   \end{table}
 
@@ -4020,6 +4022,8 @@ Indeed, the collection of all \aseeker\ phases took a time in the
 order of milliseconds for the experiments in
 Figures~\ref{fig:speedups} and~\ref{fig:effort}.
 
+
+\newpage
 % EnergySeeker 3.2
 % 
 %
@@ -4034,22 +4038,19 @@ Figures~\ref{fig:speedups} and~\ref{fig:effort}.
 
 Since battery-powered \SoC\ devices become more prominent and are in high demand, the need
 %Heterogeneous Computing calls 
-for specialized \HW\ (HW) that can serve the purpose of 
+for specialized \HW\ that can serve the purpose of 
 saving significant amounts of energy, in addition to accelerating applications as seen 
 in the previous section, becomes higher. 
-Vivado High Level Synthesis (HLS) 
-\cite{VivadoHLSMar17} is one of the state-of-the-art, HLS tools that are used to 
-build accelerators and synthesize parts of software applications to HW. 
-HLS and HW Description Language (HDL) tools, as seen in the previous chapters, require 
+% Vivado HLS 
+% \cite{VivadoHLSMar17} is one of the state-of-the-art, HLS tools that are used to 
+% build accelerators and synthesize parts of software applications to HW. 
+HLS and HW Description Language (HDL) tools, as mentioned in the previous chapters, require 
 manual decisions to be made from the programmer's part. 
-% Such HLS 
-% and HW Description Language (HDL) tools, however efficient, are far from optimal 
-% since they require a lot of manual decisions from the programmer's part. 
 When 
 facing a tight area budget, the decision of which parts of the computation are more
 demanding in terms of energy consumption, in order to 
  materialize them in low power HW accelerators, is not 
-trivial. It requires a deep understanding of the \SW\ (SW) application 
+trivial. It requires a deep understanding of the \SW\ application 
 and its characteristics, as aspects of computation intensity and memory 
 management are complex and hard to identify.\par
 
@@ -4302,10 +4303,12 @@ gprof3 profiling data strategies, varying the area constraint. Number of softwar
 \section{Conclusions}
 \label{sec:conclusions_as}
 
-\aseeker\ was presented, a framework for assisting system architects during the early design phase of hardware-accelerated systems. By automatically assessing the potential speedup of different hardware acceleration choices, in their default implementation, as well as the hardware resources they demand, \aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more detailed analysis and optimization. \aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring lengthy and detailed evaluations of each acceleration candidate individually. It then automatically selects the set of candidates that maximize estimated speedup under a given resource constraint. Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly outperforms choices that are solely based on profiling information.
+\aseeker\ and \eseeker\ frameworks were presented for assisting system architects during the early design phase of hardware-accelerated systems. They target better speedup and improved energy efficiency, respectively, in HW/SW designs.\par
+% \aseeker\ was presented, a framework for assisting system architects during the early design phase of hardware-accelerated systems. 
+By automatically assessing the potential speedup of different hardware acceleration choices, in their default implementation, as well as the hardware resources they demand, \aseeker\ allows architects to pinpoint the code sections that are worthy targets for further, more detailed analysis and optimization. \aseeker\ performs the identification of candidate accelerators, as well as their area and speedup estimations, through compiler analysis passes implemented within the LLVM compiler, without requiring lengthy and detailed evaluations of each acceleration candidate individually. It then automatically selects the set of candidates that maximize estimated speedup under a given resource constraint. Experimental evidence highlights that the hardware/software partitioning selected by \aseeker\ vastly outperforms choices that are solely based on profiling information. This research work was presented in the 2019 International Conference on Computer Design (ICCD).\par
 %
 %
-\eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to profiling-only based methodologies.
+\eseeker\ offers an extension of the previous tool-chain that focuses on more energy efficient selections by performing a power estimation of the accelerators, along with their latency estimation offered by the \aseeker\ framework. Experimentation revealed significant energy savings of up to 55\% less energy required compared to a software-only approach and a consistently better performance compared to methodologies based on profiling-only information.
 
 
 
@@ -4374,23 +4377,36 @@ As an extension of the previous tool-chain, \eseeker\ (Section \ref{sec:energy})
 
 The methodologies summarized above address the research questions posed in the Introduction of this
 document but leave room for extending and improving my research work. 
-For instance the analysis performed by both \rseeker\ (\ref{sec:rs}) and \aseeker\ (\ref{sec:accel}) is 
-considering default HW implementations without optimizations. This analysis can be 
-extended to estimate automatically the performance and HW resources of multiple versions of candidates for acceleration that acquire a number of optimizations such as Loop Unrolling, Loop Pipelining and
-array partitioning as described in Section \ref{sec:multi}. This would require a more complex and
-rigorous analysis and offer an intermediate tool between my current developed frameworks and simulation
-tools such as Aladdin \cite{ShaoJul14}.\par
+The analysis performed in Chapter 1 and Chapter 3 could become more application specific and target 
+types of applications with common characteristics.
+Furthermore, the analysis for estimating the performance of candidates for acceleration can be extended
+so that it estimates the latency and the HW resources required for optimized HW accelerators prior to 
+selection, thus fully automating the \multi\ approach in Section \ref{sec:multi}.
+% For instance the analysis performed by both \rseeker\ (\ref{sec:rs}) and \aseeker\ (\ref{sec:accel}) is 
+% considering default HW implementations without optimizations. This analysis can be 
+% extended to estimate automatically the performance and HW resources of multiple versions of candidates for acceleration that acquire a number of optimizations such as Loop Unrolling, Loop Pipelining and
+% array partitioning as described in the \rseeker\ \multi\ approach in Section \ref{sec:multi}. This 
+% would require a more complex and rigorous analysis and offer an intermediate tool between my current 
+% developed frameworks and simulation tools such as Aladdin \cite{ShaoJul14}.\par
 
-The automatic optimizations methodologies in Section \ref{sec:dr} and Section \ref{sec:ml} can be used
-as standalone tools to aid the employment of optimizations to HW accelerators, but each targets a specific
-optimization feature, i.e., Loop Unrolling factor prediction and memory buffers design respectively. An 
-integration of these methodologies with \rseeker\ and \aseeker\ would lead to a more complete and unified 
-solution regarding HW/SW co-design. Furthermore, more optimizations than the ones already considered
+The automatic optimizations methodologies in Section \ref{sec:dr} and Section \ref{sec:ml} can be 
+integrated with \rseeker\ and \aseeker\ in order to provide a more common. Furthermore, more optimizations than the ones already considered
 can be included in the potential optimizations applied onto HW implementations, such as more complex
 memory buffers (e.g. ping-pong buffer) and combinations of optimizations in special cases (e.g. loop 
 unrolling and cyclic array partitioning).
 These limitations leads me to the consideration of the subsequent steps in my research which are presented as
 future work in the following section.
+
+% The automatic optimizations methodologies in Section \ref{sec:dr} and Section \ref{sec:ml} can be used
+% as standalone tools to aid the employment of optimizations to HW accelerators, but each targets a specific
+% optimization feature, i.e., Loop Unrolling factor prediction and memory buffers design respectively. An 
+% integration of these methodologies with \rseeker\ and \aseeker\ would lead to a more complete and unified 
+% solution regarding HW/SW co-design. Furthermore, more optimizations than the ones already considered
+% can be included in the potential optimizations applied onto HW implementations, such as more complex
+% memory buffers (e.g. ping-pong buffer) and combinations of optimizations in special cases (e.g. loop 
+% unrolling and cyclic array partitioning).
+% These limitations leads me to the consideration of the subsequent steps in my research which are presented as
+% future work in the following section.
 
 
 
@@ -4406,7 +4422,7 @@ This collective research work attempts to both automate the HW/SW co-design proc
 faster approach, and achieve better performance in terms of speedup of execution and energy efficiency in 
 heterogeneous computing systems.\par
 
-As future work, \aseeker\ framework can be extended to domain specific applications 
+\emph{Domain Specific Compiler Analysis.}  \aseeker\ framework can be extended to domain specific applications 
 in order to obtain even more efficient choices, tailored to a specific type of applications and identify patterns 
 that are recurring in these applications.
 For instance in Machine Learning applications there are many matrix-to-matrix or matrix-to-vectors multiplications.
@@ -4416,7 +4432,22 @@ use as the ground of their experimentation routines. These experiments include q
 simulations that engage in repetitive tasks that could be accelerated with the aid of suitable HW 
 accelerators.\par
 
-Furthermore I consider the integration of \aseeker\ with the two pieces of research work I have performed on identifying automatically potential optimizations on HW accelerators (Section \ref{sec:dr} 
+\emph{Estimation of Optimized HW Accelerators Performance.} 
+ The analysis performed by both \rseeker\ (\ref{sec:rs}) and \aseeker\ (\ref{sec:accel}) is 
+considering default HW implementations without optimizations. This analysis can be 
+extended to estimate automatically the performance and HW resources of multiple versions of candidates for acceleration that acquire a number of optimizations such as Loop Unrolling, Loop Pipelining and
+array partitioning as described in the \rseeker\ \multi\ approach in Section \ref{sec:multi}. This 
+would require a more complex and rigorous analysis and offer an intermediate tool between my current 
+developed frameworks and simulation tools such as Aladdin \cite{ShaoJul14}.
+
+\emph{Integration of \aseeker\ to automatic optimizations methods.}
+The automatic optimizations methodologies in Section \ref{sec:dr} and Section \ref{sec:ml} can be used
+as standalone tools to aid the employment of optimizations to HW accelerators, but each targets a specific
+optimization feature, i.e., Loop Unrolling factor prediction and memory buffers design respectively. An 
+integration of these methodologies with \rseeker\ and \aseeker\ would lead to a more complete and unified 
+solution regarding HW/SW co-design.
+
+Another interesting direction would be the integration of \aseeker\ with the two pieces of research work I have performed on identifying automatically potential optimizations on HW accelerators (Section \ref{sec:dr} 
 and Section \ref{sec:ml}).
 This would constitute, among others, potential data 
 reuse analysis during the execution of the HW accelerators and analysis of the loops 
@@ -4426,10 +4457,17 @@ suggestions from the tool in order to apply optimizations related to minimizing 
 computation time. A more thorough analysis can lead to an early estimation of the performance and the 
 required HW resources of optimized accelerators that can subsequently be selected for HW implementation.\par
 
-Independently from the integration phase, I would attempt to expand the 
-capabilities of both of these automatic optimization generation methods by extending the current LLVM based 
+\emph{Combination of Optimizations.}
+ I would attempt 
+to expand the capabilities of both of these automatic optimization generation methods by extending the current LLVM based 
 analysis methodology for data reuse and loop information. This would lead to more complex combinations of the optimizations applied simultaneously by estimating and predicting their suitability with the aid of both an 
 LLVM based analysis model and a trained Machine Learning classification algorithm.\par
+
+
+
+
+
+
 
 All these are interesting and motivating future research directions that I plan to explore in the next phase 
 of my academic career. Research is, after all, a never-ending journey.
