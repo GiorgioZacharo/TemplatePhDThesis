@@ -64,6 +64,14 @@ P.~Biswas, N.~Dutt, P.~Ienne, and L.~Pozzi.
 \newblock In {\em Proceedings of the Design, Automation and Test in Europe
   Conference and Exhibition}, pages 212--217, Mar. 2006.
 
+\bibitem{BonziniJul07b}
+P.~Bonzini and L.~Pozzi.
+\newblock A retargetable framework for automated discovery of custom
+  instructions.
+\newblock In {\em Proceedings of the 18th International Conference on
+  Application-specific Systems, Architectures and Processors}, pages 334--41,
+  Montr\'{e}al, Canada, July 2007.
+
 \bibitem{BronKerbosch73}
 C.~Bron and J.~Kerbosch.
 \newblock Algorithm 457: finding all cliques of an undirected graph.
@@ -163,6 +171,12 @@ L.~Ferretti, G.~Ansaloni, and L.~Pozzi.
   exploration.
 \newblock {\em IEEE Transactions on Emerging Topics in Computing}, (99):1--9,
   Jan 2018.
+
+\bibitem{FerrettiOct18}
+L.~Ferretti, G.~Ansaloni, and L.~Pozzi.
+\newblock Lattice-traversing design space exploration for high level synthesis.
+\newblock In {\em Proceedings of the International Conference on Computer
+  Design}, pages 210--217. IEEE, Oct. 2018.
 
 \bibitem{GaluzziOct06}
 C.~Galuzzi, E.~M. Panainte, Y.~Yankova, K.~Bertels, and S.~Vassiliadis.
@@ -362,10 +376,24 @@ F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
 \newblock Scikit-learn: Machine learning in python.
 \newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
 
+\bibitem{PiccolboniSep17}
+L.~Piccolboni, P.~Mantovani, G.~D. Guglielmo, and L.~Carloni.
+\newblock {COSMOS:} coordination of high-level synthesis and memory
+  optimization for hardware accelerators.
+\newblock {\em {ACM} Transactions on Embedded Computing Systems ({TECS})},
+  16(5s):150:1--150:22, Sept. 2017.
+
 \bibitem{PilatoMar12}
 C.~Pilato and F.~Ferrandi.
 \newblock Bambu: A free framework for the high level synthesis of complex
   applications, Mar. 2012.
+
+\bibitem{pilato2016system}
+C.~Pilato, P.~Mantovani, G.~Di~Guglielmo, and L.~P. Carloni.
+\newblock System-level optimization of accelerator local memory for
+  heterogeneous systems-on-chip.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 36(3):435--448, 2016.
 
 \bibitem{PothineniJan07}
 N.~Pothineni, A.~Kumar, and K.~Paul.
@@ -421,12 +449,6 @@ J.~Reddington, G.~Gutin, A.~Johnstone, E.~Scott, and A.~Yeo.
   candidates.
 \newblock In {\em Proceedings of the 12th {IEEE} International Conference on
   Computational Science and Engineering}, pages 17--24, 2009.
-
-\bibitem{SchaferJun12}
-B.~C. Schafer and K.~Wakabayashi.
-\newblock Divide and conquer high-level synthesis design space exploration.
-\newblock {\em {ACM} Transactions on Design Automation of Electronic Systems
-  ({TODAES})}, 17(3):29:1--29:19, June 2012.
 
 \bibitem{schaller1997moore}
 R.~R. Schaller.
@@ -593,6 +615,14 @@ G.~Zacharopoulos, A.~Barbon, G.~Ansaloni, and L.~Pozzi.
   high level synthesis.
 \newblock {\em 2018 IEEE International Conference on High Performance Computing
   \& Simulation (HPCS)}, pages 91--97, 2018.
+
+\bibitem{ZacharopoulosNov19}
+G.~Zacharopoulos, L.~Ferretti, G.~Ansaloni, G.~Di~Guglielmo, L.~Carloni, and
+  L.~Pozzi.
+\newblock Compiler-assisted selection of hardware acceleration candidates from
+  application source code.
+\newblock {\em Proceedings of the International Conference on Computer Design},
+  pages 1--9, 2019.
 
 \bibitem{ZacharopoulosApr19}
 G.~Zacharopoulos, L.~Ferretti, E.~Giaquinta, G.~Ansaloni, and L.~Pozzi.
