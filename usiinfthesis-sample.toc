@@ -1,4 +1,4 @@
-\contentsline {chapter}{Contents}{xi}{section*.3}
+\contentsline {chapter}{Contents}{xiii}{section*.3}
 \contentsline {chapter}{Introduction}{1}{chapter*.5}
 \contentsline {chapter}{\numberline {1}Automatic Identification and Selection of Accelerators}{7}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivation}{7}{section.1.1}
