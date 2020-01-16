@@ -13,6 +13,7 @@
 \usepackage{listings}
 \usepackage{multirow}
 \usepackage{amsmath}
+\usepackage{hyperref}
 
 \usepackage[keeplastbox]{flushend}
 \usepackage{soul}
@@ -87,7 +88,7 @@ morecomment=[l]{//s},
 
 % \title{Software Analysis for\\ Heterogeneous Computing Architectures} %compulsory
 \title{Compiler Analysis for Hardware/Software Co-design and Optimization}
-\subtitle{An automation framework towards more efficient Heterogeneous Computing} %optional 
+\subtitle{An automation framework\\ towards more efficient Heterogeneous Computing} %optional 
 \author{Georgios Zacharopoulos} %compulsory
 \advisor{Prof. Laura Pozzi} %compulsory
   % \advisor{Prof. Laura Pozzi, Universit\`a della Svizzera italiana, Switzerland}
@@ -127,13 +128,14 @@ is what people are pleased to call the fruit of genius. It is the fruit of labor
 
 \begin{abstract}
 % \textbf{NOTE: The abstract will be written in the end of the thesis.}\\
-Time and energy are finite resources, in contrast to the need for faster and more energy efficient computing 
-systems in our every day life.
+% Time and energy are finite resources, in contrast to the need for faster and more energy efficient computing 
+% systems in our every day life.
+Performance increase, in terms of faster execution and energy efficiency, is a never-ending research domain and does not come for free. 
 The breakdown of Dennard scaling, along with the seemingly inevitable end of 
 Moore's law economic aspect, present a new challenge to computer architects striving to achieve
-better performance in modern computer systems. Heterogeneous computing is hence 
-emerging as one of the solutions to overcome these limitations, in order to keep the performance 
-trend rising. 
+better performance in modern computer systems. Heterogeneous computing 
+emerges as one of the solutions to overcome these limitations%, in order to 
+and keep the performance trend rising. 
 %This is achieved by turning the focus to 
 Heterogeneous platforms employ 
 specialized \HW\ (HW) that 
@@ -174,9 +176,9 @@ phases, driving the designs of effective heterogeneous platforms one step forwar
 \begin{acknowledgements}
 % This is where I acknowledge people.
 % To be written.
-I had my first computer when I was about 14 years old. It was bought second hand by the office of a bank 
+I had my first computer when I was about 12 years old. It was bought second hand by the office of a bank 
 in Athens that was updating its systems with new ones. I remember a big desktop PC with a large CRT 
-screen and running Windows 98 as an operational system. It was not yet connected to the Internet (the type of beautiful dial-up connections
+screen and running Windows 98 as an operating system. It was not yet connected to the Internet (the type of beautiful dial-up connections
 with the distinct sounds that we all have in our heads and that would forbid any incoming phone calls), so I was spending some time exploring the interface, configuring the wallpaper and of course playing some of the default games. One of these was mine sweeper. I had become pretty good at it and I could beat the game within some tens of seconds. Around forty seconds, then thirty -- I was setting a new record every day. \par
 
 One day I broke the twenty seconds barrier and I told my father. He responded that he had just done it in 9.8 seconds. 
@@ -195,26 +197,25 @@ So I followed his advice and decided to forget about the record and just play th
 was really into it and having fun it suddenly stopped. The clock was showing 8.9 seconds. I had broken the unbreakable.\par
 
 I wish I could say that this was a life lesson that took immediate action, but it wasn't. In many instances throughout 
-my life I was focused too much on the final end or goal that made me lose focus on what I was actually doing. So at some
-point during my adulthood I remembered what had happened with minesweeper and decided to pursue only what would make me 
-feel motivated and fully into it, so that the final goal would arrive naturally. As a general rule, if what I was doing was 
+my life I was focused too much on the final end or goal that made me lose concentration on what I was actually doing. So 
+at some point during my adulthood I remembered what had happened with minesweeper and decided to pursue only what would make me feel motivated and fully into it, so that the final goal would arrive naturally. As a general rule, if what I was doing was 
 not enjoying, captivating, inspiring and meaningful then it was not worth doing it. This is of course easier said than done, 
 but as I have found out it is also easier done than initially thought or feared. By no means pursuing what is 
 meaningful means that it is only going to be all joy and no hardships. Quite the contrary. It means that besides all
 the difficulties I am convinced that if a given task is meaningful, then it is worth doing and despite any obstacles
 I can feel accomplished even if the result is not what I had expected to begin with. And this last sentence sums up 
-an informal definition of research according to my understanding.\par
+an informal definition of what ``doing research'' is all about according to my understanding.\par
 
 % I have always been a curious person. Solving problems and understanding how things around me
 % work has been of great interest to me. In addition to that imagination and creativity urged
 % me to have the feeling that I want to be actively involved in the process of discovering or inventing
 % things
-The whole period of my PhD was like embarking on an adventure that I had to figure out where it leads. A 
+The whole period of my PhD was like embarking on an adventure that simultaneously I had to figure out where it leads. A 
 pursuit of research and innovation. And it has been one of the most fulfilling and exceptional periods of
-my life. I managed to grew in many aspects of my personality and personal knowledge while having by my side
+my life. I managed to grew in many aspects of my personality and personal knowledge, while having by my side
 remarkable people. The person that invited me, guided me and gave me the opportunity to embark on this 
 research journey is Prof. Laura Pozzi, who I cannot thank enough. Her support, advice, careful assessment of our
-work and belief in me have been nothing less than invaluable. I wish that I can adapt some of her key 
+work and belief in me have been nothing short of invaluable. I wish that I can adapt some of her key 
 attributes and values, so that I can also be as helpful to any people that I supervise in the future as she
 has been to me.\par
 
@@ -222,7 +223,7 @@ I want to also thank all the intelligent, talented and skillful researchers that
 team work, patience and discussion of my suggestions and ideas. The members of my research group in Universit\`a 
 della Svizzera italiana, Dr. Giovanni Ansaloni, whose feedback and co-operation have been tremendously helpful during 
 the whole period of my PhD, and Lorenzo Ferretti. Also, I have to thank the researchers from Columbia University, Prof. Luca Carloni who offered 
-me the chance to work in his lab during my six-month visit and Dr. Giuseppe Di Guglielmo. Prof. Carloni has guided me with his experience during our meetings and has provided me with important insights and valuable feedback, both throughout our collaboration and and as a member of my PhD committee. Dr. Giuseppe Di Guglielmo has provided me with indispensable support and advice while I was acquiring new skills during my visit. Furthermore, Emanuele Giaquinta has collaborated with us in my first journal paper and I thank him for his contribution. I feel indebted to all these people I have worked with.\par
+me the chance to work in his lab during my six-month visit and Dr. Giuseppe Di Guglielmo. Prof. Carloni has guided me with his experience during our meetings and has provided me with important insights and valuable feedback, both throughout our collaboration and and as a member of my PhD committee. Dr. Giuseppe Di Guglielmo has provided me with indispensable support and advice while I was acquiring new skills during my visit. Furthermore, Emanuele Giaquinta has collaborated with us in my first journal publication, i.e., IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems and I thank him for his contribution. I feel indebted to all these people I have worked with.\par
 
 Special thanks and loads of gratitude to my collaborator, flat mate for almost four years straight and good friend Andrea Barbon.
 Andrea is an exceptional person that has motivated me to try and learn new things and we have spent countless hours 
@@ -233,8 +234,9 @@ has been a fantastic experience. Ioannis has shared many insights regarding poli
 on a number of organizational aspects together as PhD representatives. I believe that, as a result, we have managed to benefit the PhD students community in our faculty.\par
 
 
-I believe it is a good opportunity to thank also collaborators and colleagues from Uppsala University that assisted me and worked alongside with me during our Master's studies in numerous projects and have continued to be supportive to me during the period that I was pursuing my PhD. Georgios Ntounas, Panagiotis Stamatakopoulos and Iosif Karkanis I am really grateful for having you as my friends. Also Prof. Alexandra Jimborean, Prof. Stefanos Kaxiras, Dr. Vasileios Spiliopoulos and Dr. 
-Konstantinos Koukos \par
+It is a good opportunity to also thank collaborators and colleagues from Uppsala University that assisted me and worked alongside with me during my Master's studies in numerous projects and have continued to be supportive to me during the period that I was pursuing my PhD. Georgios Ntounas, Panagiotis Stamatakopoulos and Iosif Karkanis I am really grateful for having you as my friends. Also my MSc thesis supervisor Prof. Alexandra Jimborean, my MSc thesis reviewer Prof. Stefanos Kaxiras, 
+Dr. Vasileios Spiliopoulos and Dr. Konstantinos Koukos who worked alongside with me in my first paper publication, that also
+resulted in the best paper award in the 25th International Conference on Compiler Construction. \par
 
 I want to thank some of the students that I have supervised during their projects. Alexander Mamyshev completed his bachelor Thesis under the supervision of Prof. Laura Pozzi and myself and the co-operation with him has been terrific. Paul Kr{\"a}henmann and Kalyma Leon were the high school students that I supervised and worked on the project regarding Machine Learning and
 psychology, who I want to thank for their patience and enthusiasm throughout the course of the project.\par
@@ -248,7 +250,7 @@ for my upcoming PostDoc research period and I feel deeply grateful for that.\par
 I owe an honorary mention to a number of my secret heroes: Alexander Hamilton, Richard Feynman and Jordan Peterson whose books,
 work and words of wisdom have helped me significantly during the last four years. Special thanks to Prof. David Brooks from
 Harvard University that has given me the opportunity to continue this research journey in his lab upon the completion of my 
-PhD. I feel both honored and excited to keep working on the accomplishment of my dreams in such a stimulating and fascinating
+PhD. I feel both honored and excited to keep working towards the accomplishment of my dreams in such a stimulating and fascinating
 research community in Cambridge, Massachusetts.\par
 
 I want to thank Iliana Zantza for accompanying me not only in the final part of my adventures in Lugano, but anywhere in 
@@ -304,7 +306,8 @@ proportional to the size of a transistor. Therefore, as long as the same chip ar
 power stays constant and, at the same time, more transistors of smaller size can fit onto it.
 Unfortunately, this is no longer the case. The transistor size has decreased over 
 the years, but the amount of power per transistor has, recently, stopped decreasing accordingly,  
-resulting in current leakage, a phenomenon also known as the 
+% resulting in current leakage, 
+a phenomenon also known as the 
 Breakdown of Dennard scaling \cite{esmaeilzadeh2011dark}.\par
 
 The breakdown of Dennard scaling, %\cite{esmaeilzadeh2011dark}, 
@@ -392,7 +395,8 @@ designing a heterogeneous system, as it can provide valuable information and sub
 highly benefit performance. Furthermore, such analysis can be performed in a short time (typically within a 
 few seconds) and can be portable to other target applications or platforms. 
 The research during my PhD has revolved around various ways that SW
-analysis, by extending the LLVM compiler framework \cite{LattnerMar04} and, hence, its potential,
+analysis, by extending the LLVM compiler framework \cite{LattnerMar04}, 
+% and, hence, its potential,
 can guide a HW engineer %synthesizing HW accelerators 
 by making informed decisions early in the development cycle. 
 % \hl{
@@ -632,7 +636,7 @@ Figure~\ref{fig:cfg-example}b: B is a region, while C is not.\par
 Under the scope of this chapter, all and only regions are considered as
 candidates for identification of accelerators.
 Given a merit $M()$ and cost $C()$ function for each region 
-we can formulate the problem of selecting accelerators as follows:
+we can formulate the problem of selecting regions as follows:
 
 \textbf{Problem: Region Selection}
 
@@ -1715,6 +1719,11 @@ from Xilinx (for FPGAs) and StratusHLS \cite{StratusHLSApr16} from
 Cadence (for ASIC development).
 However, these HLS frameworks place the responsibility of
 partitioning a SW application on the application developer.\par
+
+\section{Released Software}
+
+The LLVM passes developed for \rseeker, along with the respective scripts that invoke them and the documentation, 
+can be downladed here: \url{https://github.com/GiorgioZacharo/RegionSeeker}.
 
 \section{Conclusions}
 \label{sec:rs_conclusions}
@@ -3514,7 +3523,7 @@ multiplied by its respective execution frequency. The total HW latency
 of a candidate is retrieved by summing up all HW latencies of all basic 
 blocks included in the candidate. 
 Both the SW and the HW estimation take place in a bottom-up fashion,
-by first performing the estimations of the leave candidates and moving
+by first performing the estimations of the leaf candidates and moving
 upwards to the ones containing calls to others.\par
 
 \emph{HW Latency Communication Estimation}. In order to take into
@@ -4216,6 +4225,11 @@ gprof3 profiling data strategies, varying the area constraint. Number of softwar
 %
 %
 %
+
+\section{Released Software}
+
+The LLVM passes developed for \aseeker\ and \eseeker, along with the respective scripts that invoke them and the documentation, can be downladed in the following links: \url{https://github.com/GiorgioZacharo/AccelSeeker} and 
+\url{https://github.com/GiorgioZacharo/EnergySeeker}.
 
 \section{Conclusions}
 \label{sec:conclusions_as}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.27)  12 DEC 2019 21:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.27)  16 JAN 2020 21:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1008,51 +1008,51 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.556 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.558 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 ? 
 )
 \openout1 = `usiinfthesis-sample.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 122.
-LaTeX Font Info:    Try loading font information for MDA+cmr on input line 122.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 123.
+LaTeX Font Info:    Try loading font information for MDA+cmr on input line 123.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdacmr.fd
 File: mdacmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 122.
-LaTeX Font Info:    Try loading font information for MDB+cmr on input line 122.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 123.
+LaTeX Font Info:    Try loading font information for MDB+cmr on input line 123.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbcmr.fd
 File: mdbcmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 122.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 123.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1125,7 +1125,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box70
-Package hyperref Info: Link coloring OFF on input line 122.
+Package hyperref Info: Link coloring OFF on input line 123.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1135,9 +1135,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count175
 )
-LaTeX Info: Redefining \ref on input line 122.
-LaTeX Info: Redefining \pageref on input line 122.
-LaTeX Info: Redefining \nameref on input line 122.
+LaTeX Info: Redefining \ref on input line 123.
+LaTeX Info: Redefining \pageref on input line 123.
+LaTeX Info: Redefining \nameref on input line 123.
 
 (./usiinfthesis-sample.out) (./usiinfthesis-sample.out)
 \@outlinefile=\write5
@@ -1147,24 +1147,24 @@ LaTeX Info: Redefining \nameref on input line 122.
 ABD: EveryShipout initializing macros
 \c@lstlisting=\count176
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 19.91054pt on input line 125.
+(Font)              scaled to size 19.91054pt on input line 126.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 19.91054pt on input line 125.
-LaTeX Font Info:    Try loading font information for T1+uop on input line 125.
-LaTeX Font Info:    No file T1uop.fd. on input line 125.
+(Font)              scaled to size 19.91054pt on input line 126.
+LaTeX Font Info:    Try loading font information for T1+uop on input line 126.
+LaTeX Font Info:    No file T1uop.fd. on input line 126.
 
 
 LaTeX Font Warning: Font shape `T1/uop/b/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 125.
+(Font)              using `T1/cmr/m/n' instead on input line 126.
 
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 13.82408pt on input line 125.
+(Font)              scaled to size 13.82408pt on input line 126.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 13.82408pt on input line 125.
+(Font)              scaled to size 13.82408pt on input line 126.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 16.58891pt on input line 125.
+(Font)              scaled to size 16.58891pt on input line 126.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 16.58891pt on input line 125.
+(Font)              scaled to size 16.58891pt on input line 126.
 [0
 
 
@@ -1173,98 +1173,98 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 
 ]
 LaTeX Font Info:    Try loading font information for OT1+mdbch on input line 12
-6.
+7.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/ot1mdbch.fd
 File: ot1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OT1/mdbch.
 )
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Try loading font information for OML+mdbch on input line 12
-6.
+7.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/omlmdbch.fd
 File: omlmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OML/mdbch.
 )
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Try loading font information for OMS+mdbch on input line 12
-6.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/omsmdbch.fd
 File: omsmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMS/mdbch.
 )
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Try loading font information for OMX+mdbch on input line 12
-6.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/omxmdbch.fd
 File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
 )
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Try loading font information for MDA+mdbch on input line 12
-6.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/mdamdbch.fd
 File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
 )
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Try loading font information for MDB+mdbch on input line 12
-6.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/mdbmdbch.fd
 File: mdbmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDB/mdbch.
 )
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 126.
+(Font)              scaled to size 7.68005pt on input line 127.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 126.
+(Font)              scaled to size 5.76004pt on input line 127.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 LaTeX Font Info:    Font shape `T1/mdbch/b/it' will be
-(Font)              scaled to size 11.52008pt on input line 126.
+(Font)              scaled to size 11.52008pt on input line 127.
 
-Overfull \hbox (13.29861pt too wide) in paragraph at lines 126--126
+Overfull \hbox (13.29861pt too wide) in paragraph at lines 127--127
  [][] 
  []
 
 
 LaTeX Font Warning: Font shape `T1/uop/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 126.
+(Font)              using `T1/cmr/m/n' instead on input line 127.
 
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 126--126
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
 
  []
 
@@ -1272,36 +1272,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 126--126
 
 ]
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 16.58891pt on input line 126.
+(Font)              scaled to size 16.58891pt on input line 127.
  [3
 
 ] [4
 
 ]
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 126.
+(Font)              scaled to size 10.51207pt on input line 127.
  [5] [6
 
 ]
 \c@oldpage=\count177
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 23.88496pt on input line 130.
+(Font)              scaled to size 23.88496pt on input line 133.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 23.88496pt on input line 130.
+(Font)              scaled to size 23.88496pt on input line 133.
  [7
 
 ] [8
@@ -1319,204 +1319,204 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 
 
 ] [2]
-<figs/Research_Carol.pdf, id=389, 837.83939pt x 380.04846pt>
+<figs/Research_Carol.pdf, id=399, 837.83939pt x 380.04846pt>
 File: figs/Research_Carol.pdf Graphic file (type pdf)
 
 <use figs/Research_Carol.pdf>
-Package pdftex.def Info: figs/Research_Carol.pdf used on input line 411.
+Package pdftex.def Info: figs/Research_Carol.pdf used on input line 415.
 (pdftex.def)             Requested size: 400.32918pt x 181.59192pt.
 
 
 LaTeX Font Warning: Font shape `T1/uop/m/sl' undefined
-(Font)              using `T1/uop/m/n' instead on input line 414.
+(Font)              using `T1/uop/m/n' instead on input line 418.
 
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 11.52008pt on input line 423.
+(Font)              scaled to size 11.52008pt on input line 427.
 [3] [4 <./figs/Research_Carol.pdf, page is rotated 270 degrees>] [5] [6
 
 ]
 Chapter 1.
-<Figs/cfg_example.pdf, id=458, 488.82625pt x 282.05376pt>
+<Figs/cfg_example.pdf, id=468, 488.82625pt x 282.05376pt>
 File: Figs/cfg_example.pdf Graphic file (type pdf)
 
 <use Figs/cfg_example.pdf>
-Package pdftex.def Info: Figs/cfg_example.pdf used on input line 522.
+Package pdftex.def Info: Figs/cfg_example.pdf used on input line 526.
 (pdftex.def)             Requested size: 280.2292pt x 161.69331pt.
  [7] [8 <./Figs/cfg_example.pdf>] [9]
-<figs/exact_example.pdf, id=511, 468.75125pt x 266.9975pt>
+<figs/exact_example.pdf, id=521, 468.75125pt x 266.9975pt>
 File: figs/exact_example.pdf Graphic file (type pdf)
 
 <use figs/exact_example.pdf>
-Package pdftex.def Info: figs/exact_example.pdf used on input line 683.
+Package pdftex.def Info: figs/exact_example.pdf used on input line 687.
 (pdftex.def)             Requested size: 280.2292pt x 159.61305pt.
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 10.12793pt on input line 691.
+(Font)              scaled to size 10.12793pt on input line 695.
  [10] [11 <./figs/exact_example.pdf>] [12]
-<Figs/exact_tree.pdf, id=566, 843.04358pt x 391.77501pt>
+<Figs/exact_tree.pdf, id=576, 843.04358pt x 391.77501pt>
 File: Figs/exact_tree.pdf Graphic file (type pdf)
 
 <use Figs/exact_tree.pdf>
-Package pdftex.def Info: Figs/exact_tree.pdf used on input line 795.
+Package pdftex.def Info: Figs/exact_tree.pdf used on input line 799.
 (pdftex.def)             Requested size: 360.29381pt x 167.43175pt.
  [13 <./Figs/exact_tree.pdf, page is rotated 270 degrees>]
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 866.
+(Font)              scaled to size 9.60007pt on input line 870.
 LaTeX Font Info:    Font shape `T1/mdbch/m/fsc' will be
-(Font)              scaled to size 11.52008pt on input line 866.
+(Font)              scaled to size 11.52008pt on input line 870.
 LaTeX Font Info:    Font shape `T1/mdbch/m/fsc' will be
-(Font)              scaled to size 7.68005pt on input line 867.
+(Font)              scaled to size 7.68005pt on input line 871.
 LaTeX Font Info:    Font shape `T1/mdbch/m/fsc' will be
-(Font)              scaled to size 5.76004pt on input line 867.
+(Font)              scaled to size 5.76004pt on input line 871.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 872.
+(Font)              scaled to size 7.68005pt on input line 876.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 872.
+(Font)              scaled to size 5.76004pt on input line 876.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 886.
- [14] <figs/platform.pdf, id=615, 261.97874pt x 139.52126pt>
+put line 890.
+ [14] <figs/platform.pdf, id=625, 261.97874pt x 139.52126pt>
 File: figs/platform.pdf Graphic file (type pdf)
 
 <use figs/platform.pdf>
-Package pdftex.def Info: figs/platform.pdf used on input line 924.
+Package pdftex.def Info: figs/platform.pdf used on input line 928.
 (pdftex.def)             Requested size: 240.19994pt x 127.9268pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15]
 [16 <./figs/platform.pdf>]
-<figs/CHstone_aladdin/adpcm.pdf, id=650, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/adpcm.pdf, id=660, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/adpcm.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/adpcm.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/adpcm.pdf used on input line 1015
+Package pdftex.def Info: figs/CHstone_aladdin/adpcm.pdf used on input line 1019
 .
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/aes.pdf, id=651, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/aes.pdf, id=661, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/aes.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/aes.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/aes.pdf used on input line 1018.
+Package pdftex.def Info: figs/CHstone_aladdin/aes.pdf used on input line 1022.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/dfmul.pdf, id=652, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/dfmul.pdf, id=662, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/dfmul.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/dfmul.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/dfmul.pdf used on input line 1021
+Package pdftex.def Info: figs/CHstone_aladdin/dfmul.pdf used on input line 1025
 .
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/dfsin.pdf, id=653, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/dfsin.pdf, id=663, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/dfsin.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/dfsin.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/dfsin.pdf used on input line 1024
+Package pdftex.def Info: figs/CHstone_aladdin/dfsin.pdf used on input line 1028
 .
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/gsm.pdf, id=654, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/gsm.pdf, id=664, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/gsm.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/gsm.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/gsm.pdf used on input line 1027.
+Package pdftex.def Info: figs/CHstone_aladdin/gsm.pdf used on input line 1031.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/jpeg.pdf, id=655, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/jpeg.pdf, id=665, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/jpeg.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/jpeg.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/jpeg.pdf used on input line 1030.
+Package pdftex.def Info: figs/CHstone_aladdin/jpeg.pdf used on input line 1034.
 
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/mpeg2.pdf, id=656, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/mpeg2.pdf, id=666, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/mpeg2.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/mpeg2.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/mpeg2.pdf used on input line 1033
+Package pdftex.def Info: figs/CHstone_aladdin/mpeg2.pdf used on input line 1037
 .
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone_aladdin/sha.pdf, id=657, 194.7275pt x 129.48375pt>
+<figs/CHstone_aladdin/sha.pdf, id=667, 194.7275pt x 129.48375pt>
 File: figs/CHstone_aladdin/sha.pdf Graphic file (type pdf)
 
 <use figs/CHstone_aladdin/sha.pdf>
-Package pdftex.def Info: figs/CHstone_aladdin/sha.pdf used on input line 1035.
+Package pdftex.def Info: figs/CHstone_aladdin/sha.pdf used on input line 1039.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/legend.pdf, id=658, 916.30852pt x 146.68883pt>
+<figs/CHstone/legend.pdf, id=668, 916.30852pt x 146.68883pt>
 File: figs/CHstone/legend.pdf Graphic file (type pdf)
 
 <use figs/CHstone/legend.pdf>
-Package pdftex.def Info: figs/CHstone/legend.pdf used on input line 1038.
+Package pdftex.def Info: figs/CHstone/legend.pdf used on input line 1042.
 (pdftex.def)             Requested size: 176.14581pt x 28.19795pt.
 
 
-LaTeX Warning: Float too large for page by 14.86665pt on input line 1043.
+LaTeX Warning: Float too large for page by 14.86665pt on input line 1047.
 
-<figs/CHstone/adpcm.pdf, id=659, 194.7275pt x 129.48375pt>
+<figs/CHstone/adpcm.pdf, id=669, 194.7275pt x 129.48375pt>
 File: figs/CHstone/adpcm.pdf Graphic file (type pdf)
 
 <use figs/CHstone/adpcm.pdf>
-Package pdftex.def Info: figs/CHstone/adpcm.pdf used on input line 1062.
+Package pdftex.def Info: figs/CHstone/adpcm.pdf used on input line 1066.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/aes.pdf, id=660, 194.7275pt x 129.48375pt>
+<figs/CHstone/aes.pdf, id=670, 194.7275pt x 129.48375pt>
 File: figs/CHstone/aes.pdf Graphic file (type pdf)
 
 <use figs/CHstone/aes.pdf>
-Package pdftex.def Info: figs/CHstone/aes.pdf used on input line 1065.
+Package pdftex.def Info: figs/CHstone/aes.pdf used on input line 1069.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/dfmul.pdf, id=661, 194.7275pt x 129.48375pt>
+<figs/CHstone/dfmul.pdf, id=671, 194.7275pt x 129.48375pt>
 File: figs/CHstone/dfmul.pdf Graphic file (type pdf)
 
 <use figs/CHstone/dfmul.pdf>
-Package pdftex.def Info: figs/CHstone/dfmul.pdf used on input line 1068.
+Package pdftex.def Info: figs/CHstone/dfmul.pdf used on input line 1072.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/dfsin.pdf, id=662, 194.7275pt x 129.48375pt>
+<figs/CHstone/dfsin.pdf, id=672, 194.7275pt x 129.48375pt>
 File: figs/CHstone/dfsin.pdf Graphic file (type pdf)
 
 <use figs/CHstone/dfsin.pdf>
-Package pdftex.def Info: figs/CHstone/dfsin.pdf used on input line 1071.
+Package pdftex.def Info: figs/CHstone/dfsin.pdf used on input line 1075.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/gsm.pdf, id=663, 194.7275pt x 129.48375pt>
+<figs/CHstone/gsm.pdf, id=673, 194.7275pt x 129.48375pt>
 File: figs/CHstone/gsm.pdf Graphic file (type pdf)
 
 <use figs/CHstone/gsm.pdf>
-Package pdftex.def Info: figs/CHstone/gsm.pdf used on input line 1074.
+Package pdftex.def Info: figs/CHstone/gsm.pdf used on input line 1078.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/jpeg.pdf, id=664, 194.7275pt x 129.48375pt>
+<figs/CHstone/jpeg.pdf, id=674, 194.7275pt x 129.48375pt>
 File: figs/CHstone/jpeg.pdf Graphic file (type pdf)
 
 <use figs/CHstone/jpeg.pdf>
-Package pdftex.def Info: figs/CHstone/jpeg.pdf used on input line 1077.
+Package pdftex.def Info: figs/CHstone/jpeg.pdf used on input line 1081.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/mpeg2.pdf, id=665, 194.7275pt x 129.48375pt>
+<figs/CHstone/mpeg2.pdf, id=675, 194.7275pt x 129.48375pt>
 File: figs/CHstone/mpeg2.pdf Graphic file (type pdf)
 
 <use figs/CHstone/mpeg2.pdf>
-Package pdftex.def Info: figs/CHstone/mpeg2.pdf used on input line 1080.
+Package pdftex.def Info: figs/CHstone/mpeg2.pdf used on input line 1084.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 
-<figs/CHstone/sha.pdf, id=666, 194.7275pt x 129.48375pt>
+<figs/CHstone/sha.pdf, id=676, 194.7275pt x 129.48375pt>
 File: figs/CHstone/sha.pdf Graphic file (type pdf)
 
 <use figs/CHstone/sha.pdf>
-Package pdftex.def Info: figs/CHstone/sha.pdf used on input line 1082.
+Package pdftex.def Info: figs/CHstone/sha.pdf used on input line 1086.
 (pdftex.def)             Requested size: 176.14581pt x 117.13095pt.
 File: figs/CHstone/legend.pdf Graphic file (type pdf)
  <use figs/CHstone/legend.pdf>
-Package pdftex.def Info: figs/CHstone/legend.pdf used on input line 1085.
+Package pdftex.def Info: figs/CHstone/legend.pdf used on input line 1089.
 (pdftex.def)             Requested size: 176.14581pt x 28.19795pt.
 
 
-LaTeX Warning: Float too large for page by 14.86665pt on input line 1091.
+LaTeX Warning: Float too large for page by 14.86665pt on input line 1095.
 
 [17] [18 <./figs/CHstone_aladdin/adpcm.pdf> <./figs/CHstone_aladdin/aes.pdf> <.
 /figs/CHstone_aladdin/dfmul.pdf> <./figs/CHstone_aladdin/dfsin.pdf> <./figs/CHs
@@ -1525,50 +1525,50 @@ tone_aladdin/gsm.pdf> <./figs/CHstone_aladdin/jpeg.pdf> <./figs/CHstone_aladdin
 [19 <./figs/CHstone/adpcm.pdf> <./figs/CHstone/aes.pdf> <./figs/CHstone/dfmul.p
 df> <./figs/CHstone/dfsin.pdf> <./figs/CHstone/gsm.pdf> <./figs/CHstone/jpeg.pd
 f> <./figs/CHstone/mpeg2.pdf> <./figs/CHstone/sha.pdf>] [20]
-<figs/rbf_max_norm_all.pdf, id=840, 289.08pt x 144.54pt>
+<figs/rbf_max_norm_all.pdf, id=850, 289.08pt x 144.54pt>
 File: figs/rbf_max_norm_all.pdf Graphic file (type pdf)
 
 <use figs/rbf_max_norm_all.pdf>
-Package pdftex.def Info: figs/rbf_max_norm_all.pdf used on input line 1193.
+Package pdftex.def Info: figs/rbf_max_norm_all.pdf used on input line 1197.
 (pdftex.def)             Requested size: 320.26456pt x 160.14133pt.
  [21 <./figs/rbf_max_norm_all.pdf>]
-<figs//h264-reg.pdf, id=853, 216.81pt x 144.54pt>
+<figs//h264-reg.pdf, id=864, 216.81pt x 144.54pt>
 File: figs//h264-reg.pdf Graphic file (type pdf)
  <use figs//h264-reg.pdf>
-Package pdftex.def Info: figs//h264-reg.pdf used on input line 1229.
+Package pdftex.def Info: figs//h264-reg.pdf used on input line 1233.
 (pdftex.def)             Requested size: 200.16458pt x 133.45036pt.
 
-<figs//h264-pr-reg.pdf, id=854, 216.81pt x 144.54pt>
+<figs//h264-pr-reg.pdf, id=865, 216.81pt x 144.54pt>
 File: figs//h264-pr-reg.pdf Graphic file (type pdf)
 
 <use figs//h264-pr-reg.pdf>
-Package pdftex.def Info: figs//h264-pr-reg.pdf used on input line 1233.
+Package pdftex.def Info: figs//h264-pr-reg.pdf used on input line 1237.
 (pdftex.def)             Requested size: 200.16458pt x 133.45036pt.
  [22 <./figs//h264-reg.pdf> <./figs//h264-pr-reg.pdf>] <figs/ex_gr_speed_h264.p
-df, id=874, 216.81pt x 144.54pt>
+df, id=884, 216.81pt x 144.54pt>
 File: figs/ex_gr_speed_h264.pdf Graphic file (type pdf)
 
 <use figs/ex_gr_speed_h264.pdf>
-Package pdftex.def Info: figs/ex_gr_speed_h264.pdf used on input line 1282.
+Package pdftex.def Info: figs/ex_gr_speed_h264.pdf used on input line 1286.
 (pdftex.def)             Requested size: 200.16458pt x 133.45036pt.
 
-<figs/ex_gr_time_h264.pdf, id=875, 216.81pt x 144.54pt>
+<figs/ex_gr_time_h264.pdf, id=885, 216.81pt x 144.54pt>
 File: figs/ex_gr_time_h264.pdf Graphic file (type pdf)
 
 <use figs/ex_gr_time_h264.pdf>
-Package pdftex.def Info: figs/ex_gr_time_h264.pdf used on input line 1286.
+Package pdftex.def Info: figs/ex_gr_time_h264.pdf used on input line 1290.
 (pdftex.def)             Requested size: 200.16458pt x 133.45036pt.
 
-Underfull \hbox (badness 3000) in paragraph at lines 1291--1291
+Underfull \hbox (badness 3000) in paragraph at lines 1295--1295
 []\T1/uop/m/sl/12 Figure 1.9. |Left: Speedup achieved on the H.264 bench-mark b
 y
  []
 
-<figs/exact_versions.pdf, id=876, 558.085pt x 378.41376pt>
+<figs/exact_versions.pdf, id=886, 558.085pt x 378.41376pt>
 File: figs/exact_versions.pdf Graphic file (type pdf)
 
 <use figs/exact_versions.pdf>
-Package pdftex.def Info: figs/exact_versions.pdf used on input line 1298.
+Package pdftex.def Info: figs/exact_versions.pdf used on input line 1302.
 (pdftex.def)             Requested size: 240.19994pt x 162.87064pt.
 
 
@@ -1578,38 +1578,38 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 1668) has occurred while \output is active []
 
  [23 <./figs/ex_gr_speed_h264.pdf> <./figs/ex_gr_time_h264.pdf>] [24 <./figs/ex
-act_versions.pdf>] <figs/overhead_sha.pdf, id=941, 216.81pt x 180.675pt>
+act_versions.pdf>] <figs/overhead_sha.pdf, id=951, 216.81pt x 180.675pt>
 File: figs/overhead_sha.pdf Graphic file (type pdf)
 
 <use figs/overhead_sha.pdf>
-Package pdftex.def Info: figs/overhead_sha.pdf used on input line 1373.
+Package pdftex.def Info: figs/overhead_sha.pdf used on input line 1377.
 (pdftex.def)             Requested size: 240.19994pt x 200.17667pt.
  [25 <./figs/overhead_sha.pdf>] [26]
-<figs/multi_conflict.pdf, id=964, 343.7112pt x 182.52742pt>
+<figs/multi_conflict.pdf, id=974, 343.7112pt x 182.52742pt>
 File: figs/multi_conflict.pdf Graphic file (type pdf)
 
 <use figs/multi_conflict.pdf>
-Package pdftex.def Info: figs/multi_conflict.pdf used on input line 1457.
+Package pdftex.def Info: figs/multi_conflict.pdf used on input line 1461.
 (pdftex.def)             Requested size: 240.19994pt x 127.55942pt.
 
 Underfull \vbox (badness 1097) has occurred while \output is active []
 
  [27 <./figs/multi_conflict.pdf>] [28]
-<figs/plot_O3CPU.pdf, id=1000, 194.7275pt x 129.48375pt>
+<figs/plot_O3CPU.pdf, id=1010, 194.7275pt x 129.48375pt>
 File: figs/plot_O3CPU.pdf Graphic file (type pdf)
 
 <use figs/plot_O3CPU.pdf>
-Package pdftex.def Info: figs/plot_O3CPU.pdf used on input line 1536.
+Package pdftex.def Info: figs/plot_O3CPU.pdf used on input line 1540.
 (pdftex.def)             Requested size: 240.19994pt x 159.72636pt.
 
-<figs/plot_O3CPU_SW_large.pdf, id=1001, 194.7275pt x 129.48375pt>
+<figs/plot_O3CPU_SW_large.pdf, id=1011, 194.7275pt x 129.48375pt>
 File: figs/plot_O3CPU_SW_large.pdf Graphic file (type pdf)
 
 <use figs/plot_O3CPU_SW_large.pdf>
-Package pdftex.def Info: figs/plot_O3CPU_SW_large.pdf used on input line 1538.
+Package pdftex.def Info: figs/plot_O3CPU_SW_large.pdf used on input line 1542.
 (pdftex.def)             Requested size: 240.19994pt x 159.72636pt.
  [29 <./figs/plot_O3CPU.pdf> <./figs/plot_O3CPU_SW_large.pdf>] [30]
-Overfull \hbox (4.94249pt too wide) in paragraph at lines 1676--1690
+Overfull \hbox (4.94249pt too wide) in paragraph at lines 1680--1694
 \T1/mdbch/m/n/12 iden-tify CFG sub-graphs for code op-ti-miza-tion rea-sons. Fo
 r ex-am-ple, trace schedul-
  []
@@ -1623,64 +1623,64 @@ Underfull \vbox (badness 1389) has occurred while \output is active []
 
 ]
 [34]
-Overfull \hbox (4.29369pt too wide) in paragraph at lines 1850--1868
+Overfull \hbox (4.29369pt too wide) in paragraph at lines 1859--1877
 []\T1/mdbch/m/n/12 In slid-ing win-dow ap-pli-ca-tions, there are re-search en-
 deav-ors both by academia
  []
 
-<figs/framework.pdf, id=1113, 629.59319pt x 323.30457pt>
+<figs/framework.pdf, id=1126, 629.59319pt x 323.30457pt>
 File: figs/framework.pdf Graphic file (type pdf)
 
 <use figs/framework.pdf>
-Package pdftex.def Info: figs/framework.pdf used on input line 1901.
+Package pdftex.def Info: figs/framework.pdf used on input line 1910.
 (pdftex.def)             Requested size: 280.2292pt x 143.90707pt.
- <figs/intro.pdf, id=1114, 497.86pt x 471.7625pt>
+ <figs/intro.pdf, id=1127, 497.86pt x 471.7625pt>
 File: figs/intro.pdf Graphic file (type pdf)
 
 <use figs/intro.pdf>
-Package pdftex.def Info: figs/intro.pdf used on input line 1974.
+Package pdftex.def Info: figs/intro.pdf used on input line 1983.
 (pdftex.def)             Requested size: 240.19994pt x 227.60957pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [35] [36 <./figs/framework.pdf>] [37 <./figs/intro.pdf>]
-Overfull \hbox (0.30121pt too wide) in paragraph at lines 2112--2118
+Overfull \hbox (0.30121pt too wide) in paragraph at lines 2121--2127
 \T1/mdbch/m/n/12 are iden-ti-fied by us-ing \T1/fvm/m/n/12 isl \T1/mdbch/m/n/12
  func-tions within our own \T1/mdbch/m/it/12 Com-pute-Dis-tances-For-ReadAc-
  []
 
-[38] <figs/data_reuse.pdf, id=1207, 1027.84pt x 770.88pt>
+[38] <figs/data_reuse.pdf, id=1219, 1027.84pt x 770.88pt>
 File: figs/data_reuse.pdf Graphic file (type pdf)
 
 <use figs/data_reuse.pdf>
-Package pdftex.def Info: figs/data_reuse.pdf used on input line 2128.
+Package pdftex.def Info: figs/data_reuse.pdf used on input line 2137.
 (pdftex.def)             Requested size: 320.26456pt x 240.19365pt.
  [39 <./figs/data_reuse.pdf>] [40]
-<figs/exec_time_fpga.pdf, id=1269, 381.425pt x 176.66pt>
+<figs/exec_time_fpga.pdf, id=1281, 381.425pt x 176.66pt>
 File: figs/exec_time_fpga.pdf Graphic file (type pdf)
 
 <use figs/exec_time_fpga.pdf>
-Package pdftex.def Info: figs/exec_time_fpga.pdf used on input line 2230.
+Package pdftex.def Info: figs/exec_time_fpga.pdf used on input line 2239.
 (pdftex.def)             Requested size: 280.2292pt x 129.79636pt.
 
-<figs/area_fpga.pdf, id=1270, 617.30624pt x 176.66pt>
+<figs/area_fpga.pdf, id=1282, 617.30624pt x 176.66pt>
 File: figs/area_fpga.pdf Graphic file (type pdf)
  <use figs/area_fpga.pdf>
-Package pdftex.def Info: figs/area_fpga.pdf used on input line 2240.
+Package pdftex.def Info: figs/area_fpga.pdf used on input line 2249.
 (pdftex.def)             Requested size: 400.32918pt x 114.56885pt.
 
 [41 <./figs/exec_time_fpga.pdf> <./figs/area_fpga.pdf>]
-<figs/comparison.pdf, id=1316, 370.38374pt x 244.915pt>
+<figs/comparison.pdf, id=1328, 370.38374pt x 244.915pt>
 File: figs/comparison.pdf Graphic file (type pdf)
 
 <use figs/comparison.pdf>
-Package pdftex.def Info: figs/comparison.pdf used on input line 2273.
+Package pdftex.def Info: figs/comparison.pdf used on input line 2282.
 (pdftex.def)             Requested size: 240.19994pt x 158.83409pt.
  [42 <./figs/comparison.pdf>] [43]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 2330.
+(hyperref)                removing `\\' on input line 2339.
 
 
 Package Fancyhdr Warning: \headheight is too small (15.0pt): 
@@ -1688,11 +1688,11 @@ Package Fancyhdr Warning: \headheight is too small (15.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[44] <figs/LUP_method.pdf, id=1406, 705.63625pt x 328.22626pt>
+[44] <figs/LUP_method.pdf, id=1418, 705.63625pt x 328.22626pt>
 File: figs/LUP_method.pdf Graphic file (type pdf)
 
 <use figs/LUP_method.pdf>
-Package pdftex.def Info: figs/LUP_method.pdf used on input line 2417.
+Package pdftex.def Info: figs/LUP_method.pdf used on input line 2426.
 (pdftex.def)             Requested size: 400.32918pt x 186.21445pt.
 
 
@@ -1704,81 +1704,81 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [45]
 [46 <./figs/LUP_method.pdf>]
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 2500.
+(Font)              scaled to size 10.51207pt on input line 2509.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 2501.
+(Font)              scaled to size 10.51207pt on input line 2510.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[47] [48] [49] [50] <figs/prediction_errors.pdf, id=1500, 433.62pt x 289.08pt>
+[47] [48] [49] [50] <figs/prediction_errors.pdf, id=1512, 433.62pt x 289.08pt>
 File: figs/prediction_errors.pdf Graphic file (type pdf)
 
 <use figs/prediction_errors.pdf>
-Package pdftex.def Info: figs/prediction_errors.pdf used on input line 2696.
+Package pdftex.def Info: figs/prediction_errors.pdf used on input line 2705.
 (pdftex.def)             Requested size: 200.16458pt x 133.44597pt.
 
-<figs/models_score.pdf, id=1505, 230.8625pt x 144.54pt>
+<figs/models_score.pdf, id=1517, 230.8625pt x 144.54pt>
 File: figs/models_score.pdf Graphic file (type pdf)
 
 <use figs/models_score.pdf>
-Package pdftex.def Info: figs/models_score.pdf used on input line 2740.
+Package pdftex.def Info: figs/models_score.pdf used on input line 2749.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
 
-<figs/models_error.pdf, id=1506, 230.8625pt x 144.54pt>
+<figs/models_error.pdf, id=1518, 230.8625pt x 144.54pt>
 File: figs/models_error.pdf Graphic file (type pdf)
 
 <use figs/models_error.pdf>
-Package pdftex.def Info: figs/models_error.pdf used on input line 2741.
+Package pdftex.def Info: figs/models_error.pdf used on input line 2750.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
  [51 <./figs/prediction_errors.pdf>]
-<figs/iter_ref_score.pdf, id=1554, 230.8625pt x 144.54pt>
+<figs/iter_ref_score.pdf, id=1566, 230.8625pt x 144.54pt>
 File: figs/iter_ref_score.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_score.pdf>
-Package pdftex.def Info: figs/iter_ref_score.pdf used on input line 2774.
+Package pdftex.def Info: figs/iter_ref_score.pdf used on input line 2783.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
 
-<figs/iter_ref_error.pdf, id=1555, 230.8625pt x 144.54pt>
+<figs/iter_ref_error.pdf, id=1567, 230.8625pt x 144.54pt>
 File: figs/iter_ref_error.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_error.pdf>
-Package pdftex.def Info: figs/iter_ref_error.pdf used on input line 2775.
+Package pdftex.def Info: figs/iter_ref_error.pdf used on input line 2784.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
  [52 <./figs/models_score.pdf> <./figs/models_error.pdf>] <figs/iter_ref_abs_sp
-eed_c90.pdf, id=1575, 361.35pt x 129.48375pt>
+eed_c90.pdf, id=1587, 361.35pt x 129.48375pt>
 File: figs/iter_ref_abs_speed_c90.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_abs_speed_c90.pdf>
-Package pdftex.def Info: figs/iter_ref_abs_speed_c90.pdf used on input line 281
-3.
+Package pdftex.def Info: figs/iter_ref_abs_speed_c90.pdf used on input line 282
+2.
 (pdftex.def)             Requested size: 440.36453pt x 157.79802pt.
 
-Overfull \hbox (13.73686pt too wide) in paragraph at lines 2812--2813
+Overfull \hbox (13.73686pt too wide) in paragraph at lines 2821--2822
  []|  [] 
  []
 
-<figs/iter_ref_abs_area_c90.pdf, id=1576, 361.35pt x 129.48375pt>
+<figs/iter_ref_abs_area_c90.pdf, id=1588, 361.35pt x 129.48375pt>
 File: figs/iter_ref_abs_area_c90.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_abs_area_c90.pdf>
-Package pdftex.def Info: figs/iter_ref_abs_area_c90.pdf used on input line 2816
+Package pdftex.def Info: figs/iter_ref_abs_area_c90.pdf used on input line 2825
 .
 (pdftex.def)             Requested size: 440.36453pt x 157.79802pt.
 
-Overfull \hbox (13.73686pt too wide) in paragraph at lines 2815--2816
+Overfull \hbox (13.73686pt too wide) in paragraph at lines 2824--2825
  []|  [] 
  []
 
-<figs/iter_ref_abs_impact_c90.pdf, id=1577, 361.35pt x 129.48375pt>
+<figs/iter_ref_abs_impact_c90.pdf, id=1589, 361.35pt x 129.48375pt>
 File: figs/iter_ref_abs_impact_c90.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_abs_impact_c90.pdf>
 Package pdftex.def Info: figs/iter_ref_abs_impact_c90.pdf used on input line 28
-19.
+28.
 (pdftex.def)             Requested size: 440.36453pt x 157.79802pt.
 
-Overfull \hbox (13.73686pt too wide) in paragraph at lines 2818--2825
+Overfull \hbox (13.73686pt too wide) in paragraph at lines 2827--2834
  []|  [] 
  []
 
@@ -1793,150 +1793,150 @@ LaTeX Warning: Text page 54 contains only floats.
 Underfull \vbox (badness 2469) has occurred while \output is active []
 
  [54 <./figs/iter_ref_abs_speed_c90.pdf> <./figs/iter_ref_abs_area_c90.pdf> <./
-figs/iter_ref_abs_impact_c90.pdf>] <figs/models_time.pdf, id=1619, 230.8625pt x
+figs/iter_ref_abs_impact_c90.pdf>] <figs/models_time.pdf, id=1631, 230.8625pt x
  144.54pt>
 File: figs/models_time.pdf Graphic file (type pdf)
 
 <use figs/models_time.pdf>
-Package pdftex.def Info: figs/models_time.pdf used on input line 2863.
+Package pdftex.def Info: figs/models_time.pdf used on input line 2872.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
 
-<figs/iter_ref_time.pdf, id=1620, 230.8625pt x 144.54pt>
+<figs/iter_ref_time.pdf, id=1632, 230.8625pt x 144.54pt>
 File: figs/iter_ref_time.pdf Graphic file (type pdf)
 
 <use figs/iter_ref_time.pdf>
-Package pdftex.def Info: figs/iter_ref_time.pdf used on input line 2867.
+Package pdftex.def Info: figs/iter_ref_time.pdf used on input line 2876.
 (pdftex.def)             Requested size: 200.16458pt x 125.32089pt.
  [55 <./figs/models_time.pdf> <./figs/iter_ref_time.pdf>] [56
 
 ]
 Chapter 3.
 [57] [58]
-Overfull \hbox (1.77094pt too wide) in paragraph at lines 3026--3031
+Overfull \hbox (1.77094pt too wide) in paragraph at lines 3035--3040
 \T1/mdbch/m/n/12 High Level Syn-the-sis tools have con-sid-er-ably ma-tured in 
 re-cent years [[]]. Nowa-
  []
 
-<figs/soa_evolution.pdf, id=1674, 571.19305pt x 289.87036pt>
+<figs/soa_evolution.pdf, id=1686, 571.19305pt x 289.87036pt>
 File: figs/soa_evolution.pdf Graphic file (type pdf)
 
 <use figs/soa_evolution.pdf>
-Package pdftex.def Info: figs/soa_evolution.pdf used on input line 3036.
+Package pdftex.def Info: figs/soa_evolution.pdf used on input line 3045.
 (pdftex.def)             Requested size: 320.26456pt x 162.52974pt.
  [59] [60 <./figs/soa_evolution.pdf>]
-<figs/flow.pdf, id=1737, 505.89pt x 280.04625pt>
+<figs/flow.pdf, id=1749, 505.89pt x 280.04625pt>
 File: figs/flow.pdf Graphic file (type pdf)
  <use figs/flow.pdf>
-Package pdftex.def Info: figs/flow.pdf used on input line 3124.
+Package pdftex.def Info: figs/flow.pdf used on input line 3133.
 (pdftex.def)             Requested size: 280.2292pt x 155.12837pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [61 <./figs/flow.pdf>] <figs/subgraph_examples.pdf, id=1779, 468.75125pt x 169
+ [61 <./figs/flow.pdf>] <figs/subgraph_examples.pdf, id=1791, 468.75125pt x 169
 .63374pt>
 File: figs/subgraph_examples.pdf Graphic file (type pdf)
 
 <use figs/subgraph_examples.pdf>
-Package pdftex.def Info: figs/subgraph_examples.pdf used on input line 3154.
+Package pdftex.def Info: figs/subgraph_examples.pdf used on input line 3163.
 (pdftex.def)             Requested size: 280.2292pt x 101.4083pt.
 
-<figs/overlap_examples.pdf, id=1783, 315.1775pt x 196.735pt>
+<figs/overlap_examples.pdf, id=1795, 315.1775pt x 196.735pt>
 File: figs/overlap_examples.pdf Graphic file (type pdf)
 
 <use figs/overlap_examples.pdf>
-Package pdftex.def Info: figs/overlap_examples.pdf used on input line 3192.
+Package pdftex.def Info: figs/overlap_examples.pdf used on input line 3201.
 (pdftex.def)             Requested size: 200.16458pt x 124.94333pt.
 
 Underfull \vbox (badness 1888) has occurred while \output is active []
 
  [62 <./figs/subgraph_examples.pdf>] [63 <./figs/overlap_examples.pdf>]
-<figs/max_set_examples.pdf, id=1844, 646.415pt x 297.11pt>
+<figs/max_set_examples.pdf, id=1856, 646.415pt x 297.11pt>
 File: figs/max_set_examples.pdf Graphic file (type pdf)
 
 <use figs/max_set_examples.pdf>
-Package pdftex.def Info: figs/max_set_examples.pdf used on input line 3290.
+Package pdftex.def Info: figs/max_set_examples.pdf used on input line 3299.
 (pdftex.def)             Requested size: 320.26456pt x 147.20363pt.
 
 
 LaTeX Font Warning: Font shape `T1/uop/m/it' undefined
-(Font)              using `T1/uop/m/n' instead on input line 3299.
+(Font)              using `T1/uop/m/n' instead on input line 3308.
 
 [64] [65 <./figs/max_set_examples.pdf>]
-<figs/merit_estimation.pdf, id=1892, 464.73625pt x 231.86626pt>
+<figs/merit_estimation.pdf, id=1904, 464.73625pt x 231.86626pt>
 File: figs/merit_estimation.pdf Graphic file (type pdf)
 
 <use figs/merit_estimation.pdf>
-Package pdftex.def Info: figs/merit_estimation.pdf used on input line 3379.
+Package pdftex.def Info: figs/merit_estimation.pdf used on input line 3388.
 (pdftex.def)             Requested size: 320.26456pt x 159.78975pt.
  [66] [67 <./figs/merit_estimation.pdf>]
 [68] [69]
 LaTeX Font Info:    Try loading font information for TS1+mdbch on input line 35
-69.
+78.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/mathdesign/mdbch/ts1mdbch.fd
 File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
 )
 LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 3569.
+(Font)              scaled to size 11.52008pt on input line 3578.
 
-[70] <figs/call_graph_w_no_names.pdf, id=1958, 817.0525pt x 287.0725pt>
+[70] <figs/call_graph_w_no_names.pdf, id=1970, 817.0525pt x 287.0725pt>
 File: figs/call_graph_w_no_names.pdf Graphic file (type pdf)
 
 <use figs/call_graph_w_no_names.pdf>
-Package pdftex.def Info: figs/call_graph_w_no_names.pdf used on input line 3588
+Package pdftex.def Info: figs/call_graph_w_no_names.pdf used on input line 3597
 .
 (pdftex.def)             Requested size: 400.32918pt x 140.65799pt.
  [71 <./figs/call_graph_w_no_names.pdf>]
-<figs/h264_speedup.pdf, id=2000, 433.62pt x 271.0125pt>
+<figs/h264_speedup.pdf, id=2012, 433.62pt x 271.0125pt>
 File: figs/h264_speedup.pdf Graphic file (type pdf)
 
 <use figs/h264_speedup.pdf>
-Package pdftex.def Info: figs/h264_speedup.pdf used on input line 3724.
+Package pdftex.def Info: figs/h264_speedup.pdf used on input line 3733.
 (pdftex.def)             Requested size: 320.26456pt x 200.17392pt.
  [72]
 Underfull \vbox (badness 1454) has occurred while \output is active []
 
  [73 <./figs/h264_speedup.pdf>]
-<figs//selection_AS_30k.pdf, id=2022, 816.04875pt x 284.06125pt>
+<figs//selection_AS_30k.pdf, id=2034, 816.04875pt x 284.06125pt>
 File: figs//selection_AS_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_AS_30k.pdf>
-Package pdftex.def Info: figs//selection_AS_30k.pdf used on input line 3776.
+Package pdftex.def Info: figs//selection_AS_30k.pdf used on input line 3785.
 (pdftex.def)             Requested size: 280.2292pt x 97.54611pt.
 
-<figs//selection_G1_30k.pdf, id=2023, 817.0525pt x 286.06876pt>
+<figs//selection_G1_30k.pdf, id=2035, 817.0525pt x 286.06876pt>
 File: figs//selection_G1_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G1_30k.pdf>
-Package pdftex.def Info: figs//selection_G1_30k.pdf used on input line 3779.
+Package pdftex.def Info: figs//selection_G1_30k.pdf used on input line 3788.
 (pdftex.def)             Requested size: 280.2292pt x 98.11327pt.
 
-<figs//selection_G2_30k.pdf, id=2024, 817.0525pt x 285.065pt>
+<figs//selection_G2_30k.pdf, id=2036, 817.0525pt x 285.065pt>
 File: figs//selection_G2_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G2_30k.pdf>
-Package pdftex.def Info: figs//selection_G2_30k.pdf used on input line 3782.
+Package pdftex.def Info: figs//selection_G2_30k.pdf used on input line 3791.
 (pdftex.def)             Requested size: 280.2292pt x 97.76901pt.
 
-<figs//selection_G3_30k.pdf, id=2025, 817.0525pt x 285.065pt>
+<figs//selection_G3_30k.pdf, id=2037, 817.0525pt x 285.065pt>
 File: figs//selection_G3_30k.pdf Graphic file (type pdf)
 
 <use figs//selection_G3_30k.pdf>
-Package pdftex.def Info: figs//selection_G3_30k.pdf used on input line 3785.
+Package pdftex.def Info: figs//selection_G3_30k.pdf used on input line 3794.
 (pdftex.def)             Requested size: 280.2292pt x 97.76901pt.
  [74]
-<figs/h264_effort.pdf, id=2037, 433.62pt x 271.0125pt>
+<figs/h264_effort.pdf, id=2050, 433.62pt x 271.0125pt>
 File: figs/h264_effort.pdf Graphic file (type pdf)
 
 <use figs/h264_effort.pdf>
-Package pdftex.def Info: figs/h264_effort.pdf used on input line 3885.
+Package pdftex.def Info: figs/h264_effort.pdf used on input line 3894.
 (pdftex.def)             Requested size: 320.26456pt x 200.17392pt.
 
-<figs/area_size.pdf, id=2038, 588.72983pt x 25.87115pt>
+<figs/area_size.pdf, id=2051, 588.72983pt x 25.87115pt>
 File: figs/area_size.pdf Graphic file (type pdf)
 
 <use figs/area_size.pdf>
-Package pdftex.def Info: figs/area_size.pdf used on input line 3887.
+Package pdftex.def Info: figs/area_size.pdf used on input line 3896.
 (pdftex.def)             Requested size: 320.26456pt x 14.07362pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1946,32 +1946,32 @@ ection_G2_30k.pdf> <./figs//selection_G3_30k.pdf>] [76] [77 <./figs/h264_effort
 .pdf> <./figs/area_size.pdf>] [78
 
 ] [79] [80] [81]
-<figs/gprof_vs_llvm_h264_1c.pdf, id=2270, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_1c.pdf, id=2282, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_1c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_1c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_1c.pdf used on input line 4196
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_1c.pdf used on input line 4205
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
-<figs/gprof_vs_llvm_h264_2c.pdf, id=2271, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_2c.pdf, id=2283, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_2c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_2c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_2c.pdf used on input line 4199
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_2c.pdf used on input line 4208
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
-<figs/gprof_vs_llvm_h264_3c.pdf, id=2272, 433.62pt x 271.0125pt>
+<figs/gprof_vs_llvm_h264_3c.pdf, id=2284, 433.62pt x 271.0125pt>
 File: figs/gprof_vs_llvm_h264_3c.pdf Graphic file (type pdf)
 
 <use figs/gprof_vs_llvm_h264_3c.pdf>
-Package pdftex.def Info: figs/gprof_vs_llvm_h264_3c.pdf used on input line 4202
+Package pdftex.def Info: figs/gprof_vs_llvm_h264_3c.pdf used on input line 4211
 .
 (pdftex.def)             Requested size: 280.2292pt x 175.15114pt.
 
 
-LaTeX Warning: Float too large for page by 47.04839pt on input line 4207.
+LaTeX Warning: Float too large for page by 47.04839pt on input line 4216.
 
 [82] [83 <./figs/gprof_vs_llvm_h264_1c.pdf> <./figs/gprof_vs_llvm_h264_2c.pdf> 
 <./figs/gprof_vs_llvm_h264_3c.pdf>] [84
@@ -2037,25 +2037,25 @@ FiXme Summary: Number of notes: 0,
 (FiXme)        Total: 0.
 
 [99]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4437.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4437.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4451.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4451.
  (./usiinfthesis-sample.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4437.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4437.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4451.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4451.
 
 Package rerunfilecheck Info: File `usiinfthesis-sample.out' has not changed.
-(rerunfilecheck)             Checksum: FAB785714B50422AD4260EE13C68AE92;9202.
+(rerunfilecheck)             Checksum: 9C00646F00893F147DF2305EF7AE4433;9488.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4437.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4451.
  ) 
 Here is how much of TeX's memory you used:
- 27716 strings out of 493089
- 484712 string characters out of 6134842
- 646062 words of memory out of 5000000
- 30272 multiletter control sequences out of 15000+600000
+ 27720 strings out of 493089
+ 484760 string characters out of 6134842
+ 646063 words of memory out of 5000000
+ 30274 multiletter control sequences out of 15000+600000
  83764 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,94p,1046b,816s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2079,10 +2079,10 @@ local/texlive/2015/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chri8t.pfb
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr
 /local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/l
 ocal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb>
-Output written on usiinfthesis-sample.pdf (115 pages, 2847607 bytes).
+Output written on usiinfthesis-sample.pdf (115 pages, 2849318 bytes).
 PDF statistics:
- 2549 PDF objects out of 2984 (max. 8388607)
- 2105 compressed objects within 22 object streams
- 385 named destinations out of 1000 (max. 500000)
- 783 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2563 PDF objects out of 2984 (max. 8388607)
+ 2119 compressed objects within 22 object streams
+ 387 named destinations out of 1000 (max. 500000)
+ 799 words of extra memory for PDF output out of 10000 (max. 10000000)
 

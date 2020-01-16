@@ -19,7 +19,8 @@
 \contentsline {subsection}{\numberline {1.6.1}Methodology}{26}{subsection.1.6.1}
 \contentsline {subsection}{\numberline {1.6.2}Experimental Results}{28}{subsection.1.6.2}
 \contentsline {section}{\numberline {1.7}Related Work}{30}{section.1.7}
-\contentsline {section}{\numberline {1.8}Conclusions}{32}{section.1.8}
+\contentsline {section}{\numberline {1.8}Released Software}{32}{section.1.8}
+\contentsline {section}{\numberline {1.9}Conclusions}{32}{section.1.9}
 \contentsline {chapter}{\numberline {2}Automatic Optimization for HW/SW Co-design}{33}{chapter.2}
 \contentsline {section}{\numberline {2.1}Data reuse Analysis}{34}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Motivation}{34}{subsection.2.1.1}
@@ -68,7 +69,8 @@
 \contentsline {subsection}{\numberline {3.2.3}Methodology}{80}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Experimental Setup}{81}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Experimental Results}{82}{subsection.3.2.5}
-\contentsline {section}{\numberline {3.3}Conclusions}{84}{section.3.3}
+\contentsline {section}{\numberline {3.3}Released Software}{84}{section.3.3}
+\contentsline {section}{\numberline {3.4}Conclusions}{84}{section.3.4}
 \contentsline {chapter}{Conclusions}{85}{chapter*.67}
 \contentsline {subsubsection}{Contributions}{85}{section*.68}
 \contentsline {subsubsection}{Limitations}{86}{section*.69}
